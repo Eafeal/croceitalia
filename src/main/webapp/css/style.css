@@ -1,0 +1,385 @@
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('../font/opensans-regular.eot');
+    src: url('../font/opensans-regular.eot?#iefix') format('embedded-opentype'),
+		url('../font/opensans-regular.woff2') format('woff2'),
+		url('../font/opensans-regular.woff') format('woff'),
+		url('../font/opensans-regular.ttf') format('truetype'),
+		url('../font/opensans-regular.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'open_sanslight';
+    src: url('../font/opensans-light.eot');
+    src: url('../font/opensans-light.eot?#iefix') format('embedded-opentype'),
+		url('../font/opensans-light.woff2') format('woff2'),
+		url('../font/opensans-light.woff') format('woff'),
+		url('../font/opensans-light.ttf') format('truetype'),
+		url('../font/opensans-light.svg#open_sanslight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+
+body {
+	font: 100%/1.45 "open_sansregular", Arial, Verdana, Helvetica, sans-serif;
+	background-color: #069;
+	background-image:url(../images/page-bg.png);
+	margin: 0;
+	padding: 0;
+	color: #333;
+}
+
+/* ~~ Selettori tag/elemento ~~ */
+ul, ol, dl { /* A causa delle differenze tra i browser, è buona norma impostare a zero il margine e la spaziatura interna negli elenchi. Per uniformità, potete specificare qui i valori desiderati, oppure nelle voci di elenco (LI, DT, DD) contenute negli elenchi. Tenete presente che le impostazioni effettuate qui verranno applicate a cascata all'elenco .nav a meno che non scegliate di scrivere un selettore più specifico. */
+	padding: 0;
+	margin: 0;
+}
+
+ol {
+	padding: 20px;
+	}
+
+ol li {
+	padding: 5px 0;
+	font-size: 90%;
+	}
+
+	
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* La rimozione del margine superiore permette di aggirare il problema che si crea quando i margini possono fuoriuscire dal div che li contiene. Il margine inferiore che rimane permetterà di distanziare gli elementi che seguono. */
+	margin-bottom: 0px;
+}
+
+h4 {
+	color:#069;
+    margin: 5px 0;
+	}
+
+p {
+    margin-bottom: 15px;
+}
+
+a {
+	text-decoration: none;
+	color:#069;
+	-webkit-transition: all 200ms ease; 
+	-moz-transition: all 200ms ease; 
+	-ms-transition: all 200ms ease; 
+	-o-transition: all 200ms ease; 
+	transition: all 200ms ease;
+}
+
+a img { /* Questo selettore rimuove il bordo blu predefinito visualizzato in alcuni browser intorno a un'immagine quando è circondata da un collegamento.  */
+	border: none;
+}
+/* ~~ L'applicazione di stili ai collegamenti del sito deve rispettare questo ordine, compreso il gruppo di selettori che creano l'effetto hover. ~~ */
+
+a:hover, a:active, a:focus { /* Questo gruppo di selettori conferisce alla navigazione tramite tastiera gli stessi effetti hover che si producono quando si usa il mouse. */
+	color:#0f9acc;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #e1e1e1;
+	}
+
+input[type=button],
+input[type=submit],
+.button {
+	background-color: #eee;
+	color: #000;
+	padding: 10px 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+	margin: 7px 0;
+	cursor: pointer;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	}
+	
+input.inviaXLS {
+	margin-left:20px;
+	background-image: url(../img/icons/xls_mini.gif);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 34px;
+	}
+
+input.inviaZip {
+	margin-left:20px;
+	background-image: url(../img/icons/zip_mini.gif);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 34px;
+	}
+
+
+input[type=text],
+input[type=password],
+input[type=file],
+.input,
+select {
+	padding: 8px 10px;
+	margin: 7px 0;
+	color: #666;
+	border-radius: 3px;
+	border: 1px solid #C0C0C0;
+	}
+
+
+table {
+	border-right: 1px solid #D2D2D2;
+	border-bottom: 1px solid #D2D2D2;
+	}
+
+td, th {
+	border-top: 1px solid #D2D2D2;
+	border-left: 1px solid #D2D2D2;
+    font-size: 13px;
+    padding: 4px;
+	}
+	
+th {
+	background-color: #E4F4FF;
+    padding: 5px;
+	}
+	
+td img {
+	float:left;
+	margin: 0 5px;
+	}
+
+
+/* ~~ Questo contenitore a larghezza fissa circonda gli altri div ~~ */
+.container {
+	width: 960px;
+	padding: 0 30px;
+	background-color: #FFF;
+	margin: 0 auto; /* Il valore automatico sui lati, abbinato alla larghezza, produce un layout centrato. */
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+/* ~~ All'intestazione non viene assegnata una larghezza. Estenderà l'intera larghezza del layout. Contiene un'immagine segnaposto da sostituire con il vostro logo collegato ~~ */
+.header {
+	padding: 5px 0;
+	height: 50px;
+}
+
+.header a {
+	float:right;
+}
+
+.header a img {
+	width: 150px;
+}
+
+/* ~~ Queste sono le informazioni sul layout. ~~ 
+
+1) La spaziatura viene applicata solo al lato superiore e/o inferiore del div. Agli elementi all'interno del div viene applicata una spaziatura sui lati. In questo modo si evita ogni calcolo matematico relativo ai riquadri. Tenete presente che se aggiungete spaziatura laterale o bordi al div stesso, andranno ad aggiungersi alla larghezza definita per produrre la larghezza *totale*. Potete anche scegliere di rimuovere la spaziatura dell'elemento nel div e inserire un secondo div al suo interno con larghezza nulla e con la spaziatura necessaria per la struttura che state creando.
+
+*/
+
+.content {
+	padding: 10px 40px;
+}
+
+/* ~~ Il piè di pagina ~~ */
+.links {
+	width: 840px;
+    margin: 0px auto;
+    background-color: #EEE;
+    color: #333;
+    padding: 20px 90px;
+    font-size: 80%;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+	}
+	
+.links ul {
+	padding-left: 30px;
+}
+
+.links li {
+	padding: 3px 0;
+}
+
+.footer {
+	width: 1020px;
+	margin: 0px auto;
+	background-color: #004567;
+    color: #CCC;
+	padding: 20px 0;
+	text-align: center;
+	font-size: 80%;
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+	}
+	
+/* ~~ Classi float/clear varie ~~ */
+.fltrt {  /* questa classe può essere utilizzata per applicare un float a un elemento a destra nella pagina. L'elemento con float deve precedere l'elemento al quale deve essere affiancato sulla pagina. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* questa classe può essere utilizzata per applicare un float a un elemento a sinistra nella pagina. L'elemento con float deve precedere l'elemento al quale deve essere affiancato sulla pagina. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* Questa classe può essere inserita in un <br /> o in un div vuoto come elemento finale subito dopo l'ultimo div con float (all'interno del #container) se il #footer sul viene rimosso o estratto dal #container. */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+
+
+#wait {
+  font-size: 44px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 500000000;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -ms-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+#loading {
+  position: absolute;
+  width: 190px;
+  height: 70px;
+  top: 50%;
+  left: 50%;
+  margin-top: -45px;
+  margin-left: -110px;
+  background-color: #FFF;
+  background-image: url(../images/loader.gif);
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: 90% center;
+  font-size: 16px;
+  color: #333;
+  line-height: 65px;
+  border-radius: 10px;
+  padding: 10px 30px;
+  box-shadow: -5px 5px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.menu-in-page {
+	display:inline-block;
+	margin:0 auto 20px;
+    list-style: none;
+	border:1px solid #999;
+	}
+
+.menu-in-page li {
+	float: left;
+    padding: 5px 10px;
+	border-right:1px solid #999;
+	}
+
+.menu-in-page li:hover {
+	background-color:#E4F4FF;
+	}
+
+.menu-in-page li.last {
+	float: left;
+    padding: 5px 10px;
+	border:0;
+	}
+
+.menu-in-page li.selected {
+	background-color:#E4F4FF;
+	font-weight:bold;
+	}
+
+
+
+
+
+
+
+
+
+
+.boxed {
+	padding: 10px 25px 20px 50px;
+    margin: 0 0 20px 0;
+    font-size: 14px;
+}
+
+.boxed-title {
+    display: block;
+    height: 20px;
+    background-repeat: no-repeat;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 0 0 38px;
+    margin-left: -38px;
+    margin-bottom: 5px;
+}
+
+
+
+.info-box {
+    background-color: #f5f6f9;
+    border: 1px solid #069;
+    color: #069;
+}
+
+.info-title {
+    background-image: url(../images/ico-info-message.png);
+    color: #069;
+}
+
+.alert-box {
+	background-color: #FFFCEF;
+    border: 1px solid #D59000;
+    color: #333;
+}
+
+.alert-title {
+    background-image: url(../images/ico-alert-message.png);
+    color: #333;
+}
+
+.success-box {
+    background-color: #F1F7F1;
+    border: 1px solid #048A00;
+    color: #333;
+}
+
+.success-title {
+    background-image: url(../images/ico-success-message.png);
+    color: #048A00;
+}
+
+.error-box {
+    background-color: #FDF4F4;
+    border: 1px solid #E1242B;
+    color: #E1242B;
+}
+
+.error-title {
+    background-image: url(../images/ico-error-message.png);
+    color: #E1242B;
+}
+

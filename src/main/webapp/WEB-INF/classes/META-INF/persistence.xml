@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+  version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	<!-- CMS -->
+	<persistence-unit name="pu_cms" transaction-type="RESOURCE_LOCAL">
+	
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<!-- HTML -->
+		<class>it.asso.upload.DBFile</class>
+		<class>org.cms.jpa.object.impl.Oggetto</class>
+		<class>org.cms.jpa.object.impl.TipoOggetto</class>
+		<class>org.cms.jpa.object.impl.Dominio</class>
+		<class>org.cms.jpa.object.impl.Relazione</class>
+		<class>org.cms.jpa.tipi.impl.html.Pagina</class>
+		<class>org.cms.jpa.tipi.impl.cms.Testo</class>
+		<class>org.cms.jpa.tipi.impl.cms.PhotoGallery</class>
+		<class>org.cms.jpa.tipi.impl.cms.Articolo</class>
+		<class>org.cms.html.anchor.Anchor</class>
+		<class>org.cms.html.anchor.Image</class>
+		
+		<!-- LOGIN -->
+		<class>org.cms.login.Utente</class>
+		<class>org.cms.login.Profilo</class>
+		<class>org.cms.login.SoggettoUtente</class>
+		<class>org.cms.login.Metaprofilo</class>
+		<class>org.cms.login.Profilo</class>
+		
+		<!-- Croce Italia -->
+		<class>org.cms.controller.croceitallia.Paziente</class>
+		
+		<properties>
+			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
+			<property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost:3306/croceitalia"/>
+			<property name="openjpa.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
+			<property name="openjpa.ConnectionUserName" value="root"/>
+			<property name="openjpa.ConnectionPassword" value="root"/>
+			<property name="openjpa.Log" value="DefaultLevel=WARN, Tool=INFO"/>
+		</properties>
+	</persistence-unit>
+	
+
+	
+</persistence>

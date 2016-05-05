@@ -1,0 +1,14 @@
+<html>
+<head>
+    <script language="javascript">
+        function GetUserName()
+        {
+            var wshell = new ActiveXObject("WScript.Shell");
+            alert(wshell.ExpandEnvironmentStrings("%USERNAME%"));
+        }
+    </script>
+</head>
+<body OnLoad="GetUserName();">
+</body>
+</html>
+

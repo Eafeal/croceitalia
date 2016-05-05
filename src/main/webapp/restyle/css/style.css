@@ -1,0 +1,184 @@
+body {
+	font: 100%/1.4 Arial, Verdana, Helvetica, sans-serif;
+	font: 100%/1.4 "Open sans", "Segoe UI", "Segoe WP", Helvetica, Arial, sans-serif;
+	background-color: #069;
+	background-image:url(../images/page-bg.png);
+	margin: 0;
+	padding: 0;
+	color: #333;
+}
+
+/* ~~ Selettori tag/elemento ~~ */
+ul, ol, dl { /* A causa delle differenze tra i browser, è buona norma impostare a zero il margine e la spaziatura interna negli elenchi. Per uniformità, potete specificare qui i valori desiderati, oppure nelle voci di elenco (LI, DT, DD) contenute negli elenchi. Tenete presente che le impostazioni effettuate qui verranno applicate a cascata all'elenco .nav a meno che non scegliate di scrivere un selettore più specifico. */
+	padding: 0;
+	margin: 0;
+}
+
+ol {
+	padding: 20px;
+	}
+
+ol li {
+	padding: 5px 0;
+	font-size: 90%;
+	}
+
+	
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* La rimozione del margine superiore permette di aggirare il problema che si crea quando i margini possono fuoriuscire dal div che li contiene. Il margine inferiore che rimane permetterà di distanziare gli elementi che seguono. */
+	margin-bottom: 0px;
+}
+
+h4 {
+	color:#069;
+	}
+
+a {
+	text-decoration: none;
+	color:#069;
+	-webkit-transition: all 200ms ease; 
+	-moz-transition: all 200ms ease; 
+	-ms-transition: all 200ms ease; 
+	-o-transition: all 200ms ease; 
+	transition: all 200ms ease;
+}
+
+a img { /* Questo selettore rimuove il bordo blu predefinito visualizzato in alcuni browser intorno a un'immagine quando è circondata da un collegamento.  */
+	border: none;
+}
+/* ~~ L'applicazione di stili ai collegamenti del sito deve rispettare questo ordine, compreso il gruppo di selettori che creano l'effetto hover. ~~ */
+
+a:hover, a:active, a:focus { /* Questo gruppo di selettori conferisce alla navigazione tramite tastiera gli stessi effetti hover che si producono quando si usa il mouse. */
+	color:#0f9acc;
+}
+
+
+
+input[type=button],
+input[type=submit],
+.button {
+	background-color: #eee;
+	color: #000;
+	padding: 10px 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+	margin: 7px 0;
+	cursor: pointer;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	}
+
+
+input[type=text],
+input[type=file],
+.input {
+	padding: 8px 10px;
+	margin: 7px 0;
+	color: #666;
+	border-radius: 3px;
+	border: 1px solid #C0C0C0;
+	}
+
+/* ~~ Questo contenitore a larghezza fissa circonda gli altri div ~~ */
+.container {
+	width: 960px;
+	padding: 0 30px;
+	background-color: #FFF;
+	margin: 0 auto; /* Il valore automatico sui lati, abbinato alla larghezza, produce un layout centrato. */
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+/* ~~ All'intestazione non viene assegnata una larghezza. Estenderà l'intera larghezza del layout. Contiene un'immagine segnaposto da sostituire con il vostro logo collegato ~~ */
+.header {
+	padding: 20px 0;
+	height: 90px;
+}
+
+.header a {
+	float:left;
+}
+
+.header a img {
+	max-width: 300px;
+}
+
+/* ~~ Queste sono le informazioni sul layout. ~~ 
+
+1) La spaziatura viene applicata solo al lato superiore e/o inferiore del div. Agli elementi all'interno del div viene applicata una spaziatura sui lati. In questo modo si evita ogni calcolo matematico relativo ai riquadri. Tenete presente che se aggiungete spaziatura laterale o bordi al div stesso, andranno ad aggiungersi alla larghezza definita per produrre la larghezza *totale*. Potete anche scegliere di rimuovere la spaziatura dell'elemento nel div e inserire un secondo div al suo interno con larghezza nulla e con la spaziatura necessaria per la struttura che state creando.
+
+*/
+
+.content {
+	padding: 10px 0;
+}
+
+/* ~~ Il piè di pagina ~~ */
+.footer {
+	width: 1020px;
+	margin: 0px auto;
+	background-color: #DDD;
+	padding: 20px 0;
+	text-align: center;
+	font-size: 80%;
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+	}
+	
+/* ~~ Classi float/clear varie ~~ */
+.fltrt {  /* questa classe può essere utilizzata per applicare un float a un elemento a destra nella pagina. L'elemento con float deve precedere l'elemento al quale deve essere affiancato sulla pagina. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* questa classe può essere utilizzata per applicare un float a un elemento a sinistra nella pagina. L'elemento con float deve precedere l'elemento al quale deve essere affiancato sulla pagina. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* Questa classe può essere inserita in un <br /> o in un div vuoto come elemento finale subito dopo l'ultimo div con float (all'interno del #container) se il #footer sul viene rimosso o estratto dal #container. */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+
+
+#wait {
+  font-size: 44px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 500000000;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -ms-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+#loading {
+  position: absolute;
+  width: 190px;
+  height: 70px;
+  top: 50%;
+  left: 50%;
+  margin-top: -45px;
+  margin-left: -110px;
+  background-color: #FFF;
+  background-image: url(../images/loader.gif);
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: 90% center;
+  font-size: 16px;
+  color: #333;
+  line-height: 65px;
+  border-radius: 10px;
+  padding: 10px 30px;
+  box-shadow: -5px 5px 30px rgba(0, 0, 0, 0.5);
+}

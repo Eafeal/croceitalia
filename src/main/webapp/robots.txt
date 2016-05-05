@@ -1,0 +1,4 @@
+User-agent: WinHTTrack
+Disallow: /
+User-agent: *
+Sitemap: http://www.invio730precompilato.it/sitemap.xml

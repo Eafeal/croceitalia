@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+  <display-name>asso-mvc-jpa</display-name>
+
+    <filter>
+            <filter-name>CheckUser</filter-name>
+            <filter-class>org.cms.security.CheckUser</filter-class>
+	</filter>
+	<filter-mapping>  
+	    <filter-name>CheckUser</filter-name>  
+	    <url-pattern>/edit/*</url-pattern>  
+	</filter-mapping>  
+	
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.cms.framework.CmsDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:app-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>		
+
+	<servlet>
+		<servlet-name>editServlet</servlet-name>
+		<servlet-class>org.cms.framework.CmsEditDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:app-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>		
+
+	<servlet>
+		<servlet-name>freemarker</servlet-name>
+		<servlet-class>org.cms.framework.CmsServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>freemarker</servlet-name>
+		<url-pattern>*.ftl</url-pattern>
+	</servlet-mapping>
+	
+     <servlet-mapping>
+		<servlet-name>editServlet</servlet-name>
+		<url-pattern>/edit/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/site/*</url-pattern>
+	</servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>/index.html</welcome-file>
+    </welcome-file-list>
+
+	<error-page> 
+		<error-code>403</error-code> 
+		<location>/site/error/403</location> 
+	</error-page> 
+	<error-page> 
+		<error-code>404</error-code> 
+		<location>/site/error/404</location> 
+	</error-page> 
+	<error-page> 
+		<error-code>405</error-code> 
+		<location>/site/error/405</location> 
+	</error-page> 
+
+	
+	<error-page> 
+		<error-code>500</error-code> 
+		<location>/site/error/500</location> 
+	</error-page> 
+	
+   <session-config>
+      <session-timeout>300</session-timeout>
+   </session-config>
+      
+</web-app>

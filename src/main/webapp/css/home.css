@@ -1,0 +1,151 @@
+@charset "utf-8";
+.slider {
+	height:190px;
+	background-image:url(../images/bg-slider-home.jpg);
+	background-size: 75%;
+    background-position: right center;
+    background-repeat: no-repeat;
+	}
+
+.slider div {
+	margin-top: 25px;
+	}
+
+.boxes {
+	width:100%;
+	}
+	
+.boxes li {
+	width:33%;
+}
+
+.boxes li a {
+	width: 93%;
+	height: 210px;
+	background-position:center center;
+}
+
+.boxes li a.left {
+	margin-left: 0;
+	margin-right: auto;
+}
+
+.boxes li a.center {
+	margin: 0 auto;
+}
+
+.boxes li a.right {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+.boxes li a div {
+	height: 70px;
+	margin-top: 120px;
+	background-size: 20px;
+	background-position: 98% 90%;
+	}
+	
+.boxes li a:hover {
+	background-position: center 70%;
+}
+
+.boxes li a:hover div {
+	background-position: 100% 90%;
+	}
+
+
+.boxes li a div h3 {
+	font-size:130%;
+	}
+
+
+
+
+.boxes li.contatti {
+	width: 100%;
+	height:220px;
+	background-image: url(../images/contatti-full.jpg);
+	background-repeat: no-repeat;
+	background-position: center left;
+	border: 1px solid #DDD;
+	border-radius: 2px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	padding: 0;
+	margin-bottom: 50px;
+}
+
+.boxes li.contatti div {
+	margin-left: 31%;
+	margin-top: 0;
+	height: 190px;
+	padding: 15px;
+	display: block;
+	overflow: auto;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.boxes li.contatti div a {
+	display: initial;
+	background: none;
+	border: 0;
+	box-shadow: none;
+	color: #069;
+}
+
+
+.boxes li.clienti {
+	width: 100%;
+	height:220px;
+	background-image: url(../images/clienti-full.jpg);
+	background-repeat: no-repeat;
+	background-position: center left;
+	border: 1px solid #DDD;
+	border-radius: 2px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	padding: 0;
+	margin-bottom: 50px;
+}
+
+.boxes li.clienti div {
+	margin-left: 31%;
+	margin-top: 0;
+	height: 190px;
+	padding: 15px;
+	display: block;
+	overflow: auto;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.boxes li.clienti div ul {
+	padding:0;
+	margin:0;
+	margin-top: 15px;
+	width:100%;
+	list-style:none;
+}
+
+.boxes li.clienti div ul li {
+	float: left;
+	width: 46%;
+	height: 100px;
+	margin: 0 10px 10px 0;
+	border: 1px solid #CCC;
+	padding: 5px;
+	font-size: 75%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.boxes li.clienti div ul li img {
+	margin: 0 5px 5px 0;
+	max-height: 65px;
+	max-width: 300px;
+	width: auto;
+	}
+
+
+
+
+/* CSS Document */
+

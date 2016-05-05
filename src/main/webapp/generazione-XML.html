@@ -1,0 +1,779 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+
+<title>Generazione file XML per ANAC (ex AVCP Legge 190/2012) - Prova gratuita generazione documento</title>
+<meta name="title" content="Generazione file XML per ANAC (ex AVCP Legge 190/2012) - Prova gratuita generazione documento"/>
+<meta name="description" content="La soluzione web ideata da Assocons per la generazione del file XML necessario per assolvere agli obblighi di pubblicazione dell'art.1 comma 32 Legge 190/2012"/>
+<meta name="keywords" content="Prova gratis generazione documento ANAC Legge 190, excel, xml, AVCP, ANAC"/>
+<meta name="robots" content="index, follow"/>
+<meta name="revisit-after" content="3 days"/>
+
+<meta name="publisher" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
+<meta name="copyright" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
+<meta name="author" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
+<meta name="distribution" content="Global"/>
+
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Expires" content="-1"/>
+  
+<meta name="author" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
+<meta name="subject" content="general"/>
+<meta name="rating" content=""/>
+<meta name="language" content="it"/>
+
+<LINK rel="shortcut icon" href="images/favicon.ico">
+
+<link href="/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="/css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="/css/page.css" rel="stylesheet" type="text/css"/>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71526825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <a href="http://www.assocons.it" target="new"><img src="images/logoAssocons.gif" alt="ASSOCONS Software &amp; Solutions"/></a>
+	
+    <!--div class="login">
+      <label for="user">User</label>
+      <input type="text" id="user" value=""/>
+      <br/>
+      <label for="password">Password</label>
+      <input type="password" id="user" value=""/>
+      <br/>
+      <a href="#">Login ></a>
+    </div-->
+
+    <ul class="top-menu">
+      <li><a href="/index.html" class="home">HOME</a></li>
+      <li><a target="assocons" href="http://www.assocons.it">Azienda</a></li>
+      <!--li><a href="#">Prodotti</a></li-->
+      <li><a href="/contatti.html">Contatti</a></li>
+    </ul>
+  </div><!-- end .header -->
+  <!-- end .header -->
+  
+  <div class="slider slide5">
+    <div>
+    <h1>730 Precompilato</h1>
+    <h3>Generazione dataset XML</h3>
+    </div>
+  </div>
+  
+<!-- fine testata -->  
+
+<div id="wait">
+  <div id="loading">
+    Attendere prego<br>
+	Elaborazione in corso....
+  </div>
+</div>
+
+	<div class="loginform">
+	<form method="post" action="/site/logout"> 
+	<p style="margin:0"><input type="hidden" name="requestedUri" value="/site/croceitalia/documento/list" /></p>
+	<fieldset style="border: 0; border-bottom: 1px solid #999; padding: 5px 0; margin-bottom: 30px; font-size: 16px; line-height: 50px;">
+		Utente: <span style="display: inline-block; font-weight: bold; margin-right: 50px;">Gazzaniga Loredana</span>
+        Profilo: <span style="display: inline-block; font-weight: bold; margin-right: 50px;">ATS Lombardia</span>
+        <input type="submit"  class="button" value="Esci" style="float: right;" />
+	</fieldset>
+	</form>
+	</div>
+	
+
+    <ul class="menu-in-page">
+      <li><a href="javascript:esegui('CSV')">Prestazioni ATS (csv)</a></li>
+	  <li class="selected"><a href="javascript:esegui('ExcelMPL')">Prestazioni MMG/PDF</a></li>
+	  <li class="last"><a href="javascript:esegui('ExcelSSA')">Prestazioni SSA/ATS (excel)</a></li>
+    </ul>
+	
+	<br>
+    <fieldset style="border: 1px solid #ababab; border-radius: 3px;">
+	<legend>Seleziona dal tuo computer il file da elaborare:</legend>
+	
+	<form id="UloadForm" name="UploadForm" method="post" style="display: block; padding: 0 8px; width: 51%; margin-bottom:15px" 
+		action="/site/croceitalia/passo2/upload" 
+		enctype="multipart/form-data" 
+		onSubmit="javascript:return js_controllo_allegato()">
+		<input type="hidden" id="tipoFile" name="tipoFile" value="ExcelMPL"/>
+		<input type="hidden" id="autore" name="autore" value="ATSPavia"/>
+		<input type="hidden" id="parent_id" name="parent_id" value="croceitalia" >
+		<input class="field" type="file" id="file" name="file" />
+		<input type="submit" class="inviaXLS" value="Invia il file da elaborare"/>
+	</form>	
+	<hr />
+	<form id="ZipUploadForm" name="ZipUploadForm" method="post" style="display: block; padding: 0 8px; width: 51%;"  
+		action="/site/croceitalia/documento/zipUpload" 
+		enctype="multipart/form-data" 
+		onSubmit="javascript:return js_controllo_allegato_2()">
+		<input type="hidden" id="tipoFile" name="tipoFile" value="ExcelMPL"/>		
+		<input type="hidden" id="autore" name="autore" value="ATSPavia"/>
+		<input type="hidden" id="parent_id" name="parent_id" value="croceitalia" >
+		<input class="field" type="file" id="file" name="file" />
+		<input type="submit" class="inviaZip" value="Invia il file da elaborare"/>
+	</form>	
+    </fieldset>	
+	
+	<div id="contentList">
+
+        <div style="margin-bottom: 5px;">
+          <img src="img/icons/dir_opened_mini.gif" style="float:left; margin-right:10px; margin-top: 4px;" /><strong>Cartella Top/ATSPavia</strong>
+		  <div style="float: right; font-size: 14px; border: 1px solid #e1e1e1; padding: 3px 10px; border-bottom: 0; border-radius: 5px 5px 0 0;">
+            Ordina per: 
+            <a href="javascript:esegui('nome')" style="padding: 0 20px;">Nome File Elaborato</a>
+            <a href="javascript:esegui('data')">Data/ora Elaborazione Decr.</a>
+          </div>
+        </div>
+
+        <table border="0" cellpadding="0" cellspacing="0" style="margin-bottom:5px">
+			<tr>
+			<th title="Id Elaborazione">Id. El.</th>
+			<th align=left width=45%>File elaborato</th>
+			<th align=left width=45%>File generato</th>
+			<th align=left width=5%>Stato</th>
+			<th align=left width=5%>Operazioni</th>
+			</tr>
+	
+			
+
+					<!-- chiusura della riga precedente -->
+					<tr><td>121879.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121880" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121880')">SILVANI LORENZO_.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121883" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 46" onClick="javascript:f_win_log('/site/documento/view/121883')">030_312_00791_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121879', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121883" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121870.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121871" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121871')">setti claudia 2015.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121874" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 15" onClick="javascript:f_win_log('/site/documento/view/121874')">030_312_48778_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121870', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121874" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121833.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121834" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121834')">ROZZA FM.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121837" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 16" onClick="javascript:f_win_log('/site/documento/view/121837')">030_312_09678_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121833', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121837" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121828.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121829" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121829')">ROTELLA GB.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121832" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 66" onClick="javascript:f_win_log('/site/documento/view/121832')">030_312_46387_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121828', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121832" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121779.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121780" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121780')">RANNO A.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121783" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 5" onClick="javascript:f_win_log('/site/documento/view/121783')">030_312_47403_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121779', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121783" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121770.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121771" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121771')">quaglia luisa.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121774" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 6" onClick="javascript:f_win_log('/site/documento/view/121774')">030_312_17528_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121770', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121774" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121745.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121746" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121746')">PISANI GIOVANNI.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121749" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 118" onClick="javascript:f_win_log('/site/documento/view/121749')">030_312_70539_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121745', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121749" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121736.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121737" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121737')">PETTINATI G_.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121740" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 7" onClick="javascript:f_win_log('/site/documento/view/121740')">030_312_70346_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121736', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121740" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121691.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121692" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121692')">Nascimbene Carlo.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121695" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 22" onClick="javascript:f_win_log('/site/documento/view/121695')">030_312_16419_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121691', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121695" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121618.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121619" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121619')">MANGIAROTTI ANGELA_.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121622" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 34" onClick="javascript:f_win_log('/site/documento/view/121622')">030_312_13960_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121618', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121622" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121565.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121566" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121566')">FRASCHINI G.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121569" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 178" onClick="javascript:f_win_log('/site/documento/view/121569')">030_312_02068_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121565', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121569" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121496.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121497" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121497')">COLOMBI PAOLO.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121500" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 1" onClick="javascript:f_win_log('/site/documento/view/121500')">030_312_20996_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121496', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121500" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121475.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121476" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121476')">CAVALLOTTI.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121479" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 8" onClick="javascript:f_win_log('/site/documento/view/121479')">030_312_00127_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121475', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121479" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121446.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121447" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121447')">CAPPELLETTI MASSIMO.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121450" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 31" onClick="javascript:f_win_log('/site/documento/view/121450')">030_312_70040_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121446', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121450" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121425.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121426" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121426')">CALCANTE SARA.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121429" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 9" onClick="javascript:f_win_log('/site/documento/view/121429')">030_312_31455_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121425', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121429" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121372.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121373" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121373')">BELLAZZI ANDREA.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121376" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 43" onClick="javascript:f_win_log('/site/documento/view/121376')">030_312_15525_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121372', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121376" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121297.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121298" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121298')">ALLEN.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121351" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 42" onClick="javascript:f_win_log('/site/documento/view/121351')">030_312_47724_730.xml</span>
+					</td>
+			
+
+					<!-- chiusura della riga precedente -->
+						   <td><strong>OK</strong></td>	
+						   <td width="20px"  >
+							   <img  src="img/icons/delete.png"  style="float:left;clear:none;border:0" title="Cancella Elaborazione" onclick="esegui('del' ,'121297', 'OK')" />
+								  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121351" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+						   </td>
+					   </tr>
+					<tr><td>121292.</td>
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121293" type="application/vnd.ms-excel" ><img src="img/icons/xls_mini.gif"></a>
+						<span title="ExcelMPL - File da elaborare" onClick="javascript:f_win_log('/site/documento/view/121293')">ALESSI GC_.xls</span>
+					</td>
+			
+
+
+			
+
+
+					<td>
+						<a title="Scarica il file" href="/site/documento/get/121296" type="application/xml" ><img src="img/icons/xml_mini.gif"></a>
+						<span title="ExcelMPL - XML Generato; Fatture inserite: 25" onClick="javascript:f_win_log('/site/documento/view/121296')">030_312_02499_730.xml</span>
+					</td>
+			<!-- chiusura ultima riga -->
+
+				<td><strong>OK</strong></td>	
+			    <td width="20px"  >
+				   <img src="img/icons/delete.png" title="Cancella elaborazione" onclick="esegui('del' ,'121292', 'OK')" />
+					  &nbsp;&nbsp;<a title="Scarica il file XML" href="/site/documento/get/121296" type="application/xml" ><img src="img/icons/download.png" /></a>					  
+			   </td>
+		   </tr>
+		</table>
+		<strong style="font-size:13px;">Totale file elaborati: 18<strong>
+    </div>
+	<div class="clearfloat"></div>
+ 
+
+  <div class="clearfloat"></div>
+
+</div><!-- end .container -->
+
+<div class="footer">
+  <p>Copyright © 2015 - <a href="http://www.assocons.it/" title="Content Management System" target="_blank">Assocons S.r.l.</a> | All Rights Reserved</p>
+  <p>Sede legale: via Cacciatori delle Alpi, 1/A | 22070 Capiago Intimiano (CO) | C.F. Reg.Imprese e Partita I.V.A. 01960650131</p>
+  <p>Sede operativa: viale Andrea Doria,33 - 20124 Milano</p>  
+  <p class="credits">Powered by <a href="http://www.assocons.it/" target="_blank">Assocons S.r.l.</a></p>
+</div>
+
+
+</body>
+</html>
+
+
+		<script>
+		function openPath(path)
+			{
+			var w = 800;
+			var h = 735;
+			var pw = Math.floor((screen.width-w)/2);
+			var ph = 0; //Math.floor((screen.height-h)/2);
+			var opened = window.open(path,"mywin","toolbar=no,location=no,menubar=no,scrollbars=no,resizable=yes,width="+ w +", height="+ h +", top="+ ph +", left="+ pw);
+			opened.focus();
+			}
+	
+		function esegui(operaz, idFile, stato)
+			{
+			if (operaz == "CSV")
+				document.location = "/site/croceitalia/documento/list/CSV";					
+			else if (operaz == "ExcelMPL")
+				document.location = "/site/croceitalia/documento/list/ExcelMPL";				
+			else if (operaz == "ExcelSSA")
+				document.location = "/site/croceitalia/documento/list/ExcelSSA";
+			else if (operaz == "nome")
+				document.location = "/site/croceitalia/documento/listper/nome/ExcelMPL";
+			else if (operaz == "data")
+				document.location = "/site/croceitalia/documento/listper/data/ExcelMPL";
+			else if(operaz == "del")
+				{
+				if (stato == 'OK')
+					{
+					if(!confirm("Confermi Eliminazione elaborazione in stato OK?")) return
+					}
+				document.location = "/site/croceitalia/documento/delete/ExcelMPL/" + idFile;					
+				}
+			else if (operaz == "list")
+				document.location = "/site/croceitalia/documento/list/ExcelMPL/" + idFile;
+			else if (operaz == "unzip")
+			    document.location = "/site/croceitalia/documento/unzip/ExcelMPL/" + idFile;
+			else if (operaz == "get")  
+			    openPath("/site/croceitalia/documento/get/" + idFile);
+			else if (operaz == "edit")
+			    document.location = "/site/croceitalia/documento/update/" + idFile;
+			}
+		
+		function js_controllo_allegato()
+		{
+
+		path=document.UploadForm.file.value;
+
+		if (path=="")
+			{
+			alert("Specificare il file da elaborare.");
+			return false;
+
+			}
+			
+		posizione_punto=path.lastIndexOf(".");
+		lunghezza_stringa=path.length;
+		estensione=path.substring(posizione_punto+1,lunghezza_stringa);
+
+		if ("CSV"=="ExcelMPL" && estensione.toUpperCase() == "CSV")
+			{
+			showLoader();
+			return true;
+			}			
+		if ("CSV"!="ExcelMPL" && (estensione.toUpperCase()=="XLS"||estensione.toUpperCase()=="XLSX"))
+			{
+			showLoader();
+			return true;
+			}	
+
+		alert("Specificare un file in formato excel 2003, CSV o ZIP");	
+		return false;
+		}
+			
+		function js_controllo_allegato_2()
+		{
+
+		path=document.ZipUploadForm.file.value;
+
+		if (path=="")
+			{
+			alert("Specificare il file da elaborare.");
+			return false;
+			}
+			
+		posizione_punto=path.lastIndexOf(".");
+		lunghezza_stringa=path.length;
+		estensione=path.substring(posizione_punto+1,lunghezza_stringa);
+
+		if (estensione.toUpperCase()=="ZIP")
+			{
+			showLoader();
+			return true;
+			}	
+
+		alert("Specificare un file in formato ZIP");	
+		return false;
+		}
+						
+		function nuovaDir()
+			{
+			var idParent = document.formNewDir.idParent.value;
+			var folderName = document.formNewDir.folderName.value;
+			if(folderName == "")
+				{
+				alert("Immettere un nome per la nuova cartella");
+				document.formNewDir.folderName.focus();
+				return;
+				}
+			document.formNewDir.action = "/site/croceitalia/documento/nuovaCartella/"+idParent+"/"+folderName;
+			document.formNewDir.submit();
+			}
+			
+		function  f_win_log(url)
+			{
+
+			//document.getElementById("logfile").innerHtml = url;
+			
+			var w;
+			var h;
+			var pw;
+			var ph;
+
+
+				w = 870;
+				h = 600;
+				pw = Math.floor((screen.width-w)/2);
+				ph = 0;
+				
+				new_win=window.open(url,"Errori", "location=0,menubar=0,resizable=1,scrollbars, width="+ w +", height="+ h +", top="+ ph +", left="+ pw);
+
+				new_win.focus();
+			}		
+			
+		function showLoader()
+			{
+			document.getElementById("wait").style.display = "block";
+			}
+
+		function hideLoader()
+			{
+			document.getElementById("wait").style.display = "none";
+			}
+			
+		</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento senza titolo</title>
+</head>
+
+<body>
+</body>
+</html>

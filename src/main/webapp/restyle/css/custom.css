@@ -1,0 +1,186 @@
+@charset "utf-8";
+
+
+.login {
+	display: block;
+	float: right;
+	margin-left: 345px;
+	}
+
+.login input {
+	font-size: 65%;
+	width: 70px;
+	padding: 2px 4px;
+	border:1px solid #DDD;
+	border-radius:3px;
+	}
+
+.login label,
+.login a {
+	font-size:70%;
+	color:#999;
+	display:inline-block;
+	width:50px;
+	text-align: right;
+	}
+
+.login a {
+	text-decoration:none;
+	float: right;
+	}
+
+
+.top-menu {
+	list-style: none;
+	border-top: 1px solid #EFEFEF;
+	position: absolute;
+	left: 50%;
+	margin-left: 290px;
+	top: 110px;
+	}
+
+.top-menu li {
+	display:inline-block;
+	}
+
+.top-menu li a {
+	display:block;
+	padding:0 8px;
+	text-decoration:none;
+	font-size: 13px;
+	color: #999;
+	}
+	
+
+.top-menu li a:hover,
+.top-menu li a.current {
+	color:#069;
+}
+
+.slider {
+	width:100%;
+	border:1px solid #DDD;
+	border-radius: 2px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+.slider div {
+	display: block;
+	margin-left: 40px;
+	color: #069;
+	font-size: 240%;
+	}
+	
+.slider h1 {
+	font-size: 100%;
+	font-weight: normal;
+	margin: 0;
+}
+	
+.slider span {
+	display: block;
+	font-size: 45%;
+	line-height: 160%;
+	font-weight: normal;
+	margin-top: 25px;
+	margin-left: 20px;
+}
+	
+
+.boxes {
+	margin-top: 30px;
+	list-style:none;
+	}
+	
+.boxes li {
+	padding-bottom: 30px;
+	display:inline-block;
+}
+
+.boxes li a {
+	display:block;
+	border: 1px solid #DDD;
+	border-radius: 2px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background-color:#DDD;
+	text-decoration:none;
+	color: #333;
+	
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+
+.boxes li a.box1 {
+	background-image:url(../images/a-chi.jpg);
+}
+
+.boxes li a.box2 {
+	background-image:url(../images/caratteristiche.jpg);
+}
+
+.boxes li a.box3 {
+	background-image:url(../images/scadenze.jpg);
+}
+
+.boxes li a.box4 {
+	background-image:url(../images/gratis.jpg);
+}
+
+.boxes li a.box5 {
+	background-image:url(../images/genXML.jpg);
+}
+
+.boxes li a.box6 {
+	background-image:url(../images/clienti.jpg);
+}
+
+.boxes li a.box7 {
+	background-image:url(../images/valXML.jpg);
+}
+
+.boxes li a.box8 {
+	background-image:url(../images/rigenera-XLS.jpg);
+}
+
+.boxes li a.box9 {
+	background-image:url(../images/contatti.jpg);
+}
+
+.boxes li a div {
+	font-size: 90%;
+	padding:10px;
+	display:block;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.9);
+	background-image:url(../images/arrow.png);
+	background-repeat:no-repeat;
+	
+	-webkit-transition: all 200ms ease; 
+	-moz-transition: all 200ms ease; 
+	-ms-transition: all 200ms ease; 
+	-o-transition: all 200ms ease; 
+	transition: all 200ms ease;
+	}
+	
+.boxes li a:hover div {
+	background-color: rgba(255, 255, 255, 1.0);
+	}
+
+
+.boxes li a div h3 {
+	font-weight:bold;
+	margin-bottom: 0px;
+	}
+	
+
+.footer a {
+	color:#868686;
+	}
+
+.footer a:hover {
+	color:#069;
+	}
+
+
+/* CSS Document */
+

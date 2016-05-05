@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+    <script>
+        function get_user_Name() {
+            var credentialPicker = Windows.Security.Credentials.UI.CredentialPicker;
+			alert("@"+credentialPicker+"@");
+            document.write("Username=");
+            document.write(credentialPicker);
+            document.write(" <br/> Done.");
+        }
+    </script>
+
+    </head>
+    <body>
+        <button type="button" onclick="get_user_Name()">Display User Name</button>
+    </body>
+</html>

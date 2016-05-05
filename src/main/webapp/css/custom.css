@@ -1,0 +1,300 @@
+@charset "utf-8";
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "open_sanslight", Arial, Verdana, Helvetica, sans-serif;
+	color:#069;
+}
+
+h2 {
+	margin:30px 0 10px;
+	}
+
+h2.top {
+	margin-top:0px;
+	}
+
+.content p {
+	margin: 25px 0;
+    line-height: 25px;
+	}
+
+.footer p {
+	margin: 0;
+	}
+
+p.info {
+	padding: 15px 18px;
+    border: 1px solid #D3E1E8;
+    background-color: #F8FCFF;
+    margin-top: 10px;
+    font-size: 80%;
+    line-height: 20px;
+	}
+
+.callToAction {
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    padding-bottom: 30px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+.myform {
+	display:block;
+	width:70%;
+	padding: 15px 18px;
+    border: 1px solid #D3E1E8;
+    background-color: #F8FCFF;
+    margin-top: 10px;
+    font-size: 80%;
+    line-height: 20px;
+	}
+
+.myform p {
+	margin:0;
+	}
+
+.myform label {
+	display:inline-block;
+	width:30%;
+	}
+
+.myform .input,
+.myform select {
+	display:inline-block;
+	width:60%;
+	}
+
+.myform select {
+    width: 65%;
+}
+
+.myform .button {
+	float:right;
+	}
+
+
+.login {
+	display: block;
+	float: right;
+	margin-left: 345px;
+	}
+
+.login input {
+	font-size: 65%;
+	width: 70px;
+	padding: 2px 4px;
+	border:1px solid #DDD;
+	border-radius:3px;
+	}
+
+.login label,
+.login a {
+	font-size:70%;
+	color:#999;
+	display:inline-block;
+	width:50px;
+	text-align: right;
+	}
+
+.login a {
+	text-decoration:none;
+	float: right;
+	}
+
+
+.top-menu {
+	list-style: none;
+	border-top: 1px solid #EFEFEF;
+	position: absolute;
+	left: 50%;
+	margin-left: -480px;
+    top: 32px;
+	}
+
+.top-menu li {
+	display:inline-block;
+	}
+
+.top-menu li a {
+	display: block;
+    padding: 4px 10px;
+    text-decoration: none;
+    font-size: 15px;
+	}
+	
+.top-menu li a.home {
+	background-image:url(../images/icon-home.png);
+	background-repeat:no-repeat;
+	background-size: 20px;
+	background-position: left 4px;
+    padding-left: 25px;
+	}
+	
+
+.top-menu li a:hover,
+.top-menu li a.current {
+	color:#069;
+}
+
+.slider {
+	width:100%;
+	border: 1px solid #999;
+    border-left: 0;
+    border-right: 0;
+	border-radius: 2px;
+	}
+
+.slider div {
+	display: block;
+	margin-left: 37px;
+	color: #069;
+	font-size: 240%;
+	text-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+	}
+	
+.slider h1 {
+	font-size: 100%;
+	font-weight: normal;
+	margin: 0;
+}
+	
+.slider h3 {
+    font-size: 40px;
+    line-height: 35px;
+}
+
+.slider span {
+	display: block;
+	font-size: 45%;
+	line-height: 160%;
+	font-weight: normal;
+	margin-top: 25px;
+	margin-left: 20px;
+}
+	
+
+.boxes {
+	margin-top: 30px;
+	list-style:none;
+	}
+	
+.boxes li {
+	padding-bottom: 30px;
+	display:inline-block;
+}
+
+.boxes li a {
+	display:block;
+	border: 1px solid #DDD;
+	border-radius: 2px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background-color:#DDD;
+	text-decoration:none;
+	color: #333;
+	
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+
+.boxes li a.box1 {
+	background-image:url(../images/a-chi.jpg);
+}
+
+.boxes li a.box2 {
+	background-image:url(../images/caratteristiche.jpg);
+}
+
+.boxes li a.box3 {
+	background-image:url(../images/scadenze.jpg);
+}
+
+.boxes li a.box4 {
+	background-image:url(../images/gratis.jpg);
+}
+
+.boxes li a.box5 {
+	background-image:url(../images/genXML.jpg);
+}
+
+.boxes li a.box6 {
+	background-image:url(../images/clienti.jpg);
+}
+
+.boxes li a.box7 {
+	background-image:url(../images/valXML.jpg);
+}
+
+.boxes li a.box8 {
+	background-image:url(../images/rigenera-XLS.jpg);
+}
+
+.boxes li a.box9 {
+	background-image:url(../images/contatti.jpg);
+}
+
+.boxes li a.box-prezzi {
+	background-image:url(../images/prezzi.jpg);
+}
+
+.boxes li a.box-faq {
+	background-image:url(../images/faq.jpg);
+}
+
+.boxes li a.box-contatti {
+	background-image:url(../images/contatti.jpg);
+}
+
+.boxes li a div {
+	font-size: 80%;
+	padding:10px;
+	display:block;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.9);
+	background-image:url(../images/arrow.png);
+	background-repeat:no-repeat;
+	
+	-webkit-transition: all 200ms ease; 
+	-moz-transition: all 200ms ease; 
+	-ms-transition: all 200ms ease; 
+	-o-transition: all 200ms ease; 
+	transition: all 200ms ease;
+	}
+	
+.boxes li a:hover div {
+	background-color: rgba(255, 255, 255, 1.0);
+	}
+
+
+.boxes li a div h3 {
+	font-weight:bold;
+	margin-bottom: 0px;
+	}
+	
+
+.footer a {
+	color:#FFF;
+	}
+
+.footer a:hover {
+	color:#0f9acc;
+	}
+
+
+#box-privacy {
+    display: block;
+    margin-top: 15px;
+    border: 1px solid #C3C3C3;
+    border-radius: 3px;
+	}
+
+#box-privacy label {
+    width: auto;
+    padding-top: 0;
+    display: inline;
+    font-size: 12px;
+	}
+
+/* CSS Document */
+

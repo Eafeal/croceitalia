@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* CSS Document */
+
+.prezziario {
+    width: 100%;
+	list-style:none;
+}
+
+.prezziario li.box {
+    width: 32.9%;
+	padding-bottom: 30px;
+    display: inline-block;
+}
+
+.prezziario ul.box {
+    width: 93%;
+	list-style:none;
+
+    display: block;
+    border: 1px solid #DDD;
+	border-bottom:0;
+    border-radius: 2px;
+    color: #333;
+	}
+	
+.prezziario ul.left {
+	float: left;
+}
+
+.prezziario ul.center {
+	float: left;
+    margin-left: 3.5%;
+}
+
+.prezziario ul.right {
+	float: right;
+}
+
+.prezziario ul.box li {
+	height: 100px;
+    text-align: center;
+    border-bottom: 1px solid #DDD;
+	}
+
+.prezziario ul.box li.price-title {
+	height: 50px;
+	color:#FFF;
+    line-height: 50px;
+    font-weight: bold;
+	}
+
+.sanita ul.box li.price-title {
+    background-color: #008684;
+	}
+
+.commercialisti ul.box li.price-title {
+    background-color: #069;
+    height: 60px;
+    line-height: 20px;
+    padding-top: 15px;
+	}
+
+.prezziario ul.box li.price {
+	color:#999;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+    font-weight: bold;
+    font-size: 25px;
+	}
+
+.prezziario ul.box li.price .cifra {
+	color:#069;
+    font-weight: bold;
+    font-size: 40px;
+	}
+
+.sanita ul.box li.price .cifra {
+	color:#008684;
+	}
+
+.commercialisti ul.box li.price .cifra {
+	color:#069;
+	}
+
+.prezziario ul.box li.price-preventivo {
+    color: #999;
+    text-align: center;
+    height: 85px;
+    font-weight: bold;
+    font-size: 20px;
+    padding-top: 15px;
+	}
+

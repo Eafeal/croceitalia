@@ -1,0 +1,345 @@
+@charset "utf-8";
+* {
+	scrollbar-base-color: #6699cc;
+	scrollbar-darkShadow-color: #6699cc;
+
+	scrollbar-shadow-color: #6699cc;
+	scrollbar-highlight-color: #6699cc;
+	scrollbar-face-color: #6699cc;
+	
+	scrollbar-arrow-color: #113488;
+	scrollbar-track-color: #FFFFFF;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+hr {
+	height:1px;
+	width:100%;
+	border: 1px dashed #b5b4dc; 
+}
+
+input	{
+	border: 1px solid #a0abd7;
+	width:250px; height:16px;
+	font-size:10px;
+}
+
+
+
+
+/*------------------------------------------------------------------------*/
+
+
+
+input.btn {
+	border: 1px solid #FFFFFF;
+	background-image:url(../images/sf_btn.gif);
+	background-attachment:50%;
+	color:#ffa00e;
+	font-weight:bold;
+	padding:2px;
+	padding-left:26px;
+	text-align:left;
+	cursor:pointer;
+	font-size:10px;
+	height:20px;
+}
+
+td.radio	{
+	text-align:center;
+	padding:0px;
+}
+
+td.col1	{
+	background-color:#f2f5ff;
+}
+
+td.col2	{
+	background-color:#eeeeee;
+}
+
+.btnOrange {
+	border:1px solid #FFFFFF;
+	padding:4px;
+	background-color:#ffa00e;
+	color:#FFFFFF;
+	font-weight:bold;
+	font-size:10px;
+	float:right;
+	width:auto; height:auto;
+	cursor:pointer;
+}
+
+.btnBlue	{
+	border:1px solid #FFFFFF;
+	padding:3px;
+	background-color:#113488;
+	color:#FFFFFF;
+	font-weight:bold;
+	font-size:12px;
+	float:right;
+	width:auto; height:auto;
+	cursor:pointer;
+}
+
+.error	{
+	border:1px solid #FFFFFF;
+	padding:3px;
+	background-color:#113488;
+	color:red;
+	font-weight:bold;
+	font-size:12px;
+	float:right;
+	width:auto; height:auto;
+	cursor:pointer;
+}
+
+.radio {
+	border: 0;
+	width:15px; height:15px;
+}
+
+.check	{
+	border: 0;
+	width:15px; height:15px;
+}
+
+
+/*------------------------------------------------------------------------*/
+
+
+#testata {
+	width:100%; height:80px;
+	background-image:url(../images/sf_top.gif);
+	position:absolute;
+	text-align:right;
+	top:0;
+}
+
+#testata img.logo	{
+	margin-top:10px;
+	float:left;
+	border:1px #009966;
+}
+
+#testata span.utente	{
+	color:#113488;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	padding-right:10px;
+	padding-top:10px;
+}
+
+#testata ul	{
+	margin-top: 40px;
+	padding: 0;
+	list-style-type: none;
+	width:610px;
+	height:26px;
+	float:right;
+}
+
+#testata li	{
+	display: inline;
+}
+
+#testata li a	{
+	float: left;
+	display: block;
+	text-decoration: none;
+	padding: 6px 12px; /*padding inside each tab*/
+	background-color:#FFFFFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+	font-weight:bold;
+	color:#113488;
+	border:1px solid #FFFFFF;
+}
+
+#testata li a:hover	{
+	background-color:#ffa00e;
+	color:#FFFFFF;
+}
+
+#testata li a.selected	{
+	background-color:#ffa00e;
+	color:#FFFFFF;
+}
+
+
+/*------------------------------------------------------------------------*/
+
+
+#containerPopUp {
+	position:absolute;
+	background-color:#ebeef7;
+	padding:10px;
+	color:#113488;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+
+
+
+#container {
+	width:750px;
+	position:absolute;
+	left:50%;
+	margin:120px 0 0 -375px;
+	background-color:#ebeef7;
+	padding:10px;
+	color:#113488;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+
+span.title{
+	font-size:15px;
+	text-transform:uppercase;
+	font-weight:bold;
+}
+
+span.err{
+	font-size:15px;
+	text-transform:uppercase;
+	font-weight:bold;
+	color:#FF0000;
+}
+
+a.ok	{
+	float: right;
+	display: block;
+	text-decoration: none;
+	padding: 6px 12px;
+	background-color:#ffa00e;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+	font-weight:bold;
+	color:#FFFFFF;
+	border:1px solid #FFFFFF;
+}
+
+
+/*------------------------------------------------------------------------*/
+/*	RIQUADRO DI GESTIONE FILE	*/
+
+div#esplora {
+	position:relative;
+	width:350px; height:300px;
+	border: 1px solid #FFFFFF;
+	background-color:#F5F5F5;
+	color:#000000;
+	font-size:11px;
+	padding:5px;
+	overflow:auto;
+	text-align:left;
+	
+	scrollbar-base-color: #ebeef7;
+	scrollbar-darkShadow-color: #ebeef7;
+
+	scrollbar-shadow-color: #ebeef7;
+	scrollbar-highlight-color: #ebeef7;
+	scrollbar-face-color: #ebeef7;
+	
+	scrollbar-arrow-color: #113488;
+	scrollbar-track-color: #FFFFFF;
+}
+
+#esplora hr {
+	width:100%;
+	border:1px solid #FFFFFF;
+	}
+
+#esplora img {
+	border:0;
+	}
+
+#esplora a	{
+	text-decoration: none;
+	font-size:11px;
+	color:#000000;
+}
+
+#esplora a:hover	{
+	text-decoration:underline;
+}
+
+#esplora a.selected	{
+	text-decoration:underline;
+}
+
+img.del	{
+	float:right;
+	border:0;
+	cursor:pointer;
+}
+
+
+
+/*------------------------------------------------------------------------*/
+/*	TABELLA BIANCA CON TESTATA ARANCIO	*/
+
+#bianca table	{
+	width:90%;
+}
+
+#bianca th	{
+	color:#FFFFFF;
+	text-align:left;
+	border:1px solid #FFFFFF;
+	padding:5px;
+	background-color:#ffa00e;
+}
+
+#bianca td	{
+	padding:5px;
+	color:#113488;
+	border:1px solid #f5f6f8;
+	background-color:#FFFFFF;
+	text-align:right;
+}
+
+/*
+#bianca input {
+	border: 0;
+	width:15px; height:15px;
+}
+*/
+
+
+
+
+#errore {
+	width:500px; height:100px;
+	background-color:#113488;
+	color:#FFFFFF;
+	font-weight:bold;
+	position:absolute;
+	text-align:center;
+	border:#FF0000 solid 1px;
+	padding:15px;
+	top:150px; left:50%;
+	margin:0px 0 0 -250px;
+	z-index:50;
+}
+
+#wait {
+	width:250px;
+	height:20px;
+	visibility:hidden;
+	background-color:#113488;
+	color:#FFFFFF;
+	font-weight:bold;
+	position:absolute;
+	text-align:center;
+	border:#FF0000 solid 1px;
+	padding:15px;
+	top:150px;
+	left:50%;
+	margin:0px 0 0 -150px;
+	z-index:50;
+}

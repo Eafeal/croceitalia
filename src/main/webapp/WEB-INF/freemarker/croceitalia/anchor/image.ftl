@@ -1,0 +1,1 @@
+<img src="${oggetto.url}" alt="${oggetto.description}"  style="${oggetto.style}"  />
