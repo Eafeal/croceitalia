@@ -6,7 +6,7 @@
 	<name>croceitalia</name>
 	<packaging>war</packaging>
 	<version>1.0</version>
-	<url>http://www.inviocroceitaliailato.it/</url>
+	<url>http://croceitalia.assocons.com/</url>
 	
 	<properties>
 		<spring.framework.version>3.0.5.RELEASE</spring.framework.version>
