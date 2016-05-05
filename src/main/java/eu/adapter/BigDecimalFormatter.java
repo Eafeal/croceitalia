@@ -12,6 +12,7 @@ import java.text.DecimalFormatSymbols;
  * @author ConsDonzelliPaolo
  * 
  */
+ ///////////ciao
 public class BigDecimalFormatter {
 
     /**
