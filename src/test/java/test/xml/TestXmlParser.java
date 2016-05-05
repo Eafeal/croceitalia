@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * @author ConsDonzelliPaolo
+ * @author Donzelli Paolo
  * 
  */
 public class TestXmlParser {
