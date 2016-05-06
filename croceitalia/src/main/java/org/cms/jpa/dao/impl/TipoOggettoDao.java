@@ -38,7 +38,7 @@ public class TipoOggettoDao extends AssoDao {
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#getEntityClass()
 	 */
-	@Override
+	//@Override
 	public Class<?> getEntityClass() {
 		return TipoOggetto.class;
 	}

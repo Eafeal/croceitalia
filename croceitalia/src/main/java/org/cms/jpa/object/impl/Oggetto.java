@@ -81,7 +81,7 @@ public class Oggetto extends DominioModel {
 		return lang;
 	}
 
-	@Override
+	//@Override
 	public String getState() {
 
 		return state;
@@ -105,13 +105,13 @@ public class Oggetto extends DominioModel {
 		return uid;
 	}
 
-	@Override
+	//@Override
 	public boolean inLavorazione() {
 
 		return state.equals(WORKINPROGRESS);
 	}
 
-	@Override
+	//@Override
 	@PrePersist
 	public void onPrePersist() {
 
@@ -177,7 +177,7 @@ public class Oggetto extends DominioModel {
 		this.uid = uid;
 	}
 
-	@Override
+	//@Override
 	public String toString() {
 
 		TipoOggetto tipoOggetto = getTipoOggetto();

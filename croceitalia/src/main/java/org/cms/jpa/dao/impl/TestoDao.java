@@ -35,7 +35,7 @@ public class TestoDao extends DominioDao {
 		return resultList;
 	}
 
-	@Override
+	//@Override
 	public Class<?> getEntityClass() {
 		return Testo.class;
 	}

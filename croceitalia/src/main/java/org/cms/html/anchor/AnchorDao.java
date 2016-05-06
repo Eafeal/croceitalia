@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 @Repository("anchorDao")
 public class AnchorDao extends DominioDao {
 
-	/*
+	/*//@Override
 	 * (non-Javadoc)
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#getEntityClass()
 	 */
-	@Override
+	//@Override
 	public Class<?> getEntityClass() {
 		return Anchor.class;
 	}

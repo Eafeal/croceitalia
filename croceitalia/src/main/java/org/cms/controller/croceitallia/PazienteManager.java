@@ -38,7 +38,7 @@ public class PazienteManager extends AssoDao {
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#getEntityClass()
 	 */
-	@Override
+	//@Override
 	public Class<?> getEntityClass() {
 
 		return Paziente.class;
@@ -90,7 +90,7 @@ public class PazienteManager extends AssoDao {
 	 * 
 	 * @see org.cms.jpa.dao.impl.AssoDao#save(java.lang.Object)
 	 */
-	@Override
+	//@Override
 	public void save(Object obj) throws AssoException {
 		super.save(obj);
 	}

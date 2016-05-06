@@ -213,7 +213,7 @@ public abstract class DominioModel implements DominioModel_itf {
 
 	}
 
-	@Override
+	//@Override
 	public int compareTo(Model_itf obj) {
 
 		return this.toString().compareTo(obj.toString());

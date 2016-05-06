@@ -156,7 +156,7 @@ public class DBFile extends DominioModel implements File_itf {
 		return ext;
 	}
 
-	@Override
+	//@Override
 	public File getFile() throws AssoException {
 
 		// File file = new File(nomefile);
@@ -187,13 +187,13 @@ public class DBFile extends DominioModel implements File_itf {
 		return ico;
 	}
 
-	@Override
+	//@Override
 	public String getId() {
 
 		return id;
 	}
 
-	@Override
+	//@Override
 	public String getIdParent() {
 
 		return parent_id;
@@ -273,7 +273,7 @@ public class DBFile extends DominioModel implements File_itf {
 
 	}
 
-	@Override
+	//@Override
 	public String getState() {
 
 		return state;
@@ -303,7 +303,7 @@ public class DBFile extends DominioModel implements File_itf {
 		return this.title;
 	}
 
-	@Override
+	//@Override
 	public String getUid() {
 
 		return nomefile;
@@ -397,7 +397,7 @@ public class DBFile extends DominioModel implements File_itf {
 	 * 
 	 * @see org.cms.jpa.object.impl.DominioModel#onPrePersist()
 	 */
-	@Override
+	//@Override
 	protected void onPrePersist() throws AssoException {
 
 		super.onPrePersist();
@@ -410,7 +410,7 @@ public class DBFile extends DominioModel implements File_itf {
 	 * 
 	 * @see org.cms.jpa.object.impl.DominioModel#onPreUpdate()
 	 */
-	@Override
+	//@Override
 	protected void onPreUpdate() throws AssoException {
 
 		super.onPreUpdate();
@@ -574,7 +574,7 @@ public class DBFile extends DominioModel implements File_itf {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
+	//@Override
 	public String toString() {
 
 		String answer = this.getClass().getSimpleName() + ". ";

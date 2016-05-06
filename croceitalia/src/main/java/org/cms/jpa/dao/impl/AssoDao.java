@@ -38,7 +38,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	/**
 	 * @param em
 	 */
-	@Override
+	//@Override
 	public void close(EntityManager em) {
 
 		// em.getDelegate();
@@ -48,7 +48,7 @@ public abstract class AssoDao implements AssoDao_itf {
 		}
 	}
 
-	@Override
+	//@Override
 	public void deleteById(Class<?> aClass, String id) throws AssoException {
 
 		EntityManager em = null;
@@ -83,7 +83,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#deleteById(java.lang.String)
 	 */
-	@Override
+	//@Override
 	public void deleteById(String id) throws AssoException {
 
 		deleteById(getEntityClass(), id);
@@ -109,7 +109,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#findById(java.lang.Class, java.lang.String)
 	 */
-	@Override
+	//@Override
 	public Object findById(Class<?> classe, String id) {
 
 		EntityManager em = getEntityManager();
@@ -125,7 +125,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#findById(java.lang.String)
 	 */
-	@Override
+	//@Override
 	public Object findById(String id) {
 
 		return findById(getEntityClass(), id);
@@ -134,7 +134,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	/**
 	 * @return
 	 */
-	@Override
+	//@Override
 	public EntityManager getEntityManager() {
 
 		// if (_entityManager != null && _entityManager.isOpen()) {
@@ -163,7 +163,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#getTableName()
 	 */
-	@Override
+	//@Override
 	public String getTableName() {
 
 		Table annotation = getEntityClass().getAnnotation(javax.persistence.Table.class);
@@ -177,7 +177,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#save(java.util.List)
 	 */
-	@Override
+	//@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void save(List<Object> objectList) throws AssoException {
 
@@ -214,7 +214,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#save(java.lang.Object)
 	 */
-	@Override
+	//@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void save(Object obj) throws AssoException {
 
@@ -269,7 +269,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#update(java.util.List)
 	 */
-	@Override
+	//@Override
 	public void update(List<Object> objectList) throws AssoException {
 
 		EntityManager em = null;
@@ -307,7 +307,7 @@ public abstract class AssoDao implements AssoDao_itf {
 	/*
 	 * (non-Javadoc)
 	 */
-	@Override
+	//@Override
 	public void update(Object obj) throws AssoException {
 
 		update(getEntityManager(), obj);

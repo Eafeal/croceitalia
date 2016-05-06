@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository("photoGalleryDao")
 public class PhotoGalleryDao extends DominioDao {
 
-	@Override
+	//@Override
 	public Class<?> getEntityClass() {
 		return PhotoGallery.class;
 	}

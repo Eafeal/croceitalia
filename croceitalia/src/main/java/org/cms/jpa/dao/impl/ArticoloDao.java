@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository("articoloDao")
 public class ArticoloDao extends DominioDao {
 
-	@Override
+	//@Override
 	public Class<?> getEntityClass() {
 		return Articolo.class;
 	}

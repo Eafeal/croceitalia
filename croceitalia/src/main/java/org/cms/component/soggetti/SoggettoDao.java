@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository("soggettoDao")
 public class SoggettoDao extends AssoDao {
 
-	@Override
+	//@Override
 	public Class<?> getEntityClass() {
 		return Soggetto.class;
 	}

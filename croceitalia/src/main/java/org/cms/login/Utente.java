@@ -252,7 +252,7 @@ public class Utente extends Model implements Utente_itf {
 	 * 
 	 * @see org.cms.login.Utente_itf#getNominativo()
 	 */
-	@Override
+	//@Override
 	public String getNominativo() {
 
 		return this.nome + " " + this.cognome;
@@ -347,7 +347,7 @@ public class Utente extends Model implements Utente_itf {
 	 * 
 	 * @see org.cms.login.Utente_itf#getStates()
 	 */
-	@Override
+	//@Override
 	public List<String> getStates() {
 
 		return this.soggettoUtente.getObjectStates();
@@ -402,7 +402,7 @@ public class Utente extends Model implements Utente_itf {
 	 * 
 	 * @see org.cms.login.Utente_itf#isAdmin()
 	 */
-	@Override
+	//@Override
 	public boolean isAdmin() {
 
 		return this.soggettoUtente.isAdmin();
@@ -437,7 +437,7 @@ public class Utente extends Model implements Utente_itf {
 	 * 
 	 * @see it.asso.util.Utente_itf#isScaduto()
 	 */
-	@Override
+	//@Override
 	public boolean isScaduto() {
 
 		if (dataScadenza == null)
@@ -451,7 +451,7 @@ public class Utente extends Model implements Utente_itf {
 	 * 
 	 * @see org.cms.jpa.object.impl.Model#onPrePersist()
 	 */
-	@Override
+	//@Override
 	protected void onPrePersist() throws AssoException {
 
 		if (Util.isEmpty(this.password)) {
@@ -472,7 +472,7 @@ public class Utente extends Model implements Utente_itf {
 	 * 
 	 * @see org.cms.jpa.object.impl.Model#onPreUpdate()
 	 */
-	@Override
+	//@Override
 	@PreUpdate
 	protected void onPreUpdate() {
 

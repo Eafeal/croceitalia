@@ -25,7 +25,7 @@ import org.springframework.stereotype.Repository;
 @Repository("relazioneDao")
 public class RelazioneDao extends DominioDao implements RelazioneDao_itf {
 
-	@Override
+	//@Override
 	public void deleteById(Class<?> aClass, String id) throws AssoException {
 
 		EntityManager em = null;
@@ -55,7 +55,7 @@ public class RelazioneDao extends DominioDao implements RelazioneDao_itf {
 		}
 	}
 
-	@Override
+	//@Override
 	public Class<?> getEntityClass() {
 		return Relazione.class;
 	}
@@ -92,7 +92,7 @@ public class RelazioneDao extends DominioDao implements RelazioneDao_itf {
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#findByUid(java.lang.String,
 	 * java.lang.String)
 	 */
-	@Override
+	//@Override
 	public Relazione findByUid(String uid, String dominioUid) {
 
 		EntityManager em = getEntityManager();
@@ -120,7 +120,7 @@ public class RelazioneDao extends DominioDao implements RelazioneDao_itf {
 		return resultList;
 	}
 
-	@Override
+	//@Override
 	public List<Relazione> loadChildren(EntityManager em,
 			DominioModel_itf padre, TipoOggetto_itf tipo) {
 
@@ -169,7 +169,7 @@ public class RelazioneDao extends DominioDao implements RelazioneDao_itf {
 	 * EntityManager, org.cms.jpa.object.itf.Model_itf,
 	 * org.cms.jpa.object.impl.TipoOggetto)
 	 */
-	@Override
+	//@Override
 	public List<Relazione> loadParents(EntityManager em,
 			DominioModel_itf figlio, TipoOggetto_itf tipo) {
 
@@ -192,7 +192,7 @@ public class RelazioneDao extends DominioDao implements RelazioneDao_itf {
 	 * org.cms.jpa.manager.itf.ModelDao_itf#loadParents(org.cms.jpa.object.itf
 	 * .DominioModel_itf, org.cms.jpa.object.impl.TipoOggetto)
 	 */
-	@Override
+	//@Override
 	public List<Relazione> loadParents(DominioModel_itf figlio,
 			TipoOggetto_itf tipo) {
 

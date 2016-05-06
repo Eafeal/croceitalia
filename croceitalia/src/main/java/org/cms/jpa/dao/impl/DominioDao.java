@@ -57,7 +57,7 @@ public abstract class DominioDao implements DominioDao_itf {
      * @see org.cms.jpa.manager.itf.AssoDao_itf#deleteById(java.lang.Class,
      * java.lang.String)
      */
-    @Override
+    //@Override
     public void deleteById(Class<?> aClass, String id) throws AssoException {
 
         EntityManager em = null;
@@ -102,7 +102,7 @@ public abstract class DominioDao implements DominioDao_itf {
         }
     }
 
-    @Override
+    //@Override
     public void deleteById(String id) throws AssoException {
 
         deleteById(getEntityClass(), id);
@@ -133,7 +133,7 @@ public abstract class DominioDao implements DominioDao_itf {
      * "select obj from Pagina obj where obj.uid=:uid and obj.dominio.uid=:dominioUid"
      */
     @SuppressWarnings("unchecked")
-    @Override
+    //@Override
     public List<DominioModel_itf> findAll(TipoOggetto_itf tipoOggetto, String dominioUid) throws AssoException {
 
         EntityManager em = getEntityManager();
@@ -174,7 +174,7 @@ public abstract class DominioDao implements DominioDao_itf {
      * 
      * @see org.cms.jpa.manager.itf.AssoDao_itf#findById(java.lang.String)
      */
-    @Override
+    //@Override
     public Object findById(String id) {
 
         try {
@@ -453,7 +453,7 @@ public abstract class DominioDao implements DominioDao_itf {
      * "select obj from Pagina obj where obj.uid=:uid and obj.dominio.uid=:dominioUid"
      */
     @SuppressWarnings("unchecked")
-    @Override
+    //@Override
     public List<DominioModel_itf> chooseNewChildren(DominioModel_itf padre, TipoOggetto_itf tipoOggetto,
             String dominioUid) throws AssoException {
 

@@ -134,20 +134,20 @@ public class GuestUser implements Utente_itf {
 		return null;
 	}
 
-	@Override
+	//@Override
 	public void setTimeLastLogin(Timestamp eULTLOGIN) {
 
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+	//@Override
 	public Timestamp getDataScadenza() {
 
 		return null;
 	}
 
-	@Override
+	//@Override
 	public boolean isScaduto() {
 
 		return false;
