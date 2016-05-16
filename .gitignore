@@ -23,3 +23,8 @@ hs_err_pid*
 croceitalia/.externalToolBuilders/Maven_Ant_Builder.launch
 croceitalia/maven-eclipse.xml
 croceitalia/target/
+stampa-pdf/.classpath
+stampa-pdf/.gitignore
+stampa-pdf/.project
+stampa-pdf/.settings/org.eclipse.jdt.core.prefs
+stampa-pdf/.settings/org.eclipse.m2e.core.prefs
