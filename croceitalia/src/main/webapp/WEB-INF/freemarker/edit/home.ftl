@@ -11,7 +11,7 @@
             <h1>Funzioni Disponibili</h1>
                 <ul type="circle">
                 	<br/>
-				    <li><a href="/edit/oggetto/list" >Oggetti</a></li>
+				    <!--li><a href="/edit/oggetto/list" >Oggetti</a></li>
 				    <br/>
 				    <li><a href="/edit/pagina/list" >Pagine</a></li>
 				    <br/>
@@ -26,14 +26,14 @@
 				    <li><a href="/edit/documento/list" >Documenti</a></li>
 				    <br/>
 				    <li><a href="/edit/articolo/list" >Articoli</a></li>
-				    <br/>
+				    <br/-->
 				    <li><a href="/edit/utente/list" >Utenti</a></li>
 				    <br/>
 				    <li><a href="/edit/paziente/list" >Paziente</a></li>
 				    <br/>
 				    <li><a href="/edit/struttura/list" >Struttura</a></li>
 				    <br/>
-				    <li><a href="/edit/bache/list" >Banche</a></li>
+				    <li><a href="/edit/banca/list" >Banche</a></li>
 					<br/>
 				    <li><a href="/edit/mezzo/list" >Mezzo</a></li>	
 				    <br/>	
