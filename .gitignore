@@ -22,3 +22,4 @@ hs_err_pid*
 
 croceitalia/.externalToolBuilders/Maven_Ant_Builder.launch
 croceitalia/maven-eclipse.xml
+croceitalia/target/
