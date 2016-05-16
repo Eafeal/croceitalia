@@ -53,7 +53,7 @@
     
     </body>
 </html>
-<#if esito??>
+<#if esito?? && esito=="ok">
 <script>
 alert("Aggiornamento effettuato correttamente");
 </script>

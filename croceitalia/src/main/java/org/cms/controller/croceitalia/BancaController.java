@@ -1,21 +1,11 @@
 package org.cms.controller.croceitalia;
 
-import it.asso.util.AssoException;
-import it.asso.util.RandomIdentifier;
-
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.cms.controller.SiteCmsController;
 import org.cms.controller.edit.EditCmsController;
-import org.cms.login.SoggettoUtente;
-import org.cms.login.UserDao;
-import org.cms.login.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import it.asso.util.AssoException;
+
 @Controller
-public class BancaController extends EditCmsController{
-	
+public class BancaController extends EditCmsController {
+
 	/**
 	 * 
 	 */
@@ -37,6 +29,7 @@ public class BancaController extends EditCmsController{
 	 * @param response
 	 * @return
 	 */
+	@Override
 	@RequestMapping(value = "banca/list", method = RequestMethod.GET)
 	protected ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
 
@@ -76,13 +69,14 @@ public class BancaController extends EditCmsController{
 		return modelAndView;
 
 	}
+
 	@RequestMapping(value = "banca/create", method = RequestMethod.GET)
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
-			//List<SoggettoUtente> soggetti = userDao.caricaSoggettiUtente();
-			//modelAndView.addObject("soggetti", soggetti);
+			// List<SoggettoUtente> soggetti = userDao.caricaSoggettiUtente();
+			// modelAndView.addObject("soggetti", soggetti);
 
 			modelAndView.setViewName("croceitalia/banca/create");
 
@@ -93,7 +87,7 @@ public class BancaController extends EditCmsController{
 		}
 
 	}
-	
+
 	/**
 	 * @param request
 	 * @param response
@@ -106,7 +100,7 @@ public class BancaController extends EditCmsController{
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
 			_bancaManager.update(banca);
-			modelAndView.addObject("esito", "ok");/*chiave valore*/
+			request.setAttribute("esito", "ok");
 			String viewName = "forward:/edit/banca/update/" + banca.getId_banca();
 			modelAndView.setViewName(viewName);
 
@@ -116,7 +110,7 @@ public class BancaController extends EditCmsController{
 			return error(modelAndView, errore);
 		}
 	}
-	
+
 	/**
 	 * @param request
 	 * @param response
@@ -130,7 +124,14 @@ public class BancaController extends EditCmsController{
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
 			Banca banca = (Banca) _bancaManager.findById(user_id);
-			modelAndView.addObject("banca", banca);/*chiave valore*/
+			modelAndView.addObject("banca", banca);
+			Object esito = request.getAttribute("esito");
+			// if (esito != null) {
+			// modelAndView.addObject("esito", "ok");/* chiave valore */
+			// } else {
+			// modelAndView.addObject("esito", "");
+			// }
+
 			modelAndView.setViewName("croceitalia/banca/update");
 			return modelAndView;
 
@@ -138,10 +139,10 @@ public class BancaController extends EditCmsController{
 			return error(modelAndView, errore);
 		}
 	}
-	
-	
+
 	@RequestMapping(value = "banca/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
+	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("id") String id) {
 
 		return delete(request, response, id, LIST);
 	}
