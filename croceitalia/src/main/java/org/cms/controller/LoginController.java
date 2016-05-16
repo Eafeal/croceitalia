@@ -89,7 +89,7 @@ public class LoginController extends SiteCmsController {
 			modelAndView.addObject("loginMessage", loginMessage);
 			modelAndView.addObject(ErrorMsg, loginMessage);
 
-			modelAndView.setViewName("croceitalia/croceitalia/login");
+			modelAndView.setViewName("redirect:/index.html");
 			return modelAndView;
 
 		} catch (Exception errore) {
