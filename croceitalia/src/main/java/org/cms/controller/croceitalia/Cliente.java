@@ -22,9 +22,6 @@ public class Cliente extends Model {
 	@Column(name = "id_cliente", nullable = false, insertable = true, updatable = false)
 	private Integer			id_cliente;
 
-	// @Column(name = "fk_tipo_cliente", nullable = false, insertable = true, updatable = false)
-	// private Integer fk_tipo_cliente;
-
 	@OneToOne
 	@JoinColumn(name = "fk_tipo_cliente", nullable = false)
 	private Tipo_cliente	tipo_cliente;
@@ -58,13 +55,11 @@ public class Cliente extends Model {
 
 	public Integer getFk_tipo_cliente() {
 
-		// if (tipo_cliente == null) tipo_cliente = new Tipo_cliente();
 		return tipo_cliente.getId_tipo_cliente();
 	}
 
 	public void setFk_tipo_cliente(Integer fk_tipo_cliente) {
 
-		// if (tipo_cliente == null) tipo_cliente = new Tipo_cliente();
 		tipo_cliente.setId_tipo_cliente(fk_tipo_cliente);
 	}
 

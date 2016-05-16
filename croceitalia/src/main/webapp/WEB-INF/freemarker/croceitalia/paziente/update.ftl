@@ -56,7 +56,7 @@
                             <tr class="prop">
                                 <td valign="top" class="name"><label for="data">Data di nascita</label></td>
                                 <td valign="top" class="value">
-                                    <input type="text" id="data_nascita" name="data_nascita" size="20" maxlength="20" value="${paziente.getData_nascita()}" />
+                                    <input type="text" id="data_nascita" name="data_nascita" size="20" maxlength="20" value="${paziente.getData_nascita()?string["dd-MM-yyyy"]}" />
                                 </td>
                             </tr>
                             <tr class="prop">

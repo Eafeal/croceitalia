@@ -16,68 +16,56 @@ import javax.persistence.TemporalType;
 
 import org.cms.jpa.object.impl.Model;
 
-/**
- * @author ConsDonzelliPaolo
- * 
- */
 @Entity
 @Table(name = "Paziente")
 @NamedQuery(name = "Paziente.loadAll", query = "SELECT OBJECT(obj) FROM Paziente obj order by obj.cognome, obj.nome")
 public class Paziente extends Model {
 
-	/**
-     * 
-     */
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_paziente", nullable = false, insertable = true, updatable = false)
-	private Integer id_paziente;
+	private Integer		id_paziente;
 
 	@OneToOne
 	@JoinColumn(name = "fk_id_patologia", nullable = false)
-	private Patologia id_patologia;
+	private Patologia	id_patologia;
 
-	private String nome;
-	private String cognome;
-	private String telefono1;
-	private String telefono2;
-	private String sesso;
+	private String		nome;
+	private String		cognome;
+	private String		telefono1;
+	private String		telefono2;
+	private String		sesso;
 
-	//@Temporal(TemporalType.DATE)
-	private String data_nascita;
+	@Temporal(TemporalType.DATE)
+	private Date		data_nascita;
 
-	private String via;
-	private String comune;
-	private String cap;
-	private String provincia;
+	private String		via;
+	private String		comune;
+	private String		cap;
+	private String		provincia;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.cms.jpa.object.impl.Model#onPreUpdate()
-	 */
-	@Override
-	protected void onPreUpdate() {
-		// controlla che la data di nascita dia corretta
-	}
-	
 	public Paziente() {
+
 		this.id_patologia = new Patologia();
 	}
 
-
 	public Integer getFk_id_patologia() {
+
 		return id_patologia.getId_patologia();
 	}
 
 	public void setFk_id_patologia(Integer fk_id_patologia) {
+
+		if (this.id_patologia == null)
+			this.id_patologia = new Patologia();
 		id_patologia.setId_patologia(fk_id_patologia);
 	}
+
 	/**
 	 * @return the id_paziente
 	 */
 	public Integer getId_paziente() {
+
 		return id_paziente;
 	}
 
@@ -86,15 +74,17 @@ public class Paziente extends Model {
 	 *            the id_paziente to set
 	 */
 	public void setId_paziente(Integer id_paziente) {
+
 		this.id_paziente = id_paziente;
 	}
-
 
 	/**
 	 * @return the nome
 	 */
 	public String getNome() {
-		if(nome == null) return "";
+
+		if (nome == null)
+			return "";
 		return nome;
 	}
 
@@ -103,6 +93,7 @@ public class Paziente extends Model {
 	 *            the nome to set
 	 */
 	public void setNome(String nome) {
+
 		this.nome = nome;
 	}
 
@@ -110,7 +101,9 @@ public class Paziente extends Model {
 	 * @return the cognome
 	 */
 	public String getCognome() {
-		if(cognome == null) return "";
+
+		if (cognome == null)
+			return "";
 		return cognome;
 	}
 
@@ -119,6 +112,7 @@ public class Paziente extends Model {
 	 *            the cognome to set
 	 */
 	public void setCognome(String cognome) {
+
 		this.cognome = cognome;
 	}
 
@@ -126,7 +120,9 @@ public class Paziente extends Model {
 	 * @return the telefono1
 	 */
 	public String getTelefono1() {
-		if(telefono1 == null) return "";
+
+		if (telefono1 == null)
+			return "";
 		return telefono1;
 	}
 
@@ -135,6 +131,7 @@ public class Paziente extends Model {
 	 *            the telefono1 to set
 	 */
 	public void setTelefono1(String telefono1) {
+
 		this.telefono1 = telefono1;
 	}
 
@@ -142,7 +139,9 @@ public class Paziente extends Model {
 	 * @return the telefono2
 	 */
 	public String getTelefono2() {
-		if(telefono2 == null) return "";
+
+		if (telefono2 == null)
+			return "";
 		return telefono2;
 	}
 
@@ -151,6 +150,7 @@ public class Paziente extends Model {
 	 *            the telefono2 to set
 	 */
 	public void setTelefono2(String telefono2) {
+
 		this.telefono2 = telefono2;
 	}
 
@@ -158,7 +158,9 @@ public class Paziente extends Model {
 	 * @return the sesso
 	 */
 	public String getSesso() {
-		if(sesso == null) return "";
+
+		if (sesso == null)
+			return "";
 		return sesso;
 	}
 
@@ -167,14 +169,17 @@ public class Paziente extends Model {
 	 *            the sesso to set
 	 */
 	public void setSesso(String sesso) {
+
 		this.sesso = sesso;
 	}
 
 	/**
 	 * @return the data_nascita
 	 */
-	public String getData_nascita() {
-		if(data_nascita == null) return "";
+	public Date getData_nascita() {
+
+		// if (data_nascita == null)
+		// return "";
 		return data_nascita;
 	}
 
@@ -182,7 +187,8 @@ public class Paziente extends Model {
 	 * @param data_nascita
 	 *            the data_nascita to set
 	 */
-	public void setData_nascita(String data_nascita) {
+	public void setData_nascita(Date data_nascita) {
+
 		this.data_nascita = data_nascita;
 	}
 
@@ -190,7 +196,9 @@ public class Paziente extends Model {
 	 * @return the via
 	 */
 	public String getVia() {
-		if(via == null) return "";
+
+		if (via == null)
+			return "";
 		return via;
 	}
 
@@ -199,6 +207,7 @@ public class Paziente extends Model {
 	 *            the via to set
 	 */
 	public void setVia(String via) {
+
 		this.via = via;
 	}
 
@@ -206,7 +215,9 @@ public class Paziente extends Model {
 	 * @return the comune
 	 */
 	public String getComune() {
-		if(comune == null) return "";
+
+		if (comune == null)
+			return "";
 		return comune;
 	}
 
@@ -215,6 +226,7 @@ public class Paziente extends Model {
 	 *            the comune to set
 	 */
 	public void setComune(String comune) {
+
 		this.comune = comune;
 	}
 
@@ -222,7 +234,9 @@ public class Paziente extends Model {
 	 * @return the cap
 	 */
 	public String getCap() {
-		if(cap == null) return "";
+
+		if (cap == null)
+			return "";
 		return cap;
 	}
 
@@ -231,6 +245,7 @@ public class Paziente extends Model {
 	 *            the cap to set
 	 */
 	public void setCap(String cap) {
+
 		this.cap = cap;
 	}
 
@@ -238,7 +253,9 @@ public class Paziente extends Model {
 	 * @return the provincia
 	 */
 	public String getProvincia() {
-		if(provincia == null) return "";
+
+		if (provincia == null)
+			return "";
 		return provincia;
 	}
 
@@ -247,6 +264,7 @@ public class Paziente extends Model {
 	 *            the provincia to set
 	 */
 	public void setProvincia(String provincia) {
+
 		this.provincia = provincia.toUpperCase();
 	}
 
