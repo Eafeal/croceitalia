@@ -78,7 +78,7 @@ public class Anchor extends DominioModel {
 		return lang;
 	}
 
-	//@Override
+//	@Override
 	public String getState() {
 
 		return state;

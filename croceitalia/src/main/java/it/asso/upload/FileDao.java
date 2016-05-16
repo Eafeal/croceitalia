@@ -269,7 +269,7 @@ public class FileDao extends DominioDao implements FileManager_itf {
 		return false;
 	}
 
-	//@Override
+	@Override
 	public File_itf findById(String id) {
 
 		File_itf file = (File_itf) super.findById(id);
@@ -925,7 +925,7 @@ public class FileDao extends DominioDao implements FileManager_itf {
 	 * 
 	 * @see org.cms.jpa.dao.impl.DominioDao#save(java.lang.Object)
 	 */
-	//@Override
+	@Override
 	public void save(Object obj) throws AssoException {
 
 		super.save(obj);

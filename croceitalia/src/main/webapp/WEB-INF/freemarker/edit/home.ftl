@@ -28,7 +28,17 @@
 				    <li><a href="/edit/articolo/list" >Articoli</a></li>
 				    <br/>
 				    <li><a href="/edit/utente/list" >Utenti</a></li>
+				    <br/>
+				    <li><a href="/edit/paziente/list" >Paziente</a></li>
+				    <br/>
+				    <li><a href="/edit/struttura/list" >Struttura</a></li>
+				    <br/>
+				    <li><a href="/edit/bache/list" >Banche</a></li>
 					<br/>
+				    <li><a href="/edit/mezzo/list" >Mezzo</a></li>	
+				    <br/>	
+				    <li><a href="/edit/cliente/list" >Cliente</a></li>	
+				    <br/>					    					
 				    <hr/>
 					<br/>
 				    <li><a href="/site/logout" >Logout</a></li>

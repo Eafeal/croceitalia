@@ -164,7 +164,7 @@ public class Testo extends DominioModel {
         this.title = title;
     }
 
-    //@Override
+//    @Override
     public String getUid() {
 
         return title;
@@ -208,7 +208,7 @@ public class Testo extends DominioModel {
      * 
      * @see org.cms.jpa.object.impl.DominioModel#onPrePersist()
      */
-    //@Override
+    @Override
     protected void onPrePersist() throws AssoException {
 
         super.onPrePersist();

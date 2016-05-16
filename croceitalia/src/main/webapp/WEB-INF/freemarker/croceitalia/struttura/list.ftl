@@ -2,8 +2,8 @@
 
         
         <div class="body">
-            <h1>Ricerca Pazienti</h1>
-            <form action="/edit/paziente/list" method="post" >
+            <h1>Ricerca Struttura</h1>
+            <form action="/edit/struttura/list" method="post" >
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -28,16 +28,14 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th class="sortable" ><a href="javascript:ordina('resultTable',1,0);">Nominativo</a></th>
-                            <th class="sortable" ><a href="javascript:ordina('resultTable',2,0);">Contatti</a></th>
-                            <th class="sortable" ><a href="javascript:ordina('resultTable',3,0);">Patologia</a></th>
+                            <th class="sortable" ><a href="javascript:ordina('resultTable',2,0);">Nome Struttura</a></th>
+                            <th class="sortable" ><a href="javascript:ordina('resultTable',3,0);">Contatti </a></th>
                             <th class="sortable" ></th>
                         </tr>
                     </thead>
                     <tbody>
 	                    <#assign i=0 />
-	                    <#list Lista as paziente >
-	                    <#list patologia as pato >
+	                    <#list Lista as struttura >
 	                        <#assign i=i+1 />
 	                        <#if (i % 2) == 0 >
 	                            <#assign classe="odd" />
@@ -45,17 +43,15 @@
 	                            <#assign classe="even" />
 	                        </#if>
 	                        <tr class="${classe}">
-	                            <td><a href="/edit/paziente/update/${paziente.getId_paziente()}">${i}<img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a></td>
-	                            <td>${paziente.getCognome()}&nbsp;${paziente.getNome()}</td>
-	                            <td>${paziente.getTelefono1()} - ${paziente.getTelefono2()}</td>
-	                            <td>${pato.descrizione} </td>
-	                            <td>
-								    <form action="/edit/paziente/delete/${paziente.id_paziente}" method="get" >
+	                            <td><a href="/edit/struttura/update/${struttura.getId_struttura()}">${i}<img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a></td>
+	                            <td>${struttura.getNome()}</td>
+	                            <td>${struttura.getTelefono()}</td>
+                             	 <td>
+								    <form action="/edit/struttura/delete/${struttura.id_struttura}" method="get" >
 									<span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
 									</form>
 								</td>
 	                        </tr>
-	                    </#list>
 	                    </#list>
                     </tbody>
                 </table>

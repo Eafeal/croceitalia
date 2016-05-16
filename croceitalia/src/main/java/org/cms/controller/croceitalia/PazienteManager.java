@@ -26,53 +26,49 @@ public class PazienteManager extends AssoDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Paziente> caricaPazienti() {
-
 		List<Paziente> list = (List<Paziente>) this.execNamedQuery("Paziente.loadAll");
-
 		return list;
-
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Patologia> caricaPatologia() {
+		List<Patologia> list = (List<Patologia>) this.execNamedQuery("Patologia.loadAll");
+		return list;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.cms.jpa.manager.itf.AssoDao_itf#getEntityClass()
 	 */
-	//@Override
+//	@Override
 	public Class<?> getEntityClass() {
 
 		return Paziente.class;
 	}
-
 	/**
-	 * @param modelMap
+	 * @param cerca
 	 * @return
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Utente_itf> search(ModelMap modelMap) throws Exception {
-
-		String cognome = (String) modelMap.get("cognome");
-
-		if (Util.isNotEmpty(cognome)) {
-			cognome = "%" + cognome + "%";
-		}
+	public List<Paziente> search(String cerca) throws Exception {
 
 		EntityManager em = null;
 		try {
-
 			em = getEntityManager();
 
-			String queryString = "select Paziente from Paziente Paziente ";
-			queryString += " WHERE Paziente.cognome LIKE :cognome  ";
+			String queryString = "select paz from Paziente paz ";
+			queryString += " WHERE paz.cognome      LIKE :cerca  ";
+			queryString += " OR paz.nome            LIKE :cerca  ";
+			queryString += " OR paz.telefono1  		LIKE :cerca  ";
 
 			Query query = em.createQuery(queryString);
 
-			query.setParameter("cognome", cognome);
+			query.setParameter("cerca", "%" + cerca + "%");
 
-			queryString += " ORDER BY ute.userId ";
+			queryString += " ORDER BY paz.telefono1, paz.cognome, paz.nome ";
 
-			List<Utente_itf> answer = query.getResultList();
+			List<Paziente> answer = query.getResultList();
 
 			return answer;
 
@@ -90,7 +86,7 @@ public class PazienteManager extends AssoDao {
 	 * 
 	 * @see org.cms.jpa.dao.impl.AssoDao#save(java.lang.Object)
 	 */
-	//@Override
+	@Override
 	public void save(Object obj) throws AssoException {
 		super.save(obj);
 	}

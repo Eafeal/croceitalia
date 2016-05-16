@@ -55,7 +55,7 @@ public class OggettoDao extends DominioDao {
 		return resultList;
 	}
 
-	//@Override
+//	@Override
 	public Class<?> getEntityClass() {
 		return Oggetto.class;
 	}

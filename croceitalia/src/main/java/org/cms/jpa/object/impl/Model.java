@@ -61,7 +61,7 @@ public abstract class Model implements Model_itf {
         AssoLogger.GetInstance().logInfo("Aggiornamento " + this.getClass().getSimpleName());
     }
 
-    //@Override
+//    @Override
     public int compareTo(Model_itf obj) {
 
         return this.toString().compareTo(obj.toString());

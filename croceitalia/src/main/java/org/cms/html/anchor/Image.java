@@ -74,7 +74,7 @@ public class Image extends DominioModel {
 		return lang;
 	}
 
-	//@Override
+//	@Override
 	public String getState() {
 		return state;
 	}
@@ -105,12 +105,12 @@ public class Image extends DominioModel {
 		return this.url;
 	}
 
-	//@Override
+	@Override
 	public boolean inLavorazione() {
 		return state.equals(WORKINPROGRESS);
 	}
 
-	//@Override
+	@Override
 	@PrePersist
 	public void onPrePersist() {
 		if (title == null) {
@@ -166,7 +166,7 @@ public class Image extends DominioModel {
 		this.url = url;
 	}
 
-	//@Override
+	@Override
 	public String toString() {
 		TipoOggetto tipoOggetto = getTipoOggetto();
 		String tipo;
