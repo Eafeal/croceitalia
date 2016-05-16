@@ -31,10 +31,10 @@
 		
 		<properties>
 			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
-			<property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost:3306/croceitalia"/>
+			<property name="openjpa.ConnectionURL" value="jdbc:mysql://192.168.251.94:3306/croceitalia"/>
 			<property name="openjpa.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
-			<property name="openjpa.ConnectionUserName" value="root"/>
-			<property name="openjpa.ConnectionPassword" value="password"/>
+			<property name="openjpa.ConnectionUserName" value="croceitalia"/>
+			<property name="openjpa.ConnectionPassword" value="##croceitalia!!"/>
 			<property name="openjpa.Log" value="DefaultLevel=WARN, Tool=INFO"/>
 		</properties>
 	</persistence-unit>

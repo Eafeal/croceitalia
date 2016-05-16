@@ -96,7 +96,7 @@
 		</dependency>
 		<!-- assoframe -->
 		<dependency>
-			<groupId>assoframe</groupId>
+			<groupId>it.asso</groupId>
 			<artifactId>assoframe</artifactId>
 			<version>2.4</version>
 			<scope>runtime</scope>

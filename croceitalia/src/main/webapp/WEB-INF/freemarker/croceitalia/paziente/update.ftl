@@ -81,7 +81,7 @@
                     </table>
                 </div>
             <div class="buttons">
-                <span class="button"><input type="button" value="Update" class="edit" onclick="controlli()"/></span>
+                <span class="button"><input type="button" value="Update" class="edit" onclick="controlli()" /></span>
                 </form>
                 <form action="/edit/paziente/delete/${paziente.id_paziente}" method="get" >
                         <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
@@ -92,5 +92,11 @@
         </div>
     
     </body>
+    
+<#if esito??>
+<script>
+alert("Aggiornamento effettuato correttamente");
+</script>
+</#if> 
 
 </html>
