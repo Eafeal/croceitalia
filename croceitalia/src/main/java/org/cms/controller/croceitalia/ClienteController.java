@@ -1,5 +1,7 @@
 package org.cms.controller.croceitalia;
 
+import it.asso.util.AssoException;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,22 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import it.asso.util.AssoException;
-
 @Controller
-public class ClienteController extends EditCmsController{
-	
+public class ClienteController extends EditCmsController {
+
 	/**
 	 * 
 	 */
 	@Autowired(required = true)
-	protected ClienteManager _clienteManager;
+	protected ClienteManager	_clienteManager;
 
 	/**
 	 * @param request
 	 * @param response
 	 * @return
 	 */
+	@Override
 	@RequestMapping(value = "cliente/list", method = RequestMethod.GET)
 	protected ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
 
@@ -44,7 +45,7 @@ public class ClienteController extends EditCmsController{
 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "cliente/list", method = RequestMethod.POST)
 	public ModelAndView list1(HttpServletRequest request, HttpServletResponse response) {
 
@@ -68,7 +69,7 @@ public class ClienteController extends EditCmsController{
 	@RequestMapping(value = "cliente/save")
 	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Cliente cliente) {
 
-		ModelAndView modelAndView = getModelAndView(request);		
+		ModelAndView modelAndView = getModelAndView(request);
 		try {
 			_clienteManager.save(cliente);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
@@ -84,6 +85,7 @@ public class ClienteController extends EditCmsController{
 		return modelAndView;
 
 	}
+
 	@RequestMapping(value = "cliente/create", method = RequestMethod.GET)
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
 
@@ -101,7 +103,7 @@ public class ClienteController extends EditCmsController{
 		}
 
 	}
-	
+
 	/**
 	 * @param request
 	 * @param response
@@ -112,6 +114,8 @@ public class ClienteController extends EditCmsController{
 	public ModelAndView doUpdate(HttpServletRequest request, HttpServletResponse response, Cliente cliente) {
 
 		ModelAndView modelAndView = getModelAndView(request);
+		String qf = request.getParameter("qfs");
+		cliente.setQf(qf);
 		try {
 			_clienteManager.update(cliente);
 			request.setAttribute("esito", "ok");
@@ -124,7 +128,7 @@ public class ClienteController extends EditCmsController{
 			return error(modelAndView, errore);
 		}
 	}
-	
+
 	/**
 	 * @param request
 	 * @param response
@@ -138,7 +142,7 @@ public class ClienteController extends EditCmsController{
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
 			Cliente cliente = (Cliente) _clienteManager.findById(user_id);
-			modelAndView.addObject("cliente", cliente);/*chiave valore*/
+			modelAndView.addObject("cliente", cliente);/* chiave valore */
 			Object esito = request.getAttribute("esito");
 
 			List<Tipo_cliente> tipo_cliente = _clienteManager.caricaTipocliente();
@@ -151,8 +155,7 @@ public class ClienteController extends EditCmsController{
 			return error(modelAndView, errore);
 		}
 	}
-	
-	
+
 	@RequestMapping(value = "cliente/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
 

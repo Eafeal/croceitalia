@@ -63,7 +63,7 @@
                            <tr class="prop">
                                 <td valign="top" class="name"><label for="via">Quota fissa</label></td>
                                 <td valign="top" class="value">
-                                    <input type="text" id="qf" name="qf" size="5" maxlength="5" value="${cliente.getQf()}" placeholder="QF"/>                                </td>
+                                    <input type="text" id="qfs" name="qfs" size="10" maxlength="10" value="${cliente.getQf()}" placeholder="QF"/>                                </td>
                            </tr>
                         </tbody>
                     </table>
