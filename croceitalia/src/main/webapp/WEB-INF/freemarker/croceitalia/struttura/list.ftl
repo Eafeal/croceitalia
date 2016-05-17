@@ -8,10 +8,10 @@
                     <table>
                         <tbody>
                             <tr class="prop">
-                                <td valign="top" class="name">
+                                <td align="top" class="name">
                                     <label for="cerca">Cerca:</label>
                                 </td>
-                                <td valign="top" class="value ">
+                                <td align="top" class="value ">
                                     <input type="text" id="cerca" name="cerca" />
                                 </td>
                             </tr>
@@ -27,10 +27,9 @@
                 <table id="resultTable" >
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th class="sortable" ><a href="javascript:ordina('resultTable',2,0);">Nome Struttura</a></th>
                             <th class="sortable" ><a href="javascript:ordina('resultTable',3,0);">Contatti </a></th>
-                            <th class="sortable" ></th>
+                            <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,13 +42,11 @@
 	                            <#assign classe="even" />
 	                        </#if>
 	                        <tr class="${classe}">
-	                            <td><a href="/edit/struttura/update/${struttura.getId_struttura()}">${i}<img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a></td>
 	                            <td>${struttura.getNome()}</td>
 	                            <td>${struttura.getTelefono()}</td>
                              	 <td>
-								    <form action="/edit/struttura/delete/${struttura.id_struttura}" method="get" >
-									<span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
-									</form>
+								    <a href="/edit/struttura/update/${struttura.getId_struttura()}"><img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a>
+								    <a href="/edit/struttura/delete/${struttura.getId_struttura()}"><img src="/img/edit/cancella_on.gif" alt="Cancella"  style="float:left;clear:none;border:0" onclick="return confirm('Confermi cancellazione?');" /></a>
 								</td>
 	                        </tr>
 	                    </#list>

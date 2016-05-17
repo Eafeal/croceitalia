@@ -2,6 +2,7 @@ package org.cms.controller.croceitalia;
 
 import it.asso.util.AssoException;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,45 +81,49 @@ public class PazienteController extends EditCmsController {
 	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Paziente paziente) {
 
 		ModelAndView modelAndView = getModelAndView(request);
-		/*
-		 * // MODEL
-		 * Paziente paziente = new Paziente();
-		 * paziente.setNome(paziente1.getNome());
-		 * paziente.setCognome(paziente1.getCognome());
-		 * paziente.setTelefono1(paziente1.getTelefono1());
-		 * paziente.setTelefono2(paziente1.getTelefono2());
-		 * paziente.setFk_id_patologia(1);
-		 * 
-		 * paziente.setSesso(paziente1.getSesso());
-		 * 
-		 * // Date data_nascita = Calendar.getInstance().getTime();
-		 * // paziente.setData_nascita(data_nascita);
-		 * 
-		 * paziente.setData_nascita(paziente1.getData_nascita());
-		 * paziente.setVia(paziente1.getVia());
-		 * paziente.setComune(paziente1.getComune());
-		 * paziente.setCap(paziente1.getCap());
-		 * paziente.setProvincia(paziente1.getProvincia());
-		 */
+
 		try {
 			_pazienteManager.save(paziente);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
-		} catch (AssoException e) {
-			// Inserimento fallito
-			modelAndView.addObject("messaggio", "Inserimento fallito");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
 		}
 
 		List<Paziente> pazientiList = _pazienteManager.caricaPazienti();
+		modelAndView.addObject("Lista", pazientiList);
 
-		modelAndView.addObject("ListaPazienti", pazientiList);
-
-		String viewName = "redirect:/edit/paziente/list";
+		String viewName = "croceitalia/paziente/list";
 		modelAndView.setViewName(viewName);
-
+		
 		return modelAndView;
 
 	}
 
+	@RequestMapping(value = "paziente/save2")
+	protected ModelAndView save2(HttpServletRequest request, HttpServletResponse response, Paziente paziente) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+		String messaggio = "";
+		try {
+			_pazienteManager.save(paziente);
+			messaggio = "OK,"+paziente.getNome()+" "+paziente.getCognome()+","+paziente.getId_paziente();
+			
+		} catch (AssoException e) {
+			// Inserimento fallito
+			messaggio = "KO";
+		}
+
+		try {
+			PrintWriter out = response.getWriter();
+			response.getWriter().write(messaggio);//<--- Qua viene passato il valore inserito 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return null;
+
+	}	
 	@RequestMapping(value = "paziente/create", method = RequestMethod.GET)
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
 
@@ -152,8 +157,8 @@ public class PazienteController extends EditCmsController {
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
 			_pazienteManager.update(paziente);
-
-			String viewName = "redirect:/edit/paziente/update/" + paziente.getId_paziente();
+			modelAndView.addObject("esito", "OK");
+			String viewName = "forward:/edit/paziente/update/" + paziente.getId_paziente();
 			modelAndView.setViewName(viewName);
 
 			return modelAndView;
@@ -169,7 +174,7 @@ public class PazienteController extends EditCmsController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "paziente/update/{user_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "paziente/update/{user_id}")
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("user_id") String user_id) {
 
@@ -198,7 +203,23 @@ public class PazienteController extends EditCmsController {
 	@RequestMapping(value = "paziente/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
 
-		return delete(request, response, id, LIST);
+		ModelAndView modelAndView = getModelAndView(request);		
+		try {
+			_pazienteManager.deleteById(id);			
+			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+
+
+		List<Paziente> pazientiList = _pazienteManager.caricaPazienti();
+		modelAndView.addObject("Lista", pazientiList);
+
+		String viewName = "croceitalia/paziente/list";
+		modelAndView.setViewName(viewName);
+		
+		return modelAndView;
+		
 	}
 
 	/**

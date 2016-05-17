@@ -47,29 +47,21 @@ public class BancaManager extends AssoDao{
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Utente_itf> search(ModelMap modelMap) throws Exception {
-
-		String cognome = (String) modelMap.get("cognome");
-
-		if (Util.isNotEmpty(cognome)) {
-			cognome = "%" + cognome + "%";
-		}
+	public List<Banca> search(String cerca) throws Exception {
 
 		EntityManager em = null;
 		try {
-
 			em = getEntityManager();
 
-			String queryString = "select Paziente from Paziente Paziente ";
-			queryString += " WHERE Paziente.cognome LIKE :cognome  ";
-
+			String queryString = "select bnc from Banca bnc ";
+			queryString += " WHERE bnc.nome      LIKE :cerca  ";
 			Query query = em.createQuery(queryString);
 
-			query.setParameter("cognome", cognome);
+			query.setParameter("cerca", "%" + cerca + "%");
 
-			queryString += " ORDER BY ute.userId ";
+//			queryString += " ORDER BY str.nome, str.telefono";
 
-			List<Utente_itf> answer = query.getResultList();
+			List<Banca> answer = query.getResultList();
 
 			return answer;
 

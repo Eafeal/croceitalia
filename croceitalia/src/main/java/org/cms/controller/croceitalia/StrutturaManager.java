@@ -82,38 +82,6 @@ public class StrutturaManager extends AssoDao {
 	}
 
 	
-//	public List<Tipologia_Struttura> tipologia(Integer id) throws Exception {
-//
-//		EntityManager em = null;
-//		try {
-//			em = getEntityManager();
-//			//Tipologia_Struttura t=new Tipologia_Struttura();
-//			
-//			String queryString = "select str from Tipologia_Struttura str ";
-//			queryString += " WHERE str.descrizione ="+id+"";
-//
-//			Query query = em.createQuery(queryString);
-//
-//			
-//
-//			List<Tipologia_Struttura> answer = query.getResultList();
-//
-//			return answer;
-//
-//		} catch (Exception e) {
-//			AssoLogger.GetInstance()
-//					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
-//			throw e;
-//		} finally {
-//			close(em);
-//		}
-//	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.cms.jpa.dao.impl.AssoDao#save(java.lang.Object)
-	 */
 	@Override
 	public void save(Object obj) throws AssoException {
 		super.save(obj);

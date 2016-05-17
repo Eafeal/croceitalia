@@ -45,6 +45,26 @@ public class BancaController extends EditCmsController {
 
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "banca/list", method = RequestMethod.POST)
+	public ModelAndView list1(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+		String cerca = request.getParameter("cerca");
+
+		try {
+			List<Banca> lista = _bancaManager.search(cerca);
+			modelAndView.addObject("Lista", lista);
+
+			String viewName = "croceitalia/banca/list";
+			modelAndView.setViewName(viewName);
+
+			return modelAndView;
+
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+	}
 
 	@RequestMapping(value = "banca/save")
 	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Banca banca) {
@@ -131,8 +151,8 @@ public class BancaController extends EditCmsController {
 			// } else {
 			// modelAndView.addObject("esito", "");
 			// }
-
 			modelAndView.setViewName("croceitalia/banca/update");
+			
 			return modelAndView;
 
 		} catch (Throwable errore) {

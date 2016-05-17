@@ -54,29 +54,22 @@ public class ClienteManager extends AssoDao{
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Utente_itf> search(ModelMap modelMap) throws Exception {
-
-		String cognome = (String) modelMap.get("cognome");
-
-		if (Util.isNotEmpty(cognome)) {
-			cognome = "%" + cognome + "%";
-		}
+	public List<Cliente> search(String cerca) throws Exception {
 
 		EntityManager em = null;
 		try {
-
 			em = getEntityManager();
 
-			String queryString = "select Paziente from Paziente Paziente ";
-			queryString += " WHERE Paziente.cognome LIKE :cognome  ";
-
+			String queryString = "select cln from Cliente cln ";
+			queryString += " WHERE cln.ragione_sociale      LIKE :cerca  ";
+			queryString += "OR cln.telefono1 	 LIKE :cerca ";
 			Query query = em.createQuery(queryString);
 
-			query.setParameter("cognome", cognome);
+			query.setParameter("cerca", "%" + cerca + "%");
 
-			queryString += " ORDER BY ute.userId ";
+//			queryString += " ORDER BY cln.ragione_sociale, cln.telefono1";
 
-			List<Utente_itf> answer = query.getResultList();
+			List<Cliente> answer = query.getResultList();
 
 			return answer;
 
