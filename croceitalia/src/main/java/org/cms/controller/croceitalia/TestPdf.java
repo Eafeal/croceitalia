@@ -10,9 +10,9 @@ public class TestPdf {
 
 		System.out.println("=======================START===============");
 
-		String src = "C:/Users/andre/OneDrive/Documents/TemplateFattura.pdf";
-		String destIn = "C:/Users/andre/OneDrive/Documents/generapdf/documento";
-		String destOut = "C:/Users/andre/OneDrive/Documents/generapdf/compl/croceitaliafattura.pdf";
+		String src = "D:/workspace/upload/croceitalia/TemplateFattura.pdf";
+		String destIn = "D:/workspace/upload/croceitalia/generapdf/documento";
+		String destOut = "D:/workspace/upload/croceitalia/generapdf/compl/croceitaliafattura.pdf";
 
 		GeneraPdf2 generaPdf2 = new GeneraPdf2(src, destIn, destOut);
 		try {
