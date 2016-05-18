@@ -51,7 +51,7 @@
                              	</td>
                             </tr-->
                             <tr class="prop">
-                             	<td align="top" class="telefono1"><label for="qf">Quota fissa</label></td>
+                             	<td align="top" class="telefono1"><label for="qfs">Quota fissa</label></td>
                                 <td align="top" class="value">
                                     <input type="text" id="qfs" name="qfs"  size="5" maxlength="10" value="0"  placeholder="QF" />
                              	</td>

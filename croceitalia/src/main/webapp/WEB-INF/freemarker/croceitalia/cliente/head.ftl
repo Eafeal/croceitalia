@@ -10,6 +10,7 @@
 	<#if title?? ><title>${title}</title></#if>
 	
 	<script type="text/javascript" src="/js/bubbleSort.js"></script>
+	<script type="text/javascript" src="/js/asso_beans_client.js"></script>
 	
 	<script type="text/javascript">
 		
@@ -37,9 +38,18 @@
 				alert("Il numero di telefono è obbligatorio");
 				return false;
 			}
+			if (!controllo_telefono(clienteForm.telefono1)) {
+				return false;
+			}
+			if (!controllo_telefono1(clienteForm.telefono2)) {
+				return false;
+			}
 			if(clienteForm.email.value==""){
 				clienteForm.email.focus();
 				alert("L'e-mail è obbligatoria");
+				return false;
+			}
+			if (!controllo_email(clienteForm.email)) {
 				return false;
 			}
 			if(clienteForm.via.value==""){
@@ -52,9 +62,15 @@
 				alert("Il cap è obbligatorio");
 				return false;
 			}
+			if (!controllo_cap(clienteForm.cap)) {
+				return false;
+			}
 			if(clienteForm.comune.value==""){
 				clienteForm.comune.focus();
 				alert("Il comune è obbligatorio");
+				return false;
+			}
+			if (!controllo_comune(clienteForm.comune)) {
 				return false;
 			}
 			if(clienteForm.provincia.value==""){
@@ -62,25 +78,113 @@
 				alert("La provincia è obbligatoria");
 				return false;
 			}
-			//if (!controllo_p_qfs(clienteForm.qfs)) {
-			//	return false;
-			//}
+			if (!controllo_provincia(clienteForm.provincia)) {
+				return false;
+			}
+			if (!controllo_qfs(clienteForm.qfs)) {
+				return false;
+			}
 			clienteForm.submit();
 		}
 		
 		
-		
-		
+		function controllo_qfs(qfs) {
+			if (!cf_contieneSoloCaratteriValidi(qfs,'0123456789,.')){
+				return false;
+			}
+			return true;
+		}
+			
 		function controllo_p_iva(p_iva) {
 			if (p_iva.value.length != 11) {
 				p_iva.focus();
 				alert("La partita iva deve contenere 11 caratteri");
 				return false;
 			}
+			if (!cf_contieneSoloCaratteriValidi(p_iva,'0123456789')){
+				return false;
+			}
 		
 			return true;
 		}
 		
+		function controllo_telefono(telefono) {
+			if (telefono.value.length < 10) { 
+				telefono.focus();
+				alert("Il numero di telefono deve essere composto da 10 numeri ");
+				return false;
+			}
+			if (!cf_contieneSoloCaratteriValidi(telefono, '0123456789 +-/'))
+				return false;
+			return true;
+		}
+		
+		function controllo_telefono1(telefono) {
+			if (!cf_contieneSoloCaratteriValidi(telefono, '0123456789 +-/'))
+				return false;
+			return true;
+		}
+		
+		function controllo_email(email) {
+			if (email.value.length < 6) {
+				email.focus();
+				alert("l'email deve avere almeno 6 caratteri");
+				return false;
+			}
+	
+			if (!cf_contieneSoloCaratteriValidi(email,
+					'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM@._123456789')){
+				return false;
+			}
+	
+			if (email.value.indexOf(".") == -1 || email.value.indexOf("@") == -1) {
+				alert("L'email deve contenere i caratteri: . @");
+				email.focus();
+				return false;
+			}
+			return true;
+		}
+		function controllo_cap(cap) {
+			if (cap.value.length != 5) {
+				cap.focus();
+				alert("Il cap deve essere composto da 5 numeri");
+				return false;
+			}
+			if (!cf_contieneSoloCaratteriValidi(cap, '0123456789'))
+				return false;
+			return true;
+		}
+		
+		function controllo_comune(comune) {
+			if (comune.value.length < 3) {
+				comune.focus();
+				alert("Il comune deve contenere almeno tre caratteri");
+				return false;
+			}
+			if (!cf_contieneSoloCaratteriValidi(comune,'qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM ')){
+				return false;
+			}
+		
+			return true;
+		}
+		
+		function controllo_provincia(provincia) {
+			if (provincia.value.length != 2) {
+				provincia.focus();
+				alert("La provincia deve essere composta da due caratteri");
+				return false;
+			}
+			if (!cf_contieneSoloCaratteriValidi(provincia,'qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM ')){
+				return false;
+			}
+		
+			return true;
+		}
+		
+	
+	
+	
+	
 	
 	
 		function ricarica(){

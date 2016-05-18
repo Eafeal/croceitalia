@@ -48,7 +48,7 @@
                                 <td valign="top" class="quota_fissa"><label for="via">Indirizzo</label></td>
                                 <td valign="top" class="value">
                                     <input type="text" id="via" name="via" size="20" maxlength="20" value="${cliente.getVia()}" placeholder="Via"/>
-                               		<input type="text" id="cap" name="cap" size="10" maxlength="20" value="${cliente.getCap()}" placeholder="CAP"/>
+                               		<input type="text" id="cap" name="cap" size="10" maxlength="5" value="${cliente.getCap()}" placeholder="CAP"/>
                                		<input type="text" id="comune" name="comune" size="20" maxlength="20" value="${cliente.getComune()}" placeholder="Comune"/>
                                 	<input type="text" id="provincia" name="provincia" size="5" maxlength="2" value="${cliente.getProvincia()}" placeholder="Provincia"/>
                                 	
@@ -61,7 +61,7 @@
                                 </td>
                            </tr-->
                            <tr class="prop">
-                                <td valign="top" class="name"><label for="via">Quota fissa</label></td>
+                                <td valign="top" class="name"><label for="qfs">Quota fissa</label></td>
                                 <td valign="top" class="value">
                                     <input type="text" id="qfs" name="qfs" size="10" maxlength="10" value="${cliente.getQuotaFissa()}" placeholder="QF"/>                                </td>
                            </tr>
