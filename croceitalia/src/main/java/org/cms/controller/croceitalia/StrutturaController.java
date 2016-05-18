@@ -76,6 +76,46 @@ public class StrutturaController extends EditCmsController {
 		}
 	}
 	
+	@RequestMapping(value = "struttura/save")
+	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Struttura str) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+
+		try {
+			_strutturaManager.save(str);
+			modelAndView.addObject("messaggio", "Inserimento riuscito");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+
+		List<Struttura> struttureList = _strutturaManager.caricaStruttura();
+		modelAndView.addObject("Lista", struttureList);
+
+		String viewName = "croceitalia/struttura/list";
+		modelAndView.setViewName(viewName);
+		
+		return modelAndView;
+
+	}
+	
+	@RequestMapping(value = "struttura/create", method = RequestMethod.GET)
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+		try {
+			List<Tipologia_Struttura> tipologia= _strutturaManager.caricatipoStruttura();
+			modelAndView.addObject("tipologia", tipologia);
+
+			modelAndView.setViewName("croceitalia/struttura/create");
+
+			return modelAndView;
+
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+
+	}
+	
 	
 	@RequestMapping(value = "struttura/doUpdate", method = RequestMethod.POST)
 	public ModelAndView doUpdate(HttpServletRequest request, HttpServletResponse response, Struttura struttura) {
@@ -83,7 +123,6 @@ public class StrutturaController extends EditCmsController {
 		ModelAndView modelAndView = getModelAndView(request);
 		
 		try {
-			//se funziona
 			_strutturaManager.update(struttura);
 			request.setAttribute("esito", "ok");
 			String viewName = "forward:/edit/struttura/update/" + struttura.getId_struttura();
@@ -91,7 +130,6 @@ public class StrutturaController extends EditCmsController {
 			return modelAndView;
 			
 		} catch (Throwable errore) {
-			//se non funziona
 			return error(modelAndView, errore);
 		}
 	}
@@ -117,68 +155,43 @@ public class StrutturaController extends EditCmsController {
 		}
 	}
 	
-	@RequestMapping(value = "struttura/save")
-	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Struttura str) {
-
-		ModelAndView modelAndView = getModelAndView(request);
-		
-		try {
-			_strutturaManager.save(str);
-			modelAndView.addObject("messaggio", "Inserimento riuscito");
-		} catch (AssoException e) {
-			// Inserimento fallito
-			modelAndView.addObject("messaggio", "Inserimento fallito");
-		}
-
-		List<Struttura> strutturaList = _strutturaManager.caricaStruttura();
-
-		modelAndView.addObject("ListaStruttura", strutturaList);
-		
-		String viewName = "redirect:/edit/struttura/list";
-		modelAndView.setViewName(viewName);
-
-		return modelAndView;
-
-	}
-
-	@RequestMapping(value = "struttura/create", method = RequestMethod.GET)
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView modelAndView = getModelAndView(request);
-		try {
-			List<Tipologia_Struttura> tipologia= _strutturaManager.caricatipoStruttura();
-			modelAndView.addObject("tipologia", tipologia);
-
-			modelAndView.setViewName("croceitalia/struttura/create");
-
-			return modelAndView;
-
-		} catch (Throwable errore) {
-			return error(modelAndView, errore);
-		}
-
-	}
 	
 	@RequestMapping(value = "struttura/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
-		return delete(request, response, id, LIST);
-	}
-	
-
-	@RequestMapping(value = "struttura/delete/{id}/{pageId}", method = RequestMethod.GET)
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id,
-			@PathVariable("pageId") String pageId) {
-
-		ModelAndView modelAndView = getModelAndView(request);
+		
+		ModelAndView modelAndView = getModelAndView(request);	
+		
 		try {
-			_strutturaManager.deleteById(id);
-			return pageAfterDelete(request, response, pageId);
-
+			_strutturaManager.deleteById(id);			
+			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
 		} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
 
+		List<Struttura> struttureList = _strutturaManager.caricaStruttura();
+		modelAndView.addObject("Lista", struttureList);
+
+		String viewName = "croceitalia/struttura/list";
+		modelAndView.setViewName(viewName);
+		
+		return modelAndView;
 	}
+	
+
+//	@RequestMapping(value = "struttura/delete/{id}/{pageId}", method = RequestMethod.GET)
+//	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id,
+//			@PathVariable("pageId") String pageId) {
+//
+//		ModelAndView modelAndView = getModelAndView(request);
+//		try {
+//			_strutturaManager.deleteById(id);
+//			return pageAfterDelete(request, response, pageId);
+//
+//		} catch (Throwable errore) {
+//			return error(modelAndView, errore);
+//		}
+//
+//	}
 
 
 

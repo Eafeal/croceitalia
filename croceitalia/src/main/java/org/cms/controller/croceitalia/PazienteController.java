@@ -124,6 +124,7 @@ public class PazienteController extends EditCmsController {
 		return null;
 
 	}	
+	
 	@RequestMapping(value = "paziente/create", method = RequestMethod.GET)
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
 
@@ -157,7 +158,7 @@ public class PazienteController extends EditCmsController {
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
 			_pazienteManager.update(paziente);
-			modelAndView.addObject("esito", "OK");
+			modelAndView.addObject("esito", "ok");
 			String viewName = "forward:/edit/paziente/update/" + paziente.getId_paziente();
 			modelAndView.setViewName(viewName);
 
@@ -179,6 +180,7 @@ public class PazienteController extends EditCmsController {
 			@PathVariable("user_id") String user_id) {
 
 		ModelAndView modelAndView = getModelAndView(request);
+		
 		try {
 			Paziente paziente = (Paziente) _pazienteManager.findById(user_id);
 			List<Patologia> pato = _pazienteManager.caricaPatologia();
@@ -203,14 +205,14 @@ public class PazienteController extends EditCmsController {
 	@RequestMapping(value = "paziente/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
 
-		ModelAndView modelAndView = getModelAndView(request);		
+		ModelAndView modelAndView = getModelAndView(request);	
+		
 		try {
 			_pazienteManager.deleteById(id);			
 			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
 		} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
-
 
 		List<Paziente> pazientiList = _pazienteManager.caricaPazienti();
 		modelAndView.addObject("Lista", pazientiList);

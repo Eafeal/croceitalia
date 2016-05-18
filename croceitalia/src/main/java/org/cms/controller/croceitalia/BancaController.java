@@ -74,13 +74,11 @@ public class BancaController extends EditCmsController {
 		try {
 			_bancaManager.save(banca);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
-		} catch (AssoException e) {
-			// Inserimento fallito
-			modelAndView.addObject("messaggio", "Inserimento fallito");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
 		}
 
 		List<Banca> bancheList = _bancaManager.caricaBanche();
-
 		modelAndView.addObject("Lista", bancheList);
 
 		String viewName = "croceitalia/banca/list";
@@ -161,10 +159,23 @@ public class BancaController extends EditCmsController {
 	}
 
 	@RequestMapping(value = "banca/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable("id") String id) {
+	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response,	@PathVariable("id") String id) {
+		
+		ModelAndView modelAndView = getModelAndView(request);
+		try {
+			_bancaManager.deleteById(id);			
+			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+		
+		List<Banca> bancheList = _bancaManager.caricaBanche();
+		modelAndView.addObject("Lista", bancheList);
 
-		return delete(request, response, id, LIST);
+		String viewName = "croceitalia/banca/list";
+		modelAndView.setViewName(viewName);
+		
+		return modelAndView;
 	}
 
 	/**

@@ -62,10 +62,7 @@
 				alert("La provincia è obbligatoria");
 				return false;
 			}
-			//if(clienteForm.cf.value!=""){
-			//	controllo_cf(clienteForm.cf);
-			//	return false;
-			//}
+
 			clienteForm.submit();
 		}
 		
@@ -78,6 +75,7 @@
 		
 			return true;
 		}
+		
 /*		
 		function controllo_cf(cf) {
 			if ((cf.value.length < 16) || (cf.value.length > 16)) {
@@ -97,6 +95,7 @@
 				window.opener.location.reload(true);
 				}
 			}
+			
 	</script>
 	
         <style type="text/css" media="screen">
@@ -112,59 +111,6 @@
         <script language="JavaScript" type="text/javascript" src="/js/jquery/jquery.autocomplete.js"></script>
         <script language="JavaScript" type="text/javascript" src="/js/jquery/date.js"></script>
 
-        <script type="text/javascript">
-
-            $(document).ready(function() {
-
-
-				$("#insForm").submit(function() {
-
-                    errMsg = errMsgDefault = "Attenzione!!\n";
-                    $(".errorTextField").removeClass('errorTextField');
-
-                    if (($("#data_nascita").val() !="")){
-                        if (Date.isValid( $("#data_nascita").val(), "dd-MM-yyyy") == false){
-                            errMsg = errMsg + "Data Scadenza NON valida\n";
-                            $("#data_nascita").addClass('errorTextfield');
-                        }
-                    } else {
-                        errMsg = errMsg + "Data Scadenza NON valida\n";
-                        $("#data_nascita").addClass('errorTextField');
-                    }
-
-                    
-                    if (errMsg == errMsgDefault){
-                        return confirm("Confermi inserimento?");
-                    } else {
-                        alert(errMsg);
-                        return false;
-                    }
-                    
-                 });
-
-
-                $("#data_nascita").datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    bgiframe: true,
-                    dateFormat: "dd-mm-yy",
-                    constrainInput: false,
-                    onSelect: function(dateText) {
-                        $(this).val(dateText); 
-                    }
-                });    
-
-                var today = new Date();
-                var validStartDate = today.format("dd-MM-yyyy");
-                
-                if ($("#data_nascita").val() == ""){
-                    $("#data_nascita").val(validStartDate);
-                }
-
-            });
-
-       </script>
-       	
     </head>
 
     <body>

@@ -72,12 +72,13 @@ public class MezzoController extends EditCmsController{
 		try {
 			_mezzoManager.save(mezzo);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
-		} catch (AssoException e) {
-			modelAndView.addObject("messaggio", "Inserimento fallito");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
 		}
 
 		List<Mezzo> mezziList = _mezzoManager.caricaMezzi();
 		modelAndView.addObject("Lista", mezziList);
+		
 		String viewName = "croceitalia/mezzo/list";
 		modelAndView.setViewName(viewName);
 
@@ -91,6 +92,7 @@ public class MezzoController extends EditCmsController{
 		try {
 			List<Tipo_mezzo> tipo_mezzo = _mezzoManager.caricaTipomezzo();
 			modelAndView.addObject("tipo_mezzo", tipo_mezzo);
+			
 			modelAndView.setViewName("croceitalia/mezzo/create");
 
 			return modelAndView;
@@ -155,7 +157,22 @@ public class MezzoController extends EditCmsController{
 	@RequestMapping(value = "mezzo/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
 
-		return delete(request, response, id, LIST);
+		ModelAndView modelAndView = getModelAndView(request);		
+		try {
+			_mezzoManager.deleteById(id);			
+			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+
+
+		List<Mezzo> mezziList = _mezzoManager.caricaMezzi();
+		modelAndView.addObject("Lista", mezziList);
+
+		String viewName = "croceitalia/mezzo/list";
+		modelAndView.setViewName(viewName);
+		
+		return modelAndView;
 	}
 
 	/**

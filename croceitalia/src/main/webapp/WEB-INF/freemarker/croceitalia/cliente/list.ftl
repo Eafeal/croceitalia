@@ -63,3 +63,8 @@
     
     </body>
 </html>
+<#if messaggio??>
+<script>
+alert("${messaggio}");
+</script>
+</#if>

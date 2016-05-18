@@ -63,9 +63,8 @@
     </body>
 </html>
 
+<#if messaggio??>
 <script>
-function openDocument(id)
-	{
-	document.location = "/edit/documento/listForUser/"+id;
-	}
-</script>			
+alert("${messaggio}");
+</script>
+</#if>			

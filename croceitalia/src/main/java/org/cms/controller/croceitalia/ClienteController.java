@@ -37,7 +37,6 @@ public class ClienteController extends EditCmsController {
 
 		// MODEL
 		List<Cliente> clientiList = _clienteManager.caricaClienti();
-
 		modelAndView.addObject("Lista", clientiList);
 
 		String viewName = "croceitalia/cliente/list";
@@ -70,15 +69,19 @@ public class ClienteController extends EditCmsController {
 	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Cliente cliente) {
 
 		ModelAndView modelAndView = getModelAndView(request);
+		String qf = request.getParameter("qfs");
+		if (qf.equals("")) qf = "0";
+		cliente.setQf(qf);		
 		try {
 			_clienteManager.save(cliente);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
-		} catch (AssoException e) {
-			modelAndView.addObject("messaggio", "Inserimento fallito");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
 		}
 
 		List<Cliente> clientiList = _clienteManager.caricaClienti();
 		modelAndView.addObject("Lista", clientiList);
+		
 		String viewName = "croceitalia/cliente/list";
 		modelAndView.setViewName(viewName);
 
@@ -94,6 +97,7 @@ public class ClienteController extends EditCmsController {
 
 			List<Tipo_cliente> tipo_cliente = _clienteManager.caricaTipocliente();
 			modelAndView.addObject("tipo_cliente", tipo_cliente);
+			
 			modelAndView.setViewName("croceitalia/cliente/create");
 
 			return modelAndView;
@@ -115,6 +119,7 @@ public class ClienteController extends EditCmsController {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		String qf = request.getParameter("qfs");
+		if (qf.equals("")) qf = "0";
 		cliente.setQf(qf);
 		try {
 			_clienteManager.update(cliente);
@@ -159,7 +164,22 @@ public class ClienteController extends EditCmsController {
 	@RequestMapping(value = "cliente/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
 
-		return delete(request, response, id, LIST);
+		ModelAndView modelAndView = getModelAndView(request);		
+		try {
+			_clienteManager.deleteById(id);			
+			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+
+
+		List<Cliente> clientiList = _clienteManager.caricaClienti();
+		modelAndView.addObject("Lista", clientiList);
+
+		String viewName = "croceitalia/cliente/list";
+		modelAndView.setViewName(viewName);
+		
+		return modelAndView;
 	}
 
 	/**
