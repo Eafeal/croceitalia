@@ -1,5 +1,7 @@
 package org.cms.controller.croceitalia;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +39,6 @@ public class Documento_Righe extends Model {
 //	@JoinColumn(name = "fk_id_documento_testata")
 //	@ManyToOne (cascade=CascadeType.ALL)
 //	@JoinColumn(name = "fk_id_documento_testata")
-	 private Documento_Testata documento_Testata;
 
 	private Integer		num_sedute;
 	private String		mese;
@@ -47,9 +48,14 @@ public class Documento_Righe extends Model {
 	private String		p_partenza;
 	private String		p_arrivo;
 	private Integer		ora_sosta;
-	private Integer		QF;
+	
+	@Column(precision = 7, scale = 2)
+	private BigDecimal		quota_fissa;
+	
 	private String		diritto_uscita;
-	private Integer		importo_doc;
+
+	@Column(precision = 7, scale = 2)	
+	private BigDecimal		importo;
 
 	public Documento_Righe() {
 
@@ -59,7 +65,7 @@ public class Documento_Righe extends Model {
 
 	public Documento_Righe(Integer id_documento_righe, Integer fk_id_documento_testata,/* Integer fk_id_paziente, */
 	Integer num_sedute, String mese, Integer km_totali, Integer km_percorso, String percorso, String p_partenza,
-			String p_arrivo, Integer ora_sosta, Integer qF, String diritto_uscita, Integer importo_doc) {
+			String p_arrivo, Integer ora_sosta, BigDecimal quota_fissa, String diritto_uscita, BigDecimal importo) {
 
 		super();
 		this.id_documento_righe = id_documento_righe;
@@ -73,9 +79,9 @@ public class Documento_Righe extends Model {
 		this.p_partenza = p_partenza;
 		this.p_arrivo = p_arrivo;
 		this.ora_sosta = ora_sosta;
-		this.QF = qF;
+		this.quota_fissa = quota_fissa;
 		this.diritto_uscita = diritto_uscita;
-		this.importo_doc = importo_doc;
+		this.importo = importo;
 	}
 
 	public Integer getId_documento_righe() {
@@ -188,14 +194,14 @@ public class Documento_Righe extends Model {
 		this.ora_sosta = ora_sosta;
 	}
 
-	public Integer getQF() {
+	public BigDecimal getQuotaFissa() {
 
-		return QF;
+		return quota_fissa;
 	}
 
-	public void setQF(Integer qF) {
+	public void setQuotaFissa(BigDecimal qF) {
 
-		QF = qF;
+		quota_fissa = qF;
 	}
 
 	public String getDiritto_uscita() {
@@ -208,22 +214,23 @@ public class Documento_Righe extends Model {
 		this.diritto_uscita = diritto_uscita;
 	}
 
-	public Integer getImporto_doc() {
+	public BigDecimal getImporto() {
 
-		return importo_doc;
+		return importo;
 	}
 
-	public void setImporto_doc(Integer importo_doc) {
+	public void setImporto(BigDecimal importo) {
 
-		this.importo_doc = importo_doc;
+		this.importo = importo;
 	}
 
-	public Documento_Testata getDocumento_Testata() {
-		return documento_Testata;
+	public Paziente getPaziente() {
+		return paziente;
 	}
 
-	public void setDocumento_Testata(Documento_Testata documento_Testata) {
-		this.documento_Testata = documento_Testata;
+	public void setPaziente(Paziente paziente) {
+		this.paziente = paziente;
 	}
+
 
 }
