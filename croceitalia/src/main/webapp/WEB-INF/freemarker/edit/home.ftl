@@ -38,7 +38,11 @@
 				    <li><a href="/edit/mezzo/list" >Mezzo</a></li>	
 				    <br/>	
 				    <li><a href="/edit/cliente/list" >Cliente</a></li>	
-				    <br/>					    					
+				    <br/>	
+				    <li><a href="/edit/documento_testata/list">Documento Testata</a></li>	
+				    <br/>	
+				    <li><a href="/edit/documento_righe/list">Documento Righe</a></li>	
+				    <br/>			    					
 				    <hr/>
 					<br/>
 				    <li><a href="/site/logout" >Logout</a></li>

@@ -22,10 +22,34 @@ public class DocumentoTestataManager extends AssoDao{
 
 	@SuppressWarnings("unchecked")
 	public List<DocumentoTestata> caricaDocumento_Testata() {
-
+		
 		List<DocumentoTestata> lista = (List<DocumentoTestata>) this.execNamedQuery("Documento_Testata.loadAll");
-
 		return lista;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Mezzo> caricaMezzi() {
+
+		List<Mezzo> list = (List<Mezzo>) this.execNamedQuery("Mezzo.loadAll");
+
+		return list;
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Banca> caricaBanche() {
+
+		List<Banca> list = (List<Banca>) this.execNamedQuery("Banca.loadAll");
+
+		return list;
+
+	}
+	@SuppressWarnings("unchecked")
+	public List<Cliente> caricaClienti() {
+
+		List<Cliente> list = (List<Cliente>) this.execNamedQuery("Cliente.loadAll");
+
+		return list;
 
 	}
 	public Class<?> getEntityClass() {

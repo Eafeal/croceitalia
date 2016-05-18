@@ -1,9 +1,11 @@
- <#include "head.ftl"  />
+
+
+<#include "head.ftl"  />
 
         
         <div class="body">
-            <h1>Documento Testata</h1>
-            <form action="/edit/documento_testata/list" method="post" >
+            <h1>Ricerca Pazienti</h1>
+            <form action="/edit/paziente/list" method="post" >
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -27,29 +29,27 @@
                 <table id="resultTable" >
                     <thead>
                         <tr>
+                            <th class="sortable" ><a href="javascript:ordina('resultTable',1,0);">Id</a></th>
+                            <th class="sortable" ><a href="javascript:ordina('resultTable',2,0);">Num documento</a></th>
                             <th>#</th>
-                            <th class="sortable" ><a href="javascript:ordina('resultTable',2,0);">Nome Struttura</a></th>
-                            <th class="sortable" ><a href="javascript:ordina('resultTable',3,0);">Contatti </a></th>
-                            <th class="sortable" ></th>
                         </tr>
                     </thead>
                     <tbody>
 	                    <#assign i=0 />
-	                    <#list Lista as struttura >
+	                    <#list Lista as documento >
 	                        <#assign i=i+1 />
 	                        <#if (i % 2) == 0 >
 	                            <#assign classe="odd" />
 	                        <#else>
 	                            <#assign classe="even" />
 	                        </#if>
-	                        <tr class="${classe}">
-	                            <td><a href="/edit/struttura/update/${struttura.getId_struttura()}">${i}<img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a></td>
-	                            <td>${struttura.getNome()}</td>
-	                            <td>${struttura.getTelefono()}</td>
-                             	 <td>
-								    <form action="/edit/struttura/delete/${struttura.id_struttura}" method="get" >
-									<span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
-									</form>
+	                        <tr class="${classe}">    
+	                            <td>${documento.getId_documento_testata()}</td>
+	                            <td>${documento.getNum_documento()}</td>
+	                            <td>
+								    <a href="/edit/documento_testata/update/${documento.getId_documento_testata()}"><img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a>
+								    &nbsp;
+								    <a href="/edit/documento_testata/delete/${documento.getId_documento_testata()}"><img src="/img/edit/cancella_on.gif" alt="Cancella"  style="float:left;clear:none;border:0" onclick="return confirm('Confermi la cancellazione?');" /></a>
 								</td>
 	                        </tr>
 	                    </#list>
@@ -65,10 +65,8 @@
     
     </body>
 </html>
-
+<#if messaggio??>
 <script>
-function openDocument(id)
-	{
-	document.location = "/edit/documento/listForUser/"+id;
-	}
-</script>			
+alert("${messaggio}");
+</script>
+</#if>			

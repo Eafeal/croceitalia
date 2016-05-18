@@ -14,7 +14,7 @@ import org.cms.jpa.object.impl.Model;
 
 @Entity
 @Table(name = "Documento_righe")
-@NamedQuery(name = "Documento_righe.loadAll", query = "SELECT OBJECT(obj) FROM Documento_righe obj")
+@NamedQuery(name = "Documento_righe.loadAll", query = "SELECT OBJECT(obj) FROM DocumentoRighe obj")
 public class DocumentoRighe extends Model {
 
 	@Id

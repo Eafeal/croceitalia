@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Documento_Testata")
-@NamedQuery(name = "Documento_Testata.loadAll", query = "SELECT OBJECT(obj) FROM Documento_Testata obj ")
+@NamedQuery(name = "Documento_Testata.loadAll", query = "SELECT OBJECT(obj) FROM DocumentoTestata obj ")
 public class DocumentoTestata {
 
 	@Id

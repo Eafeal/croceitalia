@@ -45,6 +45,11 @@ public class DocumentoTestataController extends EditCmsController{
 		// MODEL
 		List<DocumentoTestata> documento = _documentoTestata.caricaDocumento_Testata();
 
+		List<Mezzo> mezzo = _documentoTestata.caricaMezzi();
+		
+		List<Banca> banca = _documentoTestata.caricaBanche();
+		
+		List<Cliente> cliente = _documentoTestata.caricaClienti();
 		modelAndView.addObject("Lista", documento);
 
 		String viewName = "croceitalia/documento_testata/list";
@@ -52,5 +57,26 @@ public class DocumentoTestataController extends EditCmsController{
 
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "documento_testata/create", method = RequestMethod.GET)
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+		try {
+
+			List<Mezzo> mezzo = _documentoTestata.caricaMezzi();
+			modelAndView.addObject("mezzo", mezzo);
+
+			modelAndView.setViewName("croceitalia/documento_testata/create");
+
+			return modelAndView;
+
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+
+	}
+
+	
 
 }
