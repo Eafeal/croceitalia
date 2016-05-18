@@ -1,19 +1,24 @@
 package org.cms.controller.croceitalia;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Documento_Testata")
 @NamedQuery(name = "Documento_Testata.loadAll", query = "SELECT OBJECT(obj) FROM Documento_Testata obj ")
-public class DocumentoTestata {
+public class Documento_Testata {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,14 +50,20 @@ public class DocumentoTestata {
 	private String	stato;
 	private String	pdf_generato;
 	private String	nome_file;
+	
+//	@OneToMany
+//	@JoinColumn(name = "id_documento_testata", nullable = false)	
+	//@OneToMany( fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "documento_testata")
+	//@OneToMany(mappedBy = "documento_testata")
+	 private List<Documento_Righe> righe;
 
-	public DocumentoTestata() {
+	public Documento_Testata() {
 
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public DocumentoTestata(Integer id_documento_testata,/*
+	public Documento_Testata(Integer id_documento_testata,/*
 														 * Integer fk_id_mezzo, Integer fk_id_banca,
 														 * Integer fk_id_cliente,
 														 */Integer num_documento, String anno_documento,
@@ -249,5 +260,14 @@ public class DocumentoTestata {
 
 		this.nome_file = nome_file;
 	}
+
+	public List<Documento_Righe> getRighe() {
+		return righe;
+	}
+
+	public void setRighe(List<Documento_Righe> righe) {
+		this.righe = righe;
+	}
+	
 
 }

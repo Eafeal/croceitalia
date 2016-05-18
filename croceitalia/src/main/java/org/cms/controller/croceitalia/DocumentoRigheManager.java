@@ -13,9 +13,9 @@ public class DocumentoRigheManager extends AssoDao {
 	 */
 
 	@SuppressWarnings("unchecked")
-	public List<DocumentoRighe> caricaDocumento_Row() {
+	public List<Documento_Righe> caricaDocumento_Row() {
 
-		List<DocumentoRighe> lista = (List<DocumentoRighe>) this.execNamedQuery("DocumentoRighe.loadAll");
+		List<Documento_Righe> lista = (List<Documento_Righe>) this.execNamedQuery("Documento_Righe.loadAll");
 
 		return lista;
 

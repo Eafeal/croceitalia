@@ -21,9 +21,9 @@ public class DocumentoTestataManager extends AssoDao{
 	 */
 
 	@SuppressWarnings("unchecked")
-	public List<DocumentoTestata> caricaDocumento_Testata() {
+	public List<Documento_Testata> caricaDocumento_Testata() {
 
-		List<DocumentoTestata> lista = (List<DocumentoTestata>) this.execNamedQuery("Documento_Testata.loadAll");
+		List<Documento_Testata> lista = (List<Documento_Testata>) this.execNamedQuery("Documento_Testata.loadAll");
 
 		return lista;
 
