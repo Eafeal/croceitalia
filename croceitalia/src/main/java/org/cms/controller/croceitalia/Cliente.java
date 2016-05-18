@@ -1,5 +1,10 @@
 package org.cms.controller.croceitalia;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,9 +27,6 @@ public class Cliente extends Model {
 	@Column(name = "id_cliente", nullable = false, insertable = true, updatable = false)
 	private Integer			id_cliente;
 
-	// @Column(name = "fk_tipo_cliente", nullable = false, insertable = true, updatable = false)
-	// private Integer fk_tipo_cliente;
-
 	@OneToOne
 	@JoinColumn(name = "fk_tipo_cliente", nullable = false)
 	private Tipo_cliente	tipo_cliente;
@@ -39,7 +41,9 @@ public class Cliente extends Model {
 	private String			cap;
 	private String			provincia;
 	private String			cf;
-	private String			qf;
+
+	@Column(precision = 7, scale = 2)
+	private BigDecimal		qf;
 
 	public Cliente() {
 
@@ -58,13 +62,11 @@ public class Cliente extends Model {
 
 	public Integer getFk_tipo_cliente() {
 
-		// if (tipo_cliente == null) tipo_cliente = new Tipo_cliente();
 		return tipo_cliente.getId_tipo_cliente();
 	}
 
 	public void setFk_tipo_cliente(Integer fk_tipo_cliente) {
 
-		// if (tipo_cliente == null) tipo_cliente = new Tipo_cliente();
 		tipo_cliente.setId_tipo_cliente(fk_tipo_cliente);
 	}
 
@@ -170,16 +172,38 @@ public class Cliente extends Model {
 		this.cf = cf;
 	}
 
-	public String getQf() {
+	public BigDecimal getQf() {
 
 		if (qf == null)
-			return "";
+			return BigDecimal.ZERO;
 		return qf;
+	}
+
+	public void setQf(BigDecimal qf) {
+
+		if (qf == null)
+			qf = BigDecimal.ZERO;
+		this.qf = qf;
 	}
 
 	public void setQf(String qf) {
 
-		this.qf = qf.replace(",", ".");
+		// Create a DecimalFormat that fits your requirements
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+		// symbols.setGroupingSeparator('.');
+		// symbols.setDecimalSeparator(',');
+		String pattern = "#.##0,0#";
+		DecimalFormat decimalFormat = new DecimalFormat();
+		decimalFormat.setParseBigDecimal(true);
+
+		// parse the string
+		try {
+			this.qf = (BigDecimal) decimalFormat.parse(qf);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public Tipo_cliente getTipo_cliente() {

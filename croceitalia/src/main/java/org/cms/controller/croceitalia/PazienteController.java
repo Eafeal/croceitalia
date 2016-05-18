@@ -1,21 +1,14 @@
 package org.cms.controller.croceitalia;
 
 import it.asso.util.AssoException;
-import it.asso.util.RandomIdentifier;
-import it.asso.util.Utente_itf;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.cms.controller.SiteCmsController;
 import org.cms.controller.edit.EditCmsController;
-import org.cms.login.SoggettoUtente;
-import org.cms.login.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,14 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
 @Controller
 public class PazienteController extends EditCmsController {
 
 	@Autowired(required = true)
-	protected PazienteManager _pazienteManager;
+	protected PazienteManager	_pazienteManager;
 
-	
 	/**
 	 * @param request
 	 * @param response
@@ -44,6 +35,11 @@ public class PazienteController extends EditCmsController {
 		String cerca = request.getParameter("cerca");
 
 		try {
+
+			// MODEL
+			List<Patologia> pato = _pazienteManager.caricaPatologia();
+			modelAndView.addObject("patologia", pato);
+
 			List<Paziente> lista = _pazienteManager.search(cerca);
 			modelAndView.addObject("Lista", lista);
 
@@ -56,12 +52,13 @@ public class PazienteController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-	
+
 	/**
 	 * @param request
 	 * @param response
 	 * @return
 	 */
+	@Override
 	@RequestMapping(value = "paziente/list", method = RequestMethod.GET)
 	protected ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
 
@@ -73,7 +70,7 @@ public class PazienteController extends EditCmsController {
 
 		List<Patologia> pato = _pazienteManager.caricaPatologia();
 		modelAndView.addObject("patologia", pato);
-		
+
 		String viewName = "croceitalia/paziente/list";
 		modelAndView.setViewName(viewName);
 
@@ -84,52 +81,56 @@ public class PazienteController extends EditCmsController {
 	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Paziente paziente) {
 
 		ModelAndView modelAndView = getModelAndView(request);
-	/*	
-		// MODEL
-		Paziente paziente = new Paziente();
-		paziente.setNome(paziente1.getNome());
-		paziente.setCognome(paziente1.getCognome());
-		paziente.setTelefono1(paziente1.getTelefono1());
-		paziente.setTelefono2(paziente1.getTelefono2());
-		paziente.setFk_id_patologia(1);
 
-		paziente.setSesso(paziente1.getSesso());
-		
-//		Date data_nascita = Calendar.getInstance().getTime();
-//		paziente.setData_nascita(data_nascita);
-		
-		paziente.setData_nascita(paziente1.getData_nascita());
-		paziente.setVia(paziente1.getVia());
-		paziente.setComune(paziente1.getComune());
-		paziente.setCap(paziente1.getCap());
-		paziente.setProvincia(paziente1.getProvincia());
-*/
 		try {
 			_pazienteManager.save(paziente);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
-		} catch (AssoException e) {
-			// Inserimento fallito
-			modelAndView.addObject("messaggio", "Inserimento fallito");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
 		}
 
 		List<Paziente> pazientiList = _pazienteManager.caricaPazienti();
+		modelAndView.addObject("Lista", pazientiList);
 
-		modelAndView.addObject("ListaPazienti", pazientiList);
-
-		String viewName = "redirect:/edit/paziente/list";		
+		String viewName = "croceitalia/paziente/list";
 		modelAndView.setViewName(viewName);
-
+		
 		return modelAndView;
 
 	}
+
+	@RequestMapping(value = "paziente/save2")
+	protected ModelAndView save2(HttpServletRequest request, HttpServletResponse response, Paziente paziente) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+		String messaggio = "";
+		try {
+			_pazienteManager.save(paziente);
+			messaggio = "OK,"+paziente.getNome()+" "+paziente.getCognome()+","+paziente.getId_paziente();
+			
+		} catch (AssoException e) {
+			// Inserimento fallito
+			messaggio = "KO";
+		}
+
+		try {
+			PrintWriter out = response.getWriter();
+			response.getWriter().write(messaggio);//<--- Qua viene passato il valore inserito 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	
+		return null;
+
+	}	
 	@RequestMapping(value = "paziente/create", method = RequestMethod.GET)
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
-			//List<SoggettoUtente> soggetti = userDao.caricaSoggettiUtente();
-			//modelAndView.addObject("soggetti", soggetti);
+			// List<SoggettoUtente> soggetti = userDao.caricaSoggettiUtente();
+			// modelAndView.addObject("soggetti", soggetti);
 
 			List<Patologia> pato = _pazienteManager.caricaPatologia();
 			modelAndView.addObject("patologia", pato);
@@ -143,7 +144,7 @@ public class PazienteController extends EditCmsController {
 		}
 
 	}
-	
+
 	/**
 	 * @param request
 	 * @param response
@@ -156,8 +157,8 @@ public class PazienteController extends EditCmsController {
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
 			_pazienteManager.update(paziente);
-
-			String viewName = "redirect:/edit/paziente/update/" + paziente.getId_paziente();
+			modelAndView.addObject("esito", "OK");
+			String viewName = "forward:/edit/paziente/update/" + paziente.getId_paziente();
 			modelAndView.setViewName(viewName);
 
 			return modelAndView;
@@ -166,23 +167,23 @@ public class PazienteController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-	
+
 	/**
 	 * @param request
 	 * @param response
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "paziente/update/{user_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "paziente/update/{user_id}")
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("user_id") String user_id) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
 			Paziente paziente = (Paziente) _pazienteManager.findById(user_id);
-			List <Patologia> pato =  _pazienteManager.caricaPatologia();
-			
-			modelAndView.addObject("paziente", paziente);/*chiave valore*/
+			List<Patologia> pato = _pazienteManager.caricaPatologia();
+
+			modelAndView.addObject("paziente", paziente);/* chiave valore */
 			modelAndView.addObject("patologia", pato);
 			modelAndView.setViewName("croceitalia/paziente/update");
 
@@ -192,7 +193,7 @@ public class PazienteController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-	
+
 	/**
 	 * @param request
 	 * @param response
@@ -202,9 +203,25 @@ public class PazienteController extends EditCmsController {
 	@RequestMapping(value = "paziente/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
 
-		return delete(request, response, id, LIST);
+		ModelAndView modelAndView = getModelAndView(request);		
+		try {
+			_pazienteManager.deleteById(id);			
+			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+
+
+		List<Paziente> pazientiList = _pazienteManager.caricaPazienti();
+		modelAndView.addObject("Lista", pazientiList);
+
+		String viewName = "croceitalia/paziente/list";
+		modelAndView.setViewName(viewName);
+		
+		return modelAndView;
+		
 	}
-	
+
 	/**
 	 * @param request
 	 * @param response
@@ -226,6 +243,5 @@ public class PazienteController extends EditCmsController {
 		}
 
 	}
-
 
 }

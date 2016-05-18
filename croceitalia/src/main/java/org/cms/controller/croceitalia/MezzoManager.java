@@ -54,29 +54,22 @@ public class MezzoManager extends AssoDao {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Utente_itf> search(ModelMap modelMap) throws Exception {
-
-		String cognome = (String) modelMap.get("cognome");
-
-		if (Util.isNotEmpty(cognome)) {
-			cognome = "%" + cognome + "%";
-		}
+	public List<Mezzo> search(String cerca) throws Exception {
 
 		EntityManager em = null;
 		try {
-
 			em = getEntityManager();
 
-			String queryString = "select Paziente from Paziente Paziente ";
-			queryString += " WHERE Paziente.cognome LIKE :cognome  ";
-
+			String queryString = "select mzz from Mezzo mzz ";
+			queryString += " WHERE mzz.targa      LIKE :cerca  ";
+			queryString += "OR mzz.descrizione 	 LIKE :cerca ";
 			Query query = em.createQuery(queryString);
 
-			query.setParameter("cognome", cognome);
+			query.setParameter("cerca", "%" + cerca + "%");
 
-			queryString += " ORDER BY ute.userId ";
+			queryString += " ORDER BY mzz.targa, mzz.descrizione";
 
-			List<Utente_itf> answer = query.getResultList();
+			List<Mezzo> answer = query.getResultList();
 
 			return answer;
 

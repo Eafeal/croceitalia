@@ -63,7 +63,7 @@
                            <tr class="prop">
                                 <td valign="top" class="name"><label for="via">Quota fissa</label></td>
                                 <td valign="top" class="value">
-                                    <input type="text" id="qf" name="qf" size="5" maxlength="5" value="${cliente.getQf()}" placeholder="QF"/>                                </td>
+                                    <input type="text" id="qfs" name="qfs" size="10" maxlength="10" value="${cliente.getQf()}" placeholder="QF"/>                                </td>
                            </tr>
                         </tbody>
                     </table>
@@ -72,7 +72,7 @@
                 <span class="button"><input type="button" value="Update" class="edit" onClick="controlli()" /></span>
                 </form>
                 <form action="/edit/cliente/delete/${cliente.id_cliente}" method="get" >
-                        <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
+                        <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Confermi cancellazione?');" /></span>
                         <span class="button"><input type="button" value="Close"  class="close"  onclick="ricarica()" /></span>
                  </form>
              </div>
@@ -81,3 +81,10 @@
     
     </body>
 </html>
+
+<#if esito?? && esito=="ok">
+<script>
+alert("Aggiornamento effettuato correttamente");
+</script>
+</#if> 
+

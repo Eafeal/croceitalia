@@ -56,7 +56,7 @@
                             <tr class="prop">
                                 <td valign="top" class="name"><label for="data">Data di nascita</label></td>
                                 <td valign="top" class="value">
-                                    <input type="text" id="data_nascita" name="data_nascita" size="20" maxlength="20" value="${paziente.getData_nascita()}" />
+                                    <input type="text" id="data_nascita" name="data_nascita" size="20" maxlength="20" value="${paziente.getData_nascita()?string["dd-MM-yyyy"]}" />
                                 </td>
                             </tr>
                             <tr class="prop">
@@ -84,7 +84,7 @@
                 <span class="button"><input type="button" value="Update" class="edit" onclick="controlli()" /></span>
                 </form>
                 <form action="/edit/paziente/delete/${paziente.id_paziente}" method="get" >
-                        <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
+                        <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Confermi cancellazione?');" /></span>
                         <span class="button"><input type="button" value="Close"  class="close"  onclick="ricarica()" /></span>
                  </form>
              </div>
@@ -92,11 +92,10 @@
         </div>
     
     </body>
-    
+
+</html>
 <#if esito??>
 <script>
 alert("Aggiornamento effettuato correttamente");
 </script>
 </#if> 
-
-</html>

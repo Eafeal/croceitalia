@@ -26,11 +26,10 @@
                 <table id="resultTable" >
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th class="sortable" ><a href="javascript:ordina('resultTable',1,0);">Istituto</a></th>
                             <th class="sortable" ><a href="javascript:ordina('resultTable',2,0);">Agenzia</a></th>
                             <th class="sortable" ><a href="javascript:ordina('resultTable',3,0);">IBAN</a></th>
-                            <th></th>
+                            <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,14 +42,12 @@
 	                            <#assign classe="even" />
 	                        </#if>
 	                        <tr class="${classe}">
-	                            <td><a href="/edit/banca/update/${banca.getId_banca()}">${i}<img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a></td>
 	                            <td>${banca.getNome()}</td>
 	                            <td>${banca.getAgenzia()}</td>
 	                            <td>${banca.getIban()}</td>
 	                            <td>
-								    <form action="/edit/banca/delete/${banca.getId_banca()}" method="get" >
-									<span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
-									</form>
+									<a href="/edit/banca/update/${banca.getId_banca()}"><img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a>
+							        <a href="/edit/banca/delete/${banca.getId_banca()}"><img src="/img/edit/cancella_on.gif" alt="Cancella"  style="float:left;clear:none;border:0" onclick="return confirm('Confermi cancellazione?');" /></a>
 								</td>
 	                        </tr>
 	                    </#list>

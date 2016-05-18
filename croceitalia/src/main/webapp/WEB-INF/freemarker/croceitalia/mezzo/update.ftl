@@ -73,7 +73,7 @@
                 <span class="button"><input type="button" value="Update" class="edit" onClick="controlli()" /></span>
                 </form>
                 <form action="/edit/mezzo/delete/${mezzo.id_mezzo}" method="get" >
-                        <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
+                        <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Confermi cancellazione?');" /></span>
                         <span class="button"><input type="button" value="Close"  class="close"  onclick="ricarica()" /></span>
                  </form>
              </div>
@@ -81,53 +81,13 @@
         </div>
     
     </body>
-     <script type="text/javascript">
 
-            $(document).ready(function() {
-
-                $("#updForm").submit(function() {
-
-                    errMsg = errMsgDefault = "Attenzione!!\n";
-                    $(".errorTextField").removeClass('errorTextField');
-
-
-                    if (($("#data_nascita").val() !="")){
-                        if (Date.isValid( $("#data_nascita").val(), "dd-MM-yyyy") == false){
-                            errMsg = errMsg + "Data Scadenza NON valida\n";
-                            $("#data_nascita").addClass('errorTextfield');
-                        }
-                    } else {
-                        errMsg = errMsg + "Data Scadenza NON valida\n";
-                        $("#data_nascita").addClass('errorTextField');
-                    }
-
-                    if (errMsg == errMsgDefault){
-                        return confirm("Confermi Aggiornamento?");
-                    } else {
-                        alert(errMsg);
-                        return false;
-                    }
-                    
-                 });
-
-                
-                $("#data_nascita").datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    bgiframe: true,
-                    dateFormat: "dd-mm-yy",
-                    constrainInput: false,
-                    onSelect: function(dateText) {
-                        $(this).val(dateText); 
-                    }
-                });    
-
-                
-                if ($("#data_nascita").val() == ""){
-                    $("#data_nascita").val("${utente.data_nascita?string("dd-MM-yyyy") }");
-                }
-
-            });
-
-       </script>
 </html>
+
+<#if esito?? && esito=="ok">
+<script>
+alert("Aggiornamento effettuato correttamente");
+</script>
+</#if> 
+
+

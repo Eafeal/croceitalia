@@ -17,15 +17,15 @@
                                 <td align="top" class="value">
                                     <input type="text" id="via" name="via" size="20" maxlength="60" value="" placeholder="Via" />
                                     <input type="text" id="comune" name="comune"  size="10" maxlength="60" value="" placeholder="Comune"  />
-                                    <input type="text" id="cap" name="cap" size="20" maxlength="60" value="" placeholder="Cap"  />
-                                    <input type="text" id="provincia" name="provincia"  size="5" maxlength="60" value=""  placeholder="Provincia" />
+                                    <input type="text" id="cap" name="cap" size="20" maxlength="5" value="" placeholder="Cap"  />
+                                    <input type="text" id="provincia" name="provincia"  size="5" maxlength="2" value=""  placeholder="Provincia" />
                              	</td>
                             </tr>
                              <tr class="prop">
                              	<td align="top" class="telefono1"><label for="telefono2">Iban</label></td>
                                 <td align="top" class="value">
-                                    <input type="text" id="bic_swift" name="bic_swift"  size="28" maxlength="60" value=" " hidden  />
-                                    <input type="text" id="iban" name="iban"  size="30" maxlength="60" value=""  placeholder="IBAN" />
+                                    <input type="hidden" id="bic_swift" name="bic_swift"  size="28" maxlength="60" value=" " hidden  />
+                                    <input type="text" id="iban" name="iban"  size="30" maxlength="27" value=""  placeholder="IBAN" />
                              	</td>
                             </tr>
                         </tbody>                            
@@ -41,3 +41,9 @@
     </body>
 
 </html>
+
+<#if esito?? && esito=="ok">
+<script>
+alert("Aggiornamento effettuato correttamente");
+</script>
+</#if> 
