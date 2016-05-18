@@ -152,8 +152,8 @@ public class PazienteController extends EditCmsController {
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
 			_pazienteManager.update(paziente);
-
-			String viewName = "redirect:/edit/paziente/update/" + paziente.getId_paziente();
+			request.setAttribute("esito", "ok");
+			String viewName = "forward:/edit/paziente/update/" + paziente.getId_paziente();
 			modelAndView.setViewName(viewName);
 
 			return modelAndView;
@@ -169,7 +169,7 @@ public class PazienteController extends EditCmsController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "paziente/update/{user_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "paziente/update/{user_id}")
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("user_id") String user_id) {
 
@@ -177,9 +177,10 @@ public class PazienteController extends EditCmsController {
 		try {
 			Paziente paziente = (Paziente) _pazienteManager.findById(user_id);
 			List<Patologia> pato = _pazienteManager.caricaPatologia();
-
+			Object esito = request.getAttribute("esito");
 			modelAndView.addObject("paziente", paziente);/* chiave valore */
 			modelAndView.addObject("patologia", pato);
+			//modelAndView.addObject("esito", esito);
 			modelAndView.setViewName("croceitalia/paziente/update");
 
 			return modelAndView;

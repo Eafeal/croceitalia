@@ -1,11 +1,14 @@
 package org.cms.controller.croceitalia;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -13,9 +16,9 @@ import javax.persistence.Table;
 import org.cms.jpa.object.impl.Model;
 
 @Entity
-@Table(name = "Documento_righe")
-@NamedQuery(name = "Documento_righe.loadAll", query = "SELECT OBJECT(obj) FROM Documento_righe obj")
-public class DocumentoRighe extends Model {
+@Table(name = "Documento_Righe")
+@NamedQuery(name = "Documento_Righe.loadAll", query = "SELECT OBJECT(obj) FROM Documento_Righe obj")
+public class Documento_Righe extends Model {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +30,14 @@ public class DocumentoRighe extends Model {
 	@OneToOne
 	@JoinColumn(name = "fk_id_paziente", nullable = false)
 	private Paziente	paziente;
+	
+//	@ManyToOne(optional = false)
+//	@JoinColumn(name = "documento_testata", referencedColumnName = "fk_id_documento_testata")
+//	@ManyToOne(optional = false)
+//	@JoinColumn(name = "fk_id_documento_testata")
+//	@ManyToOne (cascade=CascadeType.ALL)
+//	@JoinColumn(name = "fk_id_documento_testata")
+	 private Documento_Testata documento_Testata;
 
 	private Integer		num_sedute;
 	private String		mese;
@@ -40,13 +51,13 @@ public class DocumentoRighe extends Model {
 	private String		diritto_uscita;
 	private Integer		importo_doc;
 
-	public DocumentoRighe() {
+	public Documento_Righe() {
 
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public DocumentoRighe(Integer id_documento_righe, Integer fk_id_documento_testata,/* Integer fk_id_paziente, */
+	public Documento_Righe(Integer id_documento_righe, Integer fk_id_documento_testata,/* Integer fk_id_paziente, */
 	Integer num_sedute, String mese, Integer km_totali, Integer km_percorso, String percorso, String p_partenza,
 			String p_arrivo, Integer ora_sosta, Integer qF, String diritto_uscita, Integer importo_doc) {
 
@@ -205,6 +216,14 @@ public class DocumentoRighe extends Model {
 	public void setImporto_doc(Integer importo_doc) {
 
 		this.importo_doc = importo_doc;
+	}
+
+	public Documento_Testata getDocumento_Testata() {
+		return documento_Testata;
+	}
+
+	public void setDocumento_Testata(Documento_Testata documento_Testata) {
+		this.documento_Testata = documento_Testata;
 	}
 
 }
