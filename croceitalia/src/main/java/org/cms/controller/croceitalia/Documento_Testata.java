@@ -1,5 +1,10 @@
 package org.cms.controller.croceitalia;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Documento_Testata")
@@ -40,16 +47,36 @@ public class Documento_Testata {
 	private Integer	num_documento;
 	private String	anno_documento;
 	private String	mese_documento;
-	private String	data_documento;
-	private Integer	imponibile;
-	private Integer	iva;
+	
+	@Temporal(TemporalType.DATE)
+	private Date	data_documento;
+	
+	@Column(precision = 10, scale = 2)
+	private BigDecimal	imponibile;
+	
+	@Column(precision = 10, scale = 2)
+	private BigDecimal	iva;
+	
 	private String	esente_iva;
 	private String	esente_bollo;
-	private Integer	importo_esente;
-	private Integer	totale;
+	
+	@Column(precision = 10, scale = 2)
+	private BigDecimal	importo_esente;
+	
+	@Column(precision = 10, scale = 2)
+	private BigDecimal	totale;
+	
 	private String	stato;
 	private String	pdf_generato;
 	private String	nome_file;
+	
+	private String usercrea;
+	private String userultv;
+	
+	@Temporal(TemporalType.DATE)
+	private Date datacrea;
+	@Temporal(TemporalType.DATE)
+	private Date dataultv;
 	
 //	@OneToMany
 //	@JoinColumn(name = "id_documento_testata", nullable = false)	
@@ -58,17 +85,31 @@ public class Documento_Testata {
 	 private List<Documento_Righe> righe;
 
 	public Documento_Testata() {
-
+		
 		super();
-		// TODO Auto-generated constructor stub
+		esente_bollo = "S";
+		esente_iva = "S";
+		
+		this.mezzo = new Mezzo();
+		this.banca = new Banca();
+		this.cliente = new Cliente();
+		
+		imponibile = BigDecimal.ZERO;
+		iva = BigDecimal.ZERO;
+		importo_esente = BigDecimal.ZERO;
+		totale = BigDecimal.ZERO;
+		
+		pdf_generato = "N";	//NO
+		stato = "A";		//APERTO
+		
 	}
 
 	public Documento_Testata(Integer id_documento_testata,/*
 														 * Integer fk_id_mezzo, Integer fk_id_banca,
 														 * Integer fk_id_cliente,
 														 */Integer num_documento, String anno_documento,
-			String mese_documento, String data_documento, Integer imponibile, Integer iva, String esente_iva,
-			String esente_bollo, Integer importo_esente, Integer totale, String stato, String pdf_generato,
+			String mese_documento, Date data_documento, BigDecimal imponibile, BigDecimal iva, String esente_iva,
+			String esente_bollo, BigDecimal importo_esente, BigDecimal totale, String stato, String pdf_generato,
 			String nome_file) {
 
 		super();
@@ -161,36 +202,46 @@ public class Documento_Testata {
 		this.mese_documento = mese_documento;
 	}
 
-	public String getData_documento() {
+	public Date getData_documento() {
 
 		return data_documento;
 	}
 
-	public void setData_documento(String data_documento) {
+	public void setData_documento(Date data_documento) {
 
 		this.data_documento = data_documento;
 	}
 
-	public Integer getImponibile() {
+	public BigDecimal getImponibile() {
 
 		return imponibile;
 	}
 
-	public void setImponibile(Integer imponibile) {
+	public void setImponibile(BigDecimal imponibile) {
 
 		this.imponibile = imponibile;
 	}
+	
+	public void setImponibile(String importo) {
 
-	public Integer getIva() {
+		this.imponibile = fromStringToBigDecimal(importo);
+	}
+
+	public BigDecimal getIva() {
 
 		return iva;
 	}
 
-	public void setIVA(Integer iva) {
-
-		iva = iva;
+	public void setIva(BigDecimal iva) {
+		this.iva = iva;
 	}
-
+	
+//POLIMORFISMO	
+	public void setIva(String importo) {
+		
+		this.iva = fromStringToBigDecimal(importo);
+	}
+	
 	public String getEsenteIva() {
 
 		return esente_iva;
@@ -211,24 +262,34 @@ public class Documento_Testata {
 		this.esente_bollo = esente_bollo;
 	}
 
-	public Integer getImporto_esente() {
+	public BigDecimal getImporto_esente() {
 
 		return importo_esente;
 	}
 
-	public void setImporto_esente(Integer importo_esente) {
+	public void setImporto_esente(BigDecimal importo_esente) {
 
 		this.importo_esente = importo_esente;
 	}
 
-	public Integer getTotale() {
+	public void setImporto_esente(String importo_esente) {
+
+		this.importo_esente = fromStringToBigDecimal(importo_esente);
+	}
+	
+	public BigDecimal getTotale() {
 
 		return totale;
 	}
 
-	public void setTotale(Integer totale) {
+	public void setTotale(BigDecimal totale) {
 
 		this.totale = totale;
+	}
+
+	public void setTotale(String totale) {
+
+		this.totale = fromStringToBigDecimal(totale);;
 	}
 
 	public String getStato() {
@@ -268,6 +329,124 @@ public class Documento_Testata {
 	public void setRighe(List<Documento_Righe> righe) {
 		this.righe = righe;
 	}
+
+	public Mezzo getMezzo() {
+		return mezzo;
+	}
+
+	public void setMezzo(Mezzo mezzo) {
+		this.mezzo = mezzo;
+	}
+
+	public Banca getBanca() {
+		return banca;
+	}
+
+	public void setBanca(Banca banca) {
+		this.banca = banca;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public String getEsente_iva() {
+		return esente_iva;
+	}
+
+	public void setEsente_iva(String esente_iva) {
+		this.esente_iva = esente_iva;
+	}
+
+	public String getUsercrea() {
+		return usercrea;
+	}
+
+	public void setUsercrea(String usercrea) {
+		this.usercrea = usercrea;
+	}
+
+	public String getUserultv() {
+		return userultv;
+	}
+
+	public void setUserultv(String userultv) {
+		this.userultv = userultv;
+	}
+
+	public Date getDatacrea() {
+		return datacrea;
+	}
+
+	public void setDatacrea(Date datacrea) {
+		this.datacrea = datacrea;
+	}
+
+	public Date getDataultv() {
+		return dataultv;
+	}
+
+	public void setDataultv(Date dataultv) {
+		this.dataultv = dataultv;
+	}
+
 	
+	private BigDecimal fromStringToBigDecimal(String importo) {
+
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+
+		String pattern = "#.##0,0#";
+		DecimalFormat decimalFormat = new DecimalFormat();
+		decimalFormat.setParseBigDecimal(true);
+
+		// parse the string
+		try {
+			return (BigDecimal) decimalFormat.parse(importo);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return BigDecimal.ZERO;
+	}
+	
+	public boolean aperto() {
+		if(stato == null)
+			return true;
+
+		return stato.equals("A");
+	}
+	
+	public boolean chiuso() {
+		if(stato == null)
+			return false;
+
+		return stato.equals("C");
+	}
+	
+	private void chiudi() {
+		stato = "C";
+	}
+	
+	private void riapri() {
+		stato = "A";
+	}
+	
+	
+	public boolean pdfGenerato() {
+		if(pdf_generato== null)
+			return false;
+
+		return pdf_generato.equals("S");
+	}
+	
+	private void rigenera_pdf() {
+		pdf_generato = "N";
+	}
 
 }
+
