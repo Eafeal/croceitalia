@@ -30,6 +30,8 @@ public class Paziente extends Model {
 	@JoinColumn(name = "fk_id_patologia", nullable = false)
 	private Patologia	id_patologia;
 
+	
+
 	private String		nome;
 	private String		cognome;
 	private String		telefono1;
@@ -48,6 +50,8 @@ public class Paziente extends Model {
 
 		this.id_patologia = new Patologia();
 	}
+	
+	
 
 	public Integer getFk_id_patologia() {
 
@@ -266,6 +270,16 @@ public class Paziente extends Model {
 	public void setProvincia(String provincia) {
 
 		this.provincia = provincia.toUpperCase();
+	}
+	
+	public Patologia getId_patologia() {
+		return id_patologia;
+	}
+
+
+
+	public void setId_patologia(Patologia id_patologia) {
+		this.id_patologia = id_patologia;
 	}
 
 	/*

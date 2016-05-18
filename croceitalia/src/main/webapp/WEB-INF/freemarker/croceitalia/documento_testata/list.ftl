@@ -2,8 +2,8 @@
 
         
         <div class="body">
-            <h1>Ricerca Pazienti</h1>
-            <form action="/edit/paziente/list" method="post" >
+            <h1>Documento Testata</h1>
+            <form action="/edit/documento_testata/list" method="post" >
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -27,15 +27,15 @@
                 <table id="resultTable" >
                     <thead>
                         <tr>
-                            <th class="sortable" ><a href="javascript:ordina('resultTable',1,0);">Nominativo</a></th>
-                            <th class="sortable" ><a href="javascript:ordina('resultTable',2,0);">Contatti</a></th>
-                            <th class="sortable" ><a href="javascript:ordina('resultTable',3,0);">Patologia</a></th>
                             <th>#</th>
+                            <th class="sortable" ><a href="javascript:ordina('resultTable',2,0);">Nome Struttura</a></th>
+                            <th class="sortable" ><a href="javascript:ordina('resultTable',3,0);">Contatti </a></th>
+                            <th class="sortable" ></th>
                         </tr>
                     </thead>
                     <tbody>
 	                    <#assign i=0 />
-	                    <#list Lista as paziente >
+	                    <#list Lista as struttura >
 	                        <#assign i=i+1 />
 	                        <#if (i % 2) == 0 >
 	                            <#assign classe="odd" />
@@ -43,12 +43,13 @@
 	                            <#assign classe="even" />
 	                        </#if>
 	                        <tr class="${classe}">
-	                            <td>${paziente.getCognome()}&nbsp;${paziente.getNome()}</td>
-	                            <td>${paziente.getTelefono1()} - ${paziente.getTelefono2()}</td>
-	                            <td>${paziente.getId_patologia().getDescrizione()} </td>
-	                            <td>
-								    <a href="/edit/paziente/update/${paziente.getId_paziente()}"><img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a>
-								    <a href="/edit/paziente/delete/${paziente.getId_paziente()}"><img src="/img/edit/cancella_on.gif" alt="Cancella"  style="float:left;clear:none;border:0" onclick="return confirm('Confermi la cancellazione?');" /></a>
+	                            <td><a href="/edit/struttura/update/${struttura.getId_struttura()}">${i}<img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a></td>
+	                            <td>${struttura.getNome()}</td>
+	                            <td>${struttura.getTelefono()}</td>
+                             	 <td>
+								    <form action="/edit/struttura/delete/${struttura.id_struttura}" method="get" >
+									<span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
+									</form>
 								</td>
 	                        </tr>
 	                    </#list>
@@ -64,8 +65,10 @@
     
     </body>
 </html>
-<#if messaggio??>
+
 <script>
-alert("${messaggio}");
-</script>
-</#if>			
+function openDocument(id)
+	{
+	document.location = "/edit/documento/listForUser/"+id;
+	}
+</script>			

@@ -85,8 +85,8 @@ public class StrutturaController extends EditCmsController {
 		try {
 			//se funziona
 			_strutturaManager.update(struttura);
-
-			String viewName = "redirect:/edit/struttura/update/" + struttura.getId_struttura();
+			request.setAttribute("esito", "ok");
+			String viewName = "forward:/edit/struttura/update/" + struttura.getId_struttura();
 			modelAndView.setViewName(viewName);
 			return modelAndView;
 			
@@ -96,7 +96,7 @@ public class StrutturaController extends EditCmsController {
 		}
 	}
 	
-	@RequestMapping(value = "struttura/update/{user_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "struttura/update/{user_id}")
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("user_id") String user_id) {
 

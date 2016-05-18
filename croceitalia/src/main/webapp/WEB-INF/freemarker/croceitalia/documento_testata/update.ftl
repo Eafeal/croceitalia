@@ -79,7 +79,7 @@
                 <span class="button"><input type="button" value="Update" class="edit" onclick="controlloStruttura()" /></span>
                 </form>
                 <form action="/edit/struttura/delete/${struttura.getId_struttura()}" method="get" >
-                        <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Confermi cancellazione?');" /></span>
+                        <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
                         <span class="button"><input type="button" value="Close"  class="close"  onclick="ricarica()" /></span>
                  </form>
              </div>
@@ -89,12 +89,3 @@
     </body>
     
 </html>
-
-<#if esito?? && esito=="ok">
-<script>
-alert("Aggiornamento effettuato correttamente");
-</script>
-</#if> 
-
-
-

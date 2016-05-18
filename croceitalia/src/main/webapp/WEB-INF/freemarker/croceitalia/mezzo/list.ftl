@@ -26,10 +26,10 @@
                 <table id="resultTable" >
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th class="sortable" ><a href="javascript:ordina('resultTable',1,0);">Targa</a></th>
                             <th class="sortable" ><a href="javascript:ordina('resultTable',3,0);">Tipo veicolo</a></th>
                             <th class="sortable" ><a href="javascript:ordina('resultTable',2,0);">Descrizione</a></th>
+                            <th>#</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -42,14 +42,12 @@
 	                            <#assign classe="even" />
 	                        </#if>
 	                        <tr class="${classe}">
-	                            <td><a href="/edit/mezzo/update/${mezzo.getId_mezzo()}">${i}<img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a></td>
 	                            <td>${mezzo.getTarga()}</td>
 	                            <td>${mezzo.getTipo_mezzo().getDescrizione()}</td>
-	                            <td>${mezzo.getDescrizione()}</td>  
+	                            <td>${mezzo.getDescrizione()}</td>
 	                            <td>
-								    <form action="/edit/mezzo/delete/${mezzo.getId_mezzo()}" method="get" >
-									<span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Are you sure?');" /></span>
-									</form>
+	                            	<a href="/edit/mezzo/update/${mezzo.getId_mezzo()}"><img src="/img/edit/mod.gif" alt="Modifica" style="float:left;clear:none;border:0" /></a>
+	                            	<a href="/edit/mezzo/delete/${mezzo.getId_mezzo()}"><img src="/img/edit/cancella_on.gif" alt="Cancella" style="float:left;clear:none;border:0" onclick="return confirm('Confermi cancellazione?');" /></a>
 								</td>
 	                        </tr>
 	                    </#list>
