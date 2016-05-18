@@ -1,4 +1,4 @@
-package pdf.oggetto;
+package org.cms.controller.croceitalia;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,16 +20,17 @@ import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class GeneraPdf2 {
-	private static Font bigFont = new Font(Font.FontFamily.UNDEFINED, 12, Font.BOLD);
-	private static Font smallFont = new Font(Font.FontFamily.UNDEFINED, 9, Font.BOLD);
-	private static Font piusmallFont = new Font(Font.FontFamily.UNDEFINED, 8, Font.BOLD);
-	List<Integer> finale = new ArrayList();
 
-	private String _src;
-	private String _destIn;
-	private String _destOut;
-	private List<String> _nomiFile;
-	private int _numeroRighe = 0;
+	private static Font		bigFont			= new Font(Font.FontFamily.UNDEFINED, 12, Font.BOLD);
+	private static Font		smallFont		= new Font(Font.FontFamily.UNDEFINED, 9, Font.BOLD);
+	private static Font		piusmallFont	= new Font(Font.FontFamily.UNDEFINED, 8, Font.BOLD);
+	List<Integer>			finale			= new ArrayList();
+
+	private final String	_src;
+	private final String	_destIn;
+	private final String	_destOut;
+	private List<String>	_nomiFile;
+	private int				_numeroRighe	= 0;
 
 	/**
 	 * @param src
@@ -37,6 +38,7 @@ public class GeneraPdf2 {
 	 * @param destOut
 	 */
 	public GeneraPdf2(String src, String destIn, String destOut) {
+
 		super();
 		_src = src;
 		_destIn = destIn;
@@ -55,8 +57,8 @@ public class GeneraPdf2 {
 	 * @throws IOException
 	 * @throws DocumentException
 	 */
-	public void manipulatePdf(int numPagina, List<Documento_Row> row, List<Documento_Testata> testata, Integer importo,
-			Integer somma) throws IOException, DocumentException {
+	public void manipulatePdf(int numPagina, List<Documento_Righe> row, List<Documento_Testata> testata,
+			Integer importo, Integer somma) throws IOException, DocumentException {
 
 		finale = new ArrayList();
 		PdfReader reader = new PdfReader(_src);
@@ -97,7 +99,8 @@ public class GeneraPdf2 {
 	 * @param nested
 	 */
 	private void scriviCliente(PdfContentByte cb, PdfLayer nested) {
-		////////////////////////////////////////////////////// cliente/////////////////////////////////////////
+
+		// //////////////////////////////////////////////////// cliente/////////////////////////////////////////
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("Spettabile", smallFont), 270, 668, 0);
@@ -113,8 +116,8 @@ public class GeneraPdf2 {
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("20024 Garbagnate Milanese", smallFont), 270, 629,
-				0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("20024 Garbagnate Milanese", smallFont), 270,
+				629, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
@@ -138,7 +141,8 @@ public class GeneraPdf2 {
 	 * @param nested
 	 */
 	private void scriviDate(List<Documento_Testata> testata, PdfContentByte cb, String numero, PdfLayer nested) {
-		///////////////////////// date///////////////////////////////////////////////
+
+		// /////////////////////// date///////////////////////////////////////////////
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(testata.get(0).getMese_documento(), smallFont),
@@ -162,6 +166,7 @@ public class GeneraPdf2 {
 	 * @param nested
 	 */
 	private void scriviSomme(Integer importo, PdfContentByte cb, PdfLayer nested) {
+
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(importo.toString(), smallFont), 539, 150, 0);
 
@@ -188,7 +193,8 @@ public class GeneraPdf2 {
 	 * @param nested
 	 */
 	private void scriviNumeroPAgina(PdfContentByte cb, PdfLayer nested) {
-		//////////////////// numero pagina//////////////////////////////
+
+		// ////////////////// numero pagina//////////////////////////////
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("pagina n", smallFont), 465, 694, 0);
@@ -201,9 +207,10 @@ public class GeneraPdf2 {
 	 * @param nested
 	 */
 	private void scriviBonifico(PdfContentByte cb, PdfLayer nested) {
-		///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		////////////////// bonifico/////////////////////
+		// /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		// //////////////// bonifico/////////////////////
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("BONIFICO BANCARIO A :", piusmallFont), 27, 144,
@@ -211,8 +218,8 @@ public class GeneraPdf2 {
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("P.A. CROCE ITALIA BERNATE TICINO", piusmallFont),
-				27, 133, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("P.A. CROCE ITALIA BERNATE TICINO", piusmallFont), 27, 133, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
@@ -220,19 +227,19 @@ public class GeneraPdf2 {
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("BANCA PROSSIMA S.p.A. Filiale 05000", piusmallFont), 27, 108, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("BANCA PROSSIMA S.p.A. Filiale 05000",
+				piusmallFont), 27, 108, 0);
 
 		cb.endLayer();
 
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Piazza Paolo Ferrari 10 20121 MILANO", piusmallFont), 27, 94, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("Piazza Paolo Ferrari 10 20121 MILANO",
+				piusmallFont), 27, 94, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("IBAN: IT60 W033 5901 6001 0000 0015 705", bigFont), 27, 69, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("IBAN: IT60 W033 5901 6001 0000 0015 705",
+				bigFont), 27, 69, 0);
 
 		cb.endLayer();
 	}
@@ -244,9 +251,10 @@ public class GeneraPdf2 {
 	 * @param nested
 	 * @return
 	 */
-	private void scriviRighe(int numPagina, List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		//////////////////////////////////////////////// ------
-		//////////////////////////////////////////////// righe--------////////////////////////////////////////
+	private void scriviRighe(int numPagina, List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// ////////////////////////////////////////////// ------
+		// ////////////////////////////////////////////// righe--------////////////////////////////////////////
 
 		cellaSedute(row, cb, nested);
 		cellaMese(row, cb, nested);
@@ -273,12 +281,12 @@ public class GeneraPdf2 {
 
 		for (int i = 1; i <= numeroRigheDaStampare; i++) {
 			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(i).getNum_sedute().toString(), smallFont), 38, b - a, 0);
+			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getNum_sedute().toString(),
+					smallFont), 38, b - a, 0);
 
 			cb.endLayer();
 
-			////////////////// mese///////////////////
+			// //////////////// mese///////////////////
 
 			cb.beginLayer(nested);
 			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getMese(), smallFont), 70, b - a,
@@ -286,61 +294,59 @@ public class GeneraPdf2 {
 
 			cb.endLayer();
 
-			////////////////// km//////////////////
+			// //////////////// km//////////////////
 
 			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(i).getKm_percorso().toString(), smallFont), 130, b - a, 0);
+			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getKm_percorso().toString(),
+					smallFont), 130, b - a, 0);
 
-			////////////////// NOME//////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getFk_id_paziente(), piusmallFont),
-					158, b - a, 0);
-			cb.beginLayer(nested);
-
-			////////////////// percorso andata//////////////////
+			// //////////////// NOME//////////////////
 
 			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(i).getP_partenza() + "-" + row.get(0).getP_arrivo(), piusmallFont), 260, c - a,
-					0);
+			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getFk_id_paziente().toString(),
+					piusmallFont), 158, b - a, 0);
 			cb.beginLayer(nested);
 
-			////////////////// percorso ritorno//////////////////
+			// //////////////// percorso andata//////////////////
 
 			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(i).getP_arrivo() + "-" + row.get(0).getP_partenza(), piusmallFont), 260, d - a,
-					0);
+			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getP_partenza() + "-"
+					+ row.get(0).getP_arrivo(), piusmallFont), 260, c - a, 0);
 			cb.beginLayer(nested);
 
-			////////////////// ore //////////////////
+			// //////////////// percorso ritorno//////////////////
 
 			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(i).getOra_sosta().toString(), smallFont), 394, b - a, 0);
+			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getP_arrivo() + "-"
+					+ row.get(0).getP_partenza(), piusmallFont), 260, d - a, 0);
 			cb.beginLayer(nested);
 
-			////////////////// quota fissa//////////////////
+			// //////////////// ore //////////////////
 
 			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(i).getOra_sosta().toString(), smallFont), 420, b - a, 0);
+			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getOra_sosta().toString(),
+					smallFont), 394, b - a, 0);
 			cb.beginLayer(nested);
 
-			////////////////// diritto di uscita//////////////////
+			// //////////////// quota fissa//////////////////
+
+			cb.beginLayer(nested);
+			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getOra_sosta().toString(),
+					smallFont), 420, b - a, 0);
+			cb.beginLayer(nested);
+
+			// //////////////// diritto di uscita//////////////////
 
 			cb.beginLayer(nested);
 			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(i).getDiritto_uscita(), smallFont),
 					495, b - a, 0);
 			cb.beginLayer(nested);
 
-			////////////////// importo/////////////////////
+			// //////////////// importo/////////////////////
 
 			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase("$   " + row.get(i).getImporto_doc(), smallFont), 525, b - a, 0);
+			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("$   " + row.get(i).getImporto_doc(),
+					smallFont), 525, b - a, 0);
 			cb.beginLayer(nested);
 
 			d = d - a;
@@ -352,8 +358,9 @@ public class GeneraPdf2 {
 
 	}
 
-	private void cellaImporto(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		////////////////// importo//////////////////
+	private void cellaImporto(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// //////////////// importo//////////////////
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("$   " + row.get(0).getImporto_doc(), smallFont),
@@ -361,8 +368,9 @@ public class GeneraPdf2 {
 		cb.beginLayer(nested);
 	}
 
-	private void cellaDirittoUscita(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		////////////////// diritto di uscita//////////////////
+	private void cellaDirittoUscita(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// //////////////// diritto di uscita//////////////////
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(0).getDiritto_uscita(), smallFont), 495,
@@ -370,50 +378,56 @@ public class GeneraPdf2 {
 		cb.beginLayer(nested);
 	}
 
-	private void cellaQuotaFissa(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		////////////////// quota fissa//////////////////
+	private void cellaQuotaFissa(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// //////////////// quota fissa//////////////////
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("$      " + row.get(0).getQF(), smallFont), 420,
 				544, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaOre(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		////////////////// ore//////////////////
+	private void cellaOre(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// //////////////// ore//////////////////
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(0).getOra_sosta().toString(), smallFont),
 				394, 544, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaPercorsoRitorno(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		////////////// percorso ritorno/////////////
+	private void cellaPercorsoRitorno(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// //////////// percorso ritorno/////////////
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(0).getP_arrivo() + "-" + row.get(0).getP_partenza(), piusmallFont), 260, 538, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(0).getP_arrivo() + "-"
+				+ row.get(0).getP_partenza(), piusmallFont), 260, 538, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaAndata(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		////////////// percorso andata/////////////
+	private void cellaAndata(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// //////////// percorso andata/////////////
 
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(0).getP_partenza() + "-" + row.get(0).getP_arrivo(), piusmallFont), 260, 548, 0);
-		cb.beginLayer(nested);
-	}
-
-	private void cellaNome(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		////////////// nome//////////////////
-
-		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(0).getFk_id_paziente(), piusmallFont),
-				158, 544, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(0).getP_partenza() + "-"
+				+ row.get(0).getP_arrivo(), piusmallFont), 260, 548, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaKm(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		////////////////// km//////////////////
+	private void cellaNome(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// //////////// nome//////////////////
+
+		cb.beginLayer(nested);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(0).getFk_id_paziente().toString(),
+				piusmallFont), 158, 544, 0);
+		cb.beginLayer(nested);
+	}
+
+	private void cellaKm(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// //////////////// km//////////////////
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
@@ -421,26 +435,29 @@ public class GeneraPdf2 {
 		cb.beginLayer(nested);
 	}
 
-	private void cellaMese(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		///////////// mese////////////////////
+	private void cellaMese(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// /////////// mese////////////////////
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(0).getMese(), smallFont), 70, 544, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaSedute(List<Documento_Row> row, PdfContentByte cb, PdfLayer nested) {
-		////////////////// n sedute//////////////////
+	private void cellaSedute(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+
+		// //////////////// n sedute//////////////////
 
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(0).getNum_sedute().toString(), smallFont),
-				38, 544, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase(row.get(0).getNum_sedute().toString(), smallFont), 38, 544, 0);
 	}
 
 	/**
 	 * @return
 	 */
 	private boolean hoFinito() {
+
 		return _numeroRighe <= 0;
 	}
 
@@ -451,6 +468,7 @@ public class GeneraPdf2 {
 	 * @throws IOException
 	 */
 	private PdfLayer scriviTestata(PdfWriter writer, PdfContentByte cb) throws IOException {
+
 		PdfLayer nested = new PdfLayer("Nested layers", writer);
 		PdfLayer nested_1 = new PdfLayer("Nested layer 1", writer);
 		PdfLayer nested_2 = new PdfLayer("Nested layer 2", writer);
@@ -458,23 +476,23 @@ public class GeneraPdf2 {
 		nested.addChild(nested_2);
 		writer.lockLayer(nested_2);
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Pubblica Assistenza Croce Italia Bernate Ticino o.n.l.u.s.", smallFont), 65, 785, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
+				"Pubblica Assistenza Croce Italia Bernate Ticino o.n.l.u.s.", smallFont), 65, 785, 0);
 		// 1 spazio da sinistra 2spazio partendo dal basso 3inclinazione
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Sede Legale: Viale Monza n. 40 20014 Milano", smallFont), 27, 772, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("Sede Legale: Viale Monza n. 40 20014 Milano",
+				smallFont), 27, 772, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Sede Operativa: Largo Poldo Gasparotto snc 20010 Bernate Ticino  ", smallFont), 27, 759, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
+				"Sede Operativa: Largo Poldo Gasparotto snc 20010 Bernate Ticino  ", smallFont), 27, 759, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Sede Operativa: Busto Garolfo C/O Comune 20020 Busto Garolfo", smallFont), 27, 746, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
+				"Sede Operativa: Busto Garolfo C/O Comune 20020 Busto Garolfo", smallFont), 27, 746, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
@@ -482,21 +500,19 @@ public class GeneraPdf2 {
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("e-mail: croceitaliabernate@libero.it sito: www.croceitaliabernate.it", smallFont), 27, 720,
-				0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
+				"e-mail: croceitaliabernate@libero.it sito: www.croceitaliabernate.it", smallFont), 27, 720, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Iscrizione al n. MI-499 albo regionale sez. Provinciale di Milano del Volontariato",
-						smallFont),
-				27, 707, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
+				"Iscrizione al n. MI-499 albo regionale sez. Provinciale di Milano del Volontariato", smallFont), 27,
+				707, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Autorizzazione Sanitaria n. 03/ST/08 del 03/09/2008 ", smallFont), 27, 694, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
+				"Autorizzazione Sanitaria n. 03/ST/08 del 03/09/2008 ", smallFont), 27, 694, 0);
 
 		cb.endLayer();
 		return nested;
@@ -518,6 +534,7 @@ public class GeneraPdf2 {
 		for (int i = 0; i < _nomiFile.size(); i++) {
 
 			uno = new PdfReader(_nomiFile.get(i));
+
 			copy.addDocument(uno);
 			uno.close();
 			File f = new File(_nomiFile.get(i));
@@ -538,7 +555,7 @@ public class GeneraPdf2 {
 	 */
 	public void stampa() throws IOException, DocumentException {
 
-		List<Documento_Row> row = new ArrayList();
+		List<Documento_Righe> row = new ArrayList();
 		Integer importo = 0;
 		for (int d = 0; d < row.size(); d++) {
 			importo = importo + row.get(d).getImporto_doc();
@@ -569,6 +586,7 @@ public class GeneraPdf2 {
 	 * @return
 	 */
 	private boolean nonHoFinito() {
+
 		return !hoFinito();
 	}
 
