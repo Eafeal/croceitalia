@@ -71,7 +71,7 @@ public class ClienteController extends EditCmsController {
 		ModelAndView modelAndView = getModelAndView(request);
 		String qf = request.getParameter("qfs");
 		if (qf.equals("")) qf = "0";
-		cliente.setQf(qf);		
+		cliente.setQuotaFissa(qf);		
 		try {
 			_clienteManager.save(cliente);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
@@ -120,7 +120,7 @@ public class ClienteController extends EditCmsController {
 		ModelAndView modelAndView = getModelAndView(request);
 		String qf = request.getParameter("qfs");
 		if (qf.equals("")) qf = "0";
-		cliente.setQf(qf);
+		cliente.setQuotaFissa(qf);
 		try {
 			_clienteManager.update(cliente);
 			request.setAttribute("esito", "ok");

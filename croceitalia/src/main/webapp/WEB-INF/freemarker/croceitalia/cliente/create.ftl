@@ -22,9 +22,9 @@
                                     <input type="text" id="ragione_sociale" name="ragione_sociale"  size="20" maxlength="60" value="" placeholder="Ragione sociale"  />                                </td> 
                             </tr>
                             <tr class="prop">
-                                <td align="top" class="name"><label for="p_iva">Partita IVA / Cod. Fisc.</label></td>                             
+                                <td align="top" class="name"><label for="partitaIva">Partita IVA / Cod. Fisc.</label></td>                             
                                 <td align="top" class="value">
-                                    <input type="text" id="p_iva" name="p_iva"  size="20" maxlength="11" value="" placeholder="Partita IVA"  />
+                                    <input type="text" id="partitaIva" name="partitaIva"  size="20" maxlength="11" value="" placeholder="Partita IVA"  />
                                 </td> 
                             </tr>
                             <tr class="prop">
@@ -45,9 +45,9 @@
                              	</td>
                             </tr>
                              <!--tr class="prop">
-                             	<td align="top" class="telefono1"><label for="cf">Codice fiscale</label></td>
+                             	<td align="top" class="telefono1"><label for="codiceFiscale">Codice fiscale</label></td>
                                 <td align="top" class="value">
-                                    <input type="text" id="cf" name="cf"  size="20" maxlength="16" value="" placeholder="CF"  />
+                                    <input type="text" id="codiceFiscale" name="codiceFiscale"  size="20" maxlength="16" value="" placeholder="CF"  />
                              	</td>
                             </tr-->
                             <tr class="prop">

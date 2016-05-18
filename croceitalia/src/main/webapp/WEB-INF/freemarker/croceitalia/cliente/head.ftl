@@ -24,12 +24,12 @@
 				alert("La ragione sociale è obbligatoria");
 				return false;
 			}
-			if(clienteForm.p_iva.value==""){
-				clienteForm.p_iva.focus();
+			if(clienteForm.partitaIva.value==""){
+				clienteForm.partitaIva.focus();
 				alert("La partita iva è obbligatoria");
 				return false;
 			}
-			if (!controllo_p_iva(clienteForm.p_iva)) {
+			if (!controllo_p_iva(clienteForm.partitaIva)) {
 				return false;
 			}
 			if(clienteForm.telefono1.value==""){
@@ -62,9 +62,14 @@
 				alert("La provincia è obbligatoria");
 				return false;
 			}
-
+			//if (!controllo_p_qfs(clienteForm.qfs)) {
+			//	return false;
+			//}
 			clienteForm.submit();
 		}
+		
+		
+		
 		
 		function controllo_p_iva(p_iva) {
 			if (p_iva.value.length != 11) {
@@ -76,16 +81,7 @@
 			return true;
 		}
 		
-/*		
-		function controllo_cf(cf) {
-			if ((cf.value.length < 16) || (cf.value.length > 16)) {
-				cf.focus();
-				alert("Il codice fiscale deve contenere 16 caratteri");
-				return false;
-			}
-			return true;
-		}
-*/	
+	
 	
 		function ricarica(){
 			

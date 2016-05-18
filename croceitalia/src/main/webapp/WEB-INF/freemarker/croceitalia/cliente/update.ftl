@@ -31,9 +31,9 @@
                                 </td>
                             </tr>
                             <tr class="prop">
-                                <td align="top" class="tipo_veicolo"><label for="p_iva">Partita IVA</label></td>
+                                <td align="top" class="tipo_veicolo"><label for="partitaIva">Partita IVA</label></td>
                                 <td align="top" class="value">
-                                    <input type="text" id="p_iva" name="p_iva" size="20" maxlength="20" value="${cliente.getP_iva()}" placeholder="Partita IVA"/>
+                                    <input type="text" id="partitaIva" name="partitaIva" size="20" maxlength="20" value="${cliente.getPartitaIva()}" placeholder="Partita IVA"/>
                                 </td>
                             </tr>
                             <tr class="prop">
@@ -55,15 +55,15 @@
                                 </td>
                             </tr>
                            <!--tr class="prop">
-                                <td valign="top" class="name"><label for="cf">Codice fiscale</label></td>
+                                <td valign="top" class="name"><label for="codiceFiscale">Codice fiscale</label></td>
                                 <td valign="top" class="value">
-                                    <input type="text" id="cf" name="cf" size="20" maxlength="50" value="${cliente.getCf()}" placeholder="CF"/>
+                                    <input type="text" id="codiceFiscale" name="codiceFiscale" size="20" maxlength="50" value="${cliente.getCodiceFiscale()}" placeholder="CF"/>
                                 </td>
                            </tr-->
                            <tr class="prop">
                                 <td valign="top" class="name"><label for="via">Quota fissa</label></td>
                                 <td valign="top" class="value">
-                                    <input type="text" id="qfs" name="qfs" size="10" maxlength="10" value="${cliente.getQf()}" placeholder="QF"/>                                </td>
+                                    <input type="text" id="qfs" name="qfs" size="10" maxlength="10" value="${cliente.getQuotaFissa()}" placeholder="QF"/>                                </td>
                            </tr>
                         </tbody>
                     </table>

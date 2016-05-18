@@ -35,15 +35,17 @@ public class Cliente extends Model {
 	private String			telefono1;
 	private String			telefono2;
 	private String			email;
-	private String			p_iva;
+	@Column(name = "p_iva") 	
+	private String			partitaIva;
 	private String			via;
 	private String			comune;
 	private String			cap;
 	private String			provincia;
-	private String			cf;
+	@Column(name = "cf") 	
+	private String			codiceFiscale;
 
-	@Column(precision = 7, scale = 2)
-	private BigDecimal		qf;
+	@Column(name = "qf", precision = 7, scale = 2)
+	private BigDecimal		quotaFissa;
 
 	public Cliente() {
 
@@ -110,14 +112,14 @@ public class Cliente extends Model {
 		this.ragione_sociale = ragione_sociale;
 	}
 
-	public String getP_iva() {
+	public String getPartitaIva() {
 
-		return p_iva;
+		return partitaIva;
 	}
 
-	public void setP_iva(String p_iva) {
+	public void setPartitaIva(String p_iva) {
 
-		this.p_iva = p_iva;
+		this.partitaIva = p_iva;
 	}
 
 	public String getVia() {
@@ -160,33 +162,33 @@ public class Cliente extends Model {
 		this.provincia = provincia;
 	}
 
-	public String getCf() {
+	public String getCodiceFiscale() {
 
-		if (cf == null)
+		if (codiceFiscale == null)
 			return "";
-		return cf;
+		return codiceFiscale;
 	}
 
-	public void setCf(String cf) {
+	public void setCodiceFiscale(String cf) {
 
-		this.cf = cf;
+		this.codiceFiscale = cf;
 	}
 
-	public BigDecimal getQf() {
+	public BigDecimal getQuotaFissa() {
 
-		if (qf == null)
+		if (quotaFissa == null)
 			return BigDecimal.ZERO;
-		return qf;
+		return quotaFissa;
 	}
 
-	public void setQf(BigDecimal qf) {
+	public void setQuotaFissa(BigDecimal qf) {
 
 		if (qf == null)
 			qf = BigDecimal.ZERO;
-		this.qf = qf;
+		this.quotaFissa = qf;
 	}
 
-	public void setQf(String qf) {
+	public void setQuotaFissa(String qf) {
 
 		// Create a DecimalFormat that fits your requirements
 		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -198,7 +200,7 @@ public class Cliente extends Model {
 
 		// parse the string
 		try {
-			this.qf = (BigDecimal) decimalFormat.parse(qf);
+			this.quotaFissa = (BigDecimal) decimalFormat.parse(qf);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

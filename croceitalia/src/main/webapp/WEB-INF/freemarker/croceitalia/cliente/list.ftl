@@ -43,7 +43,7 @@
 	                        </#if>
 	                        <tr class="${classe}">
 	                            <td>${cliente.getRagione_sociale()}</td>
-	                            <td>${cliente.getP_iva()}</td>
+	                            <td>${cliente.getPartitaIva()}</td>
 	                            <td>${cliente.getComune()}</td>
 	                            <td>
 	                            	<a href="/edit/cliente/update/${cliente.getId_cliente()}"><img src="/img/edit/mod.gif" alt="Modifica"  style="float:left;clear:none;border:0" /></a>
