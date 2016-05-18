@@ -23,7 +23,7 @@ public class GeneraPdf2 {
 	private static Font bigFont = new Font(Font.FontFamily.UNDEFINED, 12, Font.BOLD);
 	private static Font smallFont = new Font(Font.FontFamily.UNDEFINED, 9, Font.BOLD);
 	private static Font piusmallFont = new Font(Font.FontFamily.UNDEFINED, 8, Font.BOLD);
-	List<Integer> finale = new ArrayList<>();
+	List<Integer> finale = new ArrayList();
 
 	private String _src;
 	private String _destIn;
@@ -58,7 +58,7 @@ public class GeneraPdf2 {
 	public void manipulatePdf(int numPagina, List<Documento_Row> row, List<Documento_Testata> testata, Integer importo,
 			Integer somma) throws IOException, DocumentException {
 
-		finale = new ArrayList<>();
+		finale = new ArrayList();
 		PdfReader reader = new PdfReader(_src);
 
 		String dest = _destIn + numPagina + ".pdf";
@@ -538,13 +538,13 @@ public class GeneraPdf2 {
 	 */
 	public void stampa() throws IOException, DocumentException {
 
-		List<Documento_Row> row = new ArrayList<>();
+		List<Documento_Row> row = new ArrayList();
 		Integer importo = 0;
 		for (int d = 0; d < row.size(); d++) {
 			importo = importo + row.get(d).getImporto_doc();
 		}
 
-		List<Documento_Testata> testata = new ArrayList<>();
+		List<Documento_Testata> testata = new ArrayList();
 		row = OggettoPdf.oggettoPdf();
 		testata = OggettoPdf.oggettoPdf2();
 
@@ -553,7 +553,7 @@ public class GeneraPdf2 {
 			importo = importo + row.get(d).getImporto_doc();
 		}
 
-		_nomiFile = new ArrayList<>();
+		_nomiFile = new ArrayList();
 		_numeroRighe = row.size();
 		int numPagina = 0;
 		while (nonHoFinito()) {

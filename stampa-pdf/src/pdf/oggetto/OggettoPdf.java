@@ -7,7 +7,7 @@ public class OggettoPdf {
 
 	public static List<Documento_Row> oggettoPdf() {
 
-		List<Documento_Row> row = new ArrayList<>();
+		List<Documento_Row> row = new ArrayList();
 
 		row.add(new Documento_Row(1, 2, "frnco palmieri", 3, "aprile", 59, 23, "", "paderno", "niguarda", 0, 23, "S",
 				45));
@@ -42,7 +42,7 @@ public class OggettoPdf {
 
 	public static List<Documento_Testata> oggettoPdf2() {
 
-		List<Documento_Testata> testata = new ArrayList<>();
+		List<Documento_Testata> testata = new ArrayList();
 		testata.add(new Documento_Testata(1, 2, 3, 4, 100, "2016", "agosto", "12/08/2020", 0, 0, "s", "s", 0, 0, "a",
 				"n", "andrea"));
 		// testata.add(new Documento_Testata(1, 2, 3, 4, 100, "2016", 5,
