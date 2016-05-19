@@ -15,6 +15,8 @@ public class TestPdf {
 		String destOut = "D:/workspace/upload/croceitalia/generapdf/compl/croceitaliafattura.pdf";
 
 		GeneraPdf2 generaPdf2 = new GeneraPdf2(src, destIn, destOut);
+		//generaPdf2.set_testata(_testata);
+		
 		try {
 			generaPdf2.stampa();
 
