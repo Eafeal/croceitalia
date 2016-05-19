@@ -69,6 +69,21 @@ public class MezzoController extends EditCmsController{
 	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Mezzo mezzo) {
 
 		ModelAndView modelAndView = getModelAndView(request);
+		
+		String costo=request.getParameter("c_km");
+		String franchigia = request.getParameter("f_km");
+		String qf = request.getParameter("qfs");
+		
+		
+		if (qf.equals("")) qf = "0";
+		mezzo.setQf(qf);
+		
+		if (costo.equals("")) costo = "0";
+		mezzo.setCosto_km(costo);
+		
+		if (franchigia.equals("")) franchigia = "0";
+		mezzo.setFranchigia_km(franchigia);
+		
 		try {
 			_mezzoManager.save(mezzo);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
@@ -113,6 +128,21 @@ public class MezzoController extends EditCmsController{
 	public ModelAndView doUpdate(HttpServletRequest request, HttpServletResponse response, Mezzo mezzo) {
 
 		ModelAndView modelAndView = getModelAndView(request);
+		
+		String costo=request.getParameter("c_km");
+		String franchigia = request.getParameter("f_km");
+		String qf = request.getParameter("qfs");
+		
+		
+		if (qf.equals("")) qf = "0";
+		mezzo.setQf(qf);
+		
+		if (costo.equals("")) costo = "0";
+		mezzo.setCosto_km(costo);
+		
+		if (franchigia.equals("")) franchigia = "0";
+		mezzo.setFranchigia_km(franchigia);
+		
 		try {
 			_mezzoManager.update(mezzo);
 			request.setAttribute("esito", "ok");

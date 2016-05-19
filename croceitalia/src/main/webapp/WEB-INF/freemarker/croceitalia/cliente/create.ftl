@@ -7,7 +7,7 @@
                    <table>
                         <tbody>
                         	<tr class="prop">
-                            	<td align="top" class="name"><label for="t">Tipologia cliente</label></td>
+                            	<td align="top" class="name"><label for="fk_tipo_clientet">Tipologia cliente</label></td>
                             	<td align="top" class="value">
 									<select id = "fk_tipo_cliente" name = "fk_tipo_cliente">
 										<option value="0">Seleziona</option>
@@ -19,28 +19,28 @@
                             <tr class="prop">
                                 <td align="top" class="name"><label for="ragione_sociale">Ragione sociale</label></td>                             
                                 <td align="top" class="value">
-                                    <input type="text" id="ragione_sociale" name="ragione_sociale"  size="20" maxlength="60" value="" placeholder="Ragione sociale"  />                                </td> 
+                                    <input type="text" id="ragione_sociale" name="ragione_sociale"  size="25" maxlength="40" value="" placeholder="Ragione sociale"  />                                </td> 
                             </tr>
                             <tr class="prop">
                                 <td align="top" class="name"><label for="partitaIva">Partita IVA / Cod. Fisc.</label></td>                             
                                 <td align="top" class="value">
-                                    <input type="text" id="partitaIva" name="partitaIva"  size="20" maxlength="11" value="" placeholder="Partita IVA"  />
+                                    <input type="text" id="partitaIva" name="partitaIva"  size="25" maxlength="11" value="" placeholder="Partita IVA"  />
                                 </td> 
                             </tr>
                             <tr class="prop">
                              	<td align="top" class="telefono1"><label for="telefono1">Recapiti</label></td>
                                 <td align="top" class="value">
-                                    <input type="text" id="telefono1" name="telefono1" size="15" maxlength="60" value="" placeholder="Telefono1" />
-                                    <input type="text" id="telefono2" name="telefono2" size="15" maxlength="60" value="" placeholder="Telefono2"  />
-                                    <input type="text" id="email" name="email"  size="35" maxlength="60" value="" placeholder="E-mail"  />
+                                    <input type="text" id="telefono1" name="telefono1" size="18" maxlength="20" value="" placeholder="Telefono1" />
+                                    <input type="text" id="telefono2" name="telefono2" size="18" maxlength="20" value="" placeholder="Telefono2"  />
+                                    <input type="text" id="email" name="email"  size="33" maxlength="60" value="" placeholder="E-mail"  />
                              	</td>
                             </tr>
                             <tr class="prop">
                              	<td align="top" class="telefono1"><label for="via">Indirizzo</label></td>
                                 <td align="top" class="value">
-                                    <input type="text" id="via" name="via" size="20" maxlength="60" value="" placeholder="Via" />
-                                    <input type="text" id="cap" name="cap" size="10" maxlength="5" value="" placeholder="Cap"  />
-                                    <input type="text" id="comune" name="comune"  size="20" maxlength="60" value="" placeholder="Comune"  />
+                                    <input type="text" id="via" name="via" size="20" maxlength="40" value="" placeholder="Via" />
+                                    <input type="text" id="cap" name="cap" size="7" maxlength="5" value="" placeholder="Cap"  />
+                                    <input type="text" id="comune" name="comune"  size="20" maxlength="40" value="" placeholder="Comune"  />
                                     <input type="text" id="provincia" name="provincia"  size="5" maxlength="2" value=""  placeholder="Provincia" />
                              	</td>
                             </tr>
@@ -53,7 +53,7 @@
                             <tr class="prop">
                              	<td align="top" class="telefono1"><label for="qfs">Quota fissa</label></td>
                                 <td align="top" class="value">
-                                    <input type="text" id="qfs" name="qfs"  size="5" maxlength="10" value="0"  placeholder="QF" />
+                                    <input type="text" id="qfs" name="qfs"  size="5" maxlength="9" value="0"  placeholder="QF" />
                              	</td>
                             </tr>
                         </tbody>                            

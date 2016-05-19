@@ -10,6 +10,7 @@
 	<#if title?? ><title>${title}</title></#if>
 	
 	<script type="text/javascript" src="/js/bubbleSort.js"></script>
+	<script type="text/javascript" src="/js/asso_beans_client.js"></script>
 	
 	<script type="text/javascript">
 	
@@ -33,20 +34,32 @@
 				alert("La descrizione è obbligatoria");
 				return null
 			}
-			if(mezzoForm.costo_km.value==""){
-				mezzoForm.costo_km.focus();
+			if (!controllo_num_posti(mezzoForm.num_posti)) {
+				return null;
+			}
+			if(mezzoForm.c_km.value==""){
+				mezzoForm.c_km.focus();
 				alert("Il costo kilometrico è obbligatorio");
 				return null
 			}
-			if(mezzoForm.franchigia_km.value==""){
-				mezzoForm.franchigia_km.focus();
+			if (!controllo_costo_km(mezzoForm.c_km)) {
+				return null;
+			}
+			if(mezzoForm.f_km.value==""){
+				mezzoForm.f_km.focus();
 				alert("I kilometri di franchigia sono obbligatori");
 				return null
 			}
-			if(mezzoForm.qf.value==""){
-				mezzoForm.qf.focus();
+			if (!controllo_franchigia_km(mezzoForm.f_km)) {
+				return null;
+			}
+			if(mezzoForm.qfs.value==""){
+				mezzoForm.qfs.focus();
 				alert("La quota fissa è obbligatoria");
 				return null
+			}
+			if (!controllo_qf(mezzoForm.qfs)) {
+				return null;
 			}
 			if(mezzoForm.distretto.value==""){
 				mezzoForm.distretto.focus();
@@ -63,6 +76,30 @@
 				return false;
 			}
 		
+			return true;
+		}
+		function controllo_num_posti(num_posti) {
+			if (!cf_contieneSoloCaratteriValidi(num_posti,'0123456789')){
+				return false;
+			}
+			return true;
+		}
+		function controllo_costo_km(costo_km) {
+			if (!cf_contieneSoloCaratteriValidi(costo_km,'0123456789,')){
+				return false;
+			}
+			return true;
+		}
+		function controllo_franchigia_km(franchigia_km) {
+			if (!cf_contieneSoloCaratteriValidi(franchigia_km,'0123456789,')){
+				return false;
+			}
+			return true;
+		}
+		function controllo_qf(qf) {
+			if (!cf_contieneSoloCaratteriValidi(qf,'0123456789,')){
+				return false;
+			}
 			return true;
 		}
 	

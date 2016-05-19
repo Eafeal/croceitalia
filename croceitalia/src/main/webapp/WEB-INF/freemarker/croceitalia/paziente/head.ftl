@@ -26,19 +26,32 @@
 			alert(" Il cognome è obbligatorio!");
 			return false;
 		}
-		
+		if(!controllo_cognome(insForm.cognome)){
+			return false;
+		}
 		if (insForm.nome.value == "") {
 			insForm.nome.focus();
 			alert("Il nome è obbligatorio!");
 			return false;
 		}
+		if (!controllo_nome(insForm.nome)) {
+			return false;
+		}
+		if (insForm.telefono1.value != "") {		
+			if (!controllo_telefono(insForm.telefono1)) return false;
+		}
 		
+		if (insForm.telefono2.value != "") {		
+			if (!controllo_telefono(insForm.telefono2)) return false;
+		}
 		if (insForm.comune.value == "") {
 			insForm.comune.focus();
 			alert(" Il comune è obbligatorio!");
 			return false;
 		}
-		
+		if(!controllo_comune(insForm.comune)){
+			return false;
+		}
 		if((!document.insForm.sesso[0].checked) && (!document.insForm.sesso[1].checked)){
 			alert("Il sesso è obbligatorio");
 			document.insForm.sesso.focus();
@@ -63,25 +76,13 @@
 			if (!controllo_provincia(insForm.provincia)) return false;
 		}
 		
-		if (insForm.telefono1.value != "") {		
-			if (!controllo_telefono(insForm.telefono1)) return false;
-		}
-		
-		if (insForm.telefono2.value != "") {		
-			if (!controllo_telefono(insForm.telefono2)) return false;
-		}
+
 		//---------------------------
-		if (!controllo_nome(insForm.nome)) {
-			return false;
-		}
 		
-		if(!controllo_cognome(insForm.cognome)){
-			return false;
-		}	
 		
-		if(!controllo_comune(insForm.comune)){
-			return false;
-		}
+			
+		
+		
 		
 
 	insForm.submit();
@@ -155,6 +156,9 @@
 		if (comune.value.length < 3) {
 			comune.focus();
 			alert("Il comune deve avere essere minimo di 3 caratteri");
+			return false;
+		}
+		if (!cf_contieneSoloCaratteriValidi(comune,'qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM ')){
 			return false;
 		}
 		return true;

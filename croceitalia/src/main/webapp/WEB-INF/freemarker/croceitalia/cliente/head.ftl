@@ -41,9 +41,6 @@
 			if (!controllo_telefono(clienteForm.telefono1)) {
 				return false;
 			}
-			if (!controllo_telefono1(clienteForm.telefono2)) {
-				return false;
-			}
 			if(clienteForm.email.value==""){
 				clienteForm.email.focus();
 				alert("L'e-mail è obbligatoria");
@@ -88,8 +85,11 @@
 		}
 		
 		
+		
+		
+		
 		function controllo_qfs(qfs) {
-			if (!cf_contieneSoloCaratteriValidi(qfs,'0123456789,.')){
+			if (!cf_contieneSoloCaratteriValidi(qfs,'0123456789,')){
 				return false;
 			}
 			return true;

@@ -10,6 +10,7 @@
 	<#if title?? ><title>${title}</title></#if>
 	
 	<script type="text/javascript" src="/js/bubbleSort.js"></script>
+	<script type="text/javascript" src="/js/asso_beans_client.js"></script>
 	
 	<script type="text/javascript">
 	
@@ -17,42 +18,88 @@
 		if(bancaForm.nome.value==""){
 			bancaForm.nome.focus();
 			alert("Il nome della banca è obbligatorio");
-			return null
+			return false;
 		}
 		if(bancaForm.agenzia.value==""){
 			bancaForm.agenzia.focus();
 			alert("L'agenzia è obbligatoria");
-			return null
+			return false;
 		}
 		if(bancaForm.via.value==""){
 			bancaForm.via.focus();
 			alert("La via è obbligatoria");
-			return null
-		}
-		if(bancaForm.comune.value==""){
-			bancaForm.comune.focus();
-			alert("Il comune è obbligatorio");
-			return null
+			return false;
 		}
 		if(bancaForm.cap.value==""){
 			bancaForm.cap.focus();
 			alert("Il cap è obbligatorio");
-			return null
+			return false;
+		}
+		if (!controllo_cap(bancaForm.cap)) {
+				return false;
+		}
+		if(bancaForm.comune.value==""){
+			bancaForm.comune.focus();
+			alert("Il comune è obbligatorio");
+			return false;
+		}
+		if (!controllo_comune(bancaForm.comune)) {
+				return false;
 		}
 		if(bancaForm.provincia.value==""){
 			bancaForm.provincia.focus();
 			alert("La provincia è obbligatoria");
-			return null
+			return false;
+		}
+		if (!controllo_provincia(bancaForm.provincia)) {
+				return false;
 		}
 		if(bancaForm.iban.value==""){
 			bancaForm.iban.focus();
 			alert("L'IBAN è obbligatorio");
-			return null
+			return false;
 		}
 		if (!controllo_iban(bancaForm.iban)) {
-			return null;
+			return false;
 		}
 		bancaForm.submit();
+	}
+	
+	
+	function controllo_comune(comune) {
+		if (comune.value.length <= 2) {
+			comune.focus();
+			alert("Il comune deve avere almeno due caratteri");
+			return false;
+		}
+		if (!cf_contieneSoloCaratteriValidi(comune,'qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM ')){
+			return false;
+		}
+		return true;
+	}
+	
+	function controllo_cap(cap) {
+		if (cap.value.length != 5) {
+			cap.focus();
+			alert("Il cap deve avere cinque numeri");
+			return false;
+		}
+		if (!cf_contieneSoloCaratteriValidi(cap,'0123456789')){
+			return false;
+		}
+		return true;
+	}
+	
+		function controllo_provincia(provincia) {
+		if (provincia.value.length != 2) {
+			provincia.focus();
+			alert("La provincia deve avere due caratteri");
+			return false;
+		}
+		if (!cf_contieneSoloCaratteriValidi(provincia,'qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM')){
+			return false;
+		}
+		return true;
 	}
 	
 	function controllo_iban(iban) {
@@ -64,7 +111,15 @@
 		return true;
 	}
 	
-		
+
+
+
+
+
+
+
+
+
 	function ricarica(){
 		
 		if(window.opener!=null)

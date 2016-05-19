@@ -43,14 +43,23 @@ public class Cliente extends Model {
 	private String			provincia;
 	@Column(name = "cf") 	
 	private String			codiceFiscale;
-
 	@Column(name = "qf", precision = 7, scale = 2)
 	private BigDecimal		quotaFissa;
 
+	
+	
+	
+	
 	public Cliente() {
 
 		this.tipo_cliente = new Tipo_cliente();
 	}
+	
+	
+	
+	
+	
+	
 
 	public Integer getId_cliente() {
 
@@ -182,7 +191,6 @@ public class Cliente extends Model {
 	}
 
 	public void setQuotaFissa(BigDecimal qf) {
-
 		if (qf == null)
 			qf = BigDecimal.ZERO;
 		this.quotaFissa = qf;
@@ -190,15 +198,12 @@ public class Cliente extends Model {
 
 	public void setQuotaFissa(String qf) {
 
-		// Create a DecimalFormat that fits your requirements
 		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-		// symbols.setGroupingSeparator('.');
-		// symbols.setDecimalSeparator(',');
+
 		String pattern = "#.##0,0#";
 		DecimalFormat decimalFormat = new DecimalFormat();
 		decimalFormat.setParseBigDecimal(true);
 
-		// parse the string
 		try {
 			this.quotaFissa = (BigDecimal) decimalFormat.parse(qf);
 		} catch (ParseException e) {

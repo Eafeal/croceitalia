@@ -69,9 +69,10 @@ public class ClienteController extends EditCmsController {
 	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Cliente cliente) {
 
 		ModelAndView modelAndView = getModelAndView(request);
+		
 		String qf = request.getParameter("qfs");
 		if (qf.equals("")) qf = "0";
-		cliente.setQuotaFissa(qf);		
+		cliente.setQuotaFissa(qf);	
 		try {
 			_clienteManager.save(cliente);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
@@ -94,7 +95,6 @@ public class ClienteController extends EditCmsController {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
-
 			List<Tipo_cliente> tipo_cliente = _clienteManager.caricaTipocliente();
 			modelAndView.addObject("tipo_cliente", tipo_cliente);
 			

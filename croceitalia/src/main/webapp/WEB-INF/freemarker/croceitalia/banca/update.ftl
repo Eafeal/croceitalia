@@ -17,25 +17,25 @@
                             <tr class="prop">
                                 <td align="top" class="name"><label for="nome">Istituto/Agenzia</label></td>
                                 <td align="top" class="value">
-                                    <input type="text" id="nome" name="nome" size="20" maxlength="20" value="${banca.getNome()}" placeholder="Nome"/>
-                                    <input type="text" id="agenzia" name="agenzia" size="20" maxlength="20" value="${banca.getAgenzia()}" placeholder="Agenzia"/>
+                                    <input type="text" id="nome" name="nome" size="25" maxlength="40" value="${banca.getNome()}" placeholder="Nome"/>
+                                    <input type="text" id="agenzia" name="agenzia" size="25" maxlength="20" value="${banca.getAgenzia()}" placeholder="Agenzia"/>
                                 </td>
                             </tr>
                             <tr class="prop">
-                                <td valign="top" class="quota_fissa"><label for="telefono">Indirizzo</label></td>
+                                <td valign="top" class="quota_fissa"><label for="via">Indirizzo</label></td>
                                 <td valign="top" class="value">
-                                    <input type="text" id="via" name="via" size="20" maxlength="20" value="${banca.getVia()}" placeholder="Via"/>
-                               		<input type="text" id="cap" name="cap" size="10" maxlength="20" value="${banca.getCap()}" placeholder="CAP"/>
-                               		<input type="text" id="comune" name="comune" size="20" maxlength="20" value="${banca.getComune()}" placeholder="Comune"/>
-                                	<input type="text" id="provincia" name="provincia" size="5" maxlength="20" value="${banca.getProvincia()}" placeholder="Provincia"/>
+                                    <input type="text" id="via" name="via" size="20" maxlength="40" value="${banca.getVia()}" placeholder="Via"/>
+                               		<input type="text" id="cap" name="cap" size="7" maxlength="5" value="${banca.getCap()}" placeholder="CAP"/>
+                               		<input type="text" id="comune" name="comune" size="40" maxlength="20" value="${banca.getComune()}" placeholder="Comune"/>
+                                	<input type="text" id="provincia" name="provincia" size="5" maxlength="2" value="${banca.getProvincia()}" placeholder="Provincia"/>
                                 	
                                 </td>
                             </tr>
                            <tr class="prop">
-                                <td valign="top" class="name"><label for="via">Iban</label></td>
+                                <td valign="top" class="name"><label for="iban">Iban</label></td>
                                 <td valign="top" class="value">
                                     <input type="text" id="bic_swift" name="bic_swift" size="50" maxlength="50" value="${banca.getBic_swift()}" hidden/>
-                                    <input type="text" id="iban" name="iban" size="30" maxlength="50" value="${banca.getIban()}" placeholder="IBAN"/>
+                                    <input type="text" id="iban" name="iban" size="33" maxlength="27" value="${banca.getIban()}" placeholder="IBAN"/>
                                 </td>
                         </tbody>
                     </table>
@@ -45,7 +45,6 @@
                 </form>
                 <form action="/edit/banca/delete/${banca.id_banca}" method="get" >
                         <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Confermi cancellazione?');" /></span>
-                        <span class="button"><input type="button" value="Close"  class="close"  onclick="ricarica()" /></span>
                  </form>
              </div>
                

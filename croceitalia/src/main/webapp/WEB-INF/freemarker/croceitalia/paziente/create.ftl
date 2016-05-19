@@ -8,7 +8,7 @@
                    <table>
                         <tbody>
 	                        <tr class="prop">
-	                            <td valign="top" class="tipo">Patologia</td>
+	                            <td valign="top" class="tipo"><label for="fk_id_patologia">Patologia</label></td>
 	                            <td valign="top" class="value">
 	                                <select id="fk_id_patologia" name="fk_id_patologia" required>
 	                                    <option value="">Seleziona..</option>
@@ -19,26 +19,25 @@
 	                            </td>
 	                        </tr>
                             <tr class="prop">
-                                <td align="top" class="name"><label for="cognome">Cognome Nome</label></td>                             
+                                <td align="top" class="name"><label for="cognome">Cognome/Nome</label></td>                             
                                 <td align="top" class="value">
-                                    <input type="text" id="cognome" name="cognome"  size="28" maxlength="60" value="" placeholder="Cognome" />
-                                    <input type="text" id="nome" name="nome"  size="28" maxlength="60" value="" placeholder="Nome"  />
+                                    <input type="text" id="cognome" name="cognome"  size="25" maxlength="40" value="" placeholder="Cognome" />
+                                    <input type="text" id="nome" name="nome"  size="25" maxlength="40" value="" placeholder="Nome"  />
                                 </td> 
                             </tr>
                             <tr class="prop">
-                             	<td align="top" class="telefono"><label for="telefono">Telefono</label></td>
+                             	<td align="top" class="telefono"><label for="telefono1">Telefono</label></td>
                                 <td align="top" class="value">
-                                    <input type="text" id="telefono1" name="telefono1"  size="28" maxlength="60" value=""  placeholder="Telefono principale"  />
-                                    <input type="text" id="telefono2" name="telefono2"  size="28" maxlength="60" value=""  placeholder="Secondo telefono"  />
+                                    <input type="text" id="telefono1" name="telefono1"  size="18" maxlength="20" value=""  placeholder="Telefono principale"  />
+                                    <input type="text" id="telefono2" name="telefono2"  size="18" maxlength="20" value=""  placeholder="Secondo telefono"  />
                              	</td>
                             </tr>
                             <tr class="prop" >
-                             	<td align="top" class="telefono1"><label for="telefono2"> Indirizzo</label></td>
+                             	<td align="top" class="telefono1"><label for="via"> Indirizzo</label></td>
                                 <td align="top" class="value" >
-                                    <input type="text" id="via" name="via" size="50" maxlength="50" value="" placeholder="Via"   />
+                                    <input type="text" id="via" name="via" size="20" maxlength="40" value="" placeholder="Via"   />
                                     <input type="text" id="cap" name="cap"  size="7" maxlength="5" value="" placeholder="Cap"   />
-                                    <input type="text" id="comune" name="comune"  size="30" maxlength="30" value="" placeholder="Comune"   />
-                                    
+                                    <input type="text" id="comune" name="comune"  size="20" maxlength="40" value="" placeholder="Comune"   />                               
                                     <input type="text" id="provincia" name="provincia"  size="5" maxlength="2" value="" placeholder="Provincia"   />
                              	</td>
                             </tr>
@@ -58,7 +57,7 @@
      						<tr class="prop">
                                 <td valign="top" class="data_nascita"><label for="data_nascita"> Data di nascita</label></td>
                                 <td valign="top" class="value">
-                                    <input type="text" id="data_nascita" name="data_nascita"  size="28" maxlength="60" />
+                                    <input type="text" id="data_nascita" name="data_nascita"  size="20" maxlength="20" />
                                 </td>
                             </tr>
                         </tbody>                            

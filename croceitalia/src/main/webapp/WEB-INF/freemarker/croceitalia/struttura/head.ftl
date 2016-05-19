@@ -18,7 +18,7 @@
 	{	
 	//CONTROLLI DI OBBLIGATORIETA'
 	
-		if (strutturaForm.fk_id_tipologia_struttura.value == "") {
+		if (strutturaForm.fk_id_tipologia_struttura.value == 0) {
 			strutturaForm.fk_id_tipologia_struttura.focus();
 			alert(" La tipologia della struttura è obbligatoria!");
 			return false;
@@ -157,7 +157,10 @@
 			comune.focus();
 			alert("Il comune deve avere essere minimo di 3 caratteri");
 			return false;
-			}
+		}
+		if (!cf_contieneSoloCaratteriValidi(comune,'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM ')){
+				return false;
+		}
 		return true;
 		}
 		
