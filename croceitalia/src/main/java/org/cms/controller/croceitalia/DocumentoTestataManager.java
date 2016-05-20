@@ -160,5 +160,31 @@ public class DocumentoTestataManager extends AssoDao{
 		}
 	}
 	
+//	@SuppressWarnings("unchecked")
+//	public List<Documento_Testata> listaPerStruttura(String cerca) throws Exception {
+//
+//		EntityManager em = null;
+//		try {
+//			em = getEntityManager();
+//			int xx = Integer.parseInt(cerca);
+//			String queryString = "select doc from Documento_Testata doc ";
+//			queryString += " WHERE doc.id_documento_testata in (select distinct rig.fk_id_documento_testata from Documento_Righe rig where rig.struttura.id_struttura = :cerca ) ";
+//			queryString += " ORDER BY doc.anno_documento desc, doc.num_documento desc";			
+//			Query query = em.createQuery(queryString);
+//			query.setParameter("cerca", xx);
+//
+//			List<Documento_Testata> answer = query.getResultList();
+//
+//			return answer;
+//
+//		} catch (Exception e) {
+//			AssoLogger.GetInstance()
+//					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+//			throw e;
+//		} finally {
+//			close(em);
+//		}
+//	}
+	
 	
 }

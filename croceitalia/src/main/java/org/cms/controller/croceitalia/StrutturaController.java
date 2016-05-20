@@ -28,6 +28,9 @@ public class StrutturaController extends EditCmsController {
 	@Autowired(required = true)
 	protected StrutturaManager _strutturaManager;
 	
+	@Autowired(required = true)
+	protected DocumentoTestataManager _documentoManager;
+	
 
 	/**
 	 * @param request
@@ -156,42 +159,54 @@ public class StrutturaController extends EditCmsController {
 	}
 	
 	
-	@RequestMapping(value = "struttura/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
-		
-		ModelAndView modelAndView = getModelAndView(request);	
-		
-		try {
-			_strutturaManager.deleteById(id);			
-			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
-		} catch (Throwable errore) {
-			return error(modelAndView, errore);
-		}
-
-		List<Struttura> struttureList = _strutturaManager.caricaStruttura();
-		modelAndView.addObject("Lista", struttureList);
-
-		String viewName = "croceitalia/struttura/list";
-		modelAndView.setViewName(viewName);
-		
-		return modelAndView;
-	}
-	
-
-//	@RequestMapping(value = "struttura/delete/{id}/{pageId}", method = RequestMethod.GET)
-//	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id,
-//			@PathVariable("pageId") String pageId) {
+//	@RequestMapping(value = "struttura/delete/{id}", method = RequestMethod.GET)
+//	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response,
+//			@PathVariable("id") String id) {
 //
 //		ModelAndView modelAndView = getModelAndView(request);
-//		try {
-//			_strutturaManager.deleteById(id);
-//			return pageAfterDelete(request, response, pageId);
 //
+//		try {
+//			List<Documento_Testata> struttura = _documentoManager.listaPerStruttura(id);
+//			String a="";
+//			for(int i=0;i<struttura.size();i++){
+//				a=a+"  "+ struttura.get(i).getNum_documento().toString();
+//			}
+//			if (struttura.size() > 0) {
+//				modelAndView.addObject("messaggio", "Cliente utilizzato, cancellazione impossibile. Il cliente è utilizzato nei documenti numero: "+a);
+//
+//			} else {
+//				_documentoManager.deleteById(id);
+//				modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
+//			}
 //		} catch (Throwable errore) {
 //			return error(modelAndView, errore);
 //		}
 //
+//		List<Struttura> struttureList = _strutturaManager.caricaStruttura();
+//		modelAndView.addObject("Lista", struttureList);
+//
+//		String viewName = "croceitalia/struttura/list";
+//		modelAndView.setViewName(viewName);
+//
+//		return modelAndView;
+//
 //	}
+	
+
+	@RequestMapping(value = "struttura/delete/{id}/{pageId}", method = RequestMethod.GET)
+	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id,
+			@PathVariable("pageId") String pageId) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+		try {
+			_strutturaManager.deleteById(id);
+			return pageAfterDelete(request, response, pageId);
+
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+
+	}
 
 
 

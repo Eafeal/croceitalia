@@ -24,6 +24,9 @@ public class BancaController extends EditCmsController {
 	@Autowired(required = true)
 	protected BancaManager _bancaManager;
 
+	@Autowired(required = true)
+	protected DocumentoTestataManager _documentoManager;
+
 	/**
 	 * @param request
 	 * @param response
@@ -44,7 +47,7 @@ public class BancaController extends EditCmsController {
 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "banca/list", method = RequestMethod.POST)
 	public ModelAndView list1(HttpServletRequest request, HttpServletResponse response) {
 
@@ -142,14 +145,8 @@ public class BancaController extends EditCmsController {
 		try {
 			Banca banca = (Banca) _bancaManager.findById(user_id);
 			modelAndView.addObject("banca", banca);
-			Object esito = request.getAttribute("esito");
-			// if (esito != null) {
-			// modelAndView.addObject("esito", "ok");/* chiave valore */
-			// } else {
-			// modelAndView.addObject("esito", "");
-			// }
 			modelAndView.setViewName("croceitalia/banca/update");
-			
+
 			return modelAndView;
 
 		} catch (Throwable errore) {
@@ -158,52 +155,35 @@ public class BancaController extends EditCmsController {
 	}
 
 	@RequestMapping(value = "banca/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response,	@PathVariable("id") String id) {
-		
+	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("id") String id) {
+
 		ModelAndView modelAndView = getModelAndView(request);
+
 		try {
-			_bancaManager.deleteById(id);			
-			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
+			List<Documento_Testata> banche = _documentoManager.listaPerBanche(id);
+			String a="";
+			for(int i=0;i<banche.size();i++){
+				a=a+"  "+ banche.get(i).getNum_documento().toString();
+			}
+			if (banche.size() > 0) {
+				modelAndView.addObject("messaggio", "Cliente utilizzato, cancellazione impossibile. Il cliente è utilizzato nei documenti numero: "+a);
+				
+			} else {
+				_bancaManager.deleteById(id);
+				modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
+			}
 		} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
-		
+
 		List<Banca> bancheList = _bancaManager.caricaBanche();
 		modelAndView.addObject("Lista", bancheList);
 
 		String viewName = "croceitalia/banca/list";
 		modelAndView.setViewName(viewName);
-		
+
 		return modelAndView;
 	}
-
-	/**
-	 * @param request
-	 * @param response
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping(value = "banca/delete/{id}/{pageId}", method = RequestMethod.GET)
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id,
-			@PathVariable("pageId") String pageId) {
-
-		ModelAndView modelAndView = getModelAndView(request);
-		try {
-			_bancaManager.deleteById(id);
-
-			return pageAfterDelete(request, response, pageId);
-
-		} catch (Throwable errore) {
-			return error(modelAndView, errore);
-		}
-
-	}
-
-	/**
-	 * @param request
-	 * @param response
-	 * @param utente
-	 * @return
-	 */
 
 }

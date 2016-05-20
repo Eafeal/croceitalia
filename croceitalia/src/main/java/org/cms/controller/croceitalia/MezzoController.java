@@ -23,6 +23,9 @@ public class MezzoController extends EditCmsController{
 	 */
 	@Autowired(required = true)
 	protected MezzoManager _mezzoManager;
+	
+	@Autowired(required = true)
+	protected DocumentoTestataManager _documentoManager;
 
 	/**
 	 * @param request
@@ -187,10 +190,20 @@ public class MezzoController extends EditCmsController{
 	@RequestMapping(value = "mezzo/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
 
-		ModelAndView modelAndView = getModelAndView(request);		
+		ModelAndView modelAndView = getModelAndView(request);
+		
 		try {
+			List<Documento_Testata> mezzi = _documentoManager.listaPerBanche(id);
+			String a="";
+			for(int i=0;i<mezzi.size();i++){
+				a=a+" "+ mezzi.get(i).getNum_documento().toString();
+			}
+			if (mezzi.size() > 0) {
+				modelAndView.addObject("messaggio", "Cliente utilizzato, cancellazione impossibile. Il cliente è utilizzato nei documenti numero: "+a);
+			} else {
 			_mezzoManager.deleteById(id);			
 			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
+			}
 		} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
