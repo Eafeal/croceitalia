@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Documento_Testata")
-@NamedQuery(name = "Documento_Testata.loadAll", query = "SELECT OBJECT(obj) FROM Documento_Testata obj ")
+@NamedQuery(name = "Documento_Testata.loadAll", query = "SELECT OBJECT(obj) FROM Documento_Testata obj")
 public class Documento_Testata {
 
 	@Id
@@ -69,6 +70,7 @@ public class Documento_Testata {
 	private String	stato;
 	private String	pdf_generato;
 	private String	nome_file;
+	private String CIG;
 	
 	private String usercrea;
 	private String userultv;
@@ -101,6 +103,14 @@ public class Documento_Testata {
 		
 		pdf_generato = "N";	//NO
 		stato = "A";		//APERTO
+		
+		usercrea = "Axel";
+		userultv = "Axel";
+		
+		datacrea = new Date();
+		dataultv = new Date();
+		
+		CIG = "";
 		
 	}
 
@@ -421,6 +431,16 @@ public class Documento_Testata {
 		return stato.equals("A");
 	}
 	
+	public String descrizioneStato(){
+		String a;		
+		if(aperto()){// di default è già true
+				a = "aperto";
+		}else{
+				a = "chiuso";
+		}
+		return a;
+	}
+	
 	public boolean chiuso() {
 		if(stato == null)
 			return false;
@@ -433,20 +453,40 @@ public class Documento_Testata {
 	}
 	
 	private void riapri() {
-		stato = "A";
+		stato = "Aperto";
 	}
 	
 	
-	public boolean pdfGenerato() {
+	
+	
+	public boolean isPdfGenerato() {
 		if(pdf_generato== null)
 			return false;
 
-		return pdf_generato.equals("S");
+		return pdf_generato.equals("S"); // SI 
 	}
 	
 	private void rigenera_pdf() {
-		pdf_generato = "N";
+		pdf_generato = "N"; // NO
 	}
 
+	public String getCIG() {
+		return CIG;
+	}
+
+	public void setCIG(String cIG) {
+		CIG = cIG;
+	}
+	
+	
+	public String getData_String_documento() {
+		SimpleDateFormat sdf = new SimpleDateFormat(); // creo l'oggetto
+		sdf.applyPattern("dd/MM/yyyy"); 
+	    String dataStr = sdf.format(data_documento);
+	   
+		return dataStr;
+	}
+
+	
 }
 

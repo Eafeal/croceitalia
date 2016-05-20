@@ -1,5 +1,6 @@
 package org.cms.controller.croceitalia;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import it.asso.util.AssoException;
+
 @Controller
 public class DocumentoTestataController extends EditCmsController {
 
@@ -19,7 +22,7 @@ public class DocumentoTestataController extends EditCmsController {
 	 * 
 	 */
 	@Autowired(required = true)
-	protected DocumentoTestataManager	_documentoTestata;
+	protected DocumentoTestataManager	_documentoTestataManager;
 
 	/**
 	 * @param request
@@ -32,15 +35,13 @@ public class DocumentoTestataController extends EditCmsController {
 
 		ModelAndView modelAndView = getModelAndView(request);
 
+	
 		// MODEL
-		List<Documento_Testata> documento = _documentoTestata.caricaDocumento_Testata();
-
-		List<Mezzo> mezzo = _documentoTestata.caricaMezzi();
+//		List<Documento_Testata> documenti = _documentoTestataManager.listaDocumento_Testata();
+//		modelAndView.addObject("listaDocumenti", documenti);
 		
-		List<Banca> banca = _documentoTestata.caricaBanche();
-		
-		List<Cliente> cliente = _documentoTestata.caricaClienti();
-		modelAndView.addObject("Lista", documento);
+		List<Documento_Testata> documenti = _documentoTestataManager.descrescente();
+		modelAndView.addObject("listaDocumenti", documenti);
 
 		String viewName = "croceitalia/documento_testata/list";
 		modelAndView.setViewName(viewName);
@@ -53,10 +54,7 @@ public class DocumentoTestataController extends EditCmsController {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
-
-			List<Mezzo> mezzo = _documentoTestata.caricaMezzi();
-			modelAndView.addObject("mezzo", mezzo);
-
+			
 			modelAndView.setViewName("croceitalia/documento_testata/create");
 
 			return modelAndView;
@@ -67,6 +65,31 @@ public class DocumentoTestataController extends EditCmsController {
 
 	}
 
+	@RequestMapping(value = "documento_testata/save2")
+	protected ModelAndView save2(HttpServletRequest request, HttpServletResponse response, Documento_Testata documento) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+		String messaggio = "";
+		try {
+			_documentoTestataManager.save(documento);
+			messaggio = "OK,"+documento.getNum_documento()+" "+documento.getAnno_documento()+","+documento.getId_documento_testata();
+			
+		} catch (AssoException e) {
+			// Inserimento fallito
+			messaggio = "KO";
+		}
+
+		try {
+			PrintWriter out = response.getWriter();
+			response.getWriter().write(messaggio);//<--- Qua viene passato il valore inserito 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return null;
+
+	}	
 	
 
 }
