@@ -23,6 +23,9 @@ public class ClienteController extends EditCmsController {
 	 */
 	@Autowired(required = true)
 	protected ClienteManager	_clienteManager;
+	
+	@Autowired(required = true)
+	protected DocumentoTestataManager _documentoManager;
 
 	/**
 	 * @param request
@@ -166,9 +169,19 @@ public class ClienteController extends EditCmsController {
 
 		ModelAndView modelAndView = getModelAndView(request);		
 		try {
+			List<Documento_Testata> clienti = _documentoManager.listaPerClienti(id);
+			String a="";
+			for(int i=0;i<clienti.size();i++){
+				a=a+" "+ clienti.get(i).getNum_documento().toString();
+			}
+			if (clienti.size() > 0) {
+				modelAndView.addObject("messaggio", "Cliente utilizzato, cancellazione impossibile. Il cliente è utilizzato nei documenti numero: "+a);
+				
+			} else {
 			_clienteManager.deleteById(id);			
 			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
-		} catch (Throwable errore) {
+			}
+			} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
 
