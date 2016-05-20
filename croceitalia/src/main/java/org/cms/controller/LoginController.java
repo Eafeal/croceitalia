@@ -199,12 +199,7 @@ public class LoginController extends SiteCmsController {
 				modelAndView.addObject("loginMessage", loginMessage);
 				modelAndView.addObject(ErrorMsg, loginMessage);
 
-				// Pagina pagina = (Pagina) paginaDao.findByUid(LoginErrorPage, dominio.getUid());
-				// Pagina pagina = (Pagina) paginaDao.findByUid("AvcpPasso2", dominio.getUid());
-				// modelAndView.addObject(PAGINA, pagina);
-				// String renderPage = "croceitalia/loginError";
-
-				modelAndView.setViewName("croceitalia/croceitalia/login");
+				modelAndView.setViewName("croceitalia/login");
 
 				return modelAndView;
 			} else {

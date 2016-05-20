@@ -1,33 +1,39 @@
-<#if utente.isLogged() >
-	<h1>Welcome</h1>
-	<div class="loginform">
-	    <form method="post" action="/site/logout"> 
-	    <p><input type="hidden" name="requestedUri" value="${requestedUri}" /></p>
-	    <fieldset>
-	 		<p>${utente.nome}&nbsp;${utente.cognome} </p>
-	 		<p><input type="submit"  class="button" value="LOGOUT"  /></p>
-	    </fieldset>
-	  </form>
-	</div>
-<#else>
-	<h1>Login</h1>
-	<div class="loginform">
-	  <form method="post" action="/site/login"> 
-	    <p><input type="hidden" name="rememberme"   value="0" /></p>
-	    <p><input type="hidden"   name="requestedUri" value="${requestedUri}" /></p>
-	    <fieldset>
-	    	<#if loginMessage?? >
-	    		<h1>Errore: ${loginMessage}</h1>
-	    	</#if>
-	      <p><label for="userId" class="top">User:</label><br />
-	        <input type="text" name="userId" id="userId" tabindex="1" class="field" value="" />
-	      </p>
-	      <p><label for="password" class="top">Password:</label><br />
-	        <input type="password" name="password" id="password" tabindex="2" class="field" value="" />
-	      </p>
-	      <p><input type="submit" class="button" value="LOGIN"  /></p>
-	      <!-- p><a href="#" id="forgotpsswd_1">Password forgotten?</a></p -->
-	    </fieldset>
-	  </form>
-	</div>
-</#if>
+
+<#assign sezione = "Accedi al servizio<br/>per la generazione dataset XML">
+<#assign curr_gra = "">
+<#assign curr_gen = "">
+<#assign curr_val = "">
+<#assign curr_rev = "">
+<#assign slide = "slide5">
+<#include "/${dominio}/includes/header_new.ftl">
+
+		<div id="content">
+		<center>		
+		<#if loginMessage="UserScaduta" >
+		
+			<fieldset>
+			<h3>Siamo spiacenti ma la sua utenza &egrave; scaduta.</h3><br/>
+			<p><a href="/contatti.html"><b>Contattare</b></a> Assocons per rinnovare il contratto e riattivare l'utenza</p>
+			</fieldset>
+
+		<#else>
+		
+			<fieldset>
+			<br><h3>User e/o password errate</h3><br/>
+			<p><a href="/index.html"><b>Riprova</b></a></p>
+			</fieldset>
+			<br>
+  
+		</#if>		
+		</center>			
+    	</div>
+
+		<div class="clearfloat"></div>
+ 
+<#include "/${dominio}/includes/footer_new.ftl">
+
+
+
+
+
+   

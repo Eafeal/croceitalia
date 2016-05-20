@@ -3,12 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 
-<title>Generazione documento XML per invio spese sanitarie 730 Precompilato partendo da un file excel</title>
-<meta name="title" content="Generazione file XML per 730 Precompilato - Prova gratuita generazione documento"/>
-<meta name="description" content="Caratteristiche della soluzione web ideata da Assocons per la generazione del file XML necessario ad assolvere agli obblighi relativi al decreto legislativo 21 novembre 2014 n.175, partendo da un semplice modello excel"/>
-<meta name="keywords" content="Generazione documento 730 Precompilato, xml, excel"/>
-<meta name="robots" content="index, follow"/>
-<meta name="revisit-after" content="3 days"/>
+<title>Gestione documenti rimborso croce italia </title>
+<meta name="title" content="Gestione documenti rimborso croce italia "/>
 
 <meta name="publisher" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
 <meta name="copyright" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
@@ -31,49 +27,23 @@
 <link href="/css/page.css" rel="stylesheet" type="text/css"/>
 <link href="/css/elaborazioni.css" rel="stylesheet" type="text/css"/>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-71526825-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
 </head>
 
 <body>
 
 <div class="container">
 
-  <div class="header">
+  <div class="header" style="border-bottom:1px solid #999;">
     <a href="http://www.assocons.it" target="new"><img src="/images/logoAssocons.gif" alt="ASSOCONS Software &amp; Solutions"/></a>
-	
-    <!--div class="login">
-      <label for="user">User</label>
-      <input type="text" id="user" value=""/>
-      <br/>
-      <label for="password">Password</label>
-      <input type="password" id="user" value=""/>
-      <br/>
-      <a href="#">Login ></a>
-    </div-->
 
     <ul class="top-menu">
-      <li><a href="/index.html" class="home">HOME</a></li>
+      <li><a href="/edit/home" class="home">HOME</a></li>
       <li><a target="assocons" href="http://www.assocons.it">Azienda</a></li>
       <!--li><a href="#">Prodotti</a></li-->
       <li><a href="/contatti.html">Contatti</a></li>
     </ul>
-  </div><!-- end .header -->
-  <!-- end .header -->
-  
-  <div class="slider ${slide}">
-    <div>
-    <h1>730 Precompilato</h1>
-    <h3>${sezione}</h3>
-    </div>
   </div>
+  <!-- end .header -->
+  <!-- end .header -->
   
 <!-- fine testata -->  
