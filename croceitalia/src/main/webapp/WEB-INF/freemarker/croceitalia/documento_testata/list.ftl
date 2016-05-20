@@ -30,6 +30,10 @@
                                    <link rel="shortcut icon" href="ico/favicon.png">
   <style type="text/css"></style></head>
 <style>
+.tabella{
+ 	padding-top:5%;
+ 	padding-bottom:5%;
+}
 table {
     border-collapse: collapse;
     width: 100%;
@@ -55,7 +59,7 @@ th {
 	color: white;
 }
 .numero{
-	width: 98px;
+	width: 85px;
 }
 .anno{
 	width: 50px;
@@ -64,16 +68,16 @@ th {
 	width: 83px;
 }
 .data{
-	width: 119px;
+	width: 110px;
 }
 .cliente{
-	width: 230px;
+	width: 210px;
 }
 .mezzo{
-	width: 230px;
+	width: 205px;
 }
 .stato{
-	width: 94px;
+	width: 86px;
 }
 .totale{
 	width: 40px;
@@ -166,7 +170,6 @@ th {
     </div>
 
     <div class="container">
-      <h1>Documento Testata</h1>
    	  <article class="tabella">
       <table width="100%" border="0">
   <tbody>
@@ -216,31 +219,39 @@ th {
                         <tr class="prop">
                                 <td align="top" class="num"><label for="num">Numero Documento</label></td>                             
                                 <td align="top" class="value">
-                                    <input type="text" id="num" name="num_documento"  size="28" maxlength="11" value="" placeholder="Numero documento"  />                                                  
+                                    <input type="text" id="num" name="num_documento"  size="28" maxlength="11" value="" placeholder="Numero documento"  />&nbsp;/&nbsp;<input type="text" id="anno_documento" name="anno_documento"  size="4" maxlength="60" value="2016" readonly/>                                            
+                                	 
+                                </td> 
+                                <td align="top" class="num"><label for="num">Data Documento</label></td>                             
+                                <td align="top" class="value">
+                                                                              
                                 	 <input type="text" id="data_documento" name="data_documento"  size="28" maxlength="60" value="" placeholder="Data documento"  />
                                 </td> 
                             </tr>
                              <tr class="prop">
-                                <td align="top" class="num"><label for="anno_documento">Anno e Mese</label></td>                             
+                              
+                                <td align="top" class="num"><label for="anno_documento">Mese di Riferimento</label></td>                             
                                 <td align="top" class="value">
-                                    <input type="text" id="anno_documento" name="anno_documento"  size="28" maxlength="60" value="" placeholder="Anno documento"  />
+                                   
                                		<input type="text" id="mese_documento" name="mese_documento"  size="28" maxlength="60" value="" placeholder="Mese documento"  />
                                		
-                                </td> 
+                                </td>  
                             </tr>       
                           <tr class="prop">
                                 <td align="top" class="fk_id_mezzo"><label for="fk_id_mezzo">Mezzo</label></td>                             
                                 <td align="top" class="value">
 	                                <select id="fk_id_mezzo" name="fk_id_mezzo" required>
 	                                    <option value="">Seleziona..</option>
-	                                        <option value="1">ambulanza</option>
+	                                    <#list listaMezzo as mezzo>
+	                                        <option value="${mezzo.getId_mezzo()}">${mezzo.getTarga()} - ${mezzo.getDescrizione()}</option>
+	                                    </#list>
 	                                        <option value="2">macchina</option>
 	                                </select>
 	                            </td>
 	                        </tr>
 	                        
 	                        <tr class="prop">
-                                <td align="top" class="fk_id_mezzo"><label for="fk_id_cliente"> Banca di Appoggio</label></td>                             
+                                <td align="top" class="fk_id_mezzo"><label for="fk_id_cliente">Cliente</label></td>                             
                                 <td align="top" class="value">
 									<select id="fk_id_cliente" name="fk_id_cliente" required>
 	                                    <option value="">Seleziona..</option>

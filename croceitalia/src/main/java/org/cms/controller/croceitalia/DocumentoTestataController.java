@@ -23,6 +23,15 @@ public class DocumentoTestataController extends EditCmsController {
 	 */
 	@Autowired(required = true)
 	protected DocumentoTestataManager	_documentoTestataManager;
+	
+	@Autowired(required = true)
+	protected ClienteManager	_clienteManager;	
+	
+	@Autowired(required = true)
+	protected BancaManager _bancaManager;
+	
+	@Autowired(required = true)
+	protected MezzoManager _mezzoManager;
 
 	/**
 	 * @param request
@@ -42,7 +51,16 @@ public class DocumentoTestataController extends EditCmsController {
 		
 		List<Documento_Testata> documenti = _documentoTestataManager.descrescente();
 		modelAndView.addObject("listaDocumenti", documenti);
-
+		
+		List<Cliente> clientiList = _clienteManager.caricaClienti();
+		modelAndView.addObject("listaClienti", clientiList);
+		
+		List<Banca> bancheList = _bancaManager.caricaBanche();
+		modelAndView.addObject("listaBanca", bancheList); 
+		
+		List<Mezzo> mezziList = _mezzoManager.caricaMezzi();
+		modelAndView.addObject("listaMezzo", mezziList);
+		
 		String viewName = "croceitalia/documento_testata/list";
 		modelAndView.setViewName(viewName);
 
@@ -54,6 +72,9 @@ public class DocumentoTestataController extends EditCmsController {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
+			
+			// MODEL
+
 			
 			modelAndView.setViewName("croceitalia/documento_testata/create");
 

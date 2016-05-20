@@ -37,7 +37,6 @@ public class BancaController extends EditCmsController {
 
 		// MODEL
 		List<Banca> bancheList = _bancaManager.caricaBanche();
-
 		modelAndView.addObject("Lista", bancheList);
 
 		String viewName = "croceitalia/banca/list";
