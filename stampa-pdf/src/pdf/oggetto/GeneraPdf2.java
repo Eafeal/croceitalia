@@ -459,7 +459,7 @@ public class GeneraPdf2 {
 		writer.lockLayer(nested_2);
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Pubblica Assistenza Croce Italia Bernate Ticino o.n.l.u.s.", smallFont), 65, 785, 0);
+				new Phrase("Pubblica Assistenza Croce Italia Bernate Ticino o.n.l.u.s.", smallFont), 27, 785, 0);
 		// 1 spazio da sinistra 2spazio partendo dal basso 3inclinazione
 		cb.endLayer();
 		cb.beginLayer(nested);
@@ -478,25 +478,32 @@ public class GeneraPdf2 {
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("C.F. 93029640153", smallFont), 27, 733, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("C.F. 93029640153", smallFont), 27, 734, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("e-mail: croceitaliabernate@libero.it sito: www.croceitaliabernate.it", smallFont), 27, 720,
+				new Phrase("Tel.:02-49.79.05.67  Mobile: 345-59.16.824  Fax: 02-84.56.66.47", smallFont), 27, 722,
 				0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Iscrizione al n. MI-499 albo regionale sez. Provinciale di Milano del Volontariato",
+				new Phrase("e-mail: croceitaliabernate@libero.it sito: www.croceitaliabernate.it",
 						smallFont),
-				27, 707, 0);
+				27, 709, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Autorizzazione Sanitaria n. 03/ST/08 del 03/09/2008 ", smallFont), 27, 694, 0);
+				new Phrase("Iscrizione al n. MI-499 albo regionale sez. Provinciale di Milano del Volontariato", smallFont), 27, 696, 0);
+
+		cb.endLayer();
+		
+		
+		cb.beginLayer(nested);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("Autorizzazione Sanitaria n. 03/ST/08 del 03/09/2008 ", smallFont), 27, 684, 0);
 
 		cb.endLayer();
 		return nested;

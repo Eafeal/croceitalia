@@ -32,6 +32,27 @@ public class GeneraPdf2 {
 	private final String	_destIn;
 	private final String	_destOut;
 	private List<String>	_nomiFile;
+	
+	private final String _intestazione1;
+	private final String _intestazione2;
+	private final String _intestazione3;
+	private final String _intestazione4;
+	private final String _intestazione5;
+	private final String _intestazione6;
+	private final String _intestazione7;
+	private final String _intestazione8;
+	private final String _intestazione9;
+	
+//	private  String _intestazione1;
+//	private  String _intestazione2;
+//	private  String _intestazione3;
+//	private  String _intestazione4;
+//	private  String _intestazione5;
+//	private  String _intestazione6;
+//	private  String _intestazione7;
+//	private  String _intestazione8;
+//	private  String _intestazione9;
+	
 	private int				_numeroRighe	= 0;
 	private int				_indiceRiga	= 0;
 
@@ -45,17 +66,38 @@ public class GeneraPdf2 {
 	 * @param destOut
 	 */
 	
-	public GeneraPdf2(String src, String destIn, String destOut) {
-
-		super();
-		_src = src;
-		_destIn = destIn;
-		_destOut = destOut;
-	}
+//	public GeneraPdf2(String src, String destIn, String destOut,String intestazione1,
+//			String intestazione2,String intestazione3,String intestazione4,String intestazione5,String intestazione6,String intestazione7,String intestazione8,String intestazione9) {
+//
+//		super();
+//		_src = src;
+//		_destIn = destIn;
+//		_destOut = destOut;
+//		_intestazione1=intestazione1;
+//		_intestazione2=intestazione2;
+//		_intestazione3=intestazione3;
+//		_intestazione4=intestazione4;
+//		_intestazione5=intestazione5;
+//		_intestazione6=intestazione6;
+//		_intestazione7=intestazione7;
+//		_intestazione8=intestazione8;
+//		_intestazione9=intestazione9;
+//	}
 
 	public GeneraPdf2(String nomeFile, Documento_Testata testata, List<Documento_Righe> righe) {
 
 		super();
+		
+		_intestazione1="Pubblica Assistenza Croce Italia Bernate Ticino o.n.l.u.s.";
+		_intestazione2="Sede Legale: Viale Monza n. 40 20014 Milano";
+		_intestazione3="Sede Operativa: Largo Poldo Gasparotto snc 20010 Bernate Ticino  ";
+		_intestazione4="Sede Operativa: Busto Garolfo C/O Comune 20020 Busto Garolfo";
+		_intestazione5="C.F. 93029640153";
+		_intestazione6="Tel.:02-49.79.05.67  Mobile: 345-59.16.824  Fax: 02-84.56.66.47";
+		_intestazione7="e-mail: croceitaliabernate@libero.it sito: www.croceitaliabernate.it";
+	    _intestazione8="Iscrizione al n. MI-499 albo regionale sez. Provinciale di Milano del Volontariato";
+		_intestazione9="Autorizzazione Sanitaria n. 03/ST/08 del 03/09/2008 ";
+		
 		_src = "D:/workspace/upload/croceitalia/TemplateFattura.pdf";
 		_destIn = "D:/workspace/upload/croceitalia/generapdf/documento";
 		_destOut = "D:/workspace/upload/croceitalia/generapdf/compl/"+nomeFile;		
@@ -518,43 +560,52 @@ public class GeneraPdf2 {
 		nested.addChild(nested_2);
 		writer.lockLayer(nested_2);
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
-				"Pubblica Assistenza Croce Italia Bernate Ticino o.n.l.u.s.", smallFont), 27, 785, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("Pubblica Assistenza Croce Italia Bernate Ticino o.n.l.u.s.", smallFont), 27, 785, 0);
 		// 1 spazio da sinistra 2spazio partendo dal basso 3inclinazione
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("Sede Legale: Viale Monza n. 40 20014 Milano",
-				smallFont), 27, 772, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("Sede Legale: Viale Monza n. 40 20014 Milano", smallFont), 27, 772, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
-				"Sede Operativa: Largo Poldo Gasparotto snc 20010 Bernate Ticino  ", smallFont), 27, 759, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("Sede Operativa: Largo Poldo Gasparotto snc 20010 Bernate Ticino  ", smallFont), 27, 759, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
-				"Sede Operativa: Busto Garolfo C/O Comune 20020 Busto Garolfo", smallFont), 27, 746, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("Sede Operativa: Busto Garolfo C/O Comune 20020 Busto Garolfo", smallFont), 27, 746, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("C.F. 93029640153", smallFont), 27, 733, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("C.F. 93029640153", smallFont), 27, 734, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
-				"e-mail: croceitaliabernate@libero.it sito: www.croceitaliabernate.it", smallFont), 27, 720, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("Tel.:02-49.79.05.67  Mobile: 345-59.16.824  Fax: 02-84.56.66.47", smallFont), 27, 722,
+				0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
-				"Iscrizione al n. MI-499 albo regionale sez. Provinciale di Milano del Volontariato", smallFont), 27,
-				707, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("e-mail: croceitaliabernate@libero.it sito: www.croceitaliabernate.it",
+						smallFont),
+				27, 709, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(
-				"Autorizzazione Sanitaria n. 03/ST/08 del 03/09/2008 ", smallFont), 27, 694, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("Iscrizione al n. MI-499 albo regionale sez. Provinciale di Milano del Volontariato", smallFont), 27, 696, 0);
+
+		cb.endLayer();
+		
+		
+		cb.beginLayer(nested);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase("Autorizzazione Sanitaria n. 03/ST/08 del 03/09/2008 ", smallFont), 27, 684, 0);
 
 		cb.endLayer();
 		return nested;
