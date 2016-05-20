@@ -1,6 +1,7 @@
 package org.cms.controller.croceitalia;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.cms.jpa.object.impl.Model;
 
@@ -32,6 +35,12 @@ public class Documento_Righe extends Model {
 	@OneToOne
 	@JoinColumn(name = "fk_id_paziente", nullable = false)
 	private Paziente	paziente;
+	
+	
+	@OneToOne
+	@JoinColumn(name = "fk_id_struttura", nullable = false)
+	private Struttura	struttura;
+	
 	
 //	@ManyToOne(optional = false)
 //	@JoinColumn(name = "documento_testata", referencedColumnName = "fk_id_documento_testata")
@@ -57,6 +66,15 @@ public class Documento_Righe extends Model {
 	@Column(precision = 7, scale = 2)	
 	private BigDecimal		importo;
 
+	
+	private String usercrea;
+	private String userultv;
+	
+	@Temporal(TemporalType.DATE)
+	private Date datacrea;
+	@Temporal(TemporalType.DATE)
+	private Date dataultv;	
+	
 	public Documento_Righe() {
 
 		super();
@@ -232,5 +250,53 @@ public class Documento_Righe extends Model {
 		this.paziente = paziente;
 	}
 
+
+	public String getUsercrea() {
+		return usercrea;
+	}
+
+	public void setUsercrea(String usercrea) {
+		this.usercrea = usercrea;
+	}
+
+	public String getUserultv() {
+		return userultv;
+	}
+
+	public void setUserultv(String userultv) {
+		this.userultv = userultv;
+	}
+
+	public Date getDatacrea() {
+		return datacrea;
+	}
+
+	public void setDatacrea(Date datacrea) {
+		this.datacrea = datacrea;
+	}
+
+	public Date getDataultv() {
+		return dataultv;
+	}
+
+	public void setDataultv(Date dataultv) {
+		this.dataultv = dataultv;
+	}
+
+	public Struttura getStruttura() {
+		return struttura;
+	}
+
+	public void setStruttura(Struttura struttura) {
+		this.struttura = struttura;
+	}
+
+	public BigDecimal getQuota_fissa() {
+		return quota_fissa;
+	}
+
+	public void setQuota_fissa(BigDecimal quota_fissa) {
+		this.quota_fissa = quota_fissa;
+	}
 
 }
