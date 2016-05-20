@@ -83,7 +83,7 @@ public class Documento_Righe extends Model {
 		this.diritto_uscita = diritto_uscita;
 		this.importo = importo;
 	}
-
+ //
 	public Integer getId_documento_righe() {
 
 		return id_documento_righe;
