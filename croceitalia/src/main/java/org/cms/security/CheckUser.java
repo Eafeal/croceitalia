@@ -108,7 +108,9 @@ public class CheckUser implements Filter {
 				AssoLogger.GetInstance().logInfo("ERRORE! Parametro mancante in configurazione: Dominio" + contextPath);
 				dominioContextPath = "site";
 			}
-			String location = "/" + dominioContextPath + "/login?requestedUri=" + encodeRedirectURI;
+			// davide redirect to login se non loggato
+			// String location = "/" + dominioContextPath + "/login?requestedUri=" + encodeRedirectURI;
+			String location = "/index.html";
 			res.sendRedirect(location);
 		}
 	}

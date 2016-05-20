@@ -3,15 +3,12 @@ package org.cms.controller.croceitalia;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -35,19 +32,17 @@ public class Documento_Righe extends Model {
 	@OneToOne
 	@JoinColumn(name = "fk_id_paziente", nullable = false)
 	private Paziente	paziente;
-	
-	
+
 	@OneToOne
 	@JoinColumn(name = "fk_id_struttura", nullable = false)
 	private Struttura	struttura;
-	
-	
-//	@ManyToOne(optional = false)
-//	@JoinColumn(name = "documento_testata", referencedColumnName = "fk_id_documento_testata")
-//	@ManyToOne(optional = false)
-//	@JoinColumn(name = "fk_id_documento_testata")
-//	@ManyToOne (cascade=CascadeType.ALL)
-//	@JoinColumn(name = "fk_id_documento_testata")
+
+	// @ManyToOne(optional = false)
+	// @JoinColumn(name = "documento_testata", referencedColumnName = "fk_id_documento_testata")
+	// @ManyToOne(optional = false)
+	// @JoinColumn(name = "fk_id_documento_testata")
+	// @ManyToOne (cascade=CascadeType.ALL)
+	// @JoinColumn(name = "fk_id_documento_testata")
 
 	private Integer		num_sedute;
 	private String		mese;
@@ -57,27 +52,29 @@ public class Documento_Righe extends Model {
 	private String		p_partenza;
 	private String		p_arrivo;
 	private Integer		ora_sosta;
-	
+
 	@Column(precision = 7, scale = 2)
-	private BigDecimal		quota_fissa;
-	
+	private BigDecimal	quota_fissa;
+
 	private String		diritto_uscita;
 
-	@Column(precision = 7, scale = 2)	
-	private BigDecimal		importo;
+	@Column(precision = 7, scale = 2)
+	private BigDecimal	importo;
 
-	
-	private String usercrea;
-	private String userultv;
-	
+	private String		usercrea;
+	private String		userultv;
+
 	@Temporal(TemporalType.DATE)
-	private Date datacrea;
+	private Date		datacrea;
 	@Temporal(TemporalType.DATE)
-	private Date dataultv;	
-	
+	private Date		dataultv;
+
 	public Documento_Righe() {
 
 		super();
+		this.paziente = new Paziente();
+		this.struttura = new Struttura();
+
 		// TODO Auto-generated constructor stub
 	}
 
@@ -89,6 +86,7 @@ public class Documento_Righe extends Model {
 		this.id_documento_righe = id_documento_righe;
 		this.fk_id_documento_testata = fk_id_documento_testata;
 		this.paziente = new Paziente();
+		this.struttura = new Struttura();
 		this.num_sedute = num_sedute;
 		this.mese = mese;
 		this.km_totali = km_totali;
@@ -101,7 +99,8 @@ public class Documento_Righe extends Model {
 		this.diritto_uscita = diritto_uscita;
 		this.importo = importo;
 	}
- //
+
+	//
 	public Integer getId_documento_righe() {
 
 		return id_documento_righe;
@@ -243,60 +242,83 @@ public class Documento_Righe extends Model {
 	}
 
 	public Paziente getPaziente() {
+
 		return paziente;
 	}
 
 	public void setPaziente(Paziente paziente) {
+
 		this.paziente = paziente;
 	}
 
-
 	public String getUsercrea() {
+
 		return usercrea;
 	}
 
 	public void setUsercrea(String usercrea) {
+
 		this.usercrea = usercrea;
 	}
 
 	public String getUserultv() {
+
 		return userultv;
 	}
 
 	public void setUserultv(String userultv) {
+
 		this.userultv = userultv;
 	}
 
 	public Date getDatacrea() {
+
 		return datacrea;
 	}
 
 	public void setDatacrea(Date datacrea) {
+
 		this.datacrea = datacrea;
 	}
 
 	public Date getDataultv() {
+
 		return dataultv;
 	}
 
 	public void setDataultv(Date dataultv) {
+
 		this.dataultv = dataultv;
 	}
 
 	public Struttura getStruttura() {
+
 		return struttura;
 	}
 
 	public void setStruttura(Struttura struttura) {
+
 		this.struttura = struttura;
 	}
 
 	public BigDecimal getQuota_fissa() {
+
 		return quota_fissa;
 	}
 
 	public void setQuota_fissa(BigDecimal quota_fissa) {
+
 		this.quota_fissa = quota_fissa;
+	}
+
+	public Integer getFk_id_struttura() {
+
+		return struttura.getId_struttura();
+	}
+
+	public void setFk_id_struttura(Integer fk_id_struttura) {
+
+		struttura.setId_struttura(fk_id_struttura);
 	}
 
 }
