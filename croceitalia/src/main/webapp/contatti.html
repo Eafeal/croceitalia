@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<title>Gestione documenti rimborso croce italia </title>
+<meta name="title" content="Gestione documenti rimborso croce italia "/>
+
+<meta name="publisher" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
+<meta name="copyright" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
+<meta name="author" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
+<meta name="distribution" content="Global"/>
+
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Expires" content="-1"/>
+  
+<meta name="author" content="ASSOCONS S.r.l.  V.le Andrea Doria 33, Milano Tel.0267020393  www.assocons.it"/>
+<meta name="subject" content="general"/>
+<meta name="rating" content=""/>
+<meta name="language" content="it"/>
+
+<LINK rel="shortcut icon" href="images/favicon.ico">
+
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<link href="css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="css/page.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header" style="border-bottom:1px solid #999;">
+    <a href="http://www.assocons.it" target="new"><img src="images/logoAssocons.gif" alt="ASSOCONS Software &amp; Solutions"/></a>
+    <br></br>
+    <ul class="top-menu">
+      <li><a href="index.html" class="home">HOME</a></li>
+      <li><a target="assocons" href="http://www.assocons.it">Azienda</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </div><!-- end .header -->
+	
+	
+  <div id="content">
+
+    <a href="mailto:info@assocons.it">info@assocons.it</a><br/><br/>
+
+    Oppure direttamente presso la nostra sede:
+    <br/><br/>
+    
+    <strong>ASSOCONS srl</strong><br/>
+    Viale Andrea Doria 33<br/>
+    20124 Milano<br/>
+    <br/>
+    
+    Tel.: 02 67020393 - 02 67382823<br/>
+    Fax : 02 66719184<br/>
+    <br/>
+
+  	<a href="http://www.assocons.it" target="new">www.assocons.it</a>
+  
+  </div><!-- end .content -->
+
+  <div class="clearfloat"></div>
+
+</div><!-- end .container -->
+
+<div class="footer">
+  <p>Copyright &copy; 2016 - <a href="http://www.assocons.it/" title="Content Management System" target="_blank">Assocons S.r.l.</a> | All Rights Reserved</p>
+  <p>Sede legale: via Cacciatori delle Alpi, 1/A | 22070 Capiago Intimiano (CO) | C.F. Reg.Imprese e Partita I.V.A. 01960650131</p>
+  <p>Sede operativa: viale Andrea Doria,33 - 20124 Milano</p>  
+  <p class="credits">Powered by <a href="http://www.assocons.it/" target="_blank">Assocons S.r.l.</a></p>
+</div>
+
+</body>
+</html>
+<!-- --------------------------------- Gestione infomativa COOKIE ------------------------------------------------>
+<script>
+
+function getCookieVal (offset) {
+  var endstr = document.cookie.indexOf (";", offset);
+  if (endstr == -1)
+    endstr = document.cookie.length;
+  return unescape(document.cookie.substring(offset, endstr));
+}
+
+function GetCookie (name) {
+  var arg = name + "=";
+  var alen = arg.length;
+  var clen = document.cookie.length;
+  var i = 0;
+  while (i < clen) {
+    var j = i + alen;
+    if (document.cookie.substring(i, j) == arg)
+      return getCookieVal (j);
+    i = document.cookie.indexOf(" ", i) + 1;
+    if (i == 0) 
+      break;
+  }
+  return "";
+}
+
+function SetCookie (name, value) {
+  var argv = SetCookie.arguments;
+  var argc = SetCookie.arguments.length;
+  var expires = (argc > 2) ? argv[2] : null;
+  var path = (argc > 3) ? argv[3] : null;
+  var domain = (argc > 4) ? argv[4] : null;
+  var secure = (argc > 5) ? argv[5] : false;
+  document.cookie = name + "=" + escape (value) +
+    ((expires == null) ? "" : ("; expires=" + expires.toGMTString())) +
+    ((path == null) ? "" : ("; path=" + path)) +
+    ((domain == null) ? "" : ("; domain=" + domain)) +
+    ((secure == true) ? "; secure" : "");
+}
+
+function DeleteCookie(name) {
+  var exp = new Date();
+  FixCookieDate (exp); // Correct for Mac bug
+  exp.setTime (exp.getTime() - 1);  // This cookie is history
+  var cval = GetCookie (name);
+  if (cval != null)
+    document.cookie = name + "=" + cval + "; expires=" + exp.toGMTString();
+}
+
+function showCookieADV()
+	{
+	if(GetCookie("informativaCookie") == "OK") return;
+	if(GetCookie("informativaCookie") == "OKTemp") return;
+	document.getElementById("cookieADV").style.display = "block";
+	SetCookie("informativaCookie","OKTemp",null,"/");
+	//SetCookie("informativaCookie","",null,"/");
+	}
+
+function hideCookieADV()
+	{
+	document.getElementById("cookieADV").style.display = "none";
+	}
+	
+function coockieAccept()
+	{
+	
+	var now = new Date();
+	var time = now.getTime();
+	var value = 'Test';
+	time += 3600 * 1000 * 8760; // aggiungo 1 anno
+	now.setTime(time);
+	SetCookie("informativaCookie","OK",now,"/");	
+	hideCookieADV();
+	}
+
+function resetCoockieAccept()
+	{
+	SetCookie("informativaCookie","",null,"/");	
+	showCookieADV();
+	}
+
+</script>
+
+<style>
+body {margin:0;}
+
+#cookieADV {
+	display: none;
+	position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #222765;
+    color: #FFF;
+    font-weight: 400;
+    font-family: arial;
+    font-size: 12px;
+    text-align: center;
+    padding: 15px 0;
+    z-index: 100000000000;
+    border-top: 2px solid #01A7EE;
+}
+
+#cookieADV a {
+    color:#FFF;
+	font-weight: 700;
+}
+
+
+#cookieADV .cookieADVbutt {
+	margin: 0 0 0 20px;
+	cursor:pointer;
+}
+</style>
+
+<div id="cookieADV">
+  ATTENZIONE: I cookie ci aiutano a fornire i nostri servizi. Proseguendo con l'utilizzo del sito, accetti l'utilizzo dei cookie da parte nostra. <a href="/informativa_cookie.html" target="info">Informativa cookies</a> 
+  <input type="button" class="cookieADVbutt" value="OK" onclick="coockieAccept()" />
+</div>
+
+<script>
+showCookieADV();
+</script>
+<!-- --------------------------------- Fine Gestione infomativa COOKIE ------------------------------------------------>
+

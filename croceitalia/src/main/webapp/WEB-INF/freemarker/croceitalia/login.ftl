@@ -1,10 +1,4 @@
 
-<#assign sezione = "Accedi al servizio<br/>per la generazione dataset XML">
-<#assign curr_gra = "">
-<#assign curr_gen = "">
-<#assign curr_val = "">
-<#assign curr_rev = "">
-<#assign slide = "slide5">
 <#include "/${dominio}/includes/header_new.ftl">
 
 		<div id="content">
