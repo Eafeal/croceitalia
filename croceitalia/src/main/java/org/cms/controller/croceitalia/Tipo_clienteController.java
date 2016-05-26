@@ -136,6 +136,7 @@ public class Tipo_clienteController extends EditCmsController{
 	@RequestMapping(value = "tipo_cliente/update/{user_id}")
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("user_id") String user_id) {
+		//ciao
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
