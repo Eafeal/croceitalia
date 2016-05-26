@@ -42,7 +42,19 @@
 				    <li><a href="/edit/documento_testata/list">Documento Testata</a></li>	
 				    <br/>	
 				    <li><a href="/edit/documento_righe/list">Documento Righe</a></li>	
-				    <br/>			    					
+				    <br/>
+				    <li><b>Tabelle</b></li>
+				    	<br>
+				    	<ul type="square">
+				    	<li><a href="/edit/patologia/list">Tabella patologia</a></li>
+				    	<br>
+				    	<li><a href="/edit/tipo_mezzo/list">Tabella tipologia mezzo</a></li>
+				    	<br>
+				    	<li><a href="/edit/tipo_cliente/list">Tabella tipologia cliente</a></li>
+				    	<br>
+				    	<li><a href="/edit/tipo_struttura/list">Tabella tipologia struttura</a></li>
+				    	</ul>
+				    <br>			    					
 				    <hr/>
 					<br/>
 				    <li><a href="/site/logout" >Logout</a></li>

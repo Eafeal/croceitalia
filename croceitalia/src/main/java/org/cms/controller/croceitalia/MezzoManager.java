@@ -91,5 +91,31 @@ public class MezzoManager extends AssoDao {
 	public void save(Object obj) throws AssoException {
 		super.save(obj);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Mezzo> listaPerTipo_mezzi(String cerca) throws Exception {
+
+		EntityManager em = null;
+		try {
+			em = getEntityManager();
+			int xx = Integer.parseInt(cerca);
+			String queryString = "select mez from Mezzo mez ";
+			queryString += " WHERE mez.tipo_mezzo.id_tipo_mezzo = :cerca ";
+			//queryString += " ORDER BY doc.anno_documento desc, doc.num_documento desc";
+			Query query = em.createQuery(queryString);
+			query.setParameter("cerca", xx);
+
+			List<Mezzo> answer = query.getResultList();
+
+			return answer;
+
+		} catch (Exception e) {
+			AssoLogger.GetInstance()
+					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+			throw e;
+		} finally {
+			close(em);
+		}
+	}
 
 }

@@ -14,48 +14,48 @@ import org.cms.jpa.dao.impl.AssoDao;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.ModelMap;
 
-@Repository("bancaManager")
+@Repository("patologiaManager")
 
-public class BancaManager extends AssoDao{
+public class PatologiaManager extends AssoDao{
 	
 	/**
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Banca> caricaBanche() {
+	public List<Patologia> caricaPatologie() {
 
-		List<Banca> list = (List<Banca>) this.execNamedQuery("Banca.loadAll");
+		List<Patologia> list = (List<Patologia>) this.execNamedQuery("Patologia.loadAll");
 
 		return list;
 
 	}
-
+	
 	//@Override
 	public Class<?> getEntityClass() {
-		return Banca.class;
+		return Patologia.class;
 	}
-
+	
 	/**
 	 * @param modelMap
 	 * @return
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Banca> search(String cerca) throws Exception {
+	public List<Patologia> search(String cerca) throws Exception {
 
 		EntityManager em = null;
 		try {
 			em = getEntityManager();
 
-			String queryString = "select bnc from Banca bnc ";
-			queryString += " WHERE bnc.nome      LIKE :cerca  ";
+			String queryString = "select ptl from Patologia ptl ";
+			queryString += " WHERE ptl.descrizione      LIKE :cerca  ";
 			Query query = em.createQuery(queryString);
 
 			query.setParameter("cerca", "%" + cerca + "%");
 
 //			queryString += " ORDER BY str.nome, str.telefono";
 
-			List<Banca> answer = query.getResultList();
+			List<Patologia> answer = query.getResultList();
 
 			return answer;
 
@@ -67,7 +67,7 @@ public class BancaManager extends AssoDao{
 			close(em);
 		}
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
