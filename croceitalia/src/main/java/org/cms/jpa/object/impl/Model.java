@@ -7,6 +7,11 @@ package org.cms.jpa.object.impl;
 import it.asso.util.AssoException;
 import it.asso.util.AssoLogger;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
@@ -67,5 +72,23 @@ public abstract class Model implements Model_itf {
         return this.toString().compareTo(obj.toString());
 
     }
+    
+    public BigDecimal fromStringToBigDecimal(String importo) {
+
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+
+		String pattern = "#.##0,0#";
+		DecimalFormat decimalFormat = new DecimalFormat();
+		decimalFormat.setParseBigDecimal(true);
+
+		try {
+			return (BigDecimal) decimalFormat.parse(importo);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return BigDecimal.ZERO;
+	}    
 
 }

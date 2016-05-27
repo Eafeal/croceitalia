@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+    <meta charset="utf-8">
+    <title>Croce Bianca Italia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="ico/favicon.png">
+  <style type="text/css"></style><!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.--><script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/arizonia:n4:default.js" type="text/javascript"></script>
+</head>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+td{
+	padding-bottom: 0px;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+	text-align:center;
+    background-color: #5BC0DE;
+    color: white;
+}
+
+.num_seduteCrea{
+	text-align:right;
+}
+.mese_seduteCrea{
+	/*width: 148px;*/
+}
+.km_percorsiCrea{
+	text-align:right;
+}
+.pazienteCrea{
+	
+}
+.strutturaCrea{
+	
+}
+.percorsoCrea{
+	
+}
+.num_oreCrea{
+	text-align:right;
+}
+.km_totaliCrea{
+	text-align:right;
+}
+.quota_fissaCrea{
+	text-align:right;
+}
+.costokmCrea{
+	text-align:right;
+}
+.franchigiaCrea{
+	text-align:right;
+}
+.dirittto_uscitaCrea{
+	text-align:right;
+}
+.importoCrea{
+	text-align:right;
+}
+.num_sedute{
+	width: 48px;
+}
+
+.mese_sedute{
+	width: 80px;
+}
+.km_percorsi{
+	width: 48px;
+}
+.trasportato{
+	width:148px;
+}
+.struttura{
+	width: 148px;
+}
+.percorso{
+	width: 153px;
+}
+.num_ore{
+	width:50px;
+}
+.quota_fissa{
+	width:60px;
+}
+.dirittto_uscita{
+	width:60px;
+}
+.importo{
+	width:75px;
+}
+
+/* body{
+	
+	background-color:#A6A6A6;
+	} */
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 80%;
+  position: relative;
+  transition: all 1s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+</style>
+
+  <body cz-shortcut-listen="true">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Croce Italia</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="/edit/home">Home</a></li>
+              <li><a href="/edit/documento_testata/list">Documento</a></li>
+              <li><a href="#gestioneRiga">Nuova Riga</a></li>              
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+     
+<div>
+
+ <form id="TdocumentoForm" name="TdocumentoForm" action="/edit/documento_testata/save2" method="post" >
+                   <table>
+                        <tbody>
+                        <tr class="prop">
+                                <td align="top" class="num"><label for="num"><h4>Numero Documento</h4></label></td>                             
+                                <td align="top" class="value">
+                                    <input type="text" id="num" name="num_documento"  size="25" maxlength="11" value="${documento.getNum_documento()}" readonly/><b> - </b><input type="text" id="anno_documento" name="anno_documento"  size="4" maxlength="60" value="2016" readonly/> del <input type="text" value="${documento.getData_documento()?string["dd-MM-yyyy"]}">                                           	 
+                                </td> 
+                               
+                            </tr>
+         
+                             <tr class="prop">         
+                                <td align="top" class="num"><label for="anno_documento"><h4>Mese di Riferimento</h4></label></td>                             
+                                <td align="top" class="value"> 
+                                <select id="mese_documento" name="mese_documento" required>
+	                                    <option value="">Seleziona..</option>
+	                                        <option value="Gennaio">Gennaio</option>
+	                                        <option value="Febbraio">Febbraio</option>
+	                                        <option value="Marzo">Marzo</option>
+	                                        <option value="Aprile">Aprile</option>
+	                                        <option value="Maggio">Maggio</option>
+	                                        <option value="Giugno">Giugno</option>
+	                                        <option value="Luglio">Luglio</option>
+	                                        <option value="Agosto">Agosto</option>
+	                                        <option value="Settembre">Settembre</option>
+	                                        <option value="Ottobre">Ottobre</option>
+	                                        <option value="Novembre">Novembre</option>
+	                                        <option value="Dicembre">Dicembre</option>
+	                                        
+	                                </select>
+	                              </td>
+                            </tr>       
+                          <tr class="prop">
+                                <td align="top" class="fk_id_mezzo"><label for="fk_id_mezzo"><h4>Mezzo</h4></label></td>                             
+                                <td align="top" class="value">
+	                                <select id="fk_id_mezzo" name="fk_id_mezzo" required>
+	                                    <option value="">Seleziona..</option>
+	                                    <#list listaMezzo as mezzo>
+	                                        <option value="${mezzo.getId_mezzo()}">${mezzo.getTarga()} - ${mezzo.getDescrizione()}</option>
+	                                    </#list>                   
+	                                </select>
+	                            </td>
+	                        </tr>
+	                        
+	                        <tr class="prop">
+                                <td align="top" class="fk_id_mezzo"><label for="fk_id_cliente"><h4>Cliente</h4></label></td>                             
+                                <td align="top" class="value">
+									<select id="fk_id_cliente" name="fk_id_cliente" required>
+	                                    <option value="">Seleziona..</option>
+	                                    <#list listaClienti as cliente>
+	                                        <option value="${cliente.getId_cliente()}">${cliente.getRagione_sociale()}</option>
+	                                    </#list>
+	                                </select>
+	                            </td>
+                            </tr>             
+                             <tr class="prop">
+                                <td align="top" class="fk_id_mezzo"><label for="fk_id_banca"><h4>Banca di Appoggio</h4></label></td>                             
+                                <td align="top" class="value">
+	                                <select id="fk_id_banca" name="fk_id_banca" required>
+	                                    <option value="">Seleziona..</option>
+	                                    <#list listaBanca as banca>
+	                                        <option value="${banca.getId_banca()}">${banca.getNome()}</option>
+	                                    </#list>
+	                                </select>
+                 				</td>
+                            </tr>             
+                       
+                        </tbody>                            
+                    </table>
+                    <br/>
+                <div class="buttons">
+                    <span class="button"><button name="create" class="save btn btn-default btn-vlarge" value="Create" id="create"/>Inserisci</button></span>
+                </div>
+            </form>
+
+</div>
+			
+			 <div class="dialog">  
+   	  			<article class="tabella">
+      			
+      			<table width="100%" border="0">
+  					<tbody>
+					    <tr>
+					      <th scope="col">Num sedute</th>
+					      <th scope="col">Mese sedute</th>
+					      <th scope="col">Km Totali</th>
+					      <th scope="col">Paziente</th>
+					      <th scope="col">Destinazione</th>
+					      <th scope="col">Percorso</th>
+					      <th scope="col">N° ore sosta</th>
+					      <th scope="col">Quota fissa</th>
+					      <th scope="col">Diritto di uscita</th>
+					      <th scope="col">IMPORTO</th>
+					    </tr>
+					    <#assign i=0 />
+							<#list righe as righe>
+						    	<#assign i=i+1 />
+					    
+    					<tr onclick="javascript://document.location='/edit/documento_testata/update/${righe.getId_documento_righe()}'">					     
+					     	<td><input value="${righe.getNum_sedute()}" type="text" name="num_sedute${i}" id="num_sedute${i}" class="num_sedute" size="5" maxlength="2" readonly></td>
+					      	<td><input value="${righe.getMese()}" type="text" name="mese${i}" id="mese_sedute${i}" class="mese_sedute"  readonly></td>
+					      	<td><input value="${righe.getKm_totali()}" type="text" name="km_totali${i}" id="km_percorsi${i}" class="km_percorsi" value="" readonly></td>
+					      	<td><input value="${righe.getPaziente().getNominativo()}" type="text" name="_id_paziente${i}" id="trasportato${i}" class="trasportato" readonly></td>
+					      	<td><input value="${righe.getStruttura().getNome()}" type="text" name="_id_struttura${i}" id="trasportato${i}" class="trasportato" readonly></td>
+					      	<td><input value="${righe.getPercorsoAndata()} - A/R " type="text" name="_id_struttura${i}" id="percorso${i}" class="percorso"  readonly ></td>							
+						 	<td><input value="${righe.getOra_sosta()}" type="text" name="ora_sosta${i}" id="num_ore${i}" class="num_ore"  readonly></td>
+							<td><input value="${righe.getQuota_fissa()}" type="text" name="quota_fissa${i}" id="quota_fissa1" class="quota_fissa" readonly ></td>
+						    <td><input value="${righe.getDiritto_uscita()}" type="text" name="diritto_uscita${i}" id="dirittto_uscita${i}" class="dirittto_uscita" readonly></td>
+						    <td><input value="${righe.getImporto()}" type="text" name="importo${i}" id="importo${i}"  class="importo" readonly></td>
+					    </tr>
+					    
+   						</#list>
+    
+  					</tbody>
+				</table>
+                 
+                <form action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" >
+                        <span class="button"><input type="submit" value="Chiudi" class="delete" /></span>
+                       
+                 </form>
+               
+               <#if documento.isChiuso()>
+				<form action="/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" method="get" >
+                        <span class="button"><input type="submit" value="Stampa PDF" class="delete" onclick="return confirm('Sei sicuro?');  " /></span>
+                 </form>
+                 </#if>
+               
+ <script>  
+ function prova(){
+ 	
+ }
+ </script>     
+<!--- CREAZIONE RIGA --> 
+
+<div id="gestioneRiga" class="overlay">
+	<div class="popup">
+		<h2>Nuova Riga</h2>
+		<a class="close" href="#" id="finisci">&times;</a>
+		<div class="content">
+            <form id="rigaForm" name="rigaForm" action="/edit/documento_righe/save" method="post" >
+                   <table>
+                        <tbody>
+<!-- Verticale --->  					
+     					 <input type="hidden" name="fk_id_documento_testata" id="fk_id_documento_testata" value="${documento.getId_documento_testata()}">
+					 		<tr class="prop">
+	                            <td align="top" class="fk_id_paziente"><label for="fk_id_paziente">Paziente</label></td>
+	                            <td valign="top" class="value">
+	                                <select class="pazienteCrea" id="fk_id_paziente" name="fk_id_paziente" required>					      				
+					      			   <option value="">Seleziona..</option>
+	                                   <#list listaPaziente as paziente>
+	                                        <option value="${paziente.getId_paziente()}">${paziente.getNome()} - ${paziente.getCognome()} </option><!-- puoi richiamare il nome anche in questo modo-->
+	                                    </#list>
+	                                    </select>
+	                            </td>
+	                             <td align="top" class="fk_id_struttura"><label for="fk_id_struttura">Destinazione</label></td>
+	                            <td valign="top" class="value">
+	                                <select class="strutturaCrea" id="fk_id_struttura" name="fk_id_struttura" required>
+					      				<option value="">Seleziona..</option>
+	                                   <#list listaStruttura as struttura>
+	                                        <option value="${struttura.getId_struttura()}">${struttura.getNome()}</option>
+	                                    </#list>
+	                        		</select>
+	                            </td>
+	                       </tr>
+					 		
+	                       <tr class="prop">
+	                            <td align="top" class="percorso"><label for="percorso">Percorso</label></td>
+	                            <td valign="top" class="value">
+	                                <input type="text" name="percorso" id="percorso" class="percorsoCrea"  readonly>
+	                            </td>
+	                            <td align="top" class="kmpercorso"><label for="km_percorso">Km Percorso</label></td>
+	                            <td valign="top" class="value">
+	                               	<input type="text" name="km_percorso" id="km_percorso" class="km_percorsiCrea" value="0" onchange="javascript:totaleImporto();">
+	                            </td>
+	                       </tr>
+	                       <tr class="prop">
+	                            <td align="top" class="sedute"><label for="num_sedute">Num sedute</label></td>
+	                            <td valign="top" class="value">
+	                                <input type="text" name="num_sedute" id="num_sedute" class="num_seduteCrea"  onchange="totaleImporto()" value="0">
+							     </td>
+							    <td align="top" class="mese"><label for="mese">Mese Sedute</label></td>
+	                            <td valign="top" class="value">
+							      	<select id="mese1" name="mese" class="mese_seduteCrea" required>
+			                                    <option value="">Seleziona..</option>
+			                                        <option value="Gennaio">Gennaio</option>
+			                                        <option value="Febbraio">Febbraio</option>
+			                                        <option value="Marzo">Marzo</option>
+			                                        <option value="Aprile">Aprile</option>
+			                                        <option value="Maggio">Maggio</option>
+			                                        <option value="Giugno">Giugno</option>
+			                                        <option value="Luglio">Luglio</option>
+			                                        <option value="Agosto">Agosto</option>
+			                                        <option value="Settembre">Settembre</option>
+			                                        <option value="Ottobre">Ottobre</option>
+			                                        <option value="Novembre">Novembre</option>
+			                                        <option value="Dicembre">Dicembre</option>
+			                     	</select>
+	                            </td>
+	                       </tr>
+	                       <tr class="prop">
+	                            <td align="top" class="ora_sosta"><label for="ora_sosta">N° ore sosta</label></td>
+	                            <td align="top" class="value">
+	                               	<input type="text" name="ora_sosta" id="ora_sosta" class="num_oreCrea"  value="0">
+	                            </td>
+	                       </tr>
+	                        <tr class="prop">
+	                            <td align="top" class="totali"><label for="km_totali">Km Totali</label></td>
+	                            <td align="top" class="value">                        
+					       			<input type="text" name="km_totali" id="km_totali" class="km_totaliCrea" value="0" readonly>
+	                            </td>
+	                            <td align="top" class="km_totali"><label for="km_totali"></label></td>
+	                            <td align="top" class="value">                        
+					       			<!--<input type="text" name="km_totali" id="km_totali" class="km_percorsi" value="0" readonly>-->
+	                            </td>
+	                       </tr>
+	                       
+	                       <tr class="prop">
+	                            <td align="top" class="quota_fissa_s"><label for="quota_fissa_s">Quota fissa</label></td>
+	                            <td valign="top" class="value">
+	                               	<input type="text" name="quota_fissa_s" id="quota_fissa_s" class="quota_fissaCrea" value="${documento.getMezzo().getQf()}" onchange="totaleImporto()">
+	                            </td>
+	                            <td align="top" class="diritto_uscita"><label for="diritto_uscita">Diritto Uscita</label></td>
+	                            <td valign="top" class="value">
+	                               	<input type="text" name="diritto_uscita" id="diritto_uscita" class="dirittto_uscitaCrea" value="0" >		  
+	                            </td>
+	                       </tr>
+	                       
+	                       <tr class="prop">
+	                            <td align="top" class="costokm"><label for="costokm">Costo Kilometrico</label></td>
+	                            <td valign="top" class="value">
+					      			<input type="text" name="costokm" id="costokm" class="costokmCrea" value="${documento.getMezzo().getCosto_km()}" onchange="totaleImporto()" readonly>
+	                            </td>                          
+	                            <td align="top" class="franchigia"><label for="franchigiakm">Franchigia</label></td>
+	                            <td valign="top" class="value">
+	                               	<input type="text" name="franchigiakm" id="franchigiakm" class="franchigiaCrea" value="${documento.getMezzo().getFranchigia_km()}" onchange="totaleImporto()" readonly>
+	                            </td>
+	                       </tr>
+	                       <tr class="prop">
+	                            <td align="top" class="importo_s"><label for="importo_s">IMPORTO TOTALE</label></td>
+	                            <td valign="top" class="value">               
+					      			<input type="text" name="importo_s" id="importo_s"  class="importoCrea" value="0" readonly>
+	                            </td>
+	                       </tr>
+	                        
+
+           </tbody>                            
+                    </table>
+                    <br/>
+                <div class="buttons">
+                    <span class="button"><button name="create" class="save btn btn-default btn-vlarge" id="createRiga"/>Salva</button></span>
+                </div>
+            </form>
+
+
+		</div>
+	</div>
+</div>
+<script>
+function totaleImporto()
+{
+
+rigaForm.importo_s.value = 0;
+rigaForm.km_totali.value = 0;
+	
+
+if (rigaForm.num_sedute.value == "")
+	return false;
+	
+if (rigaForm.km_percorso.value == "")
+	return false;
+	
+	
+var km_totali = pulisciNumero(rigaForm.num_sedute.value) * pulisciNumero(rigaForm.km_percorso.value);
+km_totali = (Math.round(km_totali * 100) /100)+"";
+
+rigaForm.km_totali.value = km_totali.replace(".",",");
+
+//----------
+
+if (rigaForm.quota_fissa_s.value == "")
+	return false;
+	
+if (rigaForm.costokm.value == "")
+	return false;
+	
+if (rigaForm.franchigiakm.value == "")
+	return false;
+
+	var risPF = pulisciNumero(rigaForm.km_percorso.value) - pulisciNumero(rigaForm.franchigiakm.value);
+
+	if(risPF < 0){
+		risPF = 0;
+	}
+
+	risPF *= pulisciNumero(rigaForm.costokm.value);
+	risPF += pulisciNumero(rigaForm.quota_fissa_s.value);
+ 	risPF *= pulisciNumero(rigaForm.num_sedute.value);
+ 	
+ 	var importo = risPF;
+ 	importo = (Math.round(importo * 100) /100)+"";
+ 	rigaForm.importo_s.value = importo.replace(".",",");
+ }
+ //
+function pulisciNumero(numero)
+{
+var nuovoNumero = numero.replace(".","");
+nuovoNumero = nuovoNumero.replace(",",".");
+return nuovoNumero;
+ }
+</script>
+
+				</article>
+			</div> <!-- /container -->
+
+
+
+
+
+  </body>
+</html>
+<script type="text/javascript" src="/js/asso_beans_client.js"></script>
+<script type="text/javascript" src="/js/controlli.js"></script>
+
+<script>
+var indice = 0;
+
+function mostra(ind) {
+	indice = ind;
+	document.location = '#popup1';
+}
+
+function percorso(ind) {
+	indice = ind;
+	
+	if(trasportato1.value == "")
+		alert("Non puoi inserire nulla!");
+		else
+		document.location = '#popup2';
+}
+</script>
+
+<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+<script type="text/javascript">
+//INIZIO AJAX 
+$(document).ready(function(e){ 
+	$("#creaPersona").click(function(){
+	
+	/* alert(indice); *///era 0
+    var url = "/edit/paziente/save2"; // the script where you handle the form input.
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $("#insForm").serialize(), // serializes the form's elements.
+           success: function(response){
+        	   
+		        	   alert(response);//Dalla chiave messaggio di Paziente Controller
+		        	   var res = response.split(",");//funzione che prende una stringa e divide in base al parametro e li numera per posizione
+		        	   if(res[0]=='KO')
+		        		   	alert("Inserimento fallito!");
+		        	   		
+		        	   else
+		        		   {
+		        		  /*  alert(indice); *///sempre 1
+		        		/* alert(res[0]);//Ok */
+		        		 /*   alert(res[1]); *///Nome Cognome
+		       	   		 /*   alert(res[2]); */// Id del paziente 
+		       	   		   var yy = "#fk_paziente"+indice;//  equivale a fk_paziente1
+		       	   		// var xx = "#trasportato"+indice;
+		       	   		   var xx = "#trasportato";
+		            	   $(yy).val(res[2]);
+		            	   $(xx).val(res[1]);
+		            	   document.location = '#gestioneRiga';
+		            	   
+		            	   //resetta tutto
+		            	   document.insForm.reset(); 
+		       	   		}
+        	   		}
+         		});
+    	//e.preventDefault(); // avoid to execute the actual submit of the form.
+		});
+});
+
+
+$(document).ready(function(e){ 
+	$("#createRiga").click(function(){
+	
+	/* alert(indice); *///era 0
+   insRigaForm.submit();
+		});
+});
+</script>

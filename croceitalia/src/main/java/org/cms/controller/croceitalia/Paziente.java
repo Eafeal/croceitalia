@@ -24,34 +24,31 @@ public class Paziente extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_paziente", nullable = false, insertable = true, updatable = false)
-	private Integer		id_paziente;
+	private Integer id_paziente;
 
 	@OneToOne
 	@JoinColumn(name = "fk_id_patologia", nullable = false)
-	private Patologia	id_patologia;
+	private Patologia id_patologia;
 
-	
+	private String nome;
+	private String cognome;
 
-	private String		nome;
-	private String		cognome;
-	private String		telefono1;
-	private String		telefono2;
-	private String		sesso;
+	private String telefono1;
+	private String telefono2;
+	private String sesso;
 
 	@Temporal(TemporalType.DATE)
-	private Date		data_nascita;
+	private Date data_nascita;
 
-	private String		via;
-	private String		comune;
-	private String		cap;
-	private String		provincia;
+	private String via;
+	private String comune;
+	private String cap;
+	private String provincia;
 
 	public Paziente() {
 
 		this.id_patologia = new Patologia();
 	}
-	
-	
 
 	public Integer getFk_id_patologia() {
 
@@ -271,15 +268,18 @@ public class Paziente extends Model {
 
 		this.provincia = provincia.toUpperCase();
 	}
-	
+
 	public Patologia getId_patologia() {
 		return id_patologia;
 	}
 
-
-
 	public void setId_patologia(Patologia id_patologia) {
 		this.id_patologia = id_patologia;
+	}
+
+	public String getNominativo() {
+		String nominativo = getNome() + " " + getCognome();
+		return nominativo;
 	}
 
 	/*

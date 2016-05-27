@@ -19,68 +19,68 @@
 	{	
 	//CONTROLLI DI OBBLIGATORIETA'
 	
-		if (strutturaForm.fk_id_tipologia_struttura.value == "") {
-			strutturaForm.fk_id_tipologia_struttura.focus();
+		if (TdocumentoForm.fk_id_tipologia_struttura.value == "") {
+			TdocumentoForm.fk_id_tipologia_struttura.focus();
 			alert(" La tipologia della struttura è obbligatoria!");
 			return false;
 		}
-		if (strutturaForm.nome.value == "") {
-			strutturaForm.nome.focus();
+		if (TdocumentoForm.nome.value == "") {
+			TdocumentoForm.nome.focus();
 			alert(" La descrizione è obbligatoria!");
 			return false;
 		}
-		if (strutturaForm.descrizione_breve.value == "") {
-			strutturaForm.descrizione_breve.focus();
+		if (TdocumentoForm.descrizione_breve.value == "") {
+			TdocumentoForm.descrizione_breve.focus();
 			alert(" Una descrizione breve è obbligatoria!");
 			return false;
 		}
-		if (strutturaForm.comune.value == "") {
-			strutturaForm.comune.focus();
+		if (TdocumentoForm.comune.value == "") {
+			TdocumentoForm.comune.focus();
 			alert(" Il comune è obbligatorio!");
 			return false;
 		}
 	//--------CONTROLLO validità ma non obbligatoria--------
 	
-		if (strutturaForm.via.value != "") {
-			if (!controllo_via(strutturaForm.via)) return false;
+		if (TdocumentoForm.via.value != "") {
+			if (!controllo_via(TdocumentoForm.via)) return false;
 		}
 	
-		if (strutturaForm.cap.value != "") {
-			if (!controllo_cap(strutturaForm.cap)) return false;
+		if (TdocumentoForm.cap.value != "") {
+			if (!controllo_cap(TdocumentoForm.cap)) return false;
 		}
-		if (strutturaForm.provincia.value != "") {
-			if (!controllo_provincia(strutturaForm.provincia)) return false;
+		if (TdocumentoForm.provincia.value != "") {
+			if (!controllo_provincia(TdocumentoForm.provincia)) return false;
 		}
-		if (strutturaForm.telefono.value != "") {		
-			if (!controllo_telefono(strutturaForm.telefono)) return false;
-		}
-		
-		if (strutturaForm.email.value != "") {		
-			if (!controllo_email(strutturaForm.email)) return false;
+		if (TdocumentoForm.telefono.value != "") {		
+			if (!controllo_telefono(TdocumentoForm.telefono)) return false;
 		}
 		
-		if (strutturaForm.cod_regione.value != "") {		
-			if (!controllo_regione(strutturaForm.cod_regione)) return false;
+		if (TdocumentoForm.email.value != "") {		
+			if (!controllo_email(TdocumentoForm.email)) return false;
 		}
 		
-		if (strutturaForm.cod_asl.value != "") {		
-			if (!controllo_asl(strutturaForm.cod_asl)) return false;
+		if (TdocumentoForm.cod_regione.value != "") {		
+			if (!controllo_regione(TdocumentoForm.cod_regione)) return false;
 		}
 		
-		if (strutturaForm.cod_struttura.value != "") {		
-			if (!controllo_CodStruttura(strutturaForm.cod_struttura)) return false;
+		if (TdocumentoForm.cod_asl.value != "") {		
+			if (!controllo_asl(TdocumentoForm.cod_asl)) return false;
+		}
+		
+		if (TdocumentoForm.cod_struttura.value != "") {		
+			if (!controllo_CodStruttura(TdocumentoForm.cod_struttura)) return false;
 		}
 	//CONTROLLI DI VALIDITA'	
 		
-		if (!controllo_nome(strutturaForm.nome)) {
+		if (!controllo_nome(TdocumentoForm.nome)) {
 			return false;
 		}
 
-		if (!controllo_comune(strutturaForm.comune)) {
+		if (!controllo_comune(TdocumentoForm.comune)) {
 			return false;
 		}
 		
-	strutturaForm.submit();
+	TdocumentoForm.submit();
 	}
 	
 	//Controllo Nome
@@ -239,7 +239,7 @@
             $(document).ready(function() {
 
 
-				$("#strutturaForm").submit(function() {
+				$("#TdocumentoForm").submit(function() {
 
                     errMsg = errMsgDefault = "Attenzione!!\n";
                     $(".errorTextField").removeClass('errorTextField');

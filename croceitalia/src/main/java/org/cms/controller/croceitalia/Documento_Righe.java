@@ -25,49 +25,53 @@ public class Documento_Righe extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_documento_righe", nullable = false, insertable = true, updatable = false)
-	private Integer		id_documento_righe;
+	private Integer id_documento_righe;
 
-	private Integer		fk_id_documento_testata;
+	private Integer fk_id_documento_testata;
 
 	@OneToOne
 	@JoinColumn(name = "fk_id_paziente", nullable = false)
-	private Paziente	paziente;
+	private Paziente paziente;
 
 	@OneToOne
 	@JoinColumn(name = "fk_id_struttura", nullable = false)
-	private Struttura	struttura;
+	private Struttura struttura;
 
 	// @ManyToOne(optional = false)
-	// @JoinColumn(name = "documento_testata", referencedColumnName = "fk_id_documento_testata")
+	// @JoinColumn(name = "documento_testata", referencedColumnName =
+	// "fk_id_documento_testata")
 	// @ManyToOne(optional = false)
 	// @JoinColumn(name = "fk_id_documento_testata")
 	// @ManyToOne (cascade=CascadeType.ALL)
 	// @JoinColumn(name = "fk_id_documento_testata")
 
-	private Integer		num_sedute;
-	private String		mese;
-	private Integer		km_totali;
-	private Integer		km_percorso;
-	private String		percorso;
-	private String		p_partenza;
-	private String		p_arrivo;
-	private Integer		ora_sosta;
+	private Integer num_sedute;
+	private String mese;
+	private Integer km_totali;
+	private Integer km_percorso;
+
+	private String percorso;
+
+	private String p_partenza;
+	private String p_arrivo;
+
+	private Integer ora_sosta;
 
 	@Column(precision = 7, scale = 2)
-	private BigDecimal	quota_fissa;
+	private BigDecimal quota_fissa;
 
-	private String		diritto_uscita;
+	private String diritto_uscita;
 
 	@Column(precision = 7, scale = 2)
-	private BigDecimal	importo;
+	private BigDecimal importo;
 
-	private String		usercrea;
-	private String		userultv;
+	private String usercrea;
+	private String userultv;
 
 	@Temporal(TemporalType.DATE)
-	private Date		datacrea;
+	private Date datacrea;
 	@Temporal(TemporalType.DATE)
-	private Date		dataultv;
+	private Date dataultv;
 
 	public Documento_Righe() {
 
@@ -75,11 +79,22 @@ public class Documento_Righe extends Model {
 		this.paziente = new Paziente();
 		this.struttura = new Struttura();
 
+		/*
+		 * usercrea = "Axel"; userultv = "Axel";
+		 * 
+		 * datacrea = new Date(); dataultv = new Date();
+		 */
+
+		p_arrivo = "";
+		p_partenza = "";
+		percorso = "";
+
 		// TODO Auto-generated constructor stub
 	}
 
-	public Documento_Righe(Integer id_documento_righe, Integer fk_id_documento_testata,/* Integer fk_id_paziente, */
-	Integer num_sedute, String mese, Integer km_totali, Integer km_percorso, String percorso, String p_partenza,
+	public Documento_Righe(Integer id_documento_righe,
+			Integer fk_id_documento_testata, /* Integer fk_id_paziente, */
+			Integer num_sedute, String mese, Integer km_totali, Integer km_percorso, String percorso, String p_partenza,
 			String p_arrivo, Integer ora_sosta, BigDecimal quota_fissa, String diritto_uscita, BigDecimal importo) {
 
 		super();
@@ -112,7 +127,8 @@ public class Documento_Righe extends Model {
 	}
 
 	public Integer getFk_id_documento_testata() {
-
+		if (fk_id_documento_testata == null)
+			return 0;
 		return fk_id_documento_testata;
 	}
 
@@ -152,7 +168,8 @@ public class Documento_Righe extends Model {
 	}
 
 	public Integer getKm_totali() {
-
+		if (km_totali == null)
+			return 0;
 		return km_totali;
 	}
 
@@ -162,7 +179,8 @@ public class Documento_Righe extends Model {
 	}
 
 	public Integer getKm_percorso() {
-
+		if (km_percorso == null)
+			return 0;
 		return km_percorso;
 	}
 
@@ -172,7 +190,8 @@ public class Documento_Righe extends Model {
 	}
 
 	public String getPercorso() {
-
+		if (percorso == null)
+			return "";
 		return percorso;
 	}
 
@@ -182,7 +201,8 @@ public class Documento_Righe extends Model {
 	}
 
 	public String getP_partenza() {
-
+		if (p_partenza == null)
+			return "";
 		return p_partenza;
 	}
 
@@ -192,7 +212,8 @@ public class Documento_Righe extends Model {
 	}
 
 	public String getP_arrivo() {
-
+		if (p_arrivo == null)
+			return "";
 		return p_arrivo;
 	}
 
@@ -221,6 +242,11 @@ public class Documento_Righe extends Model {
 		quota_fissa = qF;
 	}
 
+	public void setQuotaFissa(String qF) {
+
+		quota_fissa = fromStringToBigDecimal(qF);
+	}
+
 	public String getDiritto_uscita() {
 
 		return diritto_uscita;
@@ -239,6 +265,10 @@ public class Documento_Righe extends Model {
 	public void setImporto(BigDecimal importo) {
 
 		this.importo = importo;
+	}
+
+	public void setImporto(String importo) {
+		this.importo = fromStringToBigDecimal(importo);
 	}
 
 	public Paziente getPaziente() {
@@ -319,6 +349,15 @@ public class Documento_Righe extends Model {
 	public void setFk_id_struttura(Integer fk_id_struttura) {
 
 		struttura.setId_struttura(fk_id_struttura);
+	}
+
+	public String getPercorsoAndata() {
+		String percorsoAndata = getP_partenza() + " - " + getP_arrivo();
+		return percorsoAndata;
+	}
+
+	public String getPercorsoRitorno() {
+		return getP_arrivo() + " - " + getP_partenza();
 	}
 
 }

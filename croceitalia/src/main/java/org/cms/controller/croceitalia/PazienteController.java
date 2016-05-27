@@ -120,13 +120,10 @@ public class PazienteController extends EditCmsController {
 			PrintWriter out = response.getWriter();
 			response.getWriter().write(messaggio);// <--- Qua viene passato il
 													// valore inserito
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return null;
-
 	}
 
 	@RequestMapping(value = "paziente/create", method = RequestMethod.GET)

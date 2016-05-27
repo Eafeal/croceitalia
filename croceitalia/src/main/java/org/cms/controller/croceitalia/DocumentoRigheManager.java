@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import org.cms.jpa.dao.impl.AssoDao;
 import org.springframework.stereotype.Repository;
 
+import it.asso.util.AssoException;
 import it.asso.util.AssoLogger;
 
 @Repository("documento_righe_manager")
@@ -26,12 +27,41 @@ public class DocumentoRigheManager extends AssoDao {
 
 	}
 
+	// recupero le righe dei documenti
+
+	@SuppressWarnings("unchecked")
+	public List<Documento_Righe> caricaDocumento_Row_byId(String idd) {
+
+		EntityManager em = null;
+		int id = Integer.parseInt(idd);
+		try {
+			em = getEntityManager();
+
+			String queryString = "select righe from Documento_Righe righe ";
+			queryString += " WHERE righe.fk_id_documento_testata = :id ";
+			Query query = em.createQuery(queryString);
+
+			query.setParameter("id", id);
+			List<Documento_Righe> answer = query.getResultList();
+			return answer;
+
+		} catch (Exception e) {
+			AssoLogger.GetInstance()
+					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+			throw e;
+		} finally {
+			close(em);
+		}
+
+	}
+
+	@Override
 	public Class<?> getEntityClass() {
 
 		// TODO Auto-generated method stub
-		return null;
+		return Documento_Righe.class;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Documento_Righe> caricaRigheDocumento(int idTestata) throws Exception {
 
@@ -43,9 +73,9 @@ public class DocumentoRigheManager extends AssoDao {
 			queryString += " WHERE righe.fk_id_documento_testata = :idTestata ";
 			Query query = em.createQuery(queryString);
 
-			query.setParameter("idTestata",idTestata);
+			query.setParameter("idTestata", idTestata);
 
-//			queryString += " ORDER BY str.nome, str.telefono";
+			// queryString += " ORDER BY str.nome, str.telefono";
 
 			List<Documento_Righe> answer = query.getResultList();
 
@@ -58,6 +88,11 @@ public class DocumentoRigheManager extends AssoDao {
 		} finally {
 			close(em);
 		}
+	}
 
-}
+	@Override
+	public void save(Object obj) throws AssoException {
+
+		super.save(obj);
+	}
 }

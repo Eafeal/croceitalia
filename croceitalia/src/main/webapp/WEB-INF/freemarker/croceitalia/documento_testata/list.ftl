@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Croce Italia Bernate</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -146,6 +146,38 @@ th {
   }
 }
 
+
+button[class^="btn"] {
+	display: inline-block;
+	border-radius: 3px;
+	cursor: pointer;
+	font-weight: 500;
+	font-family: 'Open sans', sans-serif;
+	transition:0.14s;
+}
+.btn {
+	padding:7px 13px;
+	background: white;
+	border-width: 2px;
+	border-style: solid;
+}
+
+.btn-default {
+	border-color: #7f8c8d;
+	color: #7f8c8d;
+}
+
+.btn:hover {
+	color:white;
+}
+.btn-default:hover {
+	background: #7f8c8d;
+}
+.btn-vlarge {
+	padding: 18px 24px;
+	font-size: 20px;
+}
+
 </style>
   <body cz-shortcut-listen="true">
 
@@ -160,7 +192,7 @@ th {
           <a class="brand" href="#">Croce Italia</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="/edit/home">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#popup1">Nuovo Documento</a></li>
             </ul>
@@ -187,17 +219,17 @@ th {
 	<#assign i=0 />
 		<#list listaDocumenti as documento >
 	    	<#assign i=i+1 />
-    <tr>
-      	<td><input type="text" nome="numero${i}" id="numero${i}" class="numero" value="${documento.getNum_documento()}" readonly></td>
-      	<td><input type="text" nome="anno${i}" id="anno${i}" class="anno" value="${documento.getAnno_documento()}" readonly></td>
-      	<td><input type="text" nome="mese${i}" id="mese${i}" class="mese"  value="${documento.getMese_documento()}" readonly></td>
-      	<td><input type="text" nome="data${i}" id="data${i}" class="data" value="${documento.getData_documento()?string["dd-MM-yyyy"]}" readonly></td>
-      	<td><input type="text" nome="cliente${i}" id="cliente${i}" class="cliente" value="${documento.getCliente().getRagione_sociale()}" readonly></td>
-      	<td><input type="text" nome="mezzo${i}" id="mezzo${i}" class="mezzo" value="${documento.getMezzo().getDescrizione()}" readonly></td>
-   		<td><input type="text" nome="stato${i}" id="stato${i}" class="stato" value="${documento.descrizioneStato()}" readonly></td>
-    	<td><input type="text" nome="totale${i}" id="totale${i}" class="totale" value="${documento.getTotale()}" readonly></td>
+    <tr onclick="javascript:document.location='/edit/documento_testata/update/${documento.getId_documento_testata()}'">
+      	<td ><input type="text" nome="numero${i}" id="numero${i}" class="numero" value="${documento.getNum_documento()}" onclick="mostra(1)"  readonly></td>
+      	<td><input type="text" nome="anno${i}" id="anno${i}" class="anno" value="${documento.getAnno_documento()}" onclick="mostra(1)" readonly></td>
+      	<td><input type="text" nome="mese${i}" id="mese${i}" class="mese"  value="${documento.getMese_documento()}" onclick="mostra(1)"  readonly></td>
+      	<td><input type="text" nome="data${i}" id="data${i}" class="data" value="${documento.getData_documento()?string["dd-MM-yyyy"]}" onclick="mostra(1)" readonly></td>
+      	<td><input type="text" nome="cliente${i}" id="cliente${i}" class="cliente" value="${documento.getCliente().getRagione_sociale()}" onclick="mostra(1)" readonly></td>
+      	<td><input type="text" nome="mezzo${i}" id="mezzo${i}" class="mezzo" value="${documento.getMezzo().getDescrizione()}" onclick="mostra(1)" readonly></td>
+   		<td><input type="text" nome="stato${i}" id="stato${i}" class="stato" value="${documento.descrizioneStato()}" onclick="mostra(1)"  readonly></td>
+    	<td><input type="text" nome="totale${i}" id="totale${i}" class="totale" value="${documento.getTotale()}" onclick="mostra(1)" readonly></td>
     	<td>
-  			<#if documento.isPdfGenerato()>
+  			<#if documento.isChiuso()>
 			<p class="pdf"><img name="pdf" src="/img/edit/pdf.png" alt="Modifica"  style="vertical-align:initial;clear:none;border:0"/></pdf>
 			</#if>
 		</td>
@@ -206,36 +238,53 @@ th {
   </tbody>
 </table>
 
+<!-- POPUP -->
 <div id="popup1" class="overlay">
 	<div class="popup">
 	<div class="scroll">
-		<h3>Nuovo Documento Testata</h3>
+	
+	
+	
+		<h3>Nuovo Documento</h3>
 		<a class="close" href="#" id="finisci">&times;</a>
 		<div class="content">
- 
- <form id="TdocumentoForm" name="TdocumentoForm" action="" method="post" >
+					
+ <form id="TdocumentoForm" name="TdocumentoForm" action="/edit/documento_testata/save2" method="post" >
                    <table>
                         <tbody>
                         <tr class="prop">
                                 <td align="top" class="num"><label for="num">Numero Documento</label></td>                             
                                 <td align="top" class="value">
-                                    <input type="text" id="num" name="num_documento"  size="28" maxlength="11" value="" placeholder="Numero documento"  />&nbsp;/&nbsp;<input type="text" id="anno_documento" name="anno_documento"  size="4" maxlength="60" value="2016" readonly/>                                            
-                                	 
+                                    <input type="text" id="num" name="num_documento"  size="25" maxlength="11" value="" placeholder="Numero documento"  /><b> - </b><input type="text" id="anno_documento" name="anno_documento"  size="4" maxlength="60" value="2016" readonly/>                                            	 
                                 </td> 
-                                <td align="top" class="num"><label for="num">Data Documento</label></td>                             
-                                <td align="top" class="value">
-                                                                              
-                                	 <input type="text" id="data_documento" name="data_documento"  size="28" maxlength="60" value="" placeholder="Data documento"  />
-                                </td> 
+                               
                             </tr>
                              <tr class="prop">
-                              
-                                <td align="top" class="num"><label for="anno_documento">Mese di Riferimento</label></td>                             
-                                <td align="top" class="value">
-                                   
-                               		<input type="text" id="mese_documento" name="mese_documento"  size="28" maxlength="60" value="" placeholder="Mese documento"  />
-                               		
+                                <td align="top" class="num"><label for="num">Data Documento</label></td>                             
+                                <td align="top" class="value">                                   
+                                	 <input type="text" id="data_documento" name="data_documento"  size="25" maxlength="60" value=""  />
                                 </td>  
+                            </tr> 
+                             <tr class="prop">         
+                                <td align="top" class="num"><label for="anno_documento">Mese di Riferimento</label></td>                             
+                                <td align="top" class="value"> 
+                                <select id="mese_documento" name="mese_documento" required>
+	                                    <option value="">Seleziona..</option>
+	                                        <option value="Gennaio">Gennaio</option>
+	                                        <option value="Febbraio">Febbraio</option>
+	                                        <option value="Marzo">Marzo</option>
+	                                        <option value="Aprile">Aprile</option>
+	                                        <option value="Maggio">Maggio</option>
+	                                        <option value="Giugno">Giugno</option>
+	                                        <option value="Luglio">Luglio</option>
+	                                        <option value="Agosto">Agosto</option>
+	                                        <option value="Settembre">Settembre</option>
+	                                        <option value="Ottobre">Ottobre</option>
+	                                        <option value="Novembre">Novembre</option>
+	                                        <option value="Dicembre">Dicembre</option>
+	                                        
+	                                </select>
+	                              </td>
                             </tr>       
                           <tr class="prop">
                                 <td align="top" class="fk_id_mezzo"><label for="fk_id_mezzo">Mezzo</label></td>                             
@@ -244,8 +293,7 @@ th {
 	                                    <option value="">Seleziona..</option>
 	                                    <#list listaMezzo as mezzo>
 	                                        <option value="${mezzo.getId_mezzo()}">${mezzo.getTarga()} - ${mezzo.getDescrizione()}</option>
-	                                    </#list>
-	                                        <option value="2">macchina</option>
+	                                    </#list>                   
 	                                </select>
 	                            </td>
 	                        </tr>
@@ -255,18 +303,20 @@ th {
                                 <td align="top" class="value">
 									<select id="fk_id_cliente" name="fk_id_cliente" required>
 	                                    <option value="">Seleziona..</option>
-	                                        <option value="1">boh</option>
-	                                        <option value="2">miao</option>
+	                                    <#list listaClienti as cliente>
+	                                        <option value="${cliente.getId_cliente()}">${cliente.getRagione_sociale()}</option>
+	                                    </#list>
 	                                </select>
 	                            </td>
                             </tr>             
                              <tr class="prop">
-                                <td align="top" class="fk_id_mezzo"><label for="fk_id_banca"> Bancadi Appoggio</label></td>                             
+                                <td align="top" class="fk_id_mezzo"><label for="fk_id_banca"> Banca di Appoggio</label></td>                             
                                 <td align="top" class="value">
 	                                <select id="fk_id_banca" name="fk_id_banca" required>
 	                                    <option value="">Seleziona..</option>
-	                                        <option value="1">popolare</option>
-	                                        <option value="2">d'italia</option>
+	                                    <#list listaBanca as banca>
+	                                        <option value="${banca.getId_banca()}">${banca.getNome()}</option>
+	                                    </#list>
 	                                </select>
                  				</td>
                             </tr>             
@@ -275,32 +325,41 @@ th {
                     </table>
                     <br/>
                 <div class="buttons">
-                    <span class="button"><input type="button" name="create" class="save" value="Create" id="create"/></span>
+                    <span class="button"><button name="create" class="save btn btn-default btn-vlarge" value="Create" id="create"/>Inserisci</button></span>
                 </div>
             </form>
 
 		</div>
+		
       </article>
     </div> <!-- /container -->
+    
+
   </body>
 </html>
 
 <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
 <script type="text/javascript">
 
-
 var indice = 0;
 
 function mostra(ind) {
 	indice = ind;
-	document.location = '#popup1';
+	alert(indice);
+	document.location = '#miao1';
 }
 
 //INIZIO AJAX 
 $(document).ready(function(e){ 
 	$("#create").click(function(){
+  	TdocumentoForm.submit();
+		});
+});
+
+$(document).ready(function(e){ 
+	$("#createggg").click(function(){
 	
-	alert(indice); 
+
     var url = "/edit/documento_testata/save2"; // the script where you handle the form input.
     $.ajax({
            type: "POST",
@@ -310,9 +369,9 @@ $(document).ready(function(e){
         	   
 		        	   alert(response);//Dalla chiave messaggio di Paziente Controller
 		        	   var res = response.split(",");//funzione che prende una stringa e divide in base al parametro e li numera per posizione
+		        	   
 		        	   if(res[0]=='KO')
 		        		   	alert("Inserimento fallito!");
-		        	   		
 		        	   else
 		        		   {
 		        		  /*  alert(indice); *///sempre 1
@@ -322,15 +381,16 @@ $(document).ready(function(e){
 		       	   		   var xx = "#trasportato"+indice;
 		            	  // $(yy).val(res[2]);
 		            	   $(xx).val(res[1]);
-		            	   document.location = '#';
+		            	   document.location = '/edit/documento_testata/list#';
 		            	   location.reload();
 		            	   //resetta tutto
-		            	   document.insForm.reset(); 
-		            	   
+		            	   document.TdocumentoForm.reset(); 
+           	   
 		       	   		}
         	   		}
          		});
     	//e.preventDefault(); // avoid to execute the actual submit of the form.
 		});
 });
+
 </script>

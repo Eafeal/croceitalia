@@ -78,13 +78,11 @@
                 <form action="/edit/paziente/delete/${paziente.id_paziente}" method="get" >
                         <span class="button"><input type="submit" value="Delete" class="delete" onclick="return confirm('Confermi cancellazione?');" /></span>
                  </form>
-             </div>
-               
-        </div>
-    
+             </div>       
+        </div> 
     </body>
-
 </html>
+
 <#if esito??>
 <script>
 alert("Aggiornamento effettuato correttamente");

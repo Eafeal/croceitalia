@@ -46,7 +46,7 @@ public class Mezzo extends Model {
 	private String		distretto;
 
 	public Mezzo() {
-
+        super();
 		this.tipo_mezzo = new Tipo_mezzo();
 	}
 
@@ -189,21 +189,5 @@ public class Mezzo extends Model {
 		this.tipo_mezzo = tipo_mezzo;
 	}
 
-	private BigDecimal fromStringToBigDecimal(String importo) {
 
-		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-
-		String pattern = "#.##0,0#";
-		DecimalFormat decimalFormat = new DecimalFormat();
-		decimalFormat.setParseBigDecimal(true);
-
-		try {
-			return (BigDecimal) decimalFormat.parse(importo);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return BigDecimal.ZERO;
-	}
 }

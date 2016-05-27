@@ -8,16 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,96 +28,97 @@ public class Documento_Testata {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_documento_testata", nullable = false, insertable = true, updatable = false)
-	private Integer	id_documento_testata;
+	private Integer id_documento_testata;
 
 	@OneToOne
 	@JoinColumn(name = "fk_id_mezzo", nullable = false)
-	private Mezzo	mezzo;
+	private Mezzo mezzo;
 
 	@OneToOne
 	@JoinColumn(name = "fk_id_banca", nullable = false)
-	private Banca	banca;
+	private Banca banca;
 
 	@OneToOne
 	@JoinColumn(name = "fk_id_cliente", nullable = false)
-	private Cliente	cliente;
+	private Cliente cliente;
 
-	private Integer	num_documento;
-	private String	anno_documento;
-	private String	mese_documento;
-	
+	private Integer num_documento;
+	private String anno_documento;
+	private String mese_documento;
+
 	@Temporal(TemporalType.DATE)
-	private Date	data_documento;
-	
+	private Date data_documento;
+
 	@Column(precision = 10, scale = 2)
-	private BigDecimal	imponibile;
-	
+	private BigDecimal imponibile;
+
 	@Column(precision = 10, scale = 2)
-	private BigDecimal	iva;
-	
-	private String	esente_iva;
-	private String	esente_bollo;
-	
+	private BigDecimal iva;
+
+	private String esente_iva;
+	private String esente_bollo;
+
 	@Column(precision = 10, scale = 2)
-	private BigDecimal	importo_esente;
-	
+	private BigDecimal importo_esente;
+
 	@Column(precision = 10, scale = 2)
-	private BigDecimal	totale;
-	
-	private String	stato;
-	private String	pdf_generato;
-	private String	nome_file;
+	private BigDecimal totale;
+
+	private String stato;
+	private String pdf_generato;
+	private String nome_file;
 	private String CIG;
-	
+
 	private String usercrea;
 	private String userultv;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date datacrea;
 	@Temporal(TemporalType.DATE)
 	private Date dataultv;
-	
-//	@OneToMany
-//	@JoinColumn(name = "id_documento_testata", nullable = false)	
-	//@OneToMany( fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "documento_testata")
-	//@OneToMany(mappedBy = "documento_testata")
-	 private List<Documento_Righe> righe;
+
+	// @OneToMany
+	// @JoinColumn(name = "id_documento_testata", nullable = false)
+	// @OneToMany( fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy =
+	// "documento_testata")
+	// @OneToMany(mappedBy = "documento_testata")
+	private List<Documento_Righe> righe;
 
 	public Documento_Testata() {
-		
+
 		super();
+
 		esente_bollo = "S";
 		esente_iva = "S";
-		
+
 		this.mezzo = new Mezzo();
 		this.banca = new Banca();
 		this.cliente = new Cliente();
-		
+
 		imponibile = BigDecimal.ZERO;
 		iva = BigDecimal.ZERO;
 		importo_esente = BigDecimal.ZERO;
 		totale = BigDecimal.ZERO;
-		
-		pdf_generato = "N";	//NO
-		stato = "A";		//APERTO
-		
+
+		pdf_generato = "N"; // NO
+		stato = "A"; // APERTO
+
 		usercrea = "Axel";
 		userultv = "Axel";
-		
+
 		datacrea = new Date();
 		dataultv = new Date();
-		
+
 		CIG = "";
-		
+
 	}
 
-	public Documento_Testata(Integer id_documento_testata,/*
-														 * Integer fk_id_mezzo, Integer fk_id_banca,
-														 * Integer fk_id_cliente,
-														 */Integer num_documento, String anno_documento,
-			String mese_documento, Date data_documento, BigDecimal imponibile, BigDecimal iva, String esente_iva,
-			String esente_bollo, BigDecimal importo_esente, BigDecimal totale, String stato, String pdf_generato,
-			String nome_file) {
+	public Documento_Testata(Integer id_documento_testata,
+			/*
+			 * Integer fk_id_mezzo, Integer fk_id_banca, Integer fk_id_cliente,
+			 */Integer num_documento, String anno_documento, String mese_documento, Date data_documento,
+			BigDecimal imponibile, BigDecimal iva, String esente_iva, String esente_bollo, BigDecimal importo_esente,
+			BigDecimal totale, String stato, String pdf_generato, String nome_file) {
 
 		super();
 		this.id_documento_testata = id_documento_testata;
@@ -231,7 +229,7 @@ public class Documento_Testata {
 
 		this.imponibile = imponibile;
 	}
-	
+
 	public void setImponibile(String importo) {
 
 		this.imponibile = fromStringToBigDecimal(importo);
@@ -245,13 +243,13 @@ public class Documento_Testata {
 	public void setIva(BigDecimal iva) {
 		this.iva = iva;
 	}
-	
-//POLIMORFISMO	
+
+	// POLIMORFISMO
 	public void setIva(String importo) {
-		
+
 		this.iva = fromStringToBigDecimal(importo);
 	}
-	
+
 	public String getEsenteIva() {
 
 		return esente_iva;
@@ -286,7 +284,7 @@ public class Documento_Testata {
 
 		this.importo_esente = fromStringToBigDecimal(importo_esente);
 	}
-	
+
 	public BigDecimal getTotale() {
 
 		return totale;
@@ -299,7 +297,8 @@ public class Documento_Testata {
 
 	public void setTotale(String totale) {
 
-		this.totale = fromStringToBigDecimal(totale);;
+		this.totale = fromStringToBigDecimal(totale);
+		;
 	}
 
 	public String getStato() {
@@ -404,7 +403,6 @@ public class Documento_Testata {
 		this.dataultv = dataultv;
 	}
 
-	
 	private BigDecimal fromStringToBigDecimal(String importo) {
 
 		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -420,52 +418,54 @@ public class Documento_Testata {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return BigDecimal.ZERO;
 	}
-	
-	public boolean aperto() {
-		if(stato == null)
+
+	public boolean isAperto() {
+		if (stato == null)
 			return true;
 
 		return stato.equals("A");
 	}
-	
-	public String descrizioneStato(){
-		String a;		
-		if(aperto()){// di default è già true
-				a = "aperto";
-		}else{
-				a = "chiuso";
+
+	public String descrizioneStato() {
+		String a;
+		if (isAperto()) {// di default è già true
+			a = "aperto";
+		} else {
+			a = "chiuso";
 		}
 		return a;
 	}
-	
-	public boolean chiuso() {
-		if(stato == null)
+
+	public boolean isChiuso() {
+		if (stato == null)
 			return false;
 
 		return stato.equals("C");
 	}
-	
+
+	public void setChiudi() {
+
+		chiudi();
+	}
+
 	private void chiudi() {
 		stato = "C";
 	}
-	
+
 	private void riapri() {
-		stato = "Aperto";
+		stato = "A";
 	}
-	
-	
-	
-	
+
 	public boolean isPdfGenerato() {
-		if(pdf_generato== null)
+		if (pdf_generato == null)
 			return false;
 
-		return pdf_generato.equals("S"); // SI 
+		return pdf_generato.equals("S"); // SI
 	}
-	
+
 	private void rigenera_pdf() {
 		pdf_generato = "N"; // NO
 	}
@@ -477,16 +477,13 @@ public class Documento_Testata {
 	public void setCIG(String cIG) {
 		CIG = cIG;
 	}
-	
-	
+
 	public String getData_String_documento() {
 		SimpleDateFormat sdf = new SimpleDateFormat(); // creo l'oggetto
-		sdf.applyPattern("dd/MM/yyyy"); 
-	    String dataStr = sdf.format(data_documento);
-	   
+		sdf.applyPattern("dd/MM/yyyy");
+		String dataStr = sdf.format(data_documento);
+
 		return dataStr;
 	}
 
-	
 }
-
