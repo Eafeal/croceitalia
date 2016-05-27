@@ -12,15 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import it.asso.util.AssoException;
 
 @Controller
 public class MezzoController extends EditCmsController{
-	
-	/**
-	 * 
-	 */
+
 	@Autowired(required = true)
 	protected MezzoManager _mezzoManager;
 	
@@ -193,13 +189,13 @@ public class MezzoController extends EditCmsController{
 		ModelAndView modelAndView = getModelAndView(request);
 		
 		try {
-			List<Documento_Testata> mezzi = _documentoManager.listaPerBanche(id);
+			List<Documento_Testata> mezzi = _documentoManager.listaPerMezzi(id);
 			String a="";
 			for(int i=0;i<mezzi.size();i++){
 				a=a+" "+ mezzi.get(i).getNum_documento().toString();
 			}
 			if (mezzi.size() > 0) {
-				modelAndView.addObject("messaggio", "Cliente utilizzato, cancellazione impossibile. Il cliente è utilizzato nei documenti numero: "+a);
+				modelAndView.addObject("messaggio", "Mezzo utilizzato, cancellazione impossibile. Il mezzo è utilizzato nei documenti numero: "+a);
 			} else {
 			_mezzoManager.deleteById(id);			
 			modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");

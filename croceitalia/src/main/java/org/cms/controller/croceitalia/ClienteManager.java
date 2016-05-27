@@ -91,5 +91,31 @@ public class ClienteManager extends AssoDao{
 	public void save(Object obj) throws AssoException {
 		super.save(obj);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Cliente> listaPerTipo_clienti(String cerca) throws Exception {
+
+		EntityManager em = null;
+		try {
+			em = getEntityManager();
+			int xx = Integer.parseInt(cerca);
+			String queryString = "select cln from Cliente cln ";
+			queryString += " WHERE cln.tipo_cliente.id_tipo_cliente = :cerca ";
+			//queryString += " ORDER BY doc.anno_documento desc, doc.num_documento desc";
+			Query query = em.createQuery(queryString);
+			query.setParameter("cerca", xx);
+
+			List<Cliente> answer = query.getResultList();
+
+			return answer;
+
+		} catch (Exception e) {
+			AssoLogger.GetInstance()
+					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+			throw e;
+		} finally {
+			close(em);
+		}
+	}
 
 }

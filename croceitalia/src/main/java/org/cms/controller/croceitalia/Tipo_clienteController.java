@@ -12,53 +12,49 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import it.asso.util.AssoException;
 
 @Controller
-public class BancaController extends EditCmsController {
-
-	/**
-	 * 
-	 */
+public class Tipo_clienteController extends EditCmsController{
+	
 	@Autowired(required = true)
-	protected BancaManager _bancaManager;
-
+	protected Tipo_clienteManager _tipo_clienteManager;
+	
 	@Autowired(required = true)
-	protected DocumentoTestataManager _documentoManager;
-
+	protected ClienteManager _clienteManager;
+	
 	/**
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@Override
-	@RequestMapping(value = "banca/list", method = RequestMethod.GET)
+	@RequestMapping(value = "tipo_cliente/list", method = RequestMethod.GET)
 	protected ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 
 		// MODEL
-		List<Banca> bancheList = _bancaManager.caricaBanche();
-		modelAndView.addObject("Lista", bancheList);
+		List<Tipo_cliente> tipo_clientiList = _tipo_clienteManager.caricaTipo_clienti();
 
-		String viewName = "croceitalia/banca/list";
+		modelAndView.addObject("Lista", tipo_clientiList);
+
+		String viewName = "croceitalia/tipo_cliente/list";
 		modelAndView.setViewName(viewName);
 
 		return modelAndView;
 	}
-
-	@RequestMapping(value = "banca/list", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "tipo_cliente/list", method = RequestMethod.POST)
 	public ModelAndView list1(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		String cerca = request.getParameter("cerca");
 
 		try {
-			List<Banca> lista = _bancaManager.search(cerca);
+			List<Tipo_cliente> lista = _tipo_clienteManager.search(cerca);
 			modelAndView.addObject("Lista", lista);
 
-			String viewName = "croceitalia/banca/list";
+			String viewName = "croceitalia/tipo_cliente/list";
 			modelAndView.setViewName(viewName);
 
 			return modelAndView;
@@ -67,30 +63,30 @@ public class BancaController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-
-	@RequestMapping(value = "banca/save")
-	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Banca banca) {
+	
+	@RequestMapping(value = "tipo_cliente/save")
+	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Tipo_cliente tipo_cliente) {
 
 		ModelAndView modelAndView = getModelAndView(request);
-
+		
 		try {
-			_bancaManager.save(banca);
+			_tipo_clienteManager.save(tipo_cliente);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
 		} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
 
-		List<Banca> bancheList = _bancaManager.caricaBanche();
-		modelAndView.addObject("Lista", bancheList);
-
-		String viewName = "croceitalia/banca/list";
+		List<Tipo_cliente> tipo_clientiList = _tipo_clienteManager.caricaTipo_clienti();
+		modelAndView.addObject("Lista", tipo_clientiList);
+		
+		String viewName = "croceitalia/tipo_cliente/list";
 		modelAndView.setViewName(viewName);
 
 		return modelAndView;
 
 	}
-
-	@RequestMapping(value = "banca/create", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "tipo_cliente/create", method = RequestMethod.GET)
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView modelAndView = getModelAndView(request);
@@ -98,7 +94,7 @@ public class BancaController extends EditCmsController {
 			// List<SoggettoUtente> soggetti = userDao.caricaSoggettiUtente();
 			// modelAndView.addObject("soggetti", soggetti);
 
-			modelAndView.setViewName("croceitalia/banca/create");
+			modelAndView.setViewName("croceitalia/tipo_cliente/create");
 
 			return modelAndView;
 
@@ -106,21 +102,22 @@ public class BancaController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-
+	
 	/**
 	 * @param request
 	 * @param response
 	 * @param utente
 	 * @return
 	 */
-	@RequestMapping(value = "banca/doUpdate", method = RequestMethod.POST)
-	public ModelAndView doUpdate(HttpServletRequest request, HttpServletResponse response, Banca banca) {
+	@RequestMapping(value = "tipo_cliente/doUpdate", method = RequestMethod.POST)
+	public ModelAndView doUpdate(HttpServletRequest request, HttpServletResponse response, Tipo_cliente tipo_cliente) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
-			_bancaManager.update(banca);
+			_tipo_clienteManager.update(tipo_cliente);
 			request.setAttribute("esito", "ok");
-			String viewName = "forward:/edit/banca/update/" + banca.getId_banca();
+//			modelAndView.addObject("esito", "ok");
+			String viewName = "forward:/edit/tipo_cliente/update/" + tipo_cliente.getId_tipo_cliente();
 			modelAndView.setViewName(viewName);
 
 			return modelAndView;
@@ -129,22 +126,23 @@ public class BancaController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-
+	
 	/**
 	 * @param request
 	 * @param response
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "banca/update/{user_id}")
+	@RequestMapping(value = "tipo_cliente/update/{user_id}")
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("user_id") String user_id) {
+		//ciao
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
-			Banca banca = (Banca) _bancaManager.findById(user_id);
-			modelAndView.addObject("banca", banca);
-			modelAndView.setViewName("croceitalia/banca/update");
+			Tipo_cliente tipo_cliente = (Tipo_cliente) _tipo_clienteManager.findById(user_id);
+			modelAndView.addObject("tipo_cliente", tipo_cliente);
+			modelAndView.setViewName("croceitalia/tipo_cliente/update");
 
 			return modelAndView;
 
@@ -152,34 +150,34 @@ public class BancaController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-
-	@RequestMapping(value = "banca/delete/{id}", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "tipo_cliente/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("id") String id) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 
 		try {
-			List<Documento_Testata> banche = _documentoManager.listaPerBanche(id);
-			String a="";
-			for(int i=0;i<banche.size();i++){
-				a=a+"  "+ banche.get(i).getNum_documento().toString();
-			}
-			if (banche.size() > 0) {
-				modelAndView.addObject("messaggio", "Banca utilizzata, cancellazione impossibile. Il cliente è utilizzato nei documenti numero: "+a);
+			List<Cliente> clienti = _clienteManager.listaPerTipo_clienti(id);
+//			String a="";
+//			for(int i=0;i<patologie.size();i++){
+//				a=a+"  "+ patologie.get(i).getNum_documento().toString();
+//			}
+			if (clienti.size() > 0) {
+				modelAndView.addObject("messaggio", "Tipo cliente utilizzato, cancellazione impossibile.");
 				
 			} else {
-				_bancaManager.deleteById(id);
+				_tipo_clienteManager.deleteById(id);
 				modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
 			}
 		} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
 
-		List<Banca> bancheList = _bancaManager.caricaBanche();
-		modelAndView.addObject("Lista", bancheList);
+		List<Tipo_cliente> tipo_clientiList = _tipo_clienteManager.caricaTipo_clienti();
+		modelAndView.addObject("Lista", tipo_clientiList);
 
-		String viewName = "croceitalia/banca/list";
+		String viewName = "croceitalia/tipo_cliente/list";
 		modelAndView.setViewName(viewName);
 
 		return modelAndView;

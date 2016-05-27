@@ -91,5 +91,31 @@ public class PazienteManager extends AssoDao {
 
 		super.save(obj);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Paziente> listaPerPatologie(String cerca) throws Exception {
+
+		EntityManager em = null;
+		try {
+			em = getEntityManager();
+			int xx = Integer.parseInt(cerca);
+			String queryString = "select paz from Paziente paz ";
+			queryString += " WHERE paz.id_patologia.id_patologia = :cerca ";
+			//queryString += " ORDER BY doc.anno_documento desc, doc.num_documento desc";
+			Query query = em.createQuery(queryString);
+			query.setParameter("cerca", xx);
+
+			List<Paziente> answer = query.getResultList();
+
+			return answer;
+
+		} catch (Exception e) {
+			AssoLogger.GetInstance()
+					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+			throw e;
+		} finally {
+			close(em);
+		}
+	}
 
 }

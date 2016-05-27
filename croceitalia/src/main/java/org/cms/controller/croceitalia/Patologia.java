@@ -26,31 +26,22 @@ public class Patologia extends Model {
 
 	private String	descrizione;
 
+	
 	public Integer getId_patologia() {
-
 		return id_patologia;
 	}
-
 	public void setId_patologia(Integer id_patologia) {
-
 		this.id_patologia = id_patologia;
 	}
-
 	public String getDescrizione() {
-
 		return descrizione;
 	}
-
 	public void setDescrizione(String descrizione) {
-
 		this.descrizione = descrizione;
 	}
-
 	@Override
 	public String toString() {
-
 		String answer = "patologia descrizione=" + descrizione;
 		return answer;
-
 	}
 }

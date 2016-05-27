@@ -27,7 +27,6 @@
 		<class>org.cms.login.Profilo</class>
 		
 		<!-- Croce Italia -->
-		<class>org.cms.controller.croceitallia.Paziente</class>
 		
 		<properties>
 			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>

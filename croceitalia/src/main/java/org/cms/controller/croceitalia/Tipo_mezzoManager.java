@@ -14,25 +14,25 @@ import org.cms.jpa.dao.impl.AssoDao;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.ModelMap;
 
-@Repository("bancaManager")
+@Repository("tipo_mezzoManager")
 
-public class BancaManager extends AssoDao{
-	
+public class Tipo_mezzoManager extends AssoDao {
+
 	/**
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Banca> caricaBanche() {
+	public List<Tipo_mezzo> caricaTipo_mezzi() {
 
-		List<Banca> list = (List<Banca>) this.execNamedQuery("Banca.loadAll");
+		List<Tipo_mezzo> list = (List<Tipo_mezzo>) this.execNamedQuery("Tipo_mezzo.loadAll");
 
 		return list;
 
 	}
 
-	//@Override
+	// @Override
 	public Class<?> getEntityClass() {
-		return Banca.class;
+		return Tipo_mezzo.class;
 	}
 
 	/**
@@ -41,21 +41,21 @@ public class BancaManager extends AssoDao{
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Banca> search(String cerca) throws Exception {
+	public List<Tipo_mezzo> search(String cerca) throws Exception {
 
 		EntityManager em = null;
 		try {
 			em = getEntityManager();
 
-			String queryString = "select bnc from Banca bnc ";
-			queryString += " WHERE bnc.nome      LIKE :cerca  ";
+			String queryString = "select tmz from Tipo_mezzo tmz ";
+			queryString += " WHERE tmz.descrizione      LIKE :cerca  ";
 			Query query = em.createQuery(queryString);
 
 			query.setParameter("cerca", "%" + cerca + "%");
 
-//			queryString += " ORDER BY str.nome, str.telefono";
+			// queryString += " ORDER BY str.nome, str.telefono";
 
-			List<Banca> answer = query.getResultList();
+			List<Tipo_mezzo> answer = query.getResultList();
 
 			return answer;
 
@@ -73,7 +73,7 @@ public class BancaManager extends AssoDao{
 	 * 
 	 * @see org.cms.jpa.dao.impl.AssoDao#save(java.lang.Object)
 	 */
-	//@Override
+	// @Override
 	public void save(Object obj) throws AssoException {
 		super.save(obj);
 	}

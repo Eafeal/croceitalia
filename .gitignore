@@ -29,3 +29,9 @@ stampa-pdf/.project
 stampa-pdf/.settings/org.eclipse.jdt.core.prefs
 stampa-pdf/.settings/org.eclipse.m2e.core.prefs
 croceitalia/src/main/resources/config/app.properties
+.metadata/
+.recommenders/
+Servers/
+/
+*.rar
+*.project

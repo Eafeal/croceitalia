@@ -12,53 +12,49 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import it.asso.util.AssoException;
 
 @Controller
-public class BancaController extends EditCmsController {
-
-	/**
-	 * 
-	 */
+public class PatologiaController extends EditCmsController {
+	
 	@Autowired(required = true)
-	protected BancaManager _bancaManager;
-
+	protected PatologiaManager _patologiaManager;
+	
 	@Autowired(required = true)
-	protected DocumentoTestataManager _documentoManager;
-
+	protected PazienteManager _pazienteManager;
+	
 	/**
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@Override
-	@RequestMapping(value = "banca/list", method = RequestMethod.GET)
+	@RequestMapping(value = "patologia/list", method = RequestMethod.GET)
 	protected ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 
 		// MODEL
-		List<Banca> bancheList = _bancaManager.caricaBanche();
-		modelAndView.addObject("Lista", bancheList);
+		List<Patologia> patologieList = _patologiaManager.caricaPatologie();
 
-		String viewName = "croceitalia/banca/list";
+		modelAndView.addObject("Lista", patologieList);
+
+		String viewName = "croceitalia/patologia/list";
 		modelAndView.setViewName(viewName);
 
 		return modelAndView;
 	}
-
-	@RequestMapping(value = "banca/list", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "patologia/list", method = RequestMethod.POST)
 	public ModelAndView list1(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		String cerca = request.getParameter("cerca");
 
 		try {
-			List<Banca> lista = _bancaManager.search(cerca);
+			List<Patologia> lista = _patologiaManager.search(cerca);
 			modelAndView.addObject("Lista", lista);
 
-			String viewName = "croceitalia/banca/list";
+			String viewName = "croceitalia/patologia/list";
 			modelAndView.setViewName(viewName);
 
 			return modelAndView;
@@ -67,30 +63,30 @@ public class BancaController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-
-	@RequestMapping(value = "banca/save")
-	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Banca banca) {
+	
+	@RequestMapping(value = "patologia/save")
+	protected ModelAndView save(HttpServletRequest request, HttpServletResponse response, Patologia patologia) {
 
 		ModelAndView modelAndView = getModelAndView(request);
-
+		
 		try {
-			_bancaManager.save(banca);
+			_patologiaManager.save(patologia);
 			modelAndView.addObject("messaggio", "Inserimento riuscito");
 		} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
 
-		List<Banca> bancheList = _bancaManager.caricaBanche();
-		modelAndView.addObject("Lista", bancheList);
-
-		String viewName = "croceitalia/banca/list";
+		List<Patologia> patologieList = _patologiaManager.caricaPatologie();
+		modelAndView.addObject("Lista", patologieList);
+		
+		String viewName = "croceitalia/patologia/list";
 		modelAndView.setViewName(viewName);
 
 		return modelAndView;
 
 	}
-
-	@RequestMapping(value = "banca/create", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "patologia/create", method = RequestMethod.GET)
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView modelAndView = getModelAndView(request);
@@ -98,7 +94,7 @@ public class BancaController extends EditCmsController {
 			// List<SoggettoUtente> soggetti = userDao.caricaSoggettiUtente();
 			// modelAndView.addObject("soggetti", soggetti);
 
-			modelAndView.setViewName("croceitalia/banca/create");
+			modelAndView.setViewName("croceitalia/patologia/create");
 
 			return modelAndView;
 
@@ -106,21 +102,21 @@ public class BancaController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-
+	
 	/**
 	 * @param request
 	 * @param response
 	 * @param utente
 	 * @return
 	 */
-	@RequestMapping(value = "banca/doUpdate", method = RequestMethod.POST)
-	public ModelAndView doUpdate(HttpServletRequest request, HttpServletResponse response, Banca banca) {
+	@RequestMapping(value = "patologia/doUpdate", method = RequestMethod.POST)
+	public ModelAndView doUpdate(HttpServletRequest request, HttpServletResponse response, Patologia patologia) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
-			_bancaManager.update(banca);
+			_patologiaManager.update(patologia);
 			request.setAttribute("esito", "ok");
-			String viewName = "forward:/edit/banca/update/" + banca.getId_banca();
+			String viewName = "forward:/edit/patologia/update/" + patologia.getId_patologia();
 			modelAndView.setViewName(viewName);
 
 			return modelAndView;
@@ -129,22 +125,22 @@ public class BancaController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-
+	
 	/**
 	 * @param request
 	 * @param response
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "banca/update/{user_id}")
+	@RequestMapping(value = "patologia/update/{user_id}")
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("user_id") String user_id) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {
-			Banca banca = (Banca) _bancaManager.findById(user_id);
-			modelAndView.addObject("banca", banca);
-			modelAndView.setViewName("croceitalia/banca/update");
+			Patologia patologia = (Patologia) _patologiaManager.findById(user_id);
+			modelAndView.addObject("patologia", patologia);
+			modelAndView.setViewName("croceitalia/patologia/update");
 
 			return modelAndView;
 
@@ -152,34 +148,34 @@ public class BancaController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-
-	@RequestMapping(value = "banca/delete/{id}", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "patologia/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("id") String id) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 
 		try {
-			List<Documento_Testata> banche = _documentoManager.listaPerBanche(id);
-			String a="";
-			for(int i=0;i<banche.size();i++){
-				a=a+"  "+ banche.get(i).getNum_documento().toString();
-			}
-			if (banche.size() > 0) {
-				modelAndView.addObject("messaggio", "Banca utilizzata, cancellazione impossibile. Il cliente è utilizzato nei documenti numero: "+a);
+			List<Paziente> patologie = _pazienteManager.listaPerPatologie(id);
+//			String a="";
+//			for(int i=0;i<patologie.size();i++){
+//				a=a+"  "+ patologie.get(i).getNum_documento().toString();
+//			}
+			if (patologie.size() > 0) {
+				modelAndView.addObject("messaggio", "Patologia utilizzata, cancellazione impossibile.");
 				
 			} else {
-				_bancaManager.deleteById(id);
+				_patologiaManager.deleteById(id);
 				modelAndView.addObject("messaggio", "Cancellazione effettuata correttamente");
 			}
 		} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
 
-		List<Banca> bancheList = _bancaManager.caricaBanche();
-		modelAndView.addObject("Lista", bancheList);
+		List<Patologia> patologieList = _patologiaManager.caricaPatologie();
+		modelAndView.addObject("Lista", patologieList);
 
-		String viewName = "croceitalia/banca/list";
+		String viewName = "croceitalia/patologia/list";
 		modelAndView.setViewName(viewName);
 
 		return modelAndView;

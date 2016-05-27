@@ -86,5 +86,31 @@ public class StrutturaManager extends AssoDao {
 	public void save(Object obj) throws AssoException {
 		super.save(obj);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Struttura> listaPerTipo_strutture(String cerca) throws Exception {
+
+		EntityManager em = null;
+		try {
+			em = getEntityManager();
+			int xx = Integer.parseInt(cerca);
+			String queryString = "select str from Struttura str ";
+			queryString += " WHERE str.id_tipologia_struttura.id_tipologia_struttura = :cerca ";
+			//queryString += " ORDER BY doc.anno_documento desc, doc.num_documento desc";
+			Query query = em.createQuery(queryString);
+			query.setParameter("cerca", xx);
+
+			List<Struttura> answer = query.getResultList();
+
+			return answer;
+
+		} catch (Exception e) {
+			AssoLogger.GetInstance()
+					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+			throw e;
+		} finally {
+			close(em);
+		}
+	}
 
 }
