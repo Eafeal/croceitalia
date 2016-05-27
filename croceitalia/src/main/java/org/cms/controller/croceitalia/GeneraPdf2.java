@@ -367,7 +367,7 @@ public class GeneraPdf2 {
 
 			cb.beginLayer(nested);
 			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getPaziente().getCognome().toString(), piusmallFont), 158, b - a,
+					new Phrase(row.get(_indiceRiga).getPaziente().getNominativo().toString(), piusmallFont), 158, b - a,
 					0);
 			cb.beginLayer(nested);
 
@@ -375,16 +375,14 @@ public class GeneraPdf2 {
 
 			cb.beginLayer(nested);
 			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getP_partenza() + "-" + row.get(0).getP_arrivo(), piusmallFont),
-					260, c - a, 0);
+					new Phrase(row.get(_indiceRiga).getPercorsoAndata(), piusmallFont), 260, c - a, 0);
 			cb.beginLayer(nested);
 
 			// //////////////// percorso ritorno//////////////////
 
 			cb.beginLayer(nested);
 			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getP_arrivo() + "-" + row.get(0).getP_partenza(), piusmallFont),
-					260, d - a, 0);
+					new Phrase(row.get(_indiceRiga).getPercorsoRitorno(), piusmallFont), 260, d - a, 0);
 			cb.beginLayer(nested);
 
 			// //////////////// ore //////////////////
@@ -474,8 +472,7 @@ public class GeneraPdf2 {
 		// //////////// percorso ritorno/////////////
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getP_arrivo() + "-" + row.get(0).getP_partenza(), piusmallFont), 260,
-				538, 0);
+				new Phrase(row.get(_indiceRiga).getPercorsoRitorno(), piusmallFont), 260, 538, 0);
 		cb.beginLayer(nested);
 	}
 
@@ -485,8 +482,7 @@ public class GeneraPdf2 {
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getP_partenza() + "-" + row.get(0).getP_arrivo(), piusmallFont), 260,
-				548, 0);
+				new Phrase(row.get(_indiceRiga).getPercorsoAndata(), piusmallFont), 260, 548, 0);
 		cb.beginLayer(nested);
 	}
 
@@ -496,7 +492,7 @@ public class GeneraPdf2 {
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getPaziente().getCognome(), piusmallFont), 158, 544, 0);
+				new Phrase(row.get(_indiceRiga).getPaziente().getNominativo(), piusmallFont), 158, 544, 0);
 		cb.beginLayer(nested);
 	}
 

@@ -1,5 +1,8 @@
 package org.cms.controller.croceitalia;
 
+import it.asso.util.AssoException;
+import it.asso.util.AssoLogger;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,9 +10,6 @@ import javax.persistence.Query;
 
 import org.cms.jpa.dao.impl.AssoDao;
 import org.springframework.stereotype.Repository;
-
-import it.asso.util.AssoException;
-import it.asso.util.AssoLogger;
 
 @Repository("documento_righe_manager")
 public class DocumentoRigheManager extends AssoDao {
@@ -30,7 +30,7 @@ public class DocumentoRigheManager extends AssoDao {
 	// recupero le righe dei documenti
 
 	@SuppressWarnings("unchecked")
-	public List<Documento_Righe> caricaDocumento_Row_byId(String idd) {
+	public List<Documento_Righe> caricaDocumento_Row_byId(String idd) throws Exception {
 
 		EntityManager em = null;
 		int id = Integer.parseInt(idd);
