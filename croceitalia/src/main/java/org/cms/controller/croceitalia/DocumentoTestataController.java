@@ -1,8 +1,12 @@
 package org.cms.controller.croceitalia;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import it.asso.util.ApplConfig;
 import it.asso.util.AssoException;
+import it.asso.util.AssoLogger;
+import it.asso.util.ModelUser;
+import it.asso.util.Utente_itf;
 
 @Controller
 public class DocumentoTestataController extends EditCmsController {
@@ -61,6 +69,14 @@ public class DocumentoTestataController extends EditCmsController {
 		// _documentoTestataManager.listaDocumento_Testata();
 		// modelAndView.addObject("listaDocumenti", documenti);
 
+		/*
+		 * Documento_Righe r = new Documento_Righe(); Documento_Righe riga =
+		 * (Documento_Righe) _documentoRigheManager
+		 * .findById(r.getFk_id_documento_testata().toString());
+		 * 
+		 * modelAndView.addObject("riga", riga);
+		 */
+
 		List<Documento_Testata> documenti = _documentoTestataManager.descrescente();
 		modelAndView.addObject("listaDocumenti", documenti);
 
@@ -79,49 +95,30 @@ public class DocumentoTestataController extends EditCmsController {
 		return modelAndView;
 	}
 
-	// NON MI SERVE
-	@RequestMapping(value = "documento_testata/create", method = RequestMethod.GET)
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView modelAndView = getModelAndView(request);
-		try {
-			List<Documento_Testata> documenti = _documentoTestataManager.descrescente();
-			modelAndView.addObject("listaDocumenti", documenti);
-
-			List<Cliente> clientiList = _clienteManager.caricaClienti();
-			modelAndView.addObject("listaClienti", clientiList);
-
-			List<Banca> bancheList = _bancaManager.caricaBanche();
-			modelAndView.addObject("listaBanca", bancheList);
-
-			List<Mezzo> mezziList = _mezzoManager.caricaMezzi();
-			modelAndView.addObject("listaMezzo", mezziList);
-
-			String viewName = "croceitalia/documento_testata/list";
-			modelAndView.setViewName(viewName);
-
-			modelAndView.setViewName("croceitalia/documento_testata/create");
-
-			return modelAndView;
-
-		} catch (Throwable errore) {
-			return error(modelAndView, errore);
-		}
-
-	}
-
 	@RequestMapping(value = "documento_testata/save2")
 	protected ModelAndView save2(HttpServletRequest request, HttpServletResponse response,
 			Documento_Testata documento) {
 
 		ModelAndView modelAndView = getModelAndView(request);
+
+		Utente_itf utente = ModelUser.get();// restituisce l'utente loggato
+
 		String messaggio = "";
 		try {
 
 			Integer num_doc = _documentoTestataManager.nextNumDocumento(documento.getAnno_documento());
 			Date data_doc = _documentoTestataManager.nextDataDocumento(documento.getAnno_documento());
 			documento.setNum_documento(num_doc);
-			documento.setData_documento(data_doc);
+			String data = request.getParameter("data_documento");
+
+			if (data == "") {
+				documento.setData_documento(data_doc);
+			}
+
+			documento.setUsercrea(utente.getUserId());
+			documento.setUserultv(utente.getUserId());
+			documento.setDatacrea(new Date());
+			documento.setDataultv(new Date());
 
 			_documentoTestataManager.save(documento);
 
@@ -146,12 +143,27 @@ public class DocumentoTestataController extends EditCmsController {
 
 	// DEVE PRIMA FUNZIONARE
 	@RequestMapping(value = "documento_testata/doUpdate", method = RequestMethod.POST)
-	public ModelAndView doUpdate(HttpServletRequest request, HttpServletResponse response, Documento_Righe righe) {
+	public ModelAndView doUpdate(HttpServletRequest request, HttpServletResponse response,
+			Documento_Testata documento) {
 
 		ModelAndView modelAndView = getModelAndView(request);
+		Utente_itf utente = ModelUser.get();// restituisce l'utente loggato
 
 		try {
-			_documentoRigheManager.update(righe);
+			Documento_Testata documento1 = (Documento_Testata) _documentoTestataManager
+					.findById(documento.getId_documento_testata().toString());
+
+			// documento1.setStato(documento.getStato());
+
+			documento1.setData_documento(documento.getData_documento());
+			documento1.setMezzo(documento.getMezzo());
+			documento1.setCliente(documento.getCliente());
+			documento1.setBanca(documento.getBanca());
+
+			documento1.setUserultv(utente.getUserId());
+			documento1.setDataultv(new Date());
+
+			_documentoTestataManager.update(documento1);
 			// _documentoTestataManager.update(documento);
 			// _strutturaManager.update(str);
 
@@ -159,9 +171,8 @@ public class DocumentoTestataController extends EditCmsController {
 
 			// messaggio = "OK,"+documento.getNum_documento()+"
 			// "+documento.getAnno_documento()+","+documento.getId_documento_testata();
-			// String viewName = "forward:/edit/documento_testata/list/" +
-			// documento.getId_documento_testata();
-			// modelAndView.setViewName(viewName);
+			String viewName = "forward:/edit/documento_testata/update/" + documento.getId_documento_testata();
+			modelAndView.setViewName(viewName);
 			return modelAndView;
 
 		} catch (Throwable errore) {
@@ -215,27 +226,29 @@ public class DocumentoTestataController extends EditCmsController {
 		ModelAndView modelAndView = getModelAndView(request);
 
 		_documentoTestataManager.chiudiDocumento(id);
-
-		List<Documento_Testata> documenti = _documentoTestataManager.descrescente();
-		modelAndView.addObject("listaDocumenti", documenti);
-
-		List<Cliente> clientiList = _clienteManager.caricaClienti();
-		modelAndView.addObject("listaClienti", clientiList);
-
-		List<Banca> bancheList = _bancaManager.caricaBanche();
-		modelAndView.addObject("listaBanca", bancheList);
-
-		List<Mezzo> mezziList = _mezzoManager.caricaMezzi();
-		modelAndView.addObject("listaMezzo", mezziList);
-
-		String viewName = "croceitalia/documento_testata/list";
-
-		// String viewName = "redirect:/edit/documento_testata/update/" + id;
+		/*
+		 * List<Documento_Testata> documenti =
+		 * _documentoTestataManager.descrescente();
+		 * modelAndView.addObject("listaDocumenti", documenti);
+		 * 
+		 * List<Cliente> clientiList = _clienteManager.caricaClienti();
+		 * modelAndView.addObject("listaClienti", clientiList);
+		 * 
+		 * List<Banca> bancheList = _bancaManager.caricaBanche();
+		 * modelAndView.addObject("listaBanca", bancheList);
+		 * 
+		 * List<Mezzo> mezziList = _mezzoManager.caricaMezzi();
+		 * modelAndView.addObject("listaMezzo", mezziList);
+		 * 
+		 * String viewName = "croceitalia/documento_testata/list";
+		 */
+		String viewName = "redirect:/edit/documento_testata/update/" + id;
 		modelAndView.setViewName(viewName);
 
 		return modelAndView;
 
 	}
+	// STAMPA PDF DA DETTAGLIO
 
 	@RequestMapping(value = "documento_testata/pdfprint/{id}", method = RequestMethod.GET)
 	public ModelAndView pdf(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
@@ -271,7 +284,105 @@ public class DocumentoTestataController extends EditCmsController {
 		modelAndView.setViewName(viewName);
 
 		return modelAndView;
-
 	}
+
+	// STAMPA PDF DA LISTA
+	@RequestMapping(value = "documento_testata/pdfprint2/{id}", method = RequestMethod.GET)
+	public ModelAndView pdf2(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+
+		Documento_Testata documentoTestato = (Documento_Testata) _documentoTestataManager.findById(id);
+
+		List<Documento_Righe> righeDocumento = null;
+		try {
+			righeDocumento = _documentoRigheManager.caricaRigheDocumento(documentoTestato.getId_documento_testata());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		byte[] pdf = _documentoTestataManager.getPdf(documentoTestato, righeDocumento);// non
+																						// CAPISCO
+
+		List<Documento_Testata> documenti = _documentoTestataManager.descrescente();
+		modelAndView.addObject("listaDocumenti", documenti);
+
+		List<Cliente> clientiList = _clienteManager.caricaClienti();
+		modelAndView.addObject("listaClienti", clientiList);
+
+		List<Banca> bancheList = _bancaManager.caricaBanche();
+		modelAndView.addObject("listaBanca", bancheList);
+
+		List<Mezzo> mezziList = _mezzoManager.caricaMezzi();
+		modelAndView.addObject("listaMezzo", mezziList);
+
+		String viewName = "croceitalia/documento_testata/list";
+		modelAndView.setViewName(viewName);
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "documento_testata/view/{nomefile}", method = RequestMethod.GET)
+	protected ModelAndView visual(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("nomefile") String nomefile) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+
+		try {
+			response.setContentType("application/pdf");
+			ServletOutputStream out = response.getOutputStream();
+
+			// fileDao.writeOn(nomefile, out);
+			/////////
+			FileInputStream inputStream = null;
+			try {
+
+				String path = ApplConfig.GetParameter("RepositoryDocumentiGenerati") + nomefile + ".pdf";
+				File resource = new File(path);
+
+				if (!resource.exists()) {
+					throw new AssoException("Richiesto file inesistente: " + path);
+				}
+
+				AssoLogger.GetInstance().logInfo("Scaricata risorsa: " + path);
+
+				inputStream = new FileInputStream(resource);
+
+				byte[] b = new byte[1];
+				while ((inputStream.read(b)) > 0) {
+					out.write(b);
+				}
+
+			} catch (Throwable t) {
+				throw new AssoException(t);
+			} finally {
+				if (inputStream != null) {
+					try {
+						inputStream.close();
+					} catch (IOException e) {
+						AssoLogger.GetInstance().logError(e);
+					}
+				}
+			}
+
+			////////
+
+			out.flush();
+			out.close();
+
+			// VALORI DI OUTPUT
+			return null;
+
+		} catch (Throwable errore) {
+			try {
+				response.reset();
+			} catch (Throwable t) {
+				AssoLogger.GetInstance().logInfo("Non sono riuscito a fare la reset del response");
+			}
+			return error(modelAndView, errore);
+		}
+	}
+	// ----------------------------------
 
 }

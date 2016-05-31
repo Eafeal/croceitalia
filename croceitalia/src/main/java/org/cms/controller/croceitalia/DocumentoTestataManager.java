@@ -1,5 +1,6 @@
 package org.cms.controller.croceitalia;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -240,6 +241,30 @@ public class DocumentoTestataManager extends AssoDao {
 		}
 	}
 
+	public void aggiornaTotale(String id, BigDecimal importoRiga) {
+		Documento_Testata documento = (Documento_Testata) findById(id);
+		try {
+			documento.setTotale(documento.getTotale().add(importoRiga));
+			documento.setImponibile(documento.getImponibile().add(importoRiga));
+			update(documento);
+		} catch (AssoException e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	public void sottraiTotale(String id, BigDecimal importoRiga) {
+		Documento_Testata documento = (Documento_Testata) findById(id);
+		try {
+			documento.setTotale(documento.getTotale().subtract(importoRiga));
+			documento.setImponibile(documento.getImponibile().subtract(importoRiga));
+			update(documento);
+		} catch (AssoException e) {
+
+			e.printStackTrace();
+		}
+	}
+
 	public byte[] getPdf(Documento_Testata testata, List<Documento_Righe> righe) {
 
 		if (!testata.isPdfGenerato()) {
@@ -250,10 +275,13 @@ public class DocumentoTestataManager extends AssoDao {
 			System.out.println("----------------------------------");
 
 			try {
-
-				GeneraPdf2 generaPdf2 = new GeneraPdf2("rimborso_num" + testata.getNum_documento() + ".pdf", testata,
-						righe);
+				String nomefile = "rimborso_num" + testata.getNum_documento() + ".pdf";
+				GeneraPdf2 generaPdf2 = new GeneraPdf2(nomefile, testata, righe);
 				generaPdf2.stampa();
+
+				testata.setPdf_generato("S");
+				testata.setNome_file(nomefile);
+				update(testata);
 
 				// leggere il pdf generato
 				// todo

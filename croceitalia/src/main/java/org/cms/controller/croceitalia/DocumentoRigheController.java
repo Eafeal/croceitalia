@@ -24,7 +24,10 @@ public class DocumentoRigheController extends EditCmsController {
 	 * 
 	 */
 	@Autowired(required = true)
-	protected DocumentoRigheManager _documentoRiga;
+	protected DocumentoTestataManager _documentoTestataManager;
+
+	@Autowired(required = true)
+	protected DocumentoRigheManager _documentoRigaManager;
 
 	@Autowired(required = true)
 	protected PazienteManager _pazienteManager;
@@ -44,7 +47,7 @@ public class DocumentoRigheController extends EditCmsController {
 		ModelAndView modelAndView = getModelAndView(request);
 
 		// MODEL
-		List<Documento_Righe> documento = _documentoRiga.caricaDocumento_Row();
+		List<Documento_Righe> documento = _documentoRigaManager.caricaDocumento_Row();
 
 		// List<Paziente> paziente = _documentoRiga.caricaPazienti();
 
@@ -88,7 +91,8 @@ public class DocumentoRigheController extends EditCmsController {
 			riga.setP_partenza(paz.getComune());
 			riga.setP_arrivo(str.getDescrizione_breve());
 
-			_documentoRiga.save(riga);
+			_documentoRigaManager.save(riga);
+			_documentoTestataManager.aggiornaTotale(riga.getFk_id_documento_testata().toString(), riga.getImporto());
 
 			String viewName = "redirect:/edit/documento_testata/update/" + riga.getFk_id_documento_testata();
 			modelAndView.setViewName(viewName);

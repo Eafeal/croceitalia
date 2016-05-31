@@ -109,7 +109,7 @@ public class Documento_Testata {
 		datacrea = new Date();
 		dataultv = new Date();
 
-		CIG = "";
+		// CIG = "";
 
 	}
 

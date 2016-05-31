@@ -1,0 +1,260 @@
+/* STILE PRINCIPALE */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+td{
+	padding-bottom: 0px;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+	text-align:center;
+    background-color: #5BC0DE;
+    color: white;
+}
+
+.num_seduteCrea{
+	text-align:right;
+}
+.mese_seduteCrea{
+	/*width: 148px;*/
+}
+.km_percorsiCrea{
+	text-align:right;
+}
+.pazienteCrea{
+	
+}
+.strutturaCrea{
+	
+}
+.percorsoCrea{
+	
+}
+.num_oreCrea{
+	text-align:right;
+}
+.km_totaliCrea{
+	text-align:right;
+}
+.quota_fissaCrea{
+	text-align:right;
+}
+.costokmCrea{
+	text-align:right;
+}
+.franchigiaCrea{
+	text-align:right;
+}
+.dirittto_uscitaCrea{
+	text-align:right;
+}
+.importoCrea{
+	text-align:right;
+}
+.num_sedute{
+	width: 34px;
+	text-align: right;
+}
+
+.mese_sedute{
+	width: 69px;
+}
+.km_percorsi{
+	width: 48px;
+	text-align: right;
+}
+.trasportato{
+	width:170px;
+}
+.struttura{
+	width: 148px;
+}
+.percorso{
+	width: 169px;
+}
+.num_ore{
+	width:30px;
+	text-align: right;
+}
+.quota_fissa{
+	width:56px;
+	text-align: right;
+}
+.dirittto_uscita{
+	width:36px;
+	text-align: right;
+}
+.importo{
+	width:75px;
+	text-align: right;
+}
+
+/* body{
+	
+	background-color:#A6A6A6;
+	} */
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 60%;
+  position: relative;
+  transition: all 1s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+	position: relative;
+	padding: 10px 40px;
+ 	margin: 0px 10px 10px 0px;
+ 	float: left;
+	border-radius: 5px;
+	font-family: 'Helvetica', cursive;
+	font-size: 25px;
+	color: #FFF;
+	text-decoration: none;	
+}
+
+.blue
+{
+/*	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9; */
+	
+	background-color: #5bc0de;
+    border-bottom: 5px solid #53A4C3;
+    text-shadow: 0px -2px #53A4C3;
+    margin-top: 30px;
+}
+
+.action-button:active
+{
+	transform: translate(0px,5px);
+  	-webkit-transform: translate(0px,5px);
+	border-bottom: 1px solid;
+}
+label{
+	color:#5BC0DE;
+}
+
+.grigio{
+	border:0px;
+}
+#mezzo{
+	background-color:#F2F2F2;
+}
+#banca{ 
+	background-color:#F2F2F2;
+}
+
+
+button[class^="btn"] {
+	display: inline-block;
+	border-radius: 3px;
+	cursor: pointer;
+	font-weight: 500;
+	font-family: 'Open sans', sans-serif;
+	transition:0.14s;
+}
+.btn {
+	padding:7px 13px;
+	background: white;
+	border-width: 2px;
+	border-style: solid;
+}
+
+.btn-default {
+	border-color: #5BC0DE;
+	color: #5BC0DE;
+	
+	margin-right: 9px;
+    margin-top: -42px;
+}
+
+.btn:hover {
+
+	color:white;
+}
+.btn-default:hover {
+	background: #5BC0DE;
+}
+.btn-vlarge {
+	padding: 17px 62px;
+    font-size: 20px;
+    float: right;
+}
+
+
+h3 {
+    font-size: 24.5px;
+    color: #5BC0DE;
+}
+
+select{
+    width: 184px;
+}

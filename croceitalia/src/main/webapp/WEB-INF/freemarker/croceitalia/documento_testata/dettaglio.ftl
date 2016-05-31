@@ -8,6 +8,7 @@
 
     <!-- Le styles -->
     <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/documento_riga.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -16,6 +17,7 @@
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/documento_riga.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -30,163 +32,6 @@
                                    <link rel="shortcut icon" href="ico/favicon.png">
   <style type="text/css"></style><!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.--><script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/arizonia:n4:default.js" type="text/javascript"></script>
 </head>
-<style>
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-td{
-	padding-bottom: 0px;
-}
-tr:nth-child(even){background-color: #f2f2f2}
-
-th {
-	text-align:center;
-    background-color: #5BC0DE;
-    color: white;
-}
-
-.num_seduteCrea{
-	text-align:right;
-}
-.mese_seduteCrea{
-	/*width: 148px;*/
-}
-.km_percorsiCrea{
-	text-align:right;
-}
-.pazienteCrea{
-	
-}
-.strutturaCrea{
-	
-}
-.percorsoCrea{
-	
-}
-.num_oreCrea{
-	text-align:right;
-}
-.km_totaliCrea{
-	text-align:right;
-}
-.quota_fissaCrea{
-	text-align:right;
-}
-.costokmCrea{
-	text-align:right;
-}
-.franchigiaCrea{
-	text-align:right;
-}
-.dirittto_uscitaCrea{
-	text-align:right;
-}
-.importoCrea{
-	text-align:right;
-}
-.num_sedute{
-	width: 48px;
-}
-
-.mese_sedute{
-	width: 80px;
-}
-.km_percorsi{
-	width: 48px;
-}
-.trasportato{
-	width:148px;
-}
-.struttura{
-	width: 148px;
-}
-.percorso{
-	width: 153px;
-}
-.num_ore{
-	width:50px;
-}
-.quota_fissa{
-	width:60px;
-}
-.dirittto_uscita{
-	width:60px;
-}
-.importo{
-	width:75px;
-}
-
-/* body{
-	
-	background-color:#A6A6A6;
-	} */
-
-
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-}
-
-.popup {
-  margin: 70px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 80%;
-  position: relative;
-  transition: all 1s ease-in-out;
-}
-
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
-  }
-  .popup{
-    width: 70%;
-  }
-}
-</style>
 
   <body cz-shortcut-listen="true">
 
@@ -213,24 +58,26 @@ th {
     <div class="container">
      
 <div>
-
- <form id="TdocumentoForm" name="TdocumentoForm" action="/edit/documento_testata/save2" method="post" >
+<fieldset>
+	<legend style="color:#5BC0DE;">Documento Testata</legend>
+ <form id="updateForm" name="updateForm" action="/edit/documento_testata/doUpdate" method="post">
                    <table>
+                    <input type="hidden" name="id_documento_testata" id="id_documento_testata" value="${documento.getId_documento_testata()}">
                         <tbody>
                         <tr class="prop">
                                 <td align="top" class="num"><label for="num"><h4>Numero Documento</h4></label></td>                             
-                                <td align="top" class="value">
-                                    <input type="text" id="num" name="num_documento"  size="25" maxlength="11" value="${documento.getNum_documento()}" readonly/><b> - </b><input type="text" id="anno_documento" name="anno_documento"  size="4" maxlength="60" value="2016" readonly/> del <input type="text" value="${documento.getData_documento()?string["dd-MM-yyyy"]}">                                           	 
+                                <td align="top" class="value" style="float:right;">
+                                    <input type="text" id="num" name="num_documento"  size="3" maxlength="11" value="${documento.getNum_documento()}" style="border:0px; text-align:right;" readonly/><b> - </b><input type="text" id="anno_documento" name="anno_documento"  size="4" maxlength="60" value="2016" style="border:0px; text-align:center;" readonly/> del <input type="text" id="data_documento" name="data_documento" value="${documento.getData_documento()?string["dd-MM-yyyy"]}" style="border:0px; background-color:#F2F2F2; text-align:right;">                                           	 
                                 </td> 
                                
                             </tr>
          
                              <tr class="prop">         
                                 <td align="top" class="num"><label for="anno_documento"><h4>Mese di Riferimento</h4></label></td>                             
-                                <td align="top" class="value"> 
-                                <select id="mese_documento" name="mese_documento" required>
-	                                    <option value="">Seleziona..</option>
-	                                        <option value="Gennaio">Gennaio</option>
+                                <td align="top" class="value" style="float:right;"> 
+                                <select class="grigio" id="mese" name="mese_documento" required>                      
+								        	<option value = "" >${documento.getMese_documento()}</option>
+								    		<option value="Gennaio">Gennaio</option>
 	                                        <option value="Febbraio">Febbraio</option>
 	                                        <option value="Marzo">Marzo</option>
 	                                        <option value="Aprile">Aprile</option>
@@ -242,17 +89,15 @@ th {
 	                                        <option value="Ottobre">Ottobre</option>
 	                                        <option value="Novembre">Novembre</option>
 	                                        <option value="Dicembre">Dicembre</option>
-	                                        
 	                                </select>
 	                              </td>
                             </tr>       
                           <tr class="prop">
                                 <td align="top" class="fk_id_mezzo"><label for="fk_id_mezzo"><h4>Mezzo</h4></label></td>                             
-                                <td align="top" class="value">
-	                                <select id="fk_id_mezzo" name="fk_id_mezzo" required>
-	                                    <option value="">Seleziona..</option>
+                                <td align="top" class="value" style="float:right;">
+	                                <select class="grigio" id="mezzo" name="fk_id_mezzo" required>
 	                                    <#list listaMezzo as mezzo>
-	                                        <option value="${mezzo.getId_mezzo()}">${mezzo.getTarga()} - ${mezzo.getDescrizione()}</option>
+	                                        <option value="${mezzo.getId_mezzo()}" <#if documento.getFk_id_mezzo() == mezzo.getId_mezzo()> selected </#if> >${mezzo.getTarga()} - ${mezzo.getDescrizione()}</option>
 	                                    </#list>                   
 	                                </select>
 	                            </td>
@@ -260,22 +105,20 @@ th {
 	                        
 	                        <tr class="prop">
                                 <td align="top" class="fk_id_mezzo"><label for="fk_id_cliente"><h4>Cliente</h4></label></td>                             
-                                <td align="top" class="value">
-									<select id="fk_id_cliente" name="fk_id_cliente" required>
-	                                    <option value="">Seleziona..</option>
+                                <td align="top" class="value" style="float:right;">
+									<select class="grigio" id="cliente" name="fk_id_cliente" required>
 	                                    <#list listaClienti as cliente>
-	                                        <option value="${cliente.getId_cliente()}">${cliente.getRagione_sociale()}</option>
+	                                        <option value="${cliente.getId_cliente()}" <#if documento.getFk_id_cliente() == cliente.getId_cliente()> selected </#if>>${cliente.getRagione_sociale()}</option>
 	                                    </#list>
 	                                </select>
 	                            </td>
                             </tr>             
                              <tr class="prop">
                                 <td align="top" class="fk_id_mezzo"><label for="fk_id_banca"><h4>Banca di Appoggio</h4></label></td>                             
-                                <td align="top" class="value">
-	                                <select id="fk_id_banca" name="fk_id_banca" required>
-	                                    <option value="">Seleziona..</option>
+                                <td align="top" class="value" style="float:right;">
+	                                <select class="grigio" id="banca" name="fk_id_banca" required>
 	                                    <#list listaBanca as banca>
-	                                        <option value="${banca.getId_banca()}">${banca.getNome()}</option>
+	                                        <option value="${banca.getId_banca()}" <#if documento.getFk_id_banca() == banca.getId_banca()> selected </#if> >${banca.getNome()}</option>
 	                                    </#list>
 	                                </select>
                  				</td>
@@ -284,15 +127,38 @@ th {
                         </tbody>                            
                     </table>
                     <br/>
-                <div class="buttons">
-                    <span class="button"><button name="create" class="save btn btn-default btn-vlarge" value="Create" id="create"/>Inserisci</button></span>
-                </div>
-            </form>
+                <#if !documento.isChiuso()>
+				<a style="text-decoration: none; float:right;" href="#" id="update" class="action-button shadow animate blue" onclick="return confirm('Sei sicuro?');">Aggiorna</a>
+				</#if>
+			</form>
 
+                <div class="buttons">               
+	               
+	                
+                 	<#if documento.isChiuso()>
+                 	<a style="text-decoration: none;margin-top:10px; float:right;" href="#" id="chiudi" class="action-button shadow animate blue">Chiudi</a>
+	                </#if>
+	                
+	                
+	            <#if !documento.isChiuso()>
+                <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" >
+                		<a style="text-decoration: none; margin-top:10px;" href="#" id="chiusura" class="action-button shadow animate blue">Chiusura</a>               
+                </form>
+                </#if>
+					<#if documento.isChiuso()>
+						<form name="stampaForm" action="/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" method="get" >
+							<a style="text-decoration: none; margin-top:10px;" href="#" id="stampaPDF" class="action-button shadow animate blue">Stampa PDF</a> 
+						<!--<span class="button"><input type="submit" value="Stampa PDF" class="delete" onclick="return confirm('Sei sicuro?');"/></span> -->
+						</form>
+					</#if>
+                </div>
+            
+</fieldset>
 </div>
 			
 			 <div class="dialog">  
-   	  			<article class="tabella">
+   	  			<article class="tabellaDettaglio">
+      			
       			
       			<table width="100%" border="0">
   					<tbody>
@@ -311,7 +177,6 @@ th {
 					    <#assign i=0 />
 							<#list righe as righe>
 						    	<#assign i=i+1 />
-					    
     					<tr onclick="javascript://document.location='/edit/documento_testata/update/${righe.getId_documento_righe()}'">					     
 					     	<td><input value="${righe.getNum_sedute()}" type="text" name="num_sedute${i}" id="num_sedute${i}" class="num_sedute" size="5" maxlength="2" readonly></td>
 					      	<td><input value="${righe.getMese()}" type="text" name="mese${i}" id="mese_sedute${i}" class="mese_sedute"  readonly></td>
@@ -329,28 +194,12 @@ th {
     
   					</tbody>
 				</table>
-                 
-                <form action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" >
-                        <span class="button"><input type="submit" value="Chiudi" class="delete" /></span>
-                       
-                 </form>
-               
-               <#if documento.isChiuso()>
-				<form action="/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" method="get" >
-                        <span class="button"><input type="submit" value="Stampa PDF" class="delete" onclick="return confirm('Sei sicuro?');  " /></span>
-                 </form>
-                 </#if>
-               
- <script>  
- function prova(){
- 	
- }
- </script>     
+            
 <!--- CREAZIONE RIGA --> 
 
 <div id="gestioneRiga" class="overlay">
 	<div class="popup">
-		<h2>Nuova Riga</h2>
+		<h2 style="color:#5bc0de;">Nuova Riga</h2>
 		<a class="close" href="#" id="finisci">&times;</a>
 		<div class="content">
             <form id="rigaForm" name="rigaForm" action="/edit/documento_righe/save" method="post" >
@@ -386,13 +235,13 @@ th {
 	                            </td>
 	                            <td align="top" class="kmpercorso"><label for="km_percorso">Km Percorso</label></td>
 	                            <td valign="top" class="value">
-	                               	<input type="text" name="km_percorso" id="km_percorso" class="km_percorsiCrea" value="0" onchange="javascript:totaleImporto();">
+	                               	<input type="text" name="km_percorso" id="km_percorso" class="km_percorsiCrea" value="" onchange="javascript:totaleImporto();">
 	                            </td>
 	                       </tr>
 	                       <tr class="prop">
 	                            <td align="top" class="sedute"><label for="num_sedute">Num sedute</label></td>
 	                            <td valign="top" class="value">
-	                                <input type="text" name="num_sedute" id="num_sedute" class="num_seduteCrea"  onchange="totaleImporto()" value="0">
+	                                <input type="text" name="num_sedute" id="num_sedute" class="num_seduteCrea"  onchange="totaleImporto()" value="">
 							     </td>
 							    <td align="top" class="mese"><label for="mese">Mese Sedute</label></td>
 	                            <td valign="top" class="value">
@@ -457,151 +306,23 @@ th {
 					      			<input type="text" name="importo_s" id="importo_s"  class="importoCrea" value="0" readonly>
 	                            </td>
 	                       </tr>
-	                        
-
-           </tbody>                            
+           				</tbody>                            
                     </table>
                     <br/>
                 <div class="buttons">
                     <span class="button"><button name="create" class="save btn btn-default btn-vlarge" id="createRiga"/>Salva</button></span>
                 </div>
+                
             </form>
 
 
 		</div>
 	</div>
 </div>
-<script>
-function totaleImporto()
-{
-
-rigaForm.importo_s.value = 0;
-rigaForm.km_totali.value = 0;
-	
-
-if (rigaForm.num_sedute.value == "")
-	return false;
-	
-if (rigaForm.km_percorso.value == "")
-	return false;
-	
-	
-var km_totali = pulisciNumero(rigaForm.num_sedute.value) * pulisciNumero(rigaForm.km_percorso.value);
-km_totali = (Math.round(km_totali * 100) /100)+"";
-
-rigaForm.km_totali.value = km_totali.replace(".",",");
-
-//----------
-
-if (rigaForm.quota_fissa_s.value == "")
-	return false;
-	
-if (rigaForm.costokm.value == "")
-	return false;
-	
-if (rigaForm.franchigiakm.value == "")
-	return false;
-
-	var risPF = pulisciNumero(rigaForm.km_percorso.value) - pulisciNumero(rigaForm.franchigiakm.value);
-
-	if(risPF < 0){
-		risPF = 0;
-	}
-
-	risPF *= pulisciNumero(rigaForm.costokm.value);
-	risPF += pulisciNumero(rigaForm.quota_fissa_s.value);
- 	risPF *= pulisciNumero(rigaForm.num_sedute.value);
- 	
- 	var importo = risPF;
- 	importo = (Math.round(importo * 100) /100)+"";
- 	rigaForm.importo_s.value = importo.replace(".",",");
- }
- //
-function pulisciNumero(numero)
-{
-var nuovoNumero = numero.replace(".","");
-nuovoNumero = nuovoNumero.replace(",",".");
-return nuovoNumero;
- }
-</script>
-
 				</article>
 			</div> <!-- /container -->
-
-
-
-
-
   </body>
 </html>
-<script type="text/javascript" src="/js/asso_beans_client.js"></script>
-<script type="text/javascript" src="/js/controlli.js"></script>
-
-<script>
-var indice = 0;
-
-function mostra(ind) {
-	indice = ind;
-	document.location = '#popup1';
-}
-
-function percorso(ind) {
-	indice = ind;
-	
-	if(trasportato1.value == "")
-		alert("Non puoi inserire nulla!");
-		else
-		document.location = '#popup2';
-}
-</script>
-
-<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
-<script type="text/javascript">
-//INIZIO AJAX 
-$(document).ready(function(e){ 
-	$("#creaPersona").click(function(){
-	
-	/* alert(indice); *///era 0
-    var url = "/edit/paziente/save2"; // the script where you handle the form input.
-    $.ajax({
-           type: "POST",
-           url: url,
-           data: $("#insForm").serialize(), // serializes the form's elements.
-           success: function(response){
-        	   
-		        	   alert(response);//Dalla chiave messaggio di Paziente Controller
-		        	   var res = response.split(",");//funzione che prende una stringa e divide in base al parametro e li numera per posizione
-		        	   if(res[0]=='KO')
-		        		   	alert("Inserimento fallito!");
-		        	   		
-		        	   else
-		        		   {
-		        		  /*  alert(indice); *///sempre 1
-		        		/* alert(res[0]);//Ok */
-		        		 /*   alert(res[1]); *///Nome Cognome
-		       	   		 /*   alert(res[2]); */// Id del paziente 
-		       	   		   var yy = "#fk_paziente"+indice;//  equivale a fk_paziente1
-		       	   		// var xx = "#trasportato"+indice;
-		       	   		   var xx = "#trasportato";
-		            	   $(yy).val(res[2]);
-		            	   $(xx).val(res[1]);
-		            	   document.location = '#gestioneRiga';
-		            	   
-		            	   //resetta tutto
-		            	   document.insForm.reset(); 
-		       	   		}
-        	   		}
-         		});
-    	//e.preventDefault(); // avoid to execute the actual submit of the form.
-		});
-});
-
-
-$(document).ready(function(e){ 
-	$("#createRiga").click(function(){
-	
-	/* alert(indice); *///era 0
-   insRigaForm.submit();
-		});
-});
-</script>
+	<script type="text/javascript" src="/js/asso_beans_client.js"></script>
+	<script type="text/javascript" src="/js/controlli.js"></script>
+	<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
