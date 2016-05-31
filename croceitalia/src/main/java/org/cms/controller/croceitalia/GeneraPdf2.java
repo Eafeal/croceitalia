@@ -55,6 +55,11 @@ public class GeneraPdf2 {
 
 	private int _numeroRighe = 0;
 	private int _indiceRiga = 0;
+	
+	int passo = 26;
+	int b = 544;
+	int c = 548;
+	int d = 538;
 
 	private Documento_Testata _testata;
 	private List<Documento_Righe> _righe = new ArrayList();
@@ -309,28 +314,23 @@ public class GeneraPdf2 {
 		// ////////////////////////////////////////////// ------
 		// //////////////////////////////////////////////
 		// righe--------////////////////////////////////////////
-
-		cellaSedute(row, cb, nested);
-		cellaMese(row, cb, nested);
-		cellaKm(row, cb, nested);
-		cellaNome(row, cb, nested);
-		cellaAndata(row, cb, nested);
-		cellaPercorsoRitorno(row, cb, nested);
-		cellaOre(row, cb, nested);
-		cellaQuotaFissa(row, cb, nested);
-		cellaDirittoUscita(row, cb, nested);
-		cellaImporto(row, cb, nested);
+		
+		cellaSedute(row, cb, nested,0);
+		cellaMese(row, cb, nested,0);
+		cellaKm(row, cb, nested,0);
+		cellaNome(row, cb, nested,0);
+		cellaAndata(row, cb, nested,0);
+		cellaPercorsoRitorno(row, cb, nested,0);
+		cellaOre(row, cb, nested,0);
+		cellaQuotaFissa(row, cb, nested,0);
+		cellaDirittoUscita(row, cb, nested,0);
+		cellaImporto(row, cb, nested,0);
 
 		_numeroRighe--;
 		_indiceRiga++;
 
 		if (hoFinito())
 			return;
-
-		int a = 26;
-		int b = 544;
-		int c = 548;
-		int d = 538;
 
 		int dadovepartire = 0;
 		int numeroRigheDaStampare;
@@ -340,86 +340,24 @@ public class GeneraPdf2 {
 		} else {
 			numeroRigheDaStampare = _numeroRighe;
 		}
-
+		
+		
 		for (int y = 1; y <= 14; y++) {
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getNum_sedute().toString(), smallFont), 38, b - a, 0);
-
-			cb.endLayer();
-
-			// //////////////// mese///////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(_indiceRiga).getMese(), smallFont),
-					70, b - a, 0);
-
-			cb.endLayer();
-
-			// //////////////// km//////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getKm_percorso().toString(), smallFont), 130, b - a, 0);
-
-			// //////////////// NOME//////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getPaziente().getNominativo().toString(), piusmallFont), 158, b - a,
-					0);
-			cb.beginLayer(nested);
-
-			// //////////////// percorso andata//////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getPercorsoAndata(), piusmallFont), 260, c - a, 0);
-			cb.beginLayer(nested);
-
-			// //////////////// percorso ritorno//////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getPercorsoRitorno(), piusmallFont), 260, d - a, 0);
-			cb.beginLayer(nested);
-
-			// //////////////// ore //////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getOra_sosta().toString(), smallFont), 394, b - a, 0);
-			cb.beginLayer(nested);
-
-			// //////////////// quota fissa//////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase("€      " + row.get(_indiceRiga).getQuotaFissa().toString(), smallFont), 420, b - a, 0);
-			cb.beginLayer(nested);
-
-			// //////////////// diritto di uscita//////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase(row.get(_indiceRiga).getDiritto_uscita(), smallFont), 495, b - a, 0);
-			cb.beginLayer(nested);
-
-			// //////////////// importo/////////////////////
-
-			cb.beginLayer(nested);
-			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-					new Phrase("€  " + row.get(_indiceRiga).getImporto(), smallFont), 525, b - a, 0);
-			cb.beginLayer(nested);
-
-			d = d - a;
-			c = c - a;
-			b = b - a;
-
+			
+			cellaSedute(row, cb, nested,y);
+			cellaMese(row, cb, nested,y);
+			cellaKm(row, cb, nested,y);
+			cellaNome(row, cb, nested,y);
+			cellaAndata(row, cb, nested,y);
+			cellaPercorsoRitorno(row, cb, nested,y);
+			cellaOre(row, cb, nested,y);
+			cellaQuotaFissa(row, cb, nested,y);
+			cellaDirittoUscita(row, cb, nested,y);
+			cellaImporto(row, cb, nested,y);
+				
 			_indiceRiga++;
 			_numeroRighe--;
-
+	
 			if (hoFinito())
 				break;
 		}
@@ -429,100 +367,123 @@ public class GeneraPdf2 {
 
 	}
 
-	private void cellaImporto(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaImporto(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// //////////////// importo//////////////////
-
+		int pos;
+		pos = b - (passo * riga);	
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("€  " + row.get(_indiceRiga).getImporto(), smallFont), 525, 544, 0);
+				new Phrase("€  " + row.get(_indiceRiga).getImporto(), smallFont), 525, pos, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaDirittoUscita(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaDirittoUscita(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// //////////////// diritto di uscita//////////////////
-
+		int pos;
+		pos = b - (passo * riga);
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getDiritto_uscita(), smallFont), 495, 544, 0);
+				new Phrase(row.get(_indiceRiga).getDiritto_uscita(), smallFont), 495, pos, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaQuotaFissa(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaQuotaFissa(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// //////////////// quota fissa//////////////////
+		int pos;
+		pos = b - (passo * riga);
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("€      " + row.get(_indiceRiga).getQuotaFissa(), smallFont), 420, 544, 0);
+				new Phrase("€      " + row.get(_indiceRiga).getQuotaFissa(), smallFont), 420, pos, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaOre(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaOre(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// //////////////// ore//////////////////
+		int pos;
+		pos = b - (passo * riga);
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getOra_sosta().toString(), smallFont), 394, 544, 0);
+				new Phrase(row.get(_indiceRiga).getOra_sosta().toString(), smallFont), 394, pos, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaPercorsoRitorno(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaPercorsoRitorno(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// //////////// percorso ritorno/////////////
+		int pos;
+		pos = d - (passo * riga);
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getPercorsoRitorno(), piusmallFont), 260, 538, 0);
+				new Phrase(row.get(_indiceRiga).getPercorsoRitorno(), piusmallFont), 260, pos, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaAndata(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaAndata(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// //////////// percorso andata/////////////
-
+		int pos;
+		pos = c - (passo * riga);
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getPercorsoAndata(), piusmallFont), 260, 548, 0);
+				new Phrase(row.get(_indiceRiga).getPercorsoAndata(), piusmallFont), 260, pos, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaNome(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaNome(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// //////////// nome//////////////////
-
+		int pos;
+		pos = b - (passo * riga);
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getPaziente().getNominativo(), piusmallFont), 158, 544, 0);
+				new Phrase(row.get(_indiceRiga).getPaziente().getNominativo(), piusmallFont), 158, pos, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaKm(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaKm(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// //////////////// km//////////////////
-
+		int pos;
+		pos = b - (passo * riga);
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getKm_percorso().toString(), smallFont), 130, 544, 0);
+				new Phrase(row.get(_indiceRiga).getKm_percorso().toString(), smallFont), 130, pos, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaMese(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaMese(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// /////////// mese////////////////////
-
+		int pos;
+		pos = b - (passo * riga);
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(_indiceRiga).getMese(), smallFont), 70,
-				544, 0);
+				pos, 0);
 		cb.beginLayer(nested);
 	}
 
-	private void cellaSedute(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested) {
+	private void cellaSedute(List<Documento_Righe> row, PdfContentByte cb, PdfLayer nested,int riga) {
 
 		// //////////////// n sedute//////////////////
-
+		int pos;
+		pos = b - (passo * riga);
+		
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase(row.get(_indiceRiga).getNum_sedute().toString(), smallFont), 38, 544, 0);
+				new Phrase(row.get(_indiceRiga).getNum_sedute().toString(), smallFont), 38, pos, 0);
 	}
 
 	/**
