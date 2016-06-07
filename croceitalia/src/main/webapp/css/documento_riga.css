@@ -249,7 +249,6 @@ button[class^="btn"] {
     float: right;
 }
 
-
 h3 {
     font-size: 24.5px;
     color: #5BC0DE;
@@ -257,4 +256,12 @@ h3 {
 
 select{
     width: 184px;
+}
+legend{
+	color:#5BC0DE;
+}
+
+#updateForm{
+	padding-left: 54px;
+	padding-right: 54px;
 }

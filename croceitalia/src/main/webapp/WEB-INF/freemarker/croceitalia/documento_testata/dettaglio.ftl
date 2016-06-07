@@ -59,7 +59,7 @@
      
 <div>
 <fieldset>
-	<legend style="color:#5BC0DE;">Documento Testata</legend>
+	<legend >Documento Testata</legend>
  <form id="updateForm" name="updateForm" action="/edit/documento_testata/doUpdate" method="post">
                    <table>
                     <input type="hidden" name="id_documento_testata" id="id_documento_testata" value="${documento.getId_documento_testata()}">
@@ -128,30 +128,41 @@
                     </table>
                     <br/>
                 <#if !documento.isChiuso()>
-				<a style="text-decoration: none; float:right;" href="#" id="update" class="action-button shadow animate blue" onclick="">Salva</a>
+					<a style="text-decoration: none; float:right;" id="update" class="action-button shadow animate blue" >Salva</a>
 				</#if>
-				<input type="button" value="aaa" onclick="javascript:aggiorna();">
+	
 			</form>
 
                 <div class="buttons">               
 	               
 	             <!--   
 				<#if documento.isChiuso()>
-				<a style="text-decoration: none;margin-top:10px; float:right;" href="#" id="chiudi" class="action-button shadow animate blue" >Chiudi</a>
+				<a style="text-decoration: none;margin-top:10px; float:right;"  id="chiudi" class="action-button shadow animate blue" >Chiudi</a>
 				</#if>
 	               --> 
 	                
 	            <#if !documento.isChiuso()>
                 <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" >
-                	<a style="text-decoration: none; margin-top:10px; float:right;" href="#" id="chiusura" class="action-button shadow animate blue" onclick="return confirm('Sei sicuro?');">Chiudi documento</a>               
+                	<a style="text-decoration: none; margin-top:10px; float:right;" id="chiusura" class="action-button shadow animate blue">Chiudi documento</a>               
                 </form>
                 </#if>
 				
-				<#if documento.isChiuso()>
+				<#if documento.isChiuso() && !documento.isPdfGenerato()>
 					<form name="stampaForm" action="/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" method="get" >
 						<a style="text-decoration: none; margin-top:10px;" href="#" id="stampaPDF" class="action-button shadow animate blue">Stampa PDF</a> 
 					</form>
+					
+					<form action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" >                
+                        <span class="button"><input type="submit" value="Invia PDF" class="delete" onclick="return confirm('Sei sicuro?');  " /></span>                      
+                 	</form>
 				</#if>
+				
+				<#if documento.isChiuso()>
+				
+				<form action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" >                
+                        <span class="button"><input type="submit" value="Invia PDF" class="delete" onclick="return confirm('Sei sicuro?');  " /></span>                      
+                 </form>
+                 </#if>
                 </div>
             
 </fieldset>
@@ -327,10 +338,3 @@
 <script type="text/javascript" src="/js/asso_beans_client.js"></script>
 <script type="text/javascript" src="/js/controlli.js"></script>
 <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
-<script>
-function aggiorna()
-{
-if (confirm('Sei sicuro?')) updateForm.submit();
-return false;
-}
-</script>

@@ -3,9 +3,24 @@ package org.cms.controller.croceitalia;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -156,9 +171,12 @@ public class DocumentoTestataController extends EditCmsController {
 			// documento1.setStato(documento.getStato());
 
 			documento1.setData_documento(documento.getData_documento());
+			documento1.setMese_documento(documento.getMese_documento());
 			documento1.setMezzo(documento.getMezzo());
 			documento1.setCliente(documento.getCliente());
 			documento1.setBanca(documento.getBanca());
+
+			documento1.setCIG(documento.getCIG());
 
 			documento1.setUserultv(utente.getUserId());
 			documento1.setDataultv(new Date());
@@ -268,19 +286,7 @@ public class DocumentoTestataController extends EditCmsController {
 		byte[] pdf = _documentoTestataManager.getPdf(documentoTestato, righeDocumento);// non
 																						// CAPISCO
 
-		List<Documento_Testata> documenti = _documentoTestataManager.descrescente();
-		modelAndView.addObject("listaDocumenti", documenti);
-
-		List<Cliente> clientiList = _clienteManager.caricaClienti();
-		modelAndView.addObject("listaClienti", clientiList);
-
-		List<Banca> bancheList = _bancaManager.caricaBanche();
-		modelAndView.addObject("listaBanca", bancheList);
-
-		List<Mezzo> mezziList = _mezzoManager.caricaMezzi();
-		modelAndView.addObject("listaMezzo", mezziList);
-
-		String viewName = "croceitalia/documento_testata/list";
+		String viewName = "redirect:/edit/documento_testata/update/" + id;
 		modelAndView.setViewName(viewName);
 
 		return modelAndView;
@@ -383,6 +389,104 @@ public class DocumentoTestataController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-	// ----------------------------------
+
+	@RequestMapping(value = "documento_testata/pdfsend/{id}", method = RequestMethod.GET)
+	public ModelAndView pdfsend(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id)
+			throws Exception {
+
+		Cliente cliente;
+
+		ModelAndView modelAndView = getModelAndView(request);
+
+		// String url = request.getRequestURL().toString();
+
+		Documento_Testata documentoTestato = (Documento_Testata) _documentoTestataManager.findById(id);
+
+		// cliente=(Cliente) _clienteManager.findById(id_cliente);
+		cliente = documentoTestato.getCliente();
+
+		File doc = new File(ApplConfig.GetParameter("RepositoryDocumentiGenerati") + documentoTestato.getNome_file());
+
+		pdfSend(doc, cliente);
+
+		modelAndView.setViewName("redirect:/edit/documento_testata/update/" + id);
+
+		return modelAndView;
+
+	}
+
+	public void pdfSend(File myFile, Cliente cliente) throws MessagingException, UnsupportedEncodingException {
+		// Recipient's email ID needs to be mentioned.
+		String to = cliente.getEmail();
+
+		// Sender's email ID needs to be mentioned
+		String from = ApplConfig.GetParameter("from");
+
+		// Assuming you are sending email from localhost
+		String host = ApplConfig.GetParameter("smtpServer");
+
+		// Get system properties
+		java.util.Properties properties = new java.util.Properties();
+
+		// Setup mail server
+		properties.setProperty("mail.smtp.host", host);
+		properties.setProperty("mail.smtp.auth", "true");
+		properties.setProperty("mail.user", ApplConfig.GetParameter("mailUser"));
+		properties.setProperty("mail.password", ApplConfig.GetParameter("mailPassword"));
+		Authenticator auth = new MyAuthenticator();
+		// Get the default Session object.
+		Session session = Session.getInstance(properties, auth);
+
+		// Set response content type
+		try {
+			// Create a default MimeMessage object.
+			MimeMessage message = new MimeMessage(session);
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress(from, "Croce Bianca Bernate"));
+			// Set To: header field of the header.
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			// Set Subject: header field
+			message.setSubject("In allegato la fattura");
+
+			// MimeMultipart multipart = new MimeMultipart("related");
+			MimeMultipart multipart = new MimeMultipart("related");
+			// Now set the actual message
+			BodyPart messageBodyPart = new MimeBodyPart();
+			String htmlText = "<H1>In allegato la fattura</H1>";
+			messageBodyPart.setContent(htmlText, "text/html");
+			multipart.addBodyPart(messageBodyPart);
+			messageBodyPart = new MimeBodyPart();
+			DataSource fds = new FileDataSource(myFile);
+			messageBodyPart.setDataHandler(new DataHandler(fds));
+			messageBodyPart.setFileName(myFile.getName());
+
+			// add image to the multipart
+			multipart.addBodyPart(messageBodyPart);
+
+			// put everything together
+			message.setContent(multipart);
+			// Send message
+			Transport.send(message);
+		} catch (MessagingException mex) {
+			mex.printStackTrace();
+			throw mex;
+		}
+
+		return;
+	}
+
+	class MyAuthenticator extends Authenticator {
+
+		String user = ApplConfig.GetParameter("mailUser");
+		String password = ApplConfig.GetParameter("mailPassword");
+
+		javax.mail.PasswordAuthentication pwdAuth = new javax.mail.PasswordAuthentication(user, password);
+
+		@Override
+		protected PasswordAuthentication getPasswordAuthentication() {
+			return pwdAuth;
+		}
+
+	}
 
 }

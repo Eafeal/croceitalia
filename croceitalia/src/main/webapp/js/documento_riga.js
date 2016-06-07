@@ -1,3 +1,5 @@
+
+
 /* VISUALIZZA POPUP PER L'INSERIMENTO RIGA */
 
 var indice = 0;
@@ -71,6 +73,11 @@ $(document).ready(function(e){
 // Lo stato del documento verrà chiuso
 $(document).ready(function(e){ 
 	$("#chiusura").click(function(){
+		
+		if (!confirm('Sei sicuro?')){
+			return false;
+		}
+		
    chiusuraForm.submit();
 		});
 });
@@ -85,6 +92,11 @@ $(document).ready(function(e){
 //Aggiorni il documento modificato 
 $(document).ready(function(e){ 
 	$("#update").click(function(){
+		
+		if (!confirm('Sei sicuro?')){
+			return false;
+		}
+		
 	updateForm.submit();
 		});
 });

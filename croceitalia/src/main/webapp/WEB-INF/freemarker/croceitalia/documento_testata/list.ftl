@@ -18,6 +18,7 @@
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/documento_testata.js"></script>
+    <script src="/js/asso_beans_client.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -106,7 +107,7 @@
 					</a>
 			</#if>
 		</td>
- 
+ 			
     </tr>
 		</#list>
   </tbody>
@@ -127,10 +128,10 @@
                         	<tr class="prop">
                                 <td align="top" class="num"><label for="cig">Codice CIG</label></td>                             
                                 <td align="top" class="numeroDocumento">
-                                <input type="text" id="cig" name="CIG"  maxlength="10"  placeholder="Codice CIG" /> 
+                                <input type="text" id="cig" name="CIG"  maxlength="10"  placeholder="Codice CIG" onchange="javascript:controlloCIG();"/> 
                                 
                                 <!--NUMERO DOCUMENTO e ANNO NASCOSTI-->
-                                    <input type="hidden" id="numeroDocumento" name="num_documento"  maxlength="11" value="" placeholder="Numero documento"  />
+                                    <input type="hidden" id="numeroDocumento" name="num_documento"  maxlength="11" value="" placeholder="Numero documento" />
                                     <input type="hidden" id="anno_documento" name="anno_documento"  size="3" maxlength="60" value="2016" readonly/>                                            	 
                                 </td> 
                             </tr>
@@ -176,7 +177,7 @@
 	                        </tr>
 	                        
 	                        <tr class="prop">
-                                <td align="top" class="fk_id_mezzo"><label for="fk_id_cliente">Cliente</label></td>                             
+                                <td align="top" class="fk_id_cliente"><label for="fk_id_cliente">Cliente</label></td>                             
                                 <td align="top" class="value">
 									<select id="fk_id_cliente" name="fk_id_cliente" required>
 	                                    <option value="">Seleziona..</option>
@@ -187,7 +188,7 @@
 	                            </td>
                             </tr>             
                              <tr class="prop">
-                                <td align="top" class="fk_id_mezzo"><label for="fk_id_banca"> Banca di Appoggio</label></td>                             
+                                <td align="top" class="fk_id_banca"><label for="fk_id_banca"> Banca di Appoggio</label></td>                             
                                 <td align="top" class="value">
 	                                <select id="fk_id_banca" name="fk_id_banca" required>
 	                                    <option value="">Seleziona..</option>
@@ -202,8 +203,8 @@
                     </table>
                     <br/>
                 <div class="buttons">
-                    <span class="button"><button name="create" class="save btn btn-default btn-vlarge" value="Create" id="create"/>Inserisci</button></span>
-                    <span class="button"><input type="reset" name="create" class="save btn btn-default btn-vlarge" value="RESET" id="create"/></span>
+                    <span class="button"><button name="create" class="save btn btn-default btn-vlarge" value="Create" id="create" />Inserisci</button></span>
+                    <span class="button"><input type="reset" name="create" class="save btn btn-default btn-vlarge" value="Reset" id="create"/></span>
                 </div>
             </form>
 		</div>	
@@ -212,10 +213,13 @@
   </body>
 </html>
 <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+
 <script >
+
+
 $(document).ready(function(e){ 
 	$("#stampaPDF2").click(function(){
-		alert("IO CI SONO");
+		alert("Sto per stampare il PDF");
 		stampaForm1.submit();
 	alert("Ciao SONO ancora io");
 		});
