@@ -128,29 +128,30 @@
                     </table>
                     <br/>
                 <#if !documento.isChiuso()>
-				<a style="text-decoration: none; float:right;" href="#" id="update" class="action-button shadow animate blue" onclick="return confirm('Sei sicuro?');">Aggiorna</a>
+				<a style="text-decoration: none; float:right;" href="#" id="update" class="action-button shadow animate blue" onclick="">Salva</a>
 				</#if>
+				<input type="button" value="aaa" onclick="javascript:aggiorna();">
 			</form>
 
                 <div class="buttons">               
 	               
-	                
-                 	<#if documento.isChiuso()>
-                 	<a style="text-decoration: none;margin-top:10px; float:right;" href="#" id="chiudi" class="action-button shadow animate blue">Chiudi</a>
-	                </#if>
-	                
+	             <!--   
+				<#if documento.isChiuso()>
+				<a style="text-decoration: none;margin-top:10px; float:right;" href="#" id="chiudi" class="action-button shadow animate blue" >Chiudi</a>
+				</#if>
+	               --> 
 	                
 	            <#if !documento.isChiuso()>
                 <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" >
-                		<a style="text-decoration: none; margin-top:10px;" href="#" id="chiusura" class="action-button shadow animate blue">Chiusura</a>               
+                	<a style="text-decoration: none; margin-top:10px; float:right;" href="#" id="chiusura" class="action-button shadow animate blue" onclick="return confirm('Sei sicuro?');">Chiudi documento</a>               
                 </form>
                 </#if>
-					<#if documento.isChiuso()>
-						<form name="stampaForm" action="/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" method="get" >
-							<a style="text-decoration: none; margin-top:10px;" href="#" id="stampaPDF" class="action-button shadow animate blue">Stampa PDF</a> 
-						<!--<span class="button"><input type="submit" value="Stampa PDF" class="delete" onclick="return confirm('Sei sicuro?');"/></span> -->
-						</form>
-					</#if>
+				
+				<#if documento.isChiuso()>
+					<form name="stampaForm" action="/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" method="get" >
+						<a style="text-decoration: none; margin-top:10px;" href="#" id="stampaPDF" class="action-button shadow animate blue">Stampa PDF</a> 
+					</form>
+				</#if>
                 </div>
             
 </fieldset>
@@ -323,6 +324,13 @@
 			</div> <!-- /container -->
   </body>
 </html>
-	<script type="text/javascript" src="/js/asso_beans_client.js"></script>
-	<script type="text/javascript" src="/js/controlli.js"></script>
-	<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+<script type="text/javascript" src="/js/asso_beans_client.js"></script>
+<script type="text/javascript" src="/js/controlli.js"></script>
+<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+<script>
+function aggiorna()
+{
+if (confirm('Sei sicuro?')) updateForm.submit();
+return false;
+}
+</script>

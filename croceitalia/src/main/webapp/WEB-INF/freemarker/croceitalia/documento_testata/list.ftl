@@ -76,8 +76,8 @@
 	    	<#if datadef == "">
 	    	<#assign datadef = documento.getData_documento()?string["dd-MM-yyyy"]>
 	    	</#if>
-    <tr onclick="javascript:document.location='/edit/documento_testata/update/${documento.getId_documento_testata()}'">
-      	<td >
+    <tr >
+      	<td onclick="javascript:document.location='/edit/documento_testata/update/${documento.getId_documento_testata()}'">
       		<input type="hidden" name="id_testata${i}" id="id_testata${i}" class="id" value="${documento.getId_documento_testata()}"  readonly>
       		<input type="text" name="numero${i}" id="numero${i}" class="numero" value="${documento.getNum_documento()}"  readonly>
       	</td>
