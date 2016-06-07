@@ -116,7 +116,7 @@ public class Tipo_clienteController extends EditCmsController{
 		try {
 			_tipo_clienteManager.update(tipo_cliente);
 			request.setAttribute("esito", "ok");
-//			modelAndView.addObject("esito", "ok");
+			//modelAndView.addObject("esito", "ok");
 			String viewName = "forward:/edit/tipo_cliente/update/" + tipo_cliente.getId_tipo_cliente();
 			modelAndView.setViewName(viewName);
 
@@ -136,7 +136,6 @@ public class Tipo_clienteController extends EditCmsController{
 	@RequestMapping(value = "tipo_cliente/update/{user_id}")
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("user_id") String user_id) {
-		//ciao
 
 		ModelAndView modelAndView = getModelAndView(request);
 		try {

@@ -46,7 +46,7 @@
 				    <li><b>Tabelle</b></li>
 				    	<br>
 				    	<ul type="square">
-				    	<li><a href="/edit/patologia/list">Tabella patologia</a></li>
+				    	<li><a href="/edit/patologia/list">Tabella patologia paziente</a></li>
 				    	<br>
 				    	<li><a href="/edit/tipo_mezzo/list">Tabella tipologia mezzo</a></li>
 				    	<br>

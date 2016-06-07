@@ -52,7 +52,7 @@ public class GeneraPdf2 {
 	private final String _intestazione9=ApplConfig.GetParameter("IntestazioneDocumento9");;
 
 	
-
+	private int _numeroPagine = 0;
 	private int _numeroRighe = 0;
 	private int _indiceRiga = 0;
 	
@@ -174,7 +174,7 @@ public class GeneraPdf2 {
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(testata.getCIG(), smallFont), 270, 590, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("CIG: "+testata.getCIG(), smallFont), 270, 590, 0);
 
 		cb.endLayer();
 	}
@@ -249,11 +249,13 @@ public class GeneraPdf2 {
 
 		// ////////////////// numero pagina//////////////////////////////
 
-		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("pagina n °" + numPagina, smallFont), 465, 694,
-				0);
-
-		cb.endLayer();
+		if (_numeroPagine > 1) {
+			cb.beginLayer(nested);
+			ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("pagina " + numPagina + " di " + _numeroPagine, smallFont), 465, 694,
+					0);
+	
+			cb.endLayer();
+		}
 	}
 
 	/**
@@ -272,7 +274,7 @@ public class GeneraPdf2 {
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(testata.getBanca().getNome(), piusmallFont), 27,
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("P.A. CROCE ITALIANA BERNATE TICINO", piusmallFont), 27,
 				133, 0);
 
 		cb.endLayer();
@@ -282,7 +284,7 @@ public class GeneraPdf2 {
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(testata.getBanca().getAgenzia(), piusmallFont),
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(testata.getBanca().getNome()+" "+testata.getBanca().getAgenzia(), piusmallFont),
 				27, 108, 0);
 
 		cb.endLayer();
@@ -510,42 +512,42 @@ public class GeneraPdf2 {
 		writer.lockLayer(nested_2);
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Pubblica Assistenza Croce Italia Bernate Ticino o.n.l.u.s.", smallFont), 27, 785, 0);
+				new Phrase(_intestazione1, smallFont), 27, 785, 0);
 		// 1 spazio da sinistra 2spazio partendo dal basso 3inclinazione
 		cb.endLayer();
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Sede Legale: Viale Monza n. 40 20014 Milano", smallFont), 27, 772, 0);
+				new Phrase(_intestazione2, smallFont), 27, 772, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Sede Operativa: Largo Poldo Gasparotto snc 20010 Bernate Ticino  ", smallFont), 27, 759, 0);
+				new Phrase(_intestazione3, smallFont), 27, 759, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Sede Operativa: Busto Garolfo C/O Comune 20020 Busto Garolfo", smallFont), 27, 746, 0);
+				new Phrase(_intestazione4, smallFont), 27, 746, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("C.F. 93029640153", smallFont), 27, 734, 0);
-
-		cb.endLayer();
-		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Tel.:02-49.79.05.67  Mobile: 345-59.16.824  Fax: 02-84.56.66.47", smallFont), 27, 722, 0);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(_intestazione5, smallFont), 27, 734, 0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("e-mail: croceitaliabernate@libero.it sito: www.croceitaliabernate.it", smallFont), 27, 709,
+				new Phrase(_intestazione6, smallFont), 27, 722, 0);
+
+		cb.endLayer();
+		cb.beginLayer(nested);
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+				new Phrase(_intestazione7, smallFont), 27, 709,
 				0);
 
 		cb.endLayer();
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Iscrizione al n. MI-499 albo regionale sez. Provinciale di Milano del Volontariato",
+				new Phrase(_intestazione8,
 						smallFont),
 				27, 696, 0);
 
@@ -553,7 +555,7 @@ public class GeneraPdf2 {
 
 		cb.beginLayer(nested);
 		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-				new Phrase("Autorizzazione Sanitaria n. 03/ST/08 del 03/09/2008 ", smallFont), 27, 684, 0);
+				new Phrase(_intestazione9, smallFont), 27, 684, 0);
 
 		cb.endLayer();
 		return nested;
@@ -600,6 +602,9 @@ public class GeneraPdf2 {
 		Integer somma = 0;
 		_nomiFile = new ArrayList();
 		_numeroRighe = _righe.size();
+		_numeroPagine = _numeroRighe / 15;
+		if ((_numeroPagine * 15) != _numeroRighe) _numeroPagine++;
+		
 		int numPagina = 0;
 		while (nonHoFinito()) {
 
