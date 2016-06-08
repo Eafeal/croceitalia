@@ -220,6 +220,7 @@ public class DocumentoTestataController extends EditCmsController {
 			modelAndView.addObject("listaDocumenti", documenti);
 
 			List<Documento_Righe> righe = _documentoRigheManager.caricaDocumento_Row_byId(id);
+
 			List<Paziente> paziente = _pazienteManager.caricaPazienti();
 			List<Struttura> struttura = _strutturaManager.caricaStruttura();
 
@@ -275,21 +276,26 @@ public class DocumentoTestataController extends EditCmsController {
 
 		Documento_Testata documentoTestato = (Documento_Testata) _documentoTestataManager.findById(id);
 
-		List<Documento_Righe> righeDocumento = null;
-		try {
-			righeDocumento = _documentoRigheManager.caricaRigheDocumento(documentoTestato.getId_documento_testata());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!documentoTestato.isPdfGenerato()) {
+
+			List<Documento_Righe> righeDocumento = null;
+			try {
+				righeDocumento = _documentoRigheManager
+						.caricaRigheDocumento(documentoTestato.getId_documento_testata());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			byte[] pdf = _documentoTestataManager.getPdf(documentoTestato, righeDocumento);// non
+																							// CAPISCO
 		}
 
-		byte[] pdf = _documentoTestataManager.getPdf(documentoTestato, righeDocumento);// non
-																						// CAPISCO
+		// String viewName = "forward:/edit/documento_testata/update/" + id;
+		// modelAndView.setViewName(viewName);
 
-		String viewName = "redirect:/edit/documento_testata/update/" + id;
-		modelAndView.setViewName(viewName);
+		return visual(request, response, documentoTestato.getNome_file());
 
-		return modelAndView;
 	}
 
 	// STAMPA PDF DA LISTA
@@ -344,7 +350,7 @@ public class DocumentoTestataController extends EditCmsController {
 			FileInputStream inputStream = null;
 			try {
 
-				String path = ApplConfig.GetParameter("RepositoryDocumentiGenerati") + nomefile + ".pdf";
+				String path = ApplConfig.GetParameter("RepositoryDocumentiGenerati") + nomefile;
 				File resource = new File(path);
 
 				if (!resource.exists()) {

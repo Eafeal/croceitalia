@@ -205,10 +205,11 @@ label{
 .grigio{
 	border:0px;
 }
-#mezzo{
+
+#mese{
 	background-color:#F2F2F2;
 }
-#banca{ 
+#cliente{ 
 	background-color:#F2F2F2;
 }
 
@@ -256,6 +257,9 @@ h3 {
 
 select{
     width: 184px;
+}
+#CIG{
+	    width: 175px;
 }
 legend{
 	color:#5BC0DE;

@@ -471,11 +471,11 @@ public class Documento_Testata {
 	}
 
 	public String getCIG() {
-		return CIG;
+		return CIG.toUpperCase();
 	}
 
 	public void setCIG(String cIG) {
-		CIG = cIG;
+		CIG = cIG.toUpperCase();
 	}
 
 	public String getData_String_documento() {

@@ -92,20 +92,13 @@
     	<td><input type="text" name="stato${i}" id="stato${i}" class="stato" value="${documento.descrizioneStato()}" readonly></td>
     	<td>
     		
-  			<#if documento.isChiuso() && !documento.isPdfGenerato()>
-  				<form name="stampaForm1" action="/edit/documento_testata/pdfprint2/${documento.getId_documento_testata()}" method="get" >
-							<!--<a style="text-decoration: none; margin-top:10px;" href="#" id="stampaPDF2" class="action-button shadow animate blue">Stampa PDF</a>-->
-							<input type="submit" style="text-decoration: none; margin-top:10px;" href="#" id="stampaPDF2" value="STAMPA" class="action-button shadow animate blue"/>
-							<!--<img src="/img/edit/pdf.png" id="stampaPDF2" style="vertical-align:initial;clear:none;border:0">-->
-				</form>	
-			</#if>
 			
-			<#if documento.isChiuso() && documento.isPdfGenerato()>
-				<#assign urlv= "/edit/documento_testata/view/rimborso_num"+ documento.getNum_documento() + ".pdf" />
-					<a title="Visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
-						<img src="/img/edit/pdf.png" style="vertical-align:initial;clear:none;border:0">
-					</a>
-			</#if>
+			<#if documento.isChiuso()>
+					<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
+						<a title="genera e visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
+							<img src="/img/edit/pdf.png" style="vertical-align:initial;clear:none;border:0">
+						</a>
+				</#if>
 		</td>
  			
     </tr>
@@ -215,8 +208,6 @@
 <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
 
 <script >
-
-
 $(document).ready(function(e){ 
 	$("#stampaPDF2").click(function(){
 		alert("Sto per stampare il PDF");

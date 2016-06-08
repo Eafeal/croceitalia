@@ -48,7 +48,11 @@
             <ul class="nav">
               <li class="active"><a href="/edit/home">Home</a></li>
               <li><a href="/edit/documento_testata/list">Documento</a></li>
-              <li><a href="#gestioneRiga">Nuova Riga</a></li>              
+			
+			<#if !documento.isChiuso()>
+              <li><a href="#gestioneRiga">Nuova Riga</a></li>
+            </#if>
+                         
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -64,19 +68,25 @@
                    <table>
                     <input type="hidden" name="id_documento_testata" id="id_documento_testata" value="${documento.getId_documento_testata()}">
                         <tbody>
-                        <tr class="prop">
+                        	<tr class="prop">
                                 <td align="top" class="num"><label for="num"><h4>Numero Documento</h4></label></td>                             
                                 <td align="top" class="value" style="float:right;">
                                     <input type="text" id="num" name="num_documento"  size="3" maxlength="11" value="${documento.getNum_documento()}" style="border:0px; text-align:right;" readonly/><b> - </b><input type="text" id="anno_documento" name="anno_documento"  size="4" maxlength="60" value="2016" style="border:0px; text-align:center;" readonly/> del <input type="text" id="data_documento" name="data_documento" value="${documento.getData_documento()?string["dd-MM-yyyy"]}" style="border:0px; background-color:#F2F2F2; text-align:right;">                                           	 
                                 </td> 
                                
                             </tr>
-         
+         					<tr class="prop">
+                                <td align="top" class="num"><label for="num"><h4>Codice CIG</h4></label></td>                             
+                                <td align="top" class="value" style="float:right;">
+                                    <input type="text" size="25" id="CIG" name="CIG" value="${documento.getCIG()}" style="border:0px; text-align:right;">                                           	 
+                                </td> 
+                               
+                            </tr>
                              <tr class="prop">         
                                 <td align="top" class="num"><label for="anno_documento"><h4>Mese di Riferimento</h4></label></td>                             
                                 <td align="top" class="value" style="float:right;"> 
                                 <select class="grigio" id="mese" name="mese_documento" required>                      
-								        	<option value = "" >${documento.getMese_documento()}</option>
+								        	<option value = "${documento.getMese_documento()}" >${documento.getMese_documento()}</option>
 								    		<option value="Gennaio">Gennaio</option>
 	                                        <option value="Febbraio">Febbraio</option>
 	                                        <option value="Marzo">Marzo</option>
@@ -104,7 +114,7 @@
 	                        </tr>
 	                        
 	                        <tr class="prop">
-                                <td align="top" class="fk_id_mezzo"><label for="fk_id_cliente"><h4>Cliente</h4></label></td>                             
+                                <td align="top" class="fk_id_cliente"><label for="fk_id_cliente"><h4>Cliente</h4></label></td>                             
                                 <td align="top" class="value" style="float:right;">
 									<select class="grigio" id="cliente" name="fk_id_cliente" required>
 	                                    <#list listaClienti as cliente>
@@ -114,7 +124,7 @@
 	                            </td>
                             </tr>             
                              <tr class="prop">
-                                <td align="top" class="fk_id_mezzo"><label for="fk_id_banca"><h4>Banca di Appoggio</h4></label></td>                             
+                                <td align="top" class="fk_id_banca"><label for="fk_id_banca"><h4>Banca di Appoggio</h4></label></td>                             
                                 <td align="top" class="value" style="float:right;">
 	                                <select class="grigio" id="banca" name="fk_id_banca" required>
 	                                    <#list listaBanca as banca>
@@ -122,7 +132,14 @@
 	                                    </#list>
 	                                </select>
                  				</td>
-                            </tr>             
+                            </tr>    
+                             <tr class="prop">
+                                <td align="top" class="totale"><label for="totale"><h4>Importo Totale</h4></label></td>                             
+                                <td align="top" class="value" style="float:right;">
+	                                <input type="text" name="totale" id="totale" class="totale" value="${documento.getTotale()}" style="float:right;text-align:right; width: 175px;" readonly>
+                 				</td>
+                            </tr>   
+                                   
                        
                         </tbody>                            
                     </table>
@@ -140,40 +157,42 @@
 				<a style="text-decoration: none;margin-top:10px; float:right;"  id="chiudi" class="action-button shadow animate blue" >Chiudi</a>
 				</#if>
 	               --> 
-	                
+	             
+	             
 	            <#if !documento.isChiuso()>
                 <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" >
                 	<a style="text-decoration: none; margin-top:10px; float:right;" id="chiusura" class="action-button shadow animate blue">Chiudi documento</a>               
                 </form>
                 </#if>
 				
-				<#if documento.isChiuso() && !documento.isPdfGenerato()>
-					<form name="stampaForm" action="/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" method="get" >
-						<a style="text-decoration: none; margin-top:10px;" href="#" id="stampaPDF" class="action-button shadow animate blue">Stampa PDF</a> 
-					</form>
-					
-					<form action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" >                
-                        <span class="button"><input type="submit" value="Invia PDF" class="delete" onclick="return confirm('Sei sicuro?');  " /></span>                      
-                 	</form>
+				
+				<#if documento.isChiuso() >
+					<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
+						<a title="Visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
+							<img src="/img/edit/pdf.png" style="vertical-align:initial;clear:none;border:0" onclick="location.reload();">
+						</a>
+						
+					<#if documento.isChiuso() && documento.isPdfGenerato()>
+						<form name="inviaPDForm" action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" >  
+							<a title="invia la fattura pdf" style="text-decoration: none;margin-top: -50px; margin-left: 88px;"  id="inviaPDF" class="action-button shadow animate blue">Invia PDF</a>                
+	                 	</form>
+					</#if>
+
 				</#if>
-				
-				<#if documento.isChiuso()>
-				
-				<form action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" >                
-                        <span class="button"><input type="submit" value="Invia PDF" class="delete" onclick="return confirm('Sei sicuro?');  " /></span>                      
-                 </form>
-                 </#if>
                 </div>
             
 </fieldset>
 </div>
-			
+<!-- TABELLA RIGHE -->			
+
+
 			 <div class="dialog">  
    	  			<article class="tabellaDettaglio">
       			
-      			
+			    <!--#if documento.isChiuso() &&  documento.isPdfGenerato() -->			
       			<table width="100%" border="0">
   					<tbody>
+  					
 					    <tr>
 					      <th scope="col">Num sedute</th>
 					      <th scope="col">Mese sedute</th>
@@ -185,7 +204,9 @@
 					      <th scope="col">Quota fissa</th>
 					      <th scope="col">Diritto di uscita</th>
 					      <th scope="col">IMPORTO</th>
+					      <th scope="col">Elimina</th>
 					    </tr>
+					    
 					    <#assign i=0 />
 							<#list righe as righe>
 						    	<#assign i=i+1 />
@@ -200,13 +221,15 @@
 							<td><input value="${righe.getQuota_fissa()}" type="text" name="quota_fissa${i}" id="quota_fissa1" class="quota_fissa" readonly ></td>
 						    <td><input value="${righe.getDiritto_uscita()}" type="text" name="diritto_uscita${i}" id="dirittto_uscita${i}" class="dirittto_uscita" readonly></td>
 						    <td><input value="${righe.getImporto()}" type="text" name="importo${i}" id="importo${i}"  class="importo" readonly></td>
+						    <td><input value="Elimina" type="button" name="elimina${i}" id="elimina${i}"  class="elimina" readonly></td>
 					    </tr>
 					    
    						</#list>
     
   					</tbody>
 				</table>
-            
+				
+           <!--/#if-->
 <!--- CREAZIONE RIGA --> 
 
 <div id="gestioneRiga" class="overlay">
@@ -258,7 +281,8 @@
 							    <td align="top" class="mese"><label for="mese">Mese Sedute</label></td>
 	                            <td valign="top" class="value">
 							      	<select id="mese1" name="mese" class="mese_seduteCrea" required>
-			                                    <option value="">Seleziona..</option>
+							      	
+			                                    	<option value="${documento.getMese_documento()}">${documento.getMese_documento()}</option>
 			                                        <option value="Gennaio">Gennaio</option>
 			                                        <option value="Febbraio">Febbraio</option>
 			                                        <option value="Marzo">Marzo</option>
@@ -323,6 +347,7 @@
                     <br/>
                 <div class="buttons">
                     <span class="button"><button name="create" class="save btn btn-default btn-vlarge" id="createRiga"/>Salva</button></span>
+                	<span class="button"><input type="reset" name="create" class="save btn btn-default btn-vlarge" value="Reset" id="create"/></span>
                 </div>
                 
             </form>
