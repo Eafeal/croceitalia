@@ -204,7 +204,10 @@
 					      <th scope="col">Quota fissa</th>
 					      <th scope="col">Diritto di uscita</th>
 					      <th scope="col">IMPORTO</th>
-					      <th scope="col">Elimina</th>
+					      
+					      <#if documento.getStato() == "A">
+					      	<th scope="col">Elimina</th>
+					      </#if>
 					    </tr>
 					    
 					    <#assign i=0 />
@@ -221,7 +224,13 @@
 							<td><input value="${righe.getQuota_fissa()}" type="text" name="quota_fissa${i}" id="quota_fissa1" class="quota_fissa" readonly ></td>
 						    <td><input value="${righe.getDiritto_uscita()}" type="text" name="diritto_uscita${i}" id="dirittto_uscita${i}" class="dirittto_uscita" readonly></td>
 						    <td><input value="${righe.getImporto()}" type="text" name="importo${i}" id="importo${i}"  class="importo" readonly></td>
-						    <td><input value="Elimina" type="button" name="elimina${i}" id="elimina${i}"  class="elimina" readonly></td>
+						    <td>
+						    <#if documento.getStato() == "A">
+						    <form name="eliminaRigaForm" action="/edit/documento_righe/delete/${righe.getId_documento_righe()}" method="post">
+						    	<input value="Elimina" type="button" name="elimina${i}" id="eliminaRiga"  class="elimina" readonly>
+						    </form>
+						    </#if>
+						    </td>
 					    </tr>
 					    
    						</#list>
