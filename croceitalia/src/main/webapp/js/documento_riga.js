@@ -101,6 +101,14 @@ $(document).ready(function(e){
 		});
 });
 
+$(document).ready(function(e){ 
+	$("#eliminaRiga").click(function(){
+		if (!confirm('Confermi cancellazione?')){
+			return false;
+		}
+		eliminaRigaForm.submit();
+		});
+});
 
 // CALCOLO DELL'IMPORTO e dei KM TOTALI
 

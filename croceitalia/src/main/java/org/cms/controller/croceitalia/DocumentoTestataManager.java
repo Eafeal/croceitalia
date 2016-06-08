@@ -248,7 +248,6 @@ public class DocumentoTestataManager extends AssoDao {
 			documento.setImponibile(documento.getImponibile().add(importoRiga));
 			update(documento);
 		} catch (AssoException e) {
-
 			e.printStackTrace();
 		}
 	}
@@ -260,7 +259,6 @@ public class DocumentoTestataManager extends AssoDao {
 			documento.setImponibile(documento.getImponibile().subtract(importoRiga));
 			update(documento);
 		} catch (AssoException e) {
-
 			e.printStackTrace();
 		}
 	}

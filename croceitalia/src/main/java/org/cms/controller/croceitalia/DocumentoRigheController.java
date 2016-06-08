@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.cms.controller.edit.EditCmsController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +29,17 @@ public class DocumentoRigheController extends EditCmsController {
 
 	@Autowired(required = true)
 	protected DocumentoRigheManager _documentoRigaManager;
+	
+
+	@Autowired(required = true)
+	protected ClienteManager _clienteManager;
+
+	@Autowired(required = true)
+	protected BancaManager _bancaManager;
+
+	@Autowired(required = true)
+	protected MezzoManager _mezzoManager;
+
 
 	@Autowired(required = true)
 	protected PazienteManager _pazienteManager;
@@ -76,8 +88,8 @@ public class DocumentoRigheController extends EditCmsController {
 		riga.setQuotaFissa(quota_fissa);
 
 		Utente_itf utente = ModelUser.get();// restituisce l'utente loggato
-
 		String messaggio = "";
+		
 		try {
 
 			riga.setUsercrea(utente.getUserId());
@@ -107,18 +119,28 @@ public class DocumentoRigheController extends EditCmsController {
 
 		return modelAndView;
 	}
-	/*
-	 * @RequestMapping(value = "documento_righe/doUpdate", method =
-	 * RequestMethod.POST) public ModelAndView doUpdate(HttpServletRequest
-	 * request, HttpServletResponse response, Documento_Righe righe) {
-	 * 
-	 * ModelAndView modelAndView = getModelAndView(request); try {
-	 * _documentoRiga.update(righe); modelAndView.addObject("esito", "ok");
-	 * String viewName = "forward:/edit/documento_testata/dettaglio/" +
-	 * righe.getId_documento_righe(); modelAndView.setViewName(viewName);
-	 * 
-	 * return modelAndView;
-	 * 
-	 * } catch (Throwable errore) { return error(modelAndView, errore); } }
-	 */
+	
+	@RequestMapping(value = "documento_righe/delete/{id}", method = RequestMethod.POST)
+	protected ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+
+		try {
+			
+			Documento_Righe riga = (Documento_Righe) _documentoRigaManager.findById(id);
+			String idDoc = riga.getFk_id_documento_testata().toString();
+
+			_documentoTestataManager.sottraiTotale(idDoc, riga.getImporto());
+			_documentoRigaManager.deleteById(id);
+			
+			String viewName = "redirect:/edit/documento_testata/update/" + idDoc;
+			modelAndView.setViewName(viewName);
+			
+			return modelAndView;
+
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+	}
+	
 }
