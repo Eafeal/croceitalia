@@ -52,7 +52,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="/edit/home">Home</a></li>
-              <li><a href="/edit/documento_testata/list">Lista Documento</a></li>
+              <li><a href="/edit/documento_testata/list">Lista Documenti</a></li>
 			
 			<#if !documento.isChiuso()>
               <li><a href="#gestioneRiga" onclick="resetRiga()">Nuova Riga</a></li>
@@ -70,6 +70,14 @@
 <fieldset>
 	<legend >Documento Testata
 	 
+	  				<#if !documento.isChiuso()>
+	                <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" class="formHead"  >
+	                	<a title="Chiudi il documento" style="margin-top: -38px;margin-right: 150px; float:right;" id="chiusura" >
+	                		<img src="/img/edit/chiudi_pdf.png" style="clear:none;border:0;width: 35px;float:right;" onclick="location.reload();">
+	                	</a>               
+	                </form>
+	                </#if>
+                
 				<#if documento.isChiuso() >
 					<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
 						<a title="Visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
@@ -77,12 +85,10 @@
 						</a>
 						
 					<#if documento.isChiuso() && documento.isPdfGenerato()>
-						<form name="inviaPDForm" action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" >  
-						
-						<a title="Invia la fattura pdf" id="inviaPDF"  >
-							<img src="/img/edit/invia_pdf.png" style="text-decoration: none;margin-top: -36px;margin-right: 50px;float: right;width: 35px;"  onclick="location.reload();">
-						</a>
-							<!--a title="invia la fattura pdf" style="text-decoration: none;margin-top: -50px; margin-left: 88px;"  id="inviaPDF" class="action-button shadow animate blue">Invia PDF</a-->                
+						<form name="inviaPDForm" action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" class="formHead" >  
+							<a title="Invia la fattura pdf" id="inviaPDF"  >
+								<img src="/img/edit/invia_pdf.png" style="margin-top: -36px;margin-right: 50px;float: right;width: 35px;"  onclick="location.reload();">
+							</a>
 	                 	</form>
 					</#if>
 
@@ -91,6 +97,11 @@
 		
 <!---AGGIORNAMENTO DOCUMENTO-->			
  <form id="updateForm" name="updateForm" action="/edit/documento_testata/doUpdate" method="post">
+ 
+ 				<#if !documento.isChiuso()>
+					<a title="Salva le modifiche del documento" style="text-decoration: none; float:right;" id="update" class="action-button shadow animate blue" >Salva</a>
+				</#if>
+				
                    <table class="aggiornaDocumento">
                     <input type="hidden" name="id_documento_testata" id="id_documento_testata" value="${documento.getId_documento_testata()}">
                         <tbody>
@@ -144,27 +155,13 @@
 	                                </select>
                  				</td>
                             </tr>    
-                               
-                                   
-                       
                         </tbody>                            
                     </table>
-                    <br/>
-                <#if !documento.isChiuso()>
-					<a style="text-decoration: none; float:right;" id="update" class="action-button shadow animate blue" >Salva</a>
-				</#if>
-	
+                    <hr>
 			</form>
 
-                <!--div class="buttons"-->               
-		            <#if !documento.isChiuso()>
-	                <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" >
-	                	<a title="Chiudi il documento" style="text-decoration: none; margin-top:10px; float:right;" id="chiusura" >
-	                		<img src="/img/edit/chiudi_pdf.png" style="clear:none;border:0;width: 35px;float:right;" onclick="location.reload();">
-	                	</a>               
-	                </form>
-	                </#if>
-                <!--/div-->
+                            
+		          
             
 </fieldset>
 </div>

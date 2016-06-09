@@ -170,7 +170,7 @@ th {
 .action-button
 {
 	position: relative;
-	padding: 10px 40px;
+	padding: 4px 30px;
  	margin: 0px 10px 10px 0px;
  	float: left;
 	border-radius: 5px;
@@ -189,7 +189,8 @@ th {
 	background-color: #5bc0de;
     border-bottom: 5px solid #53A4C3;
     text-shadow: 0px -2px #53A4C3;
-    margin-top: 30px;
+    /*margin-top: 30px;*/
+    margin-top: -60px;
 }
 
 .action-button:active
@@ -356,4 +357,8 @@ hr{
 #eliminaRiga{
 	    margin: 0 0 5px;
 	    padding-left: 10px;
+}
+
+.formHead{
+	margin:0;
 }
