@@ -73,14 +73,14 @@
 				<#if documento.isChiuso() >
 					<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
 						<a title="Visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
-							<img src="/img/edit/pdf_riga.png" style="clear:none;border:0;width: 52px;float:right;" onclick="location.reload();">
+							<img src="/img/edit/pdf_riga.png" style="clear:none;border:0;width: 35px;float:right;" onclick="location.reload();">
 						</a>
 						
 					<#if documento.isChiuso() && documento.isPdfGenerato()>
 						<form name="inviaPDForm" action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" >  
 						
 						<a title="Invia la fattura pdf" id="inviaPDF"  >
-							<img src="/img/edit/invia_pdf.png" style="text-decoration: none;margin-top: -53px;margin-right: 71px;float: right;width: 52px;"  onclick="location.reload();">
+							<img src="/img/edit/invia_pdf.png" style="text-decoration: none;margin-top: -36px;margin-right: 50px;float: right;width: 35px;"  onclick="location.reload();">
 						</a>
 							<!--a title="invia la fattura pdf" style="text-decoration: none;margin-top: -50px; margin-left: 88px;"  id="inviaPDF" class="action-button shadow animate blue">Invia PDF</a-->                
 	                 	</form>
@@ -88,35 +88,36 @@
 
 				</#if>
 		</legend>
-				
+		
+<!---AGGIORNAMENTO DOCUMENTO-->			
  <form id="updateForm" name="updateForm" action="/edit/documento_testata/doUpdate" method="post">
                    <table class="aggiornaDocumento">
                     <input type="hidden" name="id_documento_testata" id="id_documento_testata" value="${documento.getId_documento_testata()}">
                         <tbody>
                         	<tr class="prop">
-                                <td align="top" class="num"><label for="num"><h4>Numero Documento</h4></label></td>                             
+                                <td align="top" class="num"><label for="num"><h5>Numero Documento</h5></label></td>                             
                                 <td align="top" class="value" style="float:right;">
-                                    <input type="text" id="numAg" name="num_documento"  size="3" maxlength="11" value="${documento.getNum_documento()}" style="border:0px; text-align:right;" readonly/><b> - </b><input type="text" id="anno_Ag" name="anno_documento"  size="4" maxlength="60" value="2016" style="border:0px; text-align:center;" readonly/> del <input type="text" id="data_Ag" name="data_documento" value="${documento.getData_documento()?string["dd-MM-yyyy"]}" style="border:0px; background-color:#F2F2F2; text-align:right;">                                           	 
+                                    <input type="text" id="numAg" name="num_documento"  size="2" maxlength="11" value="${documento.getNum_documento()}" style="border:0px; text-align:right;" readonly/><b> - </b>
+                                    <input type="text" id="anno_Ag" name="anno_documento"  size="4" maxlength="60" value="2016" style="border:0px; text-align:center;" readonly/> 
+                                    del
+                                     <input type="text" id="data_Ag" name="data_documento" value="${documento.getData_documento()?string["dd-MM-yyyy"]}" style="border:0px; background-color:#F2F2F2; text-align:right;">                                           	 
                                 </td> 
-                               
-                            </tr>
-         					<tr class="prop">
-                                <td align="top" class="num"><label for="num"><h4>Codice CIG</h4></label></td>                             
+
+                                <td align="top" class="num"><label for="num"><h5>Codice CIG</h5></label></td>                             
                                 <td align="top" class="value" style="float:right;">
-                                    <input type="text" size="25" id="CIG" name="CIG" value="${documento.getCIG()}" style="border:0px; text-align:right;">                                           	 
+                                    <input type="text" size="25" maxlength="10"  id="CIG" name="CIG" value="${documento.getCIG()}" style="border:0px; text-align:center;">                                           	 
                                 </td> 
-                               
-                            </tr>
-                             <tr class="prop">         
-                                <td align="top" class="num"><label for="anno_documento"><h4>Mese di Riferimento</h4></label></td>                             
+                                      
+                                <td align="top" class="num"><label for="anno_documento"><h5>Mese di Riferimento</h5></label></td>                             
                                 <td align="top" class="value" style="float:right;"> 
                                 <select class="grigio" id="mese" name="mese_documento" required>                      
 								        	<#include "selectMese.ftl"  />
 	                           </select>
 	                              </td>
-                            </tr>       
+                            </tr>
+                                   
                           <tr class="prop">
-                                <td align="top" class="fk_id_mezzo"><label for="fk_id_mezzo"><h4>Mezzo</h4></label></td>                             
+                                <td align="top" class="fk_id_mezzo"><label for="fk_id_mezzo"><h5>Mezzo</h5></label></td>                             
                                 <td align="top" class="value" style="float:right;">
 	                                <select class="grigio" id="mezzo" name="fk_id_mezzo" required>
 	                                    <#list listaMezzo as mezzo>
@@ -124,10 +125,8 @@
 	                                    </#list>                   
 	                                </select>
 	                            </td>
-	                        </tr>
-	                        
-	                        <tr class="prop">
-                                <td align="top" class="fk_id_cliente"><label for="fk_id_cliente"><h4>Cliente</h4></label></td>                             
+	                     
+                                <td align="top" class="fk_id_cliente"><label for="fk_id_cliente"><h5>Cliente</h5></label></td>                             
                                 <td align="top" class="value" style="float:right;">
 									<select class="grigio" id="cliente" name="fk_id_cliente" required>
 	                                    <#list listaClienti as cliente>
@@ -135,9 +134,8 @@
 	                                    </#list>
 	                                </select>
 	                            </td>
-                            </tr>             
-                             <tr class="prop">
-                                <td align="top" class="fk_id_banca"><label for="fk_id_banca"><h4>Banca di Appoggio</h4></label></td>                             
+                         
+                                <td align="top" class="fk_id_banca"><label for="fk_id_banca"><h5>Banca di Appoggio</h5></label></td>                             
                                 <td align="top" class="value" style="float:right;">
 	                                <select class="grigio" id="banca" name="fk_id_banca" required>
 	                                    <#list listaBanca as banca>
@@ -158,23 +156,15 @@
 	
 			</form>
 
-                <div class="buttons">               
-	               
-	             <!--   
-				<#if documento.isChiuso()>
-				<a style="text-decoration: none;margin-top:10px; float:right;"  id="chiudi" class="action-button shadow animate blue" >Chiudi</a>
-				</#if>
-	               --> 
-	             
-	             
-	            <#if !documento.isChiuso()>
-                <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" >
-                	<a style="text-decoration: none; margin-top:10px; float:right;" id="chiusura" class="action-button shadow animate blue">Chiudi documento</a>               
-                </form>
-                </#if>
-                
-				
-                </div>
+                <!--div class="buttons"-->               
+		            <#if !documento.isChiuso()>
+	                <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" >
+	                	<a title="Chiudi il documento" style="text-decoration: none; margin-top:10px; float:right;" id="chiusura" >
+	                		<img src="/img/edit/chiudi_pdf.png" style="clear:none;border:0;width: 35px;float:right;" onclick="location.reload();">
+	                	</a>               
+	                </form>
+	                </#if>
+                <!--/div-->
             
 </fieldset>
 </div>
@@ -230,13 +220,10 @@
 						    <td><input value="${righe.getImporto()}" type="text" name="importo${i}" id="importo${i}"  class="importo" readonly></td>
 						    <td>
 						  	<#if documento.getStato() == "A">
-						    <form name="eliminaRigaForm" action="/edit/documento_righe/delete/${righe.getId_documento_righe()}" method="post">
-						    	<input type="image"  src="/img/edit/cestino.png"   name="elimina${i}" id="eliminaRiga"  class="elimina" width="78" height="38">
+						    <!--form name="eliminaRigaForm" id="cestino" action="/edit/documento_righe/delete/${righe.getId_documento_righe()}" method="post"-->
+						    	<input type="image" src="/img/edit/cestino.png" name="elimina${i}" id="eliminaRiga" class="elimina" onclick="cancellaRiga(${righe.getId_documento_righe()})" title="Elimina la riga">
 						    
-						    	<a title="Elimina la riga" >
-						    		<!--img src="/img/edit/cestino.png"  id="eliminaRiga" name="elimina${i}" style="vertical-align:initial;clear:none;border:0" onclick="location.reload();" -->
-						    	</a>
-						    </form>
+						    <!--/form-->
 						    </#if>
 						    
 						    </td>
@@ -245,14 +232,17 @@
 	   						<table>
 		    					<tr class="prop">
 		    					<hr>
-			                            <td align="top" class="importo_s"><h4 style="color: #5BC0DE;">IMPORTO TOTALE</h4></td>
-			                            <td valign="top" class="value">               
-							      			<input type="text" name="totale" id="importoAg" value="${documento.getTotale()}" style="float:right;text-align:right;margin: 11px;margin-right: -19px; width: 175px; border:0px;" readonly>
-			                            </td>
-			                    </tr>	
-		                    </table>
+			                                         
+							      			<h4 style="color: #5BC0DE;margin-top: 13px; float: right;">IMPORTO TOTALE<input type="text" name="totale" id="importoAg" value="${documento.getTotale()}" style="float: right;text-align: right;margin: 11px;margin-top: 0px;width: 122px;border: 0px;" readonly></h4>
+			                            
+			                   
   					</tbody>
 				</table>
+			
+			<!---RICHIAMI QUESTO FORM dopo aver cliccato il cestino e ad aver acconsentito--->
+			    <form name="eliminaRigaForm" action="/edit/documento_righe/delete" method="post">
+			    	<input type="hidden" name="id_riga" value="">
+			    </form>				
 
 <!--- CREAZIONE RIGA --> 
 

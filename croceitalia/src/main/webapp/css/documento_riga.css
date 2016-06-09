@@ -251,23 +251,24 @@ h3 {
 
 
 #numAg{
-	margin-top: 7px;
+	/* margin-top: 7px; */
 	margin-bottom:0px;
 	margin-right: 10px;
 }
 #anno_Ag{
-	margin-top: 7px;
+	/* margin-top: 7px; */
 	margin-bottom:0px;
 	margin-right: 10px;
 }
 #data_Ag{
-	margin-top: 7px;
+	width:100px;
+	/* margin-top: 7px; */
 	margin-bottom:0px;
 	margin-right: 10px;
 }
 #CIG{
 	    width: 175px;
-	    margin-top: 7px;
+	    /* margin-top: 7px; */
 	    margin-bottom:0px;
 	    margin-right: 10px;
 }
@@ -285,19 +286,19 @@ h3 {
 	#mese{
 		background-color:#F2F2F2;
 	}
-	#cliente{ 
+	#CIG{ 
 		background-color:#F2F2F2;
 	}
 
 legend{
-	line-height: 60px;
+/* 	line-height: 60px; */
 	color:#5BC0DE;
-	font-size: xx-large;
+ 	font-size: xx-large; 
 }
 
 #updateForm{
-	padding-left: 54px;
-	padding-right: 54px;
+/* 	padding-left: 54px;
+	padding-right: 54px; */
 }
 
 
@@ -350,4 +351,9 @@ legend{
 } */
 hr{
 	    margin-bottom: -5px;
+}
+
+#eliminaRiga{
+	    margin: 0 0 5px;
+	    padding-left: 10px;
 }

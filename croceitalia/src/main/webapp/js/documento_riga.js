@@ -165,14 +165,14 @@ $(document).ready(function(e){
 });
 
 
-$(document).ready(function(e){ 
-	$("#eliminaRiga").click(function(){
-		if (!confirm('Confermi cancellazione?')){
-			return false;
-		}
-		eliminaRigaForm.submit();
-		});
-});
+//$(document).ready(function(e){ 
+//	$("#eliminaRiga").click(function(){
+//		if (!confirm('Confermi cancellazione?')){
+//			return false;
+//		}
+//		eliminaRigaForm.submit();
+//		});
+//});
 
 // CALCOLO DELL'IMPORTO e dei KM TOTALI
 
@@ -272,3 +272,17 @@ function hideLoader()
  {
  document.getElementById("wait").style.display = "none";
  }
+
+//-----------
+function cancellaRiga(id)
+{
+	if (!confirm('Confermi cancellazione?')){
+		return false;
+	}
+	eliminaRigaForm.id_riga.value = id;
+	//eliminaRigaForm.action += "/"+ id;
+	showLoader();
+	eliminaRigaForm.submit();
+}
+
+

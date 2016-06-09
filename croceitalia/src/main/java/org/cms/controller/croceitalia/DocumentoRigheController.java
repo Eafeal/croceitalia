@@ -29,7 +29,6 @@ public class DocumentoRigheController extends EditCmsController {
 
 	@Autowired(required = true)
 	protected DocumentoRigheManager _documentoRigaManager;
-	
 
 	@Autowired(required = true)
 	protected ClienteManager _clienteManager;
@@ -39,7 +38,6 @@ public class DocumentoRigheController extends EditCmsController {
 
 	@Autowired(required = true)
 	protected MezzoManager _mezzoManager;
-
 
 	@Autowired(required = true)
 	protected PazienteManager _pazienteManager;
@@ -89,7 +87,7 @@ public class DocumentoRigheController extends EditCmsController {
 
 		Utente_itf utente = ModelUser.get();// restituisce l'utente loggato
 		String messaggio = "";
-		
+
 		try {
 
 			riga.setUsercrea(utente.getUserId());
@@ -119,28 +117,52 @@ public class DocumentoRigheController extends EditCmsController {
 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "documento_righe/delete/{id}", method = RequestMethod.POST)
-	protected ModelAndView delete(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
+	protected ModelAndView delete(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("id") String id) {
 
 		ModelAndView modelAndView = getModelAndView(request);
 
 		try {
-			
+
 			Documento_Righe riga = (Documento_Righe) _documentoRigaManager.findById(id);
 			String idDoc = riga.getFk_id_documento_testata().toString();
 
 			_documentoTestataManager.sottraiTotale(idDoc, riga.getImporto());
 			_documentoRigaManager.deleteById(id);
-			
+
 			String viewName = "redirect:/edit/documento_testata/update/" + idDoc;
 			modelAndView.setViewName(viewName);
-			
+
 			return modelAndView;
 
 		} catch (Throwable errore) {
 			return error(modelAndView, errore);
 		}
 	}
-	
+
+	@RequestMapping(value = "documento_righe/delete", method = RequestMethod.POST)
+	protected ModelAndView delete1(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+		String id = request.getParameter("id_riga");
+
+		try {
+
+			Documento_Righe riga = (Documento_Righe) _documentoRigaManager.findById(id);
+			String idDoc = riga.getFk_id_documento_testata().toString();
+
+			_documentoTestataManager.sottraiTotale(idDoc, riga.getImporto());
+			_documentoRigaManager.deleteById(id);
+
+			String viewName = "redirect:/edit/documento_testata/update/" + idDoc;
+			modelAndView.setViewName(viewName);
+
+			return modelAndView;
+
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+	}
 }
