@@ -71,7 +71,7 @@ th {
 	text-align: right;
 }
 .trasportato{
-	width:170px;
+	width:160px;
 }
 .struttura{
 	width: 148px;
@@ -84,7 +84,7 @@ th {
 	text-align: right;
 }
 .quota_fissa{
-	width:56px;
+	width:40px;
 	text-align: right;
 }
 .dirittto_uscita{
@@ -92,7 +92,7 @@ th {
 	text-align: right;
 }
 .importo{
-	width:75px;
+	width:57px;
 	text-align: right;
 }
 
@@ -206,12 +206,6 @@ label{
 	border:0px;
 }
 
-#mese{
-	background-color:#F2F2F2;
-}
-#cliente{ 
-	background-color:#F2F2F2;
-}
 
 
 button[class^="btn"] {
@@ -255,17 +249,105 @@ h3 {
     color: #5BC0DE;
 }
 
-select{
-    width: 184px;
+
+#numAg{
+	margin-top: 7px;
+	margin-bottom:0px;
+	margin-right: 10px;
+}
+#anno_Ag{
+	margin-top: 7px;
+	margin-bottom:0px;
+	margin-right: 10px;
+}
+#data_Ag{
+	margin-top: 7px;
+	margin-bottom:0px;
+	margin-right: 10px;
 }
 #CIG{
 	    width: 175px;
+	    margin-top: 7px;
+	    margin-bottom:0px;
+	    margin-right: 10px;
 }
+#importoAg{
+	margin-top: 7px;
+	margin-bottom:0px;
+	margin-right: 10px;
+}
+	select{
+	    width: 184px;
+	    margin-top: 7px;
+	    margin-bottom:0px;
+	    margin-right: 10px;
+	}
+	#mese{
+		background-color:#F2F2F2;
+	}
+	#cliente{ 
+		background-color:#F2F2F2;
+	}
+
 legend{
+	line-height: 60px;
 	color:#5BC0DE;
+	font-size: xx-large;
 }
 
 #updateForm{
 	padding-left: 54px;
 	padding-right: 54px;
+}
+
+
+
+/*STILE DI DAVIDE*/
+
+#wait {
+	font-size: 44px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	z-index: 500000000;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+#loading {
+	position: absolute;
+	width: 190px;
+	height: 70px;
+	top: 50%;
+	left: 50%;
+	margin-top: -45px;
+	margin-left: -110px;
+	background-color: #FFF;
+	background-image: url(../images/loader.gif);
+	background-repeat: no-repeat;
+	background-size: 20%;
+	background-position: 90% center;
+	font-size: 16px;
+	color: #333;
+	line-height: 65px;
+	border-radius: 10px;
+	padding: 10px 30px;
+	box-shadow: -5px 5px 30px rgba(0, 0, 0, 0.5);
+}
+
+.aggiornaDocumento td{
+	padding:0px;
+	padding-left: 11px;
+}
+/* .agiornaDocumento select{
+	    margin-top: 7px;
+} */
+hr{
+	    margin-bottom: -5px;
 }

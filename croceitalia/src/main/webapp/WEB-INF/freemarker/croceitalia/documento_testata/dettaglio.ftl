@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en"><head>
     <meta charset="utf-8">
     <title>Croce Bianca Italia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,11 @@
     <!-- Le styles -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/documento_riga.css" rel="stylesheet">
+    
+ <!--JQUERY TAB--> 
+    <link href="/css/jquery-ui1.css" rel="stylesheet">
+ <!--JQUERY TAB--> 
+     
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -47,10 +52,10 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="/edit/home">Home</a></li>
-              <li><a href="/edit/documento_testata/list">Documento</a></li>
+              <li><a href="/edit/documento_testata/list">Lista Documento</a></li>
 			
 			<#if !documento.isChiuso()>
-              <li><a href="#gestioneRiga">Nuova Riga</a></li>
+              <li><a href="#gestioneRiga" onclick="resetRiga()">Nuova Riga</a></li>
             </#if>
                          
             </ul>
@@ -63,15 +68,35 @@
      
 <div>
 <fieldset>
-	<legend >Documento Testata</legend>
+	<legend >Documento Testata
+	 
+				<#if documento.isChiuso() >
+					<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
+						<a title="Visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
+							<img src="/img/edit/pdf_riga.png" style="clear:none;border:0;width: 52px;float:right;" onclick="location.reload();">
+						</a>
+						
+					<#if documento.isChiuso() && documento.isPdfGenerato()>
+						<form name="inviaPDForm" action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" >  
+						
+						<a title="Invia la fattura pdf" id="inviaPDF"  >
+							<img src="/img/edit/invia_pdf.png" style="text-decoration: none;margin-top: -53px;margin-right: 71px;float: right;width: 52px;"  onclick="location.reload();">
+						</a>
+							<!--a title="invia la fattura pdf" style="text-decoration: none;margin-top: -50px; margin-left: 88px;"  id="inviaPDF" class="action-button shadow animate blue">Invia PDF</a-->                
+	                 	</form>
+					</#if>
+
+				</#if>
+		</legend>
+				
  <form id="updateForm" name="updateForm" action="/edit/documento_testata/doUpdate" method="post">
-                   <table>
+                   <table class="aggiornaDocumento">
                     <input type="hidden" name="id_documento_testata" id="id_documento_testata" value="${documento.getId_documento_testata()}">
                         <tbody>
                         	<tr class="prop">
                                 <td align="top" class="num"><label for="num"><h4>Numero Documento</h4></label></td>                             
                                 <td align="top" class="value" style="float:right;">
-                                    <input type="text" id="num" name="num_documento"  size="3" maxlength="11" value="${documento.getNum_documento()}" style="border:0px; text-align:right;" readonly/><b> - </b><input type="text" id="anno_documento" name="anno_documento"  size="4" maxlength="60" value="2016" style="border:0px; text-align:center;" readonly/> del <input type="text" id="data_documento" name="data_documento" value="${documento.getData_documento()?string["dd-MM-yyyy"]}" style="border:0px; background-color:#F2F2F2; text-align:right;">                                           	 
+                                    <input type="text" id="numAg" name="num_documento"  size="3" maxlength="11" value="${documento.getNum_documento()}" style="border:0px; text-align:right;" readonly/><b> - </b><input type="text" id="anno_Ag" name="anno_documento"  size="4" maxlength="60" value="2016" style="border:0px; text-align:center;" readonly/> del <input type="text" id="data_Ag" name="data_documento" value="${documento.getData_documento()?string["dd-MM-yyyy"]}" style="border:0px; background-color:#F2F2F2; text-align:right;">                                           	 
                                 </td> 
                                
                             </tr>
@@ -86,20 +111,8 @@
                                 <td align="top" class="num"><label for="anno_documento"><h4>Mese di Riferimento</h4></label></td>                             
                                 <td align="top" class="value" style="float:right;"> 
                                 <select class="grigio" id="mese" name="mese_documento" required>                      
-								        	<option value = "${documento.getMese_documento()}" >${documento.getMese_documento()}</option>
-								    		<option value="Gennaio">Gennaio</option>
-	                                        <option value="Febbraio">Febbraio</option>
-	                                        <option value="Marzo">Marzo</option>
-	                                        <option value="Aprile">Aprile</option>
-	                                        <option value="Maggio">Maggio</option>
-	                                        <option value="Giugno">Giugno</option>
-	                                        <option value="Luglio">Luglio</option>
-	                                        <option value="Agosto">Agosto</option>
-	                                        <option value="Settembre">Settembre</option>
-	                                        <option value="Ottobre">Ottobre</option>
-	                                        <option value="Novembre">Novembre</option>
-	                                        <option value="Dicembre">Dicembre</option>
-	                                </select>
+								        	<#include "selectMese.ftl"  />
+	                           </select>
 	                              </td>
                             </tr>       
                           <tr class="prop">
@@ -133,12 +146,7 @@
 	                                </select>
                  				</td>
                             </tr>    
-                             <tr class="prop">
-                                <td align="top" class="totale"><label for="totale"><h4>Importo Totale</h4></label></td>                             
-                                <td align="top" class="value" style="float:right;">
-	                                <input type="text" name="totale" id="totale" class="totale" value="${documento.getTotale()}" style="float:right;text-align:right; width: 175px;" readonly>
-                 				</td>
-                            </tr>   
+                               
                                    
                        
                         </tbody>                            
@@ -164,25 +172,21 @@
                 	<a style="text-decoration: none; margin-top:10px; float:right;" id="chiusura" class="action-button shadow animate blue">Chiudi documento</a>               
                 </form>
                 </#if>
+                
 				
-				
-				<#if documento.isChiuso() >
-					<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
-						<a title="Visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
-							<img src="/img/edit/pdf.png" style="vertical-align:initial;clear:none;border:0" onclick="location.reload();">
-						</a>
-						
-					<#if documento.isChiuso() && documento.isPdfGenerato()>
-						<form name="inviaPDForm" action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" >  
-							<a title="invia la fattura pdf" style="text-decoration: none;margin-top: -50px; margin-left: 88px;"  id="inviaPDF" class="action-button shadow animate blue">Invia PDF</a>                
-	                 	</form>
-					</#if>
-
-				</#if>
                 </div>
             
 </fieldset>
 </div>
+
+
+<div id="wait">
+  <div id="loading">
+    Attendere prego...
+  </div>
+</div>
+
+
 <!-- TABELLA RIGHE -->			
 
 
@@ -205,9 +209,9 @@
 					      <th scope="col">Diritto di uscita</th>
 					      <th scope="col">IMPORTO</th>
 					      
-					      <#if documento.getStato() == "A">
+
 					      	<th scope="col">Elimina</th>
-					      </#if>
+					    
 					    </tr>
 					    
 					    <#assign i=0 />
@@ -225,26 +229,37 @@
 						    <td><input value="${righe.getDiritto_uscita()}" type="text" name="diritto_uscita${i}" id="dirittto_uscita${i}" class="dirittto_uscita" readonly></td>
 						    <td><input value="${righe.getImporto()}" type="text" name="importo${i}" id="importo${i}"  class="importo" readonly></td>
 						    <td>
-						    <#if documento.getStato() == "A">
+						  	<#if documento.getStato() == "A">
 						    <form name="eliminaRigaForm" action="/edit/documento_righe/delete/${righe.getId_documento_righe()}" method="post">
-						    	<input value="Elimina" type="button" name="elimina${i}" id="eliminaRiga"  class="elimina" readonly>
+						    	<input type="image"  src="/img/edit/cestino.png"   name="elimina${i}" id="eliminaRiga"  class="elimina" width="78" height="38">
+						    
+						    	<a title="Elimina la riga" >
+						    		<!--img src="/img/edit/cestino.png"  id="eliminaRiga" name="elimina${i}" style="vertical-align:initial;clear:none;border:0" onclick="location.reload();" -->
+						    	</a>
 						    </form>
 						    </#if>
+						    
 						    </td>
-					    </tr>
-					    
+					    </tr>			    
    						</#list>
-    
+	   						<table>
+		    					<tr class="prop">
+		    					<hr>
+			                            <td align="top" class="importo_s"><h4 style="color: #5BC0DE;">IMPORTO TOTALE</h4></td>
+			                            <td valign="top" class="value">               
+							      			<input type="text" name="totale" id="importoAg" value="${documento.getTotale()}" style="float:right;text-align:right;margin: 11px;margin-right: -19px; width: 175px; border:0px;" readonly>
+			                            </td>
+			                    </tr>	
+		                    </table>
   					</tbody>
 				</table>
-				
-           <!--/#if-->
+
 <!--- CREAZIONE RIGA --> 
 
 <div id="gestioneRiga" class="overlay">
 	<div class="popup">
 		<h2 style="color:#5bc0de;">Nuova Riga</h2>
-		<a class="close" href="#" id="finisci">&times;</a>
+		<a class="close" href="#" id="finisci" onclick="resetRiga()">&times;</a>
 		<div class="content">
             <form id="rigaForm" name="rigaForm" action="/edit/documento_righe/save" method="post" >
                    <table>
@@ -290,20 +305,7 @@
 							    <td align="top" class="mese"><label for="mese">Mese Sedute</label></td>
 	                            <td valign="top" class="value">
 							      	<select id="mese1" name="mese" class="mese_seduteCrea" required>
-							      	
-			                                    	<option value="${documento.getMese_documento()}">${documento.getMese_documento()}</option>
-			                                        <option value="Gennaio">Gennaio</option>
-			                                        <option value="Febbraio">Febbraio</option>
-			                                        <option value="Marzo">Marzo</option>
-			                                        <option value="Aprile">Aprile</option>
-			                                        <option value="Maggio">Maggio</option>
-			                                        <option value="Giugno">Giugno</option>
-			                                        <option value="Luglio">Luglio</option>
-			                                        <option value="Agosto">Agosto</option>
-			                                        <option value="Settembre">Settembre</option>
-			                                        <option value="Ottobre">Ottobre</option>
-			                                        <option value="Novembre">Novembre</option>
-			                                        <option value="Dicembre">Dicembre</option>
+							      			<#include "selectMese.ftl"  />
 			                     	</select>
 	                            </td>
 	                       </tr>
@@ -331,7 +333,7 @@
 	                            </td>
 	                            <td align="top" class="diritto_uscita"><label for="diritto_uscita">Diritto Uscita</label></td>
 	                            <td valign="top" class="value">
-	                               	<input type="text" name="diritto_uscita" id="diritto_uscita" class="dirittto_uscitaCrea" value="0" >		  
+	                               	<input type="text" name="diritto_uscita" id="diritto_uscita" class="dirittto_uscitaCrea" value="0"  readonly>		  
 	                            </td>
 	                       </tr>
 	                       
@@ -340,7 +342,7 @@
 	                            <td valign="top" class="value">
 					      			<input type="text" name="costokm" id="costokm" class="costokmCrea" value="${documento.getMezzo().getCosto_km()}" onchange="totaleImporto()" readonly>
 	                            </td>                          
-	                            <td align="top" class="franchigia"><label for="franchigiakm">Franchigia</label></td>
+	                            <td align="top" class="franchigia"><label for="franchigiakm">Franchigia Kilometrica</label></td>
 	                            <td valign="top" class="value">
 	                               	<input type="text" name="franchigiakm" id="franchigiakm" class="franchigiaCrea" value="${documento.getMezzo().getFranchigia_km()}" onchange="totaleImporto()" readonly>
 	                            </td>
@@ -367,8 +369,11 @@
 </div>
 				</article>
 			</div> <!-- /container -->
+
   </body>
 </html>
 <script type="text/javascript" src="/js/asso_beans_client.js"></script>
 <script type="text/javascript" src="/js/controlli.js"></script>
 <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+
+

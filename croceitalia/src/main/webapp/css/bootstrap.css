@@ -1146,6 +1146,7 @@ input[type="color"],
      -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
        -o-transition: border linear 0.2s, box-shadow linear 0.2s;
           transition: border linear 0.2s, box-shadow linear 0.2s;
+          height: 15px;
 }
 
 textarea:focus,
@@ -1207,6 +1208,7 @@ select {
   width: 220px;
   background-color: #ffffff;
   border: 1px solid #cccccc;
+  height: 27px;
 }
 
 select[multiple],

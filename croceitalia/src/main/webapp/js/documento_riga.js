@@ -1,7 +1,8 @@
-
-
 /* VISUALIZZA POPUP PER L'INSERIMENTO RIGA */
 
+function resetRiga(){
+	document.rigaForm.reset(); 
+}
 var indice = 0;
 
 function mostra(ind) {
@@ -64,9 +65,60 @@ $(document).ready(function(e){
 //--- PER CREARE LA RIGA
 $(document).ready(function(e){ 
 	$("#createRiga").click(function(){
-	
-	/* alert(indice); *///era 0
-   insRigaForm.submit();
+//Contr. Obbligatorietà
+		
+		if(rigaForm.fk_id_paziente.value == ""){
+			alert("Il paziente e' obbligatorio!");
+			rigaForm.fk_id_paziente.focus();
+			return false;
+		}
+		if(rigaForm.fk_id_struttura.value == ""){
+			alert("La destinazione e' obbligatoria!");
+			rigaForm.fk_id_struttura.focus();
+			return false;
+		}
+		if(rigaForm.km_percorso.value == ""){
+			alert("I kilometri del percorso e' obbligatorio!");
+			rigaForm.km_percorso.focus();
+			return false;
+		}
+		if(rigaForm.num_sedute.value == ""){
+			alert("Il numero delle persone e' obbligatorio!");
+			rigaForm.num_sedute.focus();
+			return false;
+		}
+		if(rigaForm.mese.value == ""){
+			alert("Il mese e' obbligatorio!");
+			rigaForm.mese.focus();
+			return false;
+		}
+		if(rigaForm.ora_sosta.value == ""){
+			alert("Il numero delle ore di sosta e' obbligatorio!");
+			rigaForm.ora_sosta.focus();
+			return false;
+		}
+		if(rigaForm.quota_fissa_s.value == ""){
+			alert("La quota fissa e' obbligatoria!");
+			rigaForm.quota_fissa_s.focus();
+			return false;
+		}
+//		if(rigaForm.diritto_uscita.value == ""){
+//			alert("Il diritto di uscita e' obbligatorio!");
+//			rigaForm.diritto_uscita.focus();
+//			return false;
+//		}
+		
+// Contr. Validità
+		if (cf_contieneSoloCaratteriValidi(rigaForm.km_percorso, ".,1234567890") == 0) return false;
+		if (cf_contieneSoloCaratteriValidi(rigaForm.num_sedute, "1234567890") == 0) return false;
+		if (cf_contieneSoloCaratteriValidi(rigaForm.ora_sosta, "1234567890") == 0) return false;
+		if (cf_contieneSoloCaratteriValidi(rigaForm.quota_fissa_s, ".,1234567890") == 0) return false;
+		if (cf_contieneSoloCaratteriValidi(rigaForm.diritto_uscita, "1234567890") == 0) return false;
+		
+		
+		/* alert(indice); *///era 0
+		showLoader();
+	   insRigaForm.submit();
 		});
 });
 
@@ -74,11 +126,11 @@ $(document).ready(function(e){
 $(document).ready(function(e){ 
 	$("#chiusura").click(function(){
 		
-		if (!confirm('Sei sicuro?')){
+		if (!confirm('Sei sicuro? \nDopo la chiusura del documento, non potrai piu\' aggiungere nuove righe!')){
 			return false;
 		}
-		
-   chiusuraForm.submit();
+		showLoader();
+		chiusuraForm.submit();
 		});
 });
 
@@ -92,14 +144,26 @@ $(document).ready(function(e){
 //Aggiorni il documento modificato 
 $(document).ready(function(e){ 
 	$("#update").click(function(){
-		
+		if (cf_contieneSoloCaratteriValidi(updateForm.data_documento, "\n1234567890-") == 0) return false;
+		if (cf_contieneSoloCaratteriValidi(updateForm.CIG, "\n1234567890\nQWERTYUIOPASDFGHJKLZXCVBNM\nqwertyuiopasdfghjklzxcvbnm") == 0) return false;
 		if (!confirm('Sei sicuro?')){
 			return false;
 		}
-		
-	updateForm.submit();
+		showLoader();
+		updateForm.submit();
 		});
 });
+
+$(document).ready(function(e){ 
+	$("#inviaPDF").click(function(){
+		if (!confirm('Confermi invio?')){
+			return false;
+		}
+		showLoader();
+		inviaPDForm.submit();
+		});
+});
+
 
 $(document).ready(function(e){ 
 	$("#eliminaRiga").click(function(){
@@ -178,4 +242,33 @@ function pulisciNumero(numero)
 var nuovoNumero = numero.replace(".","");
 nuovoNumero = nuovoNumero.replace(",",".");
 return nuovoNumero;
+ }
+
+function  f_win_log(url)
+{
+	   var w;
+	   var h;
+	   var pw;
+	   var ph;
+
+	   w = 870;
+	   h = 600;
+	   pw = Math.floor((screen.width-w)/2);
+	   ph = 0;
+	
+		new_win=window.open(url,"Errori", "location=0,menubar=0,resizable=1,scrollbars, width="+ w +", height="+ h +", top="+ ph +", left="+ pw);
+		new_win.focus();
+} 
+
+// JAVASCRIPT DAVIDE
+
+
+function showLoader()
+ {
+ document.getElementById("wait").style.display = "block";
+ }
+ 
+function hideLoader()
+ {
+ document.getElementById("wait").style.display = "none";
  }

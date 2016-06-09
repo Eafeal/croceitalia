@@ -1,0 +1,16 @@
+diff a/croceitalia/src/main/webapp/js/documento_riga.js b/croceitalia/src/main/webapp/js/documento_riga.js	(rejected hunks)
+@@ -101,6 +101,14 @@
+ 		});
+ });
+ 
++$(document).ready(function(e){ 
++	$("#eliminaRiga").click(function(){
++		if (!confirm('Confermi cancellazione?')){
++			return false;
++		}
++		eliminaRigaForm.submit();
++		});
++});
+ 
+ // CALCOLO DELL'IMPORTO e dei KM TOTALI
+ 
