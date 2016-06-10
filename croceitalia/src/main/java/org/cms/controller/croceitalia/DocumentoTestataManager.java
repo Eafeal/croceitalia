@@ -294,5 +294,87 @@ public class DocumentoTestataManager extends AssoDao {
 
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Documento_Testata> search(String anno,String mezzo,String cliente,String banca,String num_doc,String mese_doc,String cig,String data) throws Exception {
+		
+		String queryString;
+		
+		EntityManager em = null;
+		
+		queryString = "select dt from Documento_Testata dt where 1=1 ";
+		
+		if(!anno.equals("")){
+			queryString += " and dt.anno_documento = :anno  ";
+		}
+		if(!mezzo.equals("")){
+			queryString += " and dt.mezzo.id_mezzo = :mezzo  ";
+		}
+		if(!cliente.equals("")){
+			queryString += " and dt.cliente.id_cliente = :cliente  ";
+		}
+		if(!banca.equals("")){
+			queryString += " and dt.banca.id_banca = :banca  ";
+		}
+		if(!num_doc.equals("")){
+			queryString += " and dt.num_documento = :num_doc  ";
+		}
+		if(!cig.equals("")){
+			queryString += " and dt.CIG = :cig  ";
+		}
+		if(!mese_doc.equals("")){
+			queryString += " and dt.mese_documento = :mese_doc  ";
+		}
+		if(!data.equals("")){
+			queryString += " and dt.data_documento = :data  ";
+		}
+		try {
+				em = getEntityManager();
+				
+				Query query = em.createQuery(queryString);
+				System.out.println(query);
+				
+				if(!anno.equals("")){
+				query.setParameter("anno",anno);
+				}
+				if(!mese_doc.equals("")){
+					query.setParameter("mese_doc",mese_doc);
+					}
+				if(!mezzo.equals("")){
+					int xx = Integer.parseInt(mezzo);
+					query.setParameter("mezzo", xx );
+				}
+				if(!cliente.equals("")){
+					int xx1 = Integer.parseInt(cliente);
+					query.setParameter("cliente", xx1 );
+				}
+				if(!banca.equals("")){
+					int xx2 = Integer.parseInt(banca);
+					query.setParameter("banca", xx2 );
+				}
+				if(!num_doc.equals("")){
+					int xx3 = Integer.parseInt(num_doc);
+					query.setParameter("num_doc", xx3 );
+				}
+				if(!cig.equals("")){
+					query.setParameter("cig", cig );
+				}
+				if(!data.equals("")){
+					int xx4 = (int) Date.parse(data);
+					query.setParameter("data", xx4 );
+				}
+				
+				List<Documento_Testata> answer = query.getResultList();
+			
+				return answer;
+			
+		} catch (Exception e) {
+			AssoLogger.GetInstance()
+					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+			throw e;
+		} finally {
+			close(em);
+		}
+	}
 
 }

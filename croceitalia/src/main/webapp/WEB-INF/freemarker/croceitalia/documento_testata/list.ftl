@@ -53,7 +53,57 @@
         </div>
       </div>
     </div>
+    
+    <form id="filtriForm" name="filtriForm" action="/edit/documento_testata/cerca" method="post" >
+    	<select id ="banca" name = "banca">
+			<option value="">Seleziona banca</option>
+			<#list listaBanca as banche>
+				<option value = "${banche.id_banca}">${banche.nome}</option>
+			</#list>
+		</select>
+		<select id ="mezzo" name = "mezzo">
+			<option value="">Seleziona mezzo</option>
+			<#list listaMezzo as mezzo>
+				<option value = "${mezzo.id_mezzo}">${mezzo.targa} - ${mezzo.descrizione}</option>
+			</#list>
+		</select>
+		<select id ="fk_id_cliente" name = "cliente">
+			<option value="">Seleziona cliente</option>
+			<#list listaClienti as clienti>
+				<option value = "${clienti.id_cliente}">${clienti.ragione_sociale}</option>
+			</#list>
+		</select>
+		<input type="text" name="num_doc" id="num_doc" class="stato" value="" placeholder="Num.doc"> 
+		<select id ="anno" name = "anno">
+			<option value="">Seleziona anno documento</option>
+				<option value = "2011">2011</option>
+				<option value = "2012">2012</option>
+				<option value = "2013">2013</option>
+				<option value = "2014">2014</option>
+				<option value = "2015">2015</option>
+				<option value = "2016">2016</option>
+		</select>
+		<select id ="mese" name = "mese">
+			<option value="">Seleziona mese documento</option>
+				<option value = "gennaio">Gennaio</option>
+				<option value = "febbraio">Febbraio</option>
+				<option value = "marzo">Marzo</option>
+				<option value = "aprile">Aprile</option>
+				<option value = "maggio">Maggio</option>
+				<option value = "giugno">Giugno</option>
+				<option value = "luglio">Luglio</option>
+				<option value = "agosto">Agosto</option>
+				<option value = "settembre">Settembre</option>
+				<option value = "ottobre">Ottobre</option>
+				<option value = "novembre">Novembre</option>
+				<option value = "dicembre">Dicembre</option>
+		</select>
+		<input type="text" name="cig" id="cig" class="stato" value="" placeholder="CIG"> 
+		<input type="text" name="data" id="data" class="stato" value="" placeholder="Data documento">
+		<span class="button"><input type="submit" name="search" class="list" value="search" id="search" /></span>
 
+	</form>
+									
     <div class="container">
    	  <article class="tabella">
       <table width="100%" border="0">

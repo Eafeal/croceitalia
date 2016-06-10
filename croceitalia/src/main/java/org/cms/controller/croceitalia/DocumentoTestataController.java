@@ -494,5 +494,45 @@ public class DocumentoTestataController extends EditCmsController {
 		}
 
 	}
+	
+	@RequestMapping(value = "documento_testata/cerca", method = RequestMethod.POST)
+	public ModelAndView list1(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView modelAndView = getModelAndView(request);
+		String mezzo = request.getParameter("mezzo");
+		String cliente = request.getParameter("cliente");
+		String banca = request.getParameter("banca");
+		String anno = request.getParameter("anno");
+		String num_doc = request.getParameter("num_doc");
+		String mese_doc = request.getParameter("mese");
+		String cig = request.getParameter("cig");
+		String data = request.getParameter("data");
+		
+
+		try {
+			List<Documento_Testata> lista = _documentoTestataManager.search(anno,mezzo,cliente,banca,num_doc,mese_doc,cig,data);
+			modelAndView.addObject("listaDocumenti", lista);
+//			modelAndView.addObject("listaClienti", lista);
+//			modelAndView.addObject("listaBanca", lista);
+			
+			List<Cliente> clientiList = _clienteManager.caricaClienti();
+			modelAndView.addObject("listaClienti", clientiList);
+
+			List<Banca> bancheList = _bancaManager.caricaBanche();
+			modelAndView.addObject("listaBanca", bancheList);
+
+			List<Mezzo> mezziList = _mezzoManager.caricaMezzi();
+			modelAndView.addObject("listaMezzo", mezziList);
+
+			String viewName = "croceitalia/documento_testata/list";
+			modelAndView.setViewName(viewName);
+
+			return modelAndView;
+
+		} catch (Throwable errore) {
+			return error(modelAndView, errore);
+		}
+	}
+
 
 }
