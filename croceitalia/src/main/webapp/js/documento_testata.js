@@ -41,6 +41,9 @@ $(document).ready(function(e){
 			if (!controllo_cig(TdocumentoForm.CIG)) {
 					return false;
 			}
+			if (!controllo_data(TdocumentoForm.data_documento)) {
+				return false;
+		}
 			//Controllo Numero CIG
 			function controllo_cig(cig) {
 				if (cig.value.length < 10) {//non deve essere minore 
@@ -52,7 +55,12 @@ $(document).ready(function(e){
 					return false;
 				return true;
 			}
-			alert("Ciao!");
+			//Controllo Data Documento
+			function controllo_data(data) {
+				if (!cf_contieneSoloCaratteriValidi(data,'1234567890-'))
+					return false;
+				return true;
+			}
 			showLoader();
 			
 			//TdocumentoForm.submit(); è già una submit

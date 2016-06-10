@@ -88,9 +88,10 @@
 				<th scope="col" >N° CIG</th>
 				<th scope="col" >Cliente</th>
 				<th scope="col">Mezzo</th>
-				<th scope="col">Importo Totale</th>
+				<th scope="col" style="font-size: 12px;">Importo Totale</th>
 				<th scope="col">Stato</th>
 				<th scope="col">PDF</th>
+				<th scope="col">Dupplica</th>
 			</tr>
 			<#assign i=0 />
 			<#assign datadef="">
@@ -102,7 +103,7 @@
 			<tr >
 				<td onclick="javascript:document.location='/edit/documento_testata/update/${documento.getId_documento_testata()}'">
 					<input type="hidden" name="id_testata${i}" id="id_testata${i}" class="id" value="${documento.getId_documento_testata()}"  readonly>
-					<input type="text" name="numero${i}" id="numero${i}" class="numero" value="${documento.getNum_documento()}" onclick="showLoader();"  readonly>
+					<input type="text" name="numero${i}" id="numero${i}" class="numero" value="${documento.getNum_documento()}" onclick="showLoader();" title="Entra sul documento numero ${documento.getNum_documento()}"  readonly>
 				</td>
 				<td><input type="text" name="anno${i}" id="anno${i}" class="anno" value="${documento.getAnno_documento()}" readonly></td>
 				<td><input type="text" name="mese${i}" id="mese${i}" class="mese"  value="${documento.getMese_documento()}"  readonly></td>
@@ -113,15 +114,20 @@
 				<td><input type="text" name="totale${i}" id="totale${i}" class="totale" value="${documento.getTotale()}" readonly></td>
 				<td><input type="text" name="stato${i}" id="stato${i}" class="stato" value="${documento.descrizioneStato()}" readonly></td>
 				<td>
-					
-					
 					<#if documento.isChiuso()>
-							<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
-								<a title="genera e visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
-									<img src="/img/edit/pdf.png" style="vertical-align:initial;clear:none;border:0">
-								</a>
-						</#if>
+						<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
+							<a title="genera e visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
+								<img src="/img/edit/pdf.png" style="vertical-align:initial;clear:none;border:0">
+							</a>
+					</#if>
 				</td>
+				<td>
+					<#if documento.isChiuso()>
+						<form name="eliminaRigaForm" id="cestino" action="/edit/documento_testata/duplica/${documento.getId_documento_testata()}" method="post">
+							<input type="submit" id="duplica" name="duplica" value="Duplica">
+						</form>
+			</#if>
+		</td>
 					
 			</tr>
 				</#list>
