@@ -419,6 +419,30 @@ public class DocumentoTestataManager extends AssoDao {
 			}
 			return data1;
 		}
-		 
+	
+		@SuppressWarnings("unchecked")
+		public List<Documento_Testata> leggi(String cerca) throws Exception {
+
+			EntityManager em = null;
+			try {
+				em = getEntityManager();
+				int xx = Integer.parseInt(cerca);
+				String queryString = "select doc from Documento_Testata doc ";
+				queryString += " WHERE doc.id_documento_testata = :cerca  ";
+				Query query = em.createQuery(queryString);
+				query.setParameter("cerca", xx);
+
+				List<Documento_Testata> answer =query.getResultList();
+
+				return answer;
+
+			} catch (Exception e) {
+				AssoLogger.GetInstance()
+						.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+				throw e;
+			} finally {
+				close(em);
+			}
+		}
 
 }

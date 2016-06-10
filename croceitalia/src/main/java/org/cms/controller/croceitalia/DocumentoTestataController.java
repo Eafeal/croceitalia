@@ -533,6 +533,24 @@ public class DocumentoTestataController extends EditCmsController {
 			return error(modelAndView, errore);
 		}
 	}
-
-
+	
+	@RequestMapping(value = "documento_testata/duplica/{id}", method = RequestMethod.POST)
+	public ModelAndView duplica(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") String id) {
+		
+		ModelAndView modelAndView = getModelAndView(request);
+		Utente_itf utente = ModelUser.get();
+		
+		try {
+			List<Documento_Testata> documento= _documentoTestataManager.leggi(id);
+			_documentoTestataManager.save(documento);
+			
+			modelAndView.setViewName("redirect:/edit/documento_testata/list");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return modelAndView;
+	}
+	
 }
