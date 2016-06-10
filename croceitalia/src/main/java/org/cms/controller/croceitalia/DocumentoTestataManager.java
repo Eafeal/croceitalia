@@ -1,5 +1,10 @@
 package org.cms.controller.croceitalia;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -7,11 +12,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.taglibs.standard.tag.el.fmt.ParseDateTag;
 import org.cms.jpa.dao.impl.AssoDao;
 import org.springframework.stereotype.Repository;
 
 import it.asso.util.AssoException;
 import it.asso.util.AssoLogger;
+import it.asso.util.ModelUser;
+import it.asso.util.Utente_itf;
 
 @Repository("documento_testata_manager")
 public class DocumentoTestataManager extends AssoDao {
@@ -231,9 +239,15 @@ public class DocumentoTestataManager extends AssoDao {
 	}
 
 	public void chiudiDocumento(String id) {
+		Utente_itf utente = ModelUser.get();
+		
 		Documento_Testata documentoTestato = (Documento_Testata) findById(id);
 		try {
 			documentoTestato.setChiudi();
+			
+			documentoTestato.setUserultv(utente.getUserId());
+			documentoTestato.setDataultv(new Date());
+			
 			update(documentoTestato);
 		} catch (AssoException e) {
 
@@ -242,22 +256,36 @@ public class DocumentoTestataManager extends AssoDao {
 	}
 
 	public void aggiornaTotale(String id, BigDecimal importoRiga) {
+		Utente_itf utente = ModelUser.get();
+		
 		Documento_Testata documento = (Documento_Testata) findById(id);
 		try {
 			documento.setTotale(documento.getTotale().add(importoRiga));
 			documento.setImponibile(documento.getImponibile().add(importoRiga));
+			
+			documento.setUserultv(utente.getUserId());
+			documento.setDataultv(new Date());
+			
 			update(documento);
+			
 		} catch (AssoException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void sottraiTotale(String id, BigDecimal importoRiga) {
+		Utente_itf utente = ModelUser.get();
+		
 		Documento_Testata documento = (Documento_Testata) findById(id);
 		try {
 			documento.setTotale(documento.getTotale().subtract(importoRiga));
 			documento.setImponibile(documento.getImponibile().subtract(importoRiga));
+			
+			documento.setUserultv(utente.getUserId());
+			documento.setDataultv(new Date());
+			
 			update(documento);
+
 		} catch (AssoException e) {
 			e.printStackTrace();
 		}
@@ -360,7 +388,7 @@ public class DocumentoTestataManager extends AssoDao {
 					query.setParameter("cig", cig );
 				}
 				if(!data.equals("")){
-					int xx4 = (int) Date.parse(data);
+					Date xx4 =stringToDate(data);
 					query.setParameter("data", xx4 );
 				}
 				
@@ -376,5 +404,21 @@ public class DocumentoTestataManager extends AssoDao {
 			close(em);
 		}
 	}
+	
+	
+		public Date stringToDate(String data) {
+			
+			Date data1=null;
+			
+			DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+			try {
+				data1 = df.parse(data);
+				System.out.println("Today = " + df.format(data1));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			return data1;
+		}
+		 
 
 }
