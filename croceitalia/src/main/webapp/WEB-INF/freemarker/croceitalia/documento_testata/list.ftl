@@ -144,7 +144,7 @@
 	<div class="popup">
 	<div class="scroll">
 	<h3>Nuovo Documento</h3>
-		<a class="close" href="#" id="finisci">&times;</a>
+		<a class="close" href="#" id="finisci" onclick="resetDocumento()">&times;</a>
 		<div class="content">
 					
  <form id="TdocumentoForm" name="TdocumentoForm" action="/edit/documento_testata/save2" method="post" >
@@ -243,7 +243,7 @@
 	<div class="popup">
 	<div class="scroll">
 	<h3>Ricerca Documento</h3>
-		<a class="close" href="#" id="finisci">&times;</a>
+		<a class="close" href="#" id="finisci" onclick="document.filtriForm.reset(); ">&times;</a>
 		<div class="content">
 					
  <form id="filtriForm" name="filtriForm" action="/edit/documento_testata/cerca" method="post" >
@@ -341,8 +341,7 @@
                     </table>
                     <br/>
                 <div class="buttons">
-					<span class="button"><input type="submit" name="search" class="list" value="Cerca" id="search" onclick="showLoader();" /></span>
-					<!--span class="button"><button name="create" class="save btn btn-default btn-vlarge" value="Create" id="cerca"/>Cerca/button></span-->
+					<span class="button"><button name="create" class="save btn btn-default btn-vlarge" id="cerca"/>Cerca Documento</button></span>
                 </div>
             </form>
 		</div>

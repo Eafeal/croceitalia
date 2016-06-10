@@ -2,6 +2,10 @@
 //	if (cf_contieneSoloCaratteriValidi(TdocumentoForm.CIG, "1234567890QWERTYUIOPASDFGHJKLZXCVBNM") == 0) return false;
 //}
 
+function resetDocumento(){
+	document.TdocumentoForm.reset(); 
+}
+
 //INIZIO AJAX 
 $(document).ready(function(e){ 
 	$("#create").click(function(){
@@ -133,38 +137,51 @@ function  f_win_log(url)
 
 /*Controlli di Nicolò*/
 
-function controlli(){
-	if(filtriForm.num_doc.value==""){
-		if(filtriForm.data.value==""){
-			if(filtriForm.mese.value==""){
-				if(filtriForm.fk_id_cliente.value==""){
-					if(filtriForm.mezzo.value==""){
-						if(filtriForm.banca.value==""){
-							if(filtriForm.cig.value==""){
-								filtriForm.anno.focus();
-								alert("L'anno è obligatorio");
+$(document).ready(function(e){ 
+	$("#cerca").click(function(){
+		
+		if(filtriForm.num_doc.value==""){
+			if(filtriForm.data.value==""){
+				if(filtriForm.mese.value==""){
+					if(filtriForm.fk_id_cliente.value==""){
+						if(filtriForm.mezzo.value==""){
+							if(filtriForm.banca.value==""){
+								if(filtriForm.cig.value==""){
+									filtriForm.anno.focus();
+									alert("L'anno e' obligatorio");
+									return false;
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-	}
-	if (!controllo_num(filtriForm.num_doc)) {
-			return false;
-	}
-	if(!cf_checkdate(filtriForm.data)){
-		return false;
-	}
-	filtriForm.submit();
-}
-
-function controllo_num(num_doc){
-	if (!cf_contieneSoloCaratteriValidi(num_doc,'0123456789')){
+		if (!controllo_num(filtriForm.num_doc)) {
+				return false;
+		}
+		if(!cf_controllodata(filtriForm.data)){
 			return false;
 		}
-	return true;
-}
+
+		function controllo_num(num_doc){
+			if (!cf_contieneSoloCaratteriValidi(num_doc,'0123456789')){
+					return false;
+				}
+			return true;
+		}
+		
+		function cf_controllodata(data){
+			if (!cf_contieneSoloCaratteriValidi(data,'0123456789-')){
+					return false;
+				}
+			return true;
+		}
+		
+		showLoader();
+		
+		});
+});
 
 
 // FIXED NAV
