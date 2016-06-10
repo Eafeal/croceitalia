@@ -30,6 +30,7 @@ th {
 	color: white;
 }
 .numero{
+	cursor:pointer;
 	width: 42px;
 }
 .anno{
@@ -83,7 +84,7 @@ th {
 }
 
 .popup {
-  margin: 70px auto;
+  margin: 100px auto;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
@@ -135,8 +136,10 @@ select{
 	width: 205px;
 }
 #numeroDocumento{
-    margin-left: 295px;
-    width: 128px;
+/*     margin-left: 295px;
+    width: 128px; */
+    width: 206px;
+    float: right;
 }
 
 /* Da lasciare qua*/
@@ -183,4 +186,41 @@ h3 {
 
 label{
 	color: #E9AC38;
+}
+/*Davide */
+#wait {
+	font-size: 44px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	z-index: 500000000;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+#loading {
+	position: absolute;
+	width: 190px;
+	height: 70px;
+	top: 50%;
+	left: 50%;
+	margin-top: -45px;
+	margin-left: -110px;
+	background-color: #FFF;
+	background-image: url(../images/loader.gif);
+	background-repeat: no-repeat;
+	background-size: 20%;
+	background-position: 90% center;
+	font-size: 16px;
+	color: #333;
+	line-height: 65px;
+	border-radius: 10px;
+	padding: 10px 30px;
+	box-shadow: -5px 5px 30px rgba(0, 0, 0, 0.5);
 }

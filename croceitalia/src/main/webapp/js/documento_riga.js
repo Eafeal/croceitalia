@@ -118,7 +118,7 @@ $(document).ready(function(e){
 		
 		/* alert(indice); *///era 0
 		showLoader();
-	   insRigaForm.submit();
+	   //insRigaForm.submit(); è già una submit appena entra qua
 		});
 });
 

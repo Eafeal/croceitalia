@@ -36,25 +36,38 @@ $(document).ready(function(e){
 			}
 			if (!controllo_cig(TdocumentoForm.CIG)) {
 					return false;
-				}
-			
-			showLoader();
-			TdocumentoForm.submit();
+			}
 			//Controllo Numero CIG
+			function controllo_cig(cig) {
+				if (cig.value.length < 10) {//non deve essere minore 
+					cig.focus();// focus quando trova l'errore e ti posiziona dove c'è l'errore
+					alert("ci sono meno di 10 caratteri ");
+					return false;
+				}
+				if (!cf_contieneSoloCaratteriValidi(cig,'1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm'))
+					return false;
+				return true;
+			}
+			alert("Ciao!");
+			showLoader();
 			
-//			function controllo_cig(cig) {
-//		
-//				if (cig.value.length < 10) {//non deve essere minore 
-//					cig.focus();// focus quando trova l'errore e ti posiziona dove c'è l'errore
-//					alert("ci sono meno di 10 caratteri ");
-//					return false;
-//				}
-//				if (!cf_contieneSoloCaratteriValidi(cig,'1234567890QWERTYUIOPASDFGHJKLZXCVBNM'))
-//					return false;
-//				return true;
-//			}
+			//TdocumentoForm.submit(); è già una submit
+			
 		});
 });
+
+//JAVASCRIPT DAVIDE
+
+function showLoader()
+ {
+ document.getElementById("wait").style.display = "block";
+ }
+ 
+function hideLoader()
+ {
+ document.getElementById("wait").style.display = "none";
+ }
+
 
 //$(document).ready(function(e){ 
 //	$("#createggg").click(function(){
@@ -117,17 +130,54 @@ function  f_win_log(url)
 		new_win=window.open(url,"Errori", "location=0,menubar=0,resizable=1,scrollbars, width="+ w +", height="+ h +", top="+ ph +", left="+ pw);
 		new_win.focus();
 } 
-// FIXED NAV
 
-var sticky = document.querySelector('.nav'); //sets .nav element as a JS variable:
-var content = document.querySelector('.content-bottom');
-var origOffsetY = sticky.offsetTop;  //sets var equal to height in pixels to top of page from element (sticky):
+/*Controlli di Nicolò*/
 
-function onScroll(e) { //creates function with any event e:
-	window.pageYOffset >= origOffsetY ? sticky.classList.add('fixed'): //when called, compares amount scrolled in y direction with previously set variable. If true sets new class.
-									sticky.classList.remove('fixed');
-	window.pageYOffset >= origOffsetY ? content.classList.add('NavMargin'): //adds padding to container for seamless transition as nav is switched to fixed:
-									content.classList.remove('NavMargin');
+function controlli(){
+	if(filtriForm.num_doc.value==""){
+		if(filtriForm.data.value==""){
+			if(filtriForm.mese.value==""){
+				if(filtriForm.fk_id_cliente.value==""){
+					if(filtriForm.mezzo.value==""){
+						if(filtriForm.banca.value==""){
+							if(filtriForm.cig.value==""){
+								filtriForm.anno.focus();
+								alert("L'anno è obligatorio");
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	if (!controllo_num(filtriForm.num_doc)) {
+			return false;
+	}
+	if(!cf_checkdate(filtriForm.data)){
+		return false;
+	}
+	filtriForm.submit();
 }
 
-document.addEventListener('scroll', onScroll); //calls previously created function any time user scrolls:
+function controllo_num(num_doc){
+	if (!cf_contieneSoloCaratteriValidi(num_doc,'0123456789')){
+			return false;
+		}
+	return true;
+}
+
+
+// FIXED NAV
+//
+//var sticky = document.querySelector('.nav'); //sets .nav element as a JS variable:
+//var content = document.querySelector('.content-bottom');
+//var origOffsetY = sticky.offsetTop;  //sets var equal to height in pixels to top of page from element (sticky):
+//
+//function onScroll(e) { //creates function with any event e:
+//	window.pageYOffset >= origOffsetY ? sticky.classList.add('fixed'): //when called, compares amount scrolled in y direction with previously set variable. If true sets new class.
+//									sticky.classList.remove('fixed');
+//	window.pageYOffset >= origOffsetY ? content.classList.add('NavMargin'): //adds padding to container for seamless transition as nav is switched to fixed:
+//									content.classList.remove('NavMargin');
+//}
+//
+//document.addEventListener('scroll', onScroll); //calls previously created function any time user scrolls:

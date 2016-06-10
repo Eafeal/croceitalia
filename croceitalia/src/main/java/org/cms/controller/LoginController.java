@@ -1,7 +1,5 @@
 package org.cms.controller;
 
-import it.asso.util.Utente_itf;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import it.asso.util.Utente_itf;
+
 /**
  * @author Paolo
  * 
@@ -28,15 +28,16 @@ public class LoginController extends SiteCmsController {
 	 * 
 	 */
 	@Autowired(required = true)
-	protected UserDao	userDao;
+	protected UserDao userDao;
 
 	/**
 	 * L'url di ingresso è della forma:
 	 * 
 	 * http://quellidellunedi.local/site/login?requestedUri=/edit/home
 	 * 
-	 * e' stata richiesta la pagina "requestedUri" ma non si è loggati. Prima di accedere alla pagina si richiede
-	 * l'autentificazione. Quindi viene mostrata la pagina di LOGIN
+	 * e' stata richiesta la pagina "requestedUri" ma non si è loggati. Prima di
+	 * accedere alla pagina si richiede l'autentificazione. Quindi viene
+	 * mostrata la pagina di LOGIN
 	 * 
 	 * @param request
 	 * @param response
@@ -122,8 +123,10 @@ public class LoginController extends SiteCmsController {
 				modelAndView.addObject("loginMessage", loginMessage);
 				modelAndView.addObject(ErrorMsg, loginMessage);
 
-				// Pagina pagina = (Pagina) paginaDao.findByUid(LoginErrorPage, dominio.getUid());
-				// Pagina pagina = (Pagina) paginaDao.findByUid("AvcpPasso2", dominio.getUid());
+				// Pagina pagina = (Pagina) paginaDao.findByUid(LoginErrorPage,
+				// dominio.getUid());
+				// Pagina pagina = (Pagina) paginaDao.findByUid("AvcpPasso2",
+				// dominio.getUid());
 				// modelAndView.addObject(PAGINA, pagina);
 				// String renderPage = "croceitalia/loginError";
 
@@ -137,7 +140,8 @@ public class LoginController extends SiteCmsController {
 				modelAndView.addObject("loginMessage", loginMessage);
 				modelAndView.addObject(ErrorMsg, loginMessage);
 
-				// Pagina pagina = (Pagina) paginaDao.findByUid(LoginErrorPage, dominio.getUid());
+				// Pagina pagina = (Pagina) paginaDao.findByUid(LoginErrorPage,
+				// dominio.getUid());
 				// modelAndView.addObject(PAGINA, pagina);
 				// String renderPage = pagina.getPathRenderPage();
 				// modelAndView.setViewName(renderPage);
@@ -206,7 +210,7 @@ public class LoginController extends SiteCmsController {
 				HttpSession session = getSession(request);
 				setSessionUser(session, modelAndView, utente);
 
-				modelAndView.setViewName("redirect:/edit/home");
+				modelAndView.setViewName("redirect:/edit/documento_testata/list");
 
 				return modelAndView;
 

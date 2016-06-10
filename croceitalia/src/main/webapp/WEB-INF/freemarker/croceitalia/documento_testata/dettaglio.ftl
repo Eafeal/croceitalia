@@ -34,7 +34,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
                     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="ico/favicon.png">
+                                   <link rel="shortcut icon" href="/img/icons/favicon_croce.png">
   <style type="text/css"></style><!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.--><script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/arizonia:n4:default.js" type="text/javascript"></script>
 </head>
 
@@ -48,14 +48,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Croce Italia</a>
+          <a href="/edit/home" >
+			<img class="brand" src="/img/edit/logo_croce1.png" style="width: 53px;" >
+		  </a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="/edit/home">Home</a></li>
-              <li><a href="/edit/documento_testata/list">Lista Documenti</a></li>
+              <li><a href="/edit/home"><b>Home</b></a></li>
+              <li><a href="/edit/documento_testata/list"><b>Lista Documenti</b></a></li>
 			
 			<#if !documento.isChiuso()>
-              <li><a href="#gestioneRiga" onclick="resetRiga()">Nuova Riga</a></li>
+              <li class="active"><a href="#gestioneRiga" onclick="resetRiga()" style="cursor:cell;"><b>Nuova Riga</b></a></li>
             </#if>
                          
             </ul>
@@ -66,14 +68,14 @@
 
     <div class="container">
      
-<div>
+<div style="margin-top: 4%;">
 <fieldset>
 	<legend >Documento Testata
 	 
 	  				<#if !documento.isChiuso()>
 	                <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" class="formHead"  >
 	                	<a title="Chiudi il documento" style="margin-top: -38px;margin-right: 150px; float:right;" id="chiusura" >
-	                		<img src="/img/edit/chiudi_pdf.png" style="clear:none;border:0;width: 35px;float:right;" onclick="location.reload();">
+	                		<img src="/img/edit/chiudi_pdf.png" style="clear:none;border:0;width: 35px;float:right;cursor:pointer;" onclick="location.reload();">
 	                	</a>               
 	                </form>
 	                </#if>
@@ -81,13 +83,13 @@
 				<#if documento.isChiuso() >
 					<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
 						<a title="Visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
-							<img src="/img/edit/pdf_riga.png" style="clear:none;border:0;width: 35px;float:right;" onclick="location.reload();">
+							<img src="/img/edit/pdf_riga.png" style="clear:none;border:0;width: 35px;float:right;cursor:pointer;" onclick="location.reload();">
 						</a>
 						
 					<#if documento.isChiuso() && documento.isPdfGenerato()>
 						<form name="inviaPDForm" action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" class="formHead" >  
 							<a title="Invia la fattura pdf" id="inviaPDF"  >
-								<img src="/img/edit/invia_pdf.png" style="margin-top: -36px;margin-right: 50px;float: right;width: 35px;"  onclick="location.reload();">
+								<img src="/img/edit/invia_pdf.png" style="margin-top: -36px;margin-right: 50px;float: right;width: 35px;cursor:pointer;"  onclick="location.reload();">
 							</a>
 	                 	</form>
 					</#if>
@@ -127,10 +129,10 @@
 	                              </td>
                             </tr>
                                    
-                          <tr class="prop">
+                          <tr id="secondaRigaUpdate">
                                 <td align="top" class="fk_id_mezzo"><label for="fk_id_mezzo"><h5>Mezzo</h5></label></td>                             
                                 <td align="top" class="value" style="float:right;">
-	                                <select class="grigio" id="mezzo" name="fk_id_mezzo" required>
+	                                <select class="grigio" id="mezzoAg" name="fk_id_mezzo" required>
 	                                    <#list listaMezzo as mezzo>
 	                                        <option value="${mezzo.getId_mezzo()}" <#if documento.getFk_id_mezzo() == mezzo.getId_mezzo()> selected </#if> >${mezzo.getTarga()} - ${mezzo.getDescrizione()}</option>
 	                                    </#list>                   
@@ -139,7 +141,7 @@
 	                     
                                 <td align="top" class="fk_id_cliente"><label for="fk_id_cliente"><h5>Cliente</h5></label></td>                             
                                 <td align="top" class="value" style="float:right;">
-									<select class="grigio" id="cliente" name="fk_id_cliente" required>
+									<select class="grigio" id="clienteAg" name="fk_id_cliente" required>
 	                                    <#list listaClienti as cliente>
 	                                        <option value="${cliente.getId_cliente()}" <#if documento.getFk_id_cliente() == cliente.getId_cliente()> selected </#if>>${cliente.getRagione_sociale()}</option>
 	                                    </#list>
@@ -148,7 +150,7 @@
                          
                                 <td align="top" class="fk_id_banca"><label for="fk_id_banca"><h5>Banca di Appoggio</h5></label></td>                             
                                 <td align="top" class="value" style="float:right;">
-	                                <select class="grigio" id="banca" name="fk_id_banca" required>
+	                                <select class="grigio" id="bancaAg" name="fk_id_banca" required>
 	                                    <#list listaBanca as banca>
 	                                        <option value="${banca.getId_banca()}" <#if documento.getFk_id_banca() == banca.getId_banca()> selected </#if> >${banca.getNome()}</option>
 	                                    </#list>

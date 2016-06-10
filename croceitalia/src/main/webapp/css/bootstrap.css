@@ -1455,7 +1455,7 @@ textarea[disabled],
 input[readonly],
 select[readonly],
 textarea[readonly] {
-  cursor: not-allowed;
+  /* cursor: not-allowed; */
   background-color: #eeeeee;
 }
 
@@ -2917,7 +2917,7 @@ table th[class*="span"],
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+ /*  left: 0; */
   z-index: 1000;
   display: none;
   float: left;
@@ -4624,7 +4624,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav > li > a {
   float: none;
-  padding: 10px 15px 10px;
+  padding: 27px 15px 26px;
   color: #777777;
   text-decoration: none;
   text-shadow: 0 1px 0 #ffffff;

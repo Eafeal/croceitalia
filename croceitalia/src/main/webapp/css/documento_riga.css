@@ -12,7 +12,7 @@ td{
 	padding-bottom: 0px;
 }
 tr:nth-child(even){background-color: #f2f2f2}
-
+#secondaRigaUpdate{background-color: #ffffff;}
 th {
 	text-align:center;
     background-color: #5BC0DE;
@@ -120,7 +120,7 @@ th {
 }
 
 .popup {
-  margin: 70px auto;
+  margin: 100px auto;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
@@ -185,7 +185,7 @@ th {
 /*	background-color: #3498DB;
 	border-bottom: 5px solid #2980B9;
 	text-shadow: 0px -2px #2980B9; */
-	
+	cursor:pointer;
 	background-color: #5bc0de;
     border-bottom: 5px solid #53A4C3;
     text-shadow: 0px -2px #53A4C3;
@@ -290,6 +290,16 @@ h3 {
 	#CIG{ 
 		background-color:#F2F2F2;
 	}
+	#mezzoAg{ 
+		background-color:#F2F2F2;
+	}
+	#clienteAg{ 
+		background-color:#F2F2F2;
+	}
+	#bancaAg{ 
+		background-color:#F2F2F2;
+	}
+	
 
 legend{
 /* 	line-height: 60px; */
@@ -301,8 +311,9 @@ legend{
 /* 	padding-left: 54px;
 	padding-right: 54px; */
 }
-
-
+article.tabellaDettaglio {
+    margin-top: 20px;
+}
 
 /*STILE DI DAVIDE*/
 
