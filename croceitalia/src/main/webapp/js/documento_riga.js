@@ -115,8 +115,10 @@ $(document).ready(function(e){
 		if (cf_contieneSoloCaratteriValidi(rigaForm.quota_fissa_s, ".,1234567890") == 0) return false;
 		if (cf_contieneSoloCaratteriValidi(rigaForm.diritto_uscita, "1234567890") == 0) return false;
 		
+		if (!confirm('Sei sicuro? \nNon potrai piu\' modificare il mezzo!')){
+			return false;
+		}
 		
-		/* alert(indice); *///era 0
 		showLoader();
 	   //insRigaForm.submit(); è già una submit appena entra qua
 		});

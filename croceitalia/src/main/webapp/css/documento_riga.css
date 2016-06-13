@@ -229,7 +229,7 @@ button[class^="btn"] {
 	color: #5BC0DE;
 	
 	margin-right: 9px;
-    margin-top: -42px;
+    margin-top:-26px;
 }
 
 .btn:hover {
@@ -240,7 +240,7 @@ button[class^="btn"] {
 	background: #5BC0DE;
 }
 .btn-vlarge {
-	padding: 17px 62px;
+	padding: 10px 62px;
     font-size: 20px;
     float: right;
 }
@@ -370,6 +370,60 @@ hr{
 	    padding-left: 10px;
 }
 
+#eliminaRiga:hover{
+		width:27px;
+}
+
 .formHead{
 	margin:0;
+}
+
+#pdf_riga{
+	clear:none;
+	border:0;
+	width: 35px;
+	float:right;
+	cursor:pointer;
+}
+
+#pdf_riga:hover{
+	width: 37px;
+}
+
+#invia_pdf{
+	margin-top: -36px;
+	margin-right: 50px;
+	float: right;
+	width: 35px;
+	cursor:pointer;
+}
+
+#invia_pdf:hover{
+	width: 37px;
+}
+
+#chiusura{
+	margin-top: -38px;
+	margin-right: 50px; 
+	float:right;
+}
+
+#update{
+	float:right;
+	margin-top: -60px;
+    width: 35px;
+}
+#update:hover{
+    width: 37px;
+    cursor:pointer;
+}
+#chiudi_pdf{
+	border:0;
+	width: 35px;
+	float:right;
+	cursor:pointer;
+}
+
+#chiudi_pdf:hover{
+	width: 37px;
 }

@@ -155,9 +155,11 @@ $(document).ready(function(e){
 						if(filtriForm.mezzo.value==""){
 							if(filtriForm.banca.value==""){
 								if(filtriForm.cig.value==""){
-									filtriForm.anno.focus();
-									alert("L'anno e' obligatorio");
-									return false;
+									if(filtriForm.anno.value==""){
+										filtriForm.anno.focus();
+										alert("L'anno e' obligatorio");
+										return false;
+									}
 								}
 							}
 						}
@@ -165,6 +167,7 @@ $(document).ready(function(e){
 				}
 			}
 		}
+		
 		if (!controllo_num(filtriForm.num_doc)) {
 				return false;
 		}
@@ -190,7 +193,16 @@ $(document).ready(function(e){
 		
 		});
 });
-
+//DUPLICA DI NICO
+$(document).ready(function(e){ 
+	$("#duplica").click(function(){
+		if (!confirm('Confermi di duplicarlo?')){
+			return false;
+		}
+		showLoader();
+		duplicaForm.submit();
+		});
+});
 
 // FIXED NAV
 //

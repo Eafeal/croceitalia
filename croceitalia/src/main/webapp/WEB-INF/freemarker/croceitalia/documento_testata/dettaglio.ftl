@@ -72,10 +72,10 @@
 <fieldset>
 	<legend >Documento Testata
 	 
-	  				<#if !documento.isChiuso()>
+	  				<#if !documento.isChiuso() && righe?size!=0>
 	                <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" class="formHead"  >
-	                	<a title="Chiudi il documento" style="margin-top: -38px;margin-right: 150px; float:right;" id="chiusura" >
-	                		<img src="/img/edit/chiudi_pdf.png" style="clear:none;border:0;width: 35px;float:right;cursor:pointer;" onclick="location.reload();">
+	                	<a title="Chiudi il documento" id="chiusura" >
+	                		<img src="/img/edit/chiudi_pdf.png" id="chiudi_pdf" onclick="location.reload();">
 	                	</a>               
 	                </form>
 	                </#if>
@@ -83,13 +83,13 @@
 				<#if documento.isChiuso() >
 					<#assign urlv= "/edit/documento_testata/pdfprint/${documento.getId_documento_testata()}" />
 						<a title="Visualizza il documento di rimborso" onClick="javascript:f_win_log('${urlv}')" >
-							<img src="/img/edit/pdf_riga.png" style="clear:none;border:0;width: 35px;float:right;cursor:pointer;" onclick="location.reload();">
+							<img src="/img/edit/pdf_riga.png" id="pdf_riga" onclick="location.reload();">
 						</a>
 						
 					<#if documento.isChiuso() && documento.isPdfGenerato()>
 						<form name="inviaPDForm" action="/edit/documento_testata/pdfsend/${documento.getId_documento_testata()}" method="get" class="formHead" >  
 							<a title="Invia la fattura pdf" id="inviaPDF"  >
-								<img src="/img/edit/invia_pdf.png" style="margin-top: -36px;margin-right: 50px;float: right;width: 35px;cursor:pointer;"  onclick="location.reload();">
+								<img src="/img/edit/invia_pdf.png" id="invia_pdf" onclick="location.reload();">
 							</a>
 	                 	</form>
 					</#if>
@@ -101,7 +101,9 @@
  <form id="updateForm" name="updateForm" action="/edit/documento_testata/doUpdate" method="post">
  
  				<#if !documento.isChiuso()>
-					<a title="Salva le modifiche del documento" style="text-decoration: none; float:right;" id="update" class="action-button shadow animate blue" >Salva</a>
+					<a title="Salva le modifiche del documento" id="update" >
+						<img src="/img/edit/salva_testata.png" onclick="location.reload();">
+					</a>
 				</#if>
 				
                    <table class="aggiornaDocumento">
@@ -134,7 +136,11 @@
                                 <td align="top" class="value" style="float:right;">
 	                                <select class="grigio" id="mezzoAg" name="fk_id_mezzo" required>
 	                                    <#list listaMezzo as mezzo>
-	                                        <option value="${mezzo.getId_mezzo()}" <#if documento.getFk_id_mezzo() == mezzo.getId_mezzo()> selected </#if> >${mezzo.getTarga()} - ${mezzo.getDescrizione()}</option>
+	                                    	<#if righe?size=0>
+	                                        	<option value="${mezzo.getId_mezzo()}" <#if documento.getFk_id_mezzo() == mezzo.getId_mezzo() > selected </#if> >${mezzo.getTarga()} - ${mezzo.getDescrizione()}</option>
+	                                    	<#else>
+	                                    		<option value="${mezzo.getId_mezzo()}" <#if documento.getFk_id_mezzo() == mezzo.getId_mezzo() > selected </#if> hidden >${mezzo.getTarga()} - ${mezzo.getDescrizione()}</option>
+	                                    	</#if>
 	                                    </#list>                   
 	                                </select>
 	                            </td>
@@ -202,10 +208,15 @@
 					      	<th scope="col">Elimina</th>
 					    
 					    </tr>
-					    
+					   
+					   <#if righe?size=0>
+					   		<h2> Inserisci una nuova riga! </h2>
+					   <#else>
+					   
 					    <#assign i=0 />
 							<#list righe as righe>
 						    	<#assign i=i+1 />
+   		
     					<tr onclick="javascript://document.location='/edit/documento_testata/update/${righe.getId_documento_righe()}'">					     
 					     	<td><input value="${righe.getNum_sedute()}" type="text" name="num_sedute${i}" id="num_sedute${i}" class="num_sedute" size="5" maxlength="2" readonly></td>
 					      	<td><input value="${righe.getMese()}" type="text" name="mese${i}" id="mese_sedute${i}" class="mese_sedute"  readonly></td>
@@ -214,9 +225,9 @@
 					      	<td><input value="${righe.getStruttura().getNome()}" type="text" name="_id_struttura${i}" id="trasportato${i}" class="trasportato" readonly></td>
 					      	<td><input value="${righe.getPercorsoAndata()} - A/R " type="text" name="_id_struttura${i}" id="percorso${i}" class="percorso"  readonly ></td>							
 						 	<td><input value="${righe.getOra_sosta()}" type="text" name="ora_sosta${i}" id="num_ore${i}" class="num_ore"  readonly></td>
-							<td><input value="${righe.getQuota_fissa()}" type="text" name="quota_fissa${i}" id="quota_fissa1" class="quota_fissa" readonly ></td>
+							<td><input value="${righe.getQuota_fissa()?string["##,##0.00"]}" type="text" name="quota_fissa${i}" id="quota_fissa1" class="quota_fissa" readonly ></td>
 						    <td><input value="${righe.getDiritto_uscita()}" type="text" name="diritto_uscita${i}" id="dirittto_uscita${i}" class="dirittto_uscita" readonly></td>
-						    <td><input value="${righe.getImporto()}" type="text" name="importo${i}" id="importo${i}"  class="importo" readonly></td>
+						    <td><input value="${righe.getImporto()?string["##,##0.00"]}" type="text" name="importo${i}" id="importo${i}"  class="importo" readonly></td>
 						    <td>
 						  	<#if documento.getStato() == "A">
 						    <!--form name="eliminaRigaForm" id="cestino" action="/edit/documento_righe/delete/${righe.getId_documento_righe()}" method="post"-->
@@ -226,8 +237,9 @@
 						    </#if>
 						    
 						    </td>
-					    </tr>			    
-   						</#list>
+					    </tr>		    
+   							</#list>
+   						</#if>
 	   						<table>
 		    					<tr class="prop">
 		    					<hr>
@@ -278,7 +290,7 @@
 					 		
 	                       <tr class="prop">
 	                            <td align="top" class="percorso"><label for="percorso">Percorso</label></td>
-	                            <td valign="top" class="value">
+	                            <td valign="top" class="value"> 
 	                                <input type="text" name="percorso" id="percorso" class="percorsoCrea"  readonly>
 	                            </td>
 	                            <td align="top" class="kmpercorso"><label for="km_percorso">Km Percorso</label></td>
