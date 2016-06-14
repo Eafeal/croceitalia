@@ -421,7 +421,7 @@ public class DocumentoTestataManager extends AssoDao {
 		}
 	
 		@SuppressWarnings("unchecked")
-		public List<Documento_Testata> leggi(String cerca) throws Exception {
+		public Documento_Testata leggi(String cerca) throws Exception {
 
 			EntityManager em = null;
 			try {
@@ -432,7 +432,7 @@ public class DocumentoTestataManager extends AssoDao {
 				Query query = em.createQuery(queryString);
 				query.setParameter("cerca", xx);
 
-				List<Documento_Testata> answer =query.getResultList();
+				Documento_Testata answer = (Documento_Testata) query.getResultList();
 
 				return answer;
 

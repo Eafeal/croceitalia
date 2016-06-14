@@ -95,4 +95,54 @@ public class DocumentoRigheManager extends AssoDao {
 
 		super.save(obj);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Documento_Righe> leggi(String cerca) throws Exception {
+
+		EntityManager em = null;
+		try {
+			em = getEntityManager();
+			int xx = Integer.parseInt(cerca);
+			String queryString = "select doc from Documento_Righe doc ";
+			queryString += " WHERE doc.fk_id_documento_testata = :cerca  ";
+			Query query = em.createQuery(queryString);
+			query.setParameter("cerca", xx);
+
+			List<Documento_Righe> answer =query.getResultList();
+
+			return answer;
+
+		} catch (Exception e) {
+			AssoLogger.GetInstance()
+					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+			throw e;
+		} finally {
+			close(em);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Documento_Righe> leggi1(String cerca) throws Exception {
+
+		EntityManager em = null;
+		try {
+			em = getEntityManager();
+			int xx = Integer.parseInt(cerca);
+			String queryString = "select doc from Documento_Righe doc ";
+			queryString += " WHERE doc.fk_id_documento_testata = :cerca  ";
+			Query query = em.createQuery(queryString);
+			query.setParameter("cerca", xx);
+
+			List<Documento_Righe> answer =query.getResultList();
+
+			return answer;
+
+		} catch (Exception e) {
+			AssoLogger.GetInstance()
+					.logInfo("Errore nel metodo search della classe " + this.getClass().getSimpleName());
+			throw e;
+		} finally {
+			close(em);
+		}
+	}
 }

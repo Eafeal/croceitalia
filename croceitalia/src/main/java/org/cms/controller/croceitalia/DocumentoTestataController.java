@@ -91,7 +91,9 @@ public class DocumentoTestataController extends EditCmsController {
 		 * 
 		 * modelAndView.addObject("riga", riga);
 		 */
-
+		List<Documento_Righe> righe = _documentoRigheManager.caricaDocumento_Row();
+		modelAndView.addObject("righe", righe);
+		
 		List<Documento_Testata> documenti = _documentoTestataManager.descrescente();
 		modelAndView.addObject("listaDocumenti", documenti);
 
@@ -541,9 +543,65 @@ public class DocumentoTestataController extends EditCmsController {
 		Utente_itf utente = ModelUser.get();
 		
 		try {
-			List<Documento_Testata> documento= _documentoTestataManager.leggi(id);
-			_documentoTestataManager.save(documento);
+			Documento_Testata documento=(Documento_Testata) _documentoTestataManager.findById(id);
+			Documento_Testata documentoNew = new Documento_Testata(); 
+			List<Documento_Righe> righe=(List<Documento_Righe>) _documentoRigheManager.leggi(id);			
 			
+			Integer num_doc = _documentoTestataManager.nextNumDocumento(documento.getAnno_documento());
+			Date data_doc = _documentoTestataManager.nextDataDocumento(documento.getAnno_documento());
+			
+			documentoNew.setNum_documento(num_doc);
+			documentoNew.setData_documento(data_doc);
+			documentoNew.setAnno_documento(documento.getAnno_documento());
+			documentoNew.setCIG("");
+			documentoNew.setEsente_bollo(documento.getEsente_bollo());
+			documentoNew.setEsente_iva(documento.getEsente_iva());
+			documentoNew.setFk_id_banca(documento.getFk_id_banca());
+			documentoNew.setFk_id_cliente(documento.getFk_id_cliente());
+			documentoNew.setFk_id_mezzo(documento.getFk_id_mezzo());
+			documentoNew.setImponibile(documento.getImponibile());
+			documentoNew.setImporto_esente(documento.getImporto_esente());
+			documentoNew.setIva(documento.getIva());
+			documentoNew.setMese_documento(documento.getMese_documento());
+			documentoNew.setNome_file(documento.getNome_file());
+			documentoNew.setPdf_generato(documento.getPdf_generato());
+			documentoNew.setStato(documento.getStato());
+			documentoNew.setTotale(documento.getTotale());
+			documentoNew.setUsercrea(utente.getUserId());
+			documentoNew.setUserultv(utente.getUserId());
+			documentoNew.setDatacrea(new Date());
+			documentoNew.setDataultv(new Date());
+
+			_documentoTestataManager.save(documentoNew);
+
+			for(int i=0;i<righe.size();i++){
+				
+				Documento_Righe righeNew = new Documento_Righe();
+				Documento_Righe righeOld = righe.get(i);				
+				
+				righeNew.setDatacrea(data_doc);
+				righeNew.setUsercrea(utente.getUserId());
+				righeNew.setUserultv(utente.getUserId());
+				righeNew.setDatacrea(new Date());
+				righeNew.setDataultv(new Date());
+				righeNew.setFk_id_documento_testata(documentoNew.getId_documento_testata());
+				righeNew.setFk_id_paziente(righeOld.getFk_id_paziente());
+				righeNew.setFk_id_struttura(righeOld.getFk_id_struttura());
+				righeNew.setNum_sedute(righeOld.getNum_sedute());
+				righeNew.setMese(righeOld.getMese());
+				righeNew.setKm_totali(righeOld.getKm_totali());
+				righeNew.setKm_percorso(righeOld.getKm_percorso());
+				righeNew.setPercorso(righeOld.getPercorso());
+				righeNew.setP_partenza(righeOld.getP_partenza());
+				righeNew.setP_arrivo(righeOld.getP_arrivo());
+				righeNew.setOra_sosta(righeOld.getOra_sosta());
+				righeNew.setQuota_fissa(righeOld.getQuota_fissa());
+				righeNew.setDiritto_uscita(righeOld.getDiritto_uscita());
+				righeNew.setImporto(righeOld.getImporto());
+				
+				_documentoRigheManager.save(righeNew);
+			}
+						
 			modelAndView.setViewName("redirect:/edit/documento_testata/list");
 			
 		} catch (Exception e) {
@@ -552,5 +610,4 @@ public class DocumentoTestataController extends EditCmsController {
 		}
 		return modelAndView;
 	}
-	
 }
