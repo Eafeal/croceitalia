@@ -124,15 +124,20 @@
 				</td>
 				<td>
 					<#if documento.isChiuso()>
-						<!---form name="duplicaForm" id="duplica1" action="/edit/documento_testata/duplica/${documento.getId_documento_testata()}" method="post"-->
-							<img title="Dupplica documento" src="/img/edit/duplica.png" name="duplica${i}" id="duplica" class="duplica" onclick="duplicaDocumento(${documento.getId_documento_testata()})" >
-						<!--- /form --->
+
+							<img title="Dupplica documento" src="/img/edit/duplica.png" name="duplica${i}" id="duplicaDoc" class="duplica" onclick="duplicaDocumento(${documento.getId_documento_testata()})" >
+
 					</#if>
 				</td>		
 			</tr>
 				</#list>
 		</tbody>
 	  </table>
+	  
+	  	<!---RICHIAMI QUESTO FORM dopo aver cliccato il duplica e ad aver acconsentito--->
+	  	<form name="duplicaForm" action="/edit/documento_testata/duplica" method="post">
+				<input type="hidden" name="id_documento" value="">
+		</form>	
 	</article>
 </div>
 <!--/TABELLA-->

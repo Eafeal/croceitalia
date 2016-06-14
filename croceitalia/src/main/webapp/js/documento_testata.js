@@ -194,15 +194,15 @@ $(document).ready(function(e){
 		});
 });
 //DUPLICA DI NICO
-$(document).ready(function(e){ 
-	$("#duplica").click(function(){
-		if (!confirm('Confermi di duplicarlo?')){
-			return false;
-		}
-		showLoader();
-		duplicaForm.submit();
-		});
-});
+//$(document).ready(function(e){ 
+//	$("#duplica").click(function(){
+//		if (!confirm('Confermi di duplicarlo?')){
+//			return false;
+//		}
+//		showLoader();
+//		duplicaForm.submit();
+//		});
+//});
 
 // FIXED NAV
 //
@@ -223,11 +223,11 @@ $(document).ready(function(e){
 //-----------
 function duplicaDocumento(id)
 {
-	if (!confirm('Confermi cancellazione?')){
+	if (!confirm('Confermi duplicarlo?')){
 		return false;
 	}
 	//duplicaForm.id_documento.value = id;
 	duplicaForm.action += "/"+ id;
 	showLoader();
-	eliminaRigaForm.submit();
+	duplicaForm.submit();
 }
