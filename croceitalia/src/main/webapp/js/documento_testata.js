@@ -218,3 +218,16 @@ $(document).ready(function(e){
 //}
 //
 //document.addEventListener('scroll', onScroll); //calls previously created function any time user scrolls:
+
+
+//-----------
+function duplicaDocumento(id)
+{
+	if (!confirm('Confermi cancellazione?')){
+		return false;
+	}
+	//duplicaForm.id_documento.value = id;
+	duplicaForm.action += "/"+ id;
+	showLoader();
+	eliminaRigaForm.submit();
+}

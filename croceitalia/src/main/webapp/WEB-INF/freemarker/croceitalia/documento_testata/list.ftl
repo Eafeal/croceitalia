@@ -124,9 +124,9 @@
 				</td>
 				<td>
 					<#if documento.isChiuso()>
-						<form name="duplicaForm" id="duplica1" action="/edit/documento_testata/duplica/${documento.getId_documento_testata()}" method="post">
-							<img title="Dupplica documento" src="/img/edit/duplica.png" id="duplica" name="duplica"  >
-						</form>
+						<!---form name="duplicaForm" id="duplica1" action="/edit/documento_testata/duplica/${documento.getId_documento_testata()}" method="post"-->
+							<img title="Dupplica documento" src="/img/edit/duplica.png" name="duplica${i}" id="duplica" class="duplica" onclick="duplicaDocumento(${documento.getId_documento_testata()})" >
+						<!--- /form --->
 					</#if>
 				</td>		
 			</tr>
