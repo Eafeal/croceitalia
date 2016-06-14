@@ -374,7 +374,7 @@ public class GeneraPdf2 {
 		pos = b - (passo * riga);
 
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_RIGHT, new Phrase(row.get(_indiceRiga).getDiritto_uscita(),
+		ColumnText.showTextAligned(cb, Element.ALIGN_RIGHT, new Phrase("" + row.get(_indiceRiga).getDiritto_uscita(),
 				smallFont), 513, pos, 0);
 		cb.beginLayer(nested);
 	}

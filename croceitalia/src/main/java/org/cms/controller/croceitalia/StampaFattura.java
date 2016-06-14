@@ -1,5 +1,7 @@
 package org.cms.controller.croceitalia;
 
+import it.asso.pdf.PDFAssoView;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,11 +22,9 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPTableEvent;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import it.asso.pdf.PDFAssoView;
-
 /**
  * @author axela
- *
+ * 
  */
 public class StampaFattura extends PDFAssoView implements PdfPTableEvent {
 
@@ -45,8 +45,8 @@ public class StampaFattura extends PDFAssoView implements PdfPTableEvent {
 		String fileName = "nomedelfiles";
 
 		response.setHeader("Cache-Control", "max-age=-1");
-		response.addHeader("Content-Disposition",
-				"attachment;filename=" + java.net.URLEncoder.encode(fileName + ".pdf", "UTF-8"));
+		response.addHeader("Content-Disposition", "attachment;filename="
+				+ java.net.URLEncoder.encode(fileName + ".pdf", "UTF-8"));
 
 		// Document document = new Document(PageSize.A4.rotate());
 		document.setPageSize(PageSize.A4.rotate());
@@ -71,7 +71,7 @@ public class StampaFattura extends PDFAssoView implements PdfPTableEvent {
 	 */
 	private PdfPTable makeTable(List<Documento_Righe> righe) {
 
-		float[] relativeWidths = new float[] { 5, 20, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 };
+		float[] relativeWidths = new float[]{5, 20, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
 		PdfPTable table = new PdfPTable(relativeWidths);
 		table.setWidthPercentage(100f);
 		table.getDefaultCell().setPadding(3);
@@ -106,7 +106,7 @@ public class StampaFattura extends PDFAssoView implements PdfPTableEvent {
 			table.addCell(riga.getPaziente().getComune() + " " + riga.getStruttura().getComune());
 			table.addCell(String.valueOf(riga.getOra_sosta()));
 			table.addCell(String.valueOf(riga.getQuota_fissa()));
-			table.addCell(riga.getDiritto_uscita());
+			table.addCell(String.valueOf(riga.getDiritto_uscita()));
 			table.addCell(String.valueOf(riga.getImporto()));
 		}
 		return table;
