@@ -22,7 +22,7 @@
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/documento_riga.js"></script>
+    <script src="/js/documento_riga_v1.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -75,7 +75,7 @@
 	  				<#if !documento.isChiuso() && righe?size!=0>
 	                <form name="chiusuraForm" action="/edit/documento_testata/chiudi/${documento.getId_documento_testata()}" method="get" class="formHead"  >
 	                	<a title="Chiudi il documento" id="chiusura" >
-	                		<img src="/img/edit/chiudi_pdf.png" id="chiudi_pdf" onclick="location.reload();">
+	                		<img src="/img/edit/chiudi_pdf.png" id="chiudi_pdf">
 	                	</a>               
 	                </form>
 	                </#if>
@@ -293,9 +293,9 @@
 	                            <td valign="top" class="value"> 
 	                                <input type="text" name="percorso" id="percorso" class="percorsoCrea"  readonly>
 	                            </td>
-	                            <td align="top" class="kmpercorso"><label for="km_percorso">Km Percorso</label></td>
+	                            <td align="top" class="kmpercorso"><label for="km_percorso_s">Km Percorso</label></td>
 	                            <td valign="top" class="value">
-	                               	<input type="text" name="km_percorso" id="km_percorso" class="km_percorsiCrea" value="" onchange="javascript:totaleImporto();">
+	                               	<input type="text" name="km_percorso_s" id="km_percorso_s" class="km_percorsiCrea" value="" onchange="javascript:totaleImporto();">
 	                            </td>
 	                       </tr>
 	                       <tr class="prop">
@@ -317,13 +317,13 @@
 	                            </td>
 	                       </tr>
 	                        <tr class="prop">
-	                            <td align="top" class="totali"><label for="km_totali">Km Totali</label></td>
+	                            <td align="top" class="totali"><label for="km_totali_s">Km Totali</label></td>
 	                            <td align="top" class="value">                        
-					       			<input type="text" name="km_totali" id="km_totali" class="km_totaliCrea" value="0" readonly>
+					       			<input type="text" name="km_totali_s" id="km_totali_s" class="km_totaliCrea" value="0" readonly>
 	                            </td>
-	                            <td align="top" class="km_totali"><label for="km_totali"></label></td>
+	                            <td align="top" class="km_totali_s"><label for="km_totali_s"></label></td>
 	                            <td align="top" class="value">                        
-					       			<!--<input type="text" name="km_totali" id="km_totali" class="km_percorsi" value="0" readonly>-->
+					       			<!--<input type="text" name="km_totali_s" id="km_totali_s" class="km_percorsi" value="0" readonly>-->
 	                            </td>
 	                       </tr>
 	                       

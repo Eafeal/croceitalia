@@ -48,8 +48,11 @@ public class Documento_Righe extends Model {
 	private Integer		num_sedute;
 	private String		mese;
 
-	private Integer		km_totali;
-	private Integer		km_percorso;
+	@Column(precision = 7, scale = 2)
+	private BigDecimal	km_totali;
+
+	@Column(precision = 7, scale = 2)
+	private BigDecimal	km_percorso;
 
 	private String		percorso;
 
@@ -95,7 +98,7 @@ public class Documento_Righe extends Model {
 	}
 
 	public Documento_Righe(Integer id_documento_righe, Integer fk_id_documento_testata, /* Integer fk_id_paziente, */
-	Integer num_sedute, String mese, Integer km_totali, Integer km_percorso, String percorso, String p_partenza,
+	Integer num_sedute, String mese, BigDecimal km_totali, BigDecimal km_percorso, String percorso, String p_partenza,
 			String p_arrivo, Integer ora_sosta, BigDecimal quota_fissa, String diritto_uscita, BigDecimal importo) {
 
 		super();
@@ -169,28 +172,38 @@ public class Documento_Righe extends Model {
 		this.mese = mese;
 	}
 
-	public Integer getKm_totali() {
+	public BigDecimal getKm_totali() {
 
 		if (km_totali == null)
-			return 0;
+			return BigDecimal.ZERO;
 		return km_totali;
 	}
 
-	public void setKm_totali(Integer km_totali) {
+	public void setKm_totali(BigDecimal km_totali) {
 
 		this.km_totali = km_totali;
 	}
 
-	public Integer getKm_percorso() {
+	public void setKm_totali(String km_totali) {
+
+		this.km_totali = fromStringToBigDecimal(km_totali);
+	}
+
+	public BigDecimal getKm_percorso() {
 
 		if (km_percorso == null)
-			return 0;
+			return BigDecimal.ZERO;
 		return km_percorso;
 	}
 
-	public void setKm_percorso(Integer km_percorso) {
+	public void setKm_percorso(BigDecimal km_percorso) {
 
 		this.km_percorso = km_percorso;
+	}
+
+	public void setKm_percorso(String km_percorso) {
+
+		this.km_percorso = fromStringToBigDecimal(km_percorso);
 	}
 
 	public String getPercorso() {

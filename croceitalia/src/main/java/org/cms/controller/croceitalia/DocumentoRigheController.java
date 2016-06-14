@@ -1,5 +1,9 @@
 package org.cms.controller.croceitalia;
 
+import it.asso.util.AssoException;
+import it.asso.util.ModelUser;
+import it.asso.util.Utente_itf;
+
 import java.util.Date;
 import java.util.List;
 
@@ -14,10 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import it.asso.util.AssoException;
-import it.asso.util.ModelUser;
-import it.asso.util.Utente_itf;
-
 @Controller
 public class DocumentoRigheController extends EditCmsController {
 
@@ -25,25 +25,25 @@ public class DocumentoRigheController extends EditCmsController {
 	 * 
 	 */
 	@Autowired(required = true)
-	protected DocumentoTestataManager _documentoTestataManager;
+	protected DocumentoTestataManager	_documentoTestataManager;
 
 	@Autowired(required = true)
-	protected DocumentoRigheManager _documentoRigaManager;
+	protected DocumentoRigheManager		_documentoRigaManager;
 
 	@Autowired(required = true)
-	protected ClienteManager _clienteManager;
+	protected ClienteManager			_clienteManager;
 
 	@Autowired(required = true)
-	protected BancaManager _bancaManager;
+	protected BancaManager				_bancaManager;
 
 	@Autowired(required = true)
-	protected MezzoManager _mezzoManager;
+	protected MezzoManager				_mezzoManager;
 
 	@Autowired(required = true)
-	protected PazienteManager _pazienteManager;
+	protected PazienteManager			_pazienteManager;
 
 	@Autowired(required = true)
-	protected StrutturaManager _strutturaManager;
+	protected StrutturaManager			_strutturaManager;
 
 	/**
 	 * @param request
@@ -77,6 +77,9 @@ public class DocumentoRigheController extends EditCmsController {
 		String importo = request.getParameter("importo_s");
 		String quota_fissa = request.getParameter("quota_fissa_s");
 
+		String km_percorso = request.getParameter("km_percorso_s");
+		String km_totali = request.getParameter("km_totali_s");
+
 		if (importo.equals(""))
 			importo = "0";
 		riga.setImporto(importo);
@@ -84,6 +87,14 @@ public class DocumentoRigheController extends EditCmsController {
 		if (quota_fissa.equals(""))
 			quota_fissa = "0";
 		riga.setQuotaFissa(quota_fissa);
+
+		if (km_percorso.equals(""))
+			km_percorso = "0";
+		riga.setKm_percorso(km_percorso);
+
+		if (km_totali.equals(""))
+			km_totali = "0";
+		riga.setKm_totali(km_totali);
 
 		Utente_itf utente = ModelUser.get();// restituisce l'utente loggato
 		String messaggio = "";

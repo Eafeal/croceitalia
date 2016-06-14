@@ -446,7 +446,7 @@ public class GeneraPdf2 {
 		pos = b - (passo * riga);
 
 		cb.beginLayer(nested);
-		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(_indiceRiga).getKm_percorso().toString(),
+		ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase(row.get(_indiceRiga).getKm_totali().toString(),
 				smallFont), 130, pos, 0);
 		cb.beginLayer(nested);
 	}
