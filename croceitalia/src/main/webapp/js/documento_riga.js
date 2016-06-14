@@ -128,6 +128,12 @@ $(document).ready(function(e){
 $(document).ready(function(e){ 
 	$("#chiusura").click(function(){
 		
+		if(updateForm.CIG.value==""){
+			alert("Il CIG e' obbligatorio");
+			return false;
+		}
+		updateForm.submit();
+		
 		if (!confirm('Sei sicuro? \nDopo la chiusura del documento, non potrai piu\' aggiungere nuove righe!')){
 			return false;
 		}
@@ -146,11 +152,13 @@ $(document).ready(function(e){
 //Aggiorni il documento modificato 
 $(document).ready(function(e){ 
 	$("#update").click(function(){
+		
 		if (cf_contieneSoloCaratteriValidi(updateForm.data_documento, "\n1234567890-") == 0) return false;
 		if (cf_contieneSoloCaratteriValidi(updateForm.CIG, "\n1234567890\nQWERTYUIOPASDFGHJKLZXCVBNM\nqwertyuiopasdfghjklzxcvbnm") == 0) return false;
 		if (!confirm('Sei sicuro?')){
 			return false;
 		}
+		
 		showLoader();
 		updateForm.submit();
 		});

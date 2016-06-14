@@ -563,9 +563,9 @@ public class DocumentoTestataController extends EditCmsController {
 			documentoNew.setImporto_esente(documento.getImporto_esente());
 			documentoNew.setIva(documento.getIva());
 			documentoNew.setMese_documento(documento.getMese_documento());
-			documentoNew.setNome_file(documento.getNome_file());
-			documentoNew.setPdf_generato(documento.getPdf_generato());
-			documentoNew.setStato(documento.getStato());
+			documentoNew.setNome_file("");
+			documentoNew.setPdf_generato("N");
+			documentoNew.setStato("A");
 			documentoNew.setTotale(documento.getTotale());
 			documentoNew.setUsercrea(utente.getUserId());
 			documentoNew.setUserultv(utente.getUserId());
