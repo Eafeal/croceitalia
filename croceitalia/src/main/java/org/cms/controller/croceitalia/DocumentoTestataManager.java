@@ -356,6 +356,8 @@ public class DocumentoTestataManager extends AssoDao {
 		if(!data.equals("")){
 			queryString += " and dt.data_documento = :data  ";
 		}
+		queryString += " order by dt.anno_documento desc, dt.num_documento desc  ";
+		
 		try {
 				em = getEntityManager();
 				
